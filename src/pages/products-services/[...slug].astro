@@ -1,0 +1,14 @@
+---
+import Forwarding from '../../components/Forwarding.astro';
+import { movedUnder } from '../../lib/moved';
+
+export function getStaticPaths() {
+  return movedUnder('/products-services/').map(({ slug, to }) => ({
+    params: { slug },
+    props: { to },
+  }));
+}
+
+const { to } = Astro.props;
+---
+<Forwarding to={to} />

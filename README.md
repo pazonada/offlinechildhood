@@ -64,6 +64,9 @@ research is genuinely disputed (the smartphones and teen mental health question 
 
 ## Hosting
 
-Netlify, built from this repo. The domain is registered at Gandi, and Gandi also runs the mail for
-`hello@offlinechildhood.com`, which is unaffected by any deploy. Cutting over means changing the four
-apex A records and the `www` CNAME that currently point at Squarespace.
+Vercel, built from this repo. Redirects from the old Squarespace URLs live in `astro.config.mjs`
+rather than a host config file, so they survive a change of host.
+
+The domain is registered at Gandi, which also runs the mail for `hello@offlinechildhood.com`. Mail is
+unaffected by any deploy. Cutting over means changing the four apex A records and the `www` CNAME
+that currently point at Squarespace.

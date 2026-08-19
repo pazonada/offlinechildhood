@@ -1,0 +1,36 @@
+---
+interface Props { to: string }
+const { to } = Astro.props;
+const target = new URL(to, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>This page moved</title>
+    <meta http-equiv="refresh" content={`0; url=${to}`} />
+    <link rel="canonical" href={target} />
+    <meta name="robots" content="noindex, follow" />
+    <style>
+      body {
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        background: #fff;
+        color: #101828;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 2rem;
+        text-align: center;
+      }
+      a { color: #2451d6; }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>This page has moved.</p>
+      <p><a href={to}>Continue to the new one</a></p>
+    </div>
+  </body>
+</html>
