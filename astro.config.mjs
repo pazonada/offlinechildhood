@@ -10,7 +10,18 @@ export default defineConfig({
   site: 'https://offlinechildhood.com',
   output: 'static',
   adapter: vercel(),
-  integrations: [react(), mdx(), sitemap()],
+  integrations: [
+    react(),
+    mdx(),
+    sitemap({
+      // The forwarding pages under these prefixes exist only to bounce old
+      // Squarespace URLs onward. They carry noindex, so listing them in the
+      // sitemap would be asking search engines to crawl pages we have asked
+      // them to ignore.
+      filter: (page) =>
+        !page.includes('/products-services/') && !page.includes('/resources/'),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
