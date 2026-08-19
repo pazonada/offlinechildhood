@@ -21,7 +21,7 @@ const RULES = [
   { id: 'in-a-world', re: /in a world where/gi, note: '"in a world where"' },
   { id: 'dive-in', re: /\b(let'?s )?(dive|delve) (in|into)\b/gi, note: '"dive/delve into"' },
   { id: 'navigate', re: /navigat\w+ the (landscape|complexit)/gi, note: '"navigate the landscape"' },
-  { id: 'filler-verbs', re: /\b(unlock|unleash|leverag\w+|empower\w*|supercharg\w+)\b/gi, note: 'filler verb' },
+  { id: 'filler-verbs', re: /\b(unlock\w*|unleash\w*|leverag\w+|empower\w*|supercharg\w+|delve\w*)\b/gi, note: 'filler verb' },
   { id: 'jargon', re: /\b(moat|beachhead|north star|synergy|table stakes|game.chang\w+|10x|double.click)\b/gi, note: 'banned jargon' },
   { id: 'ai-adjectives', re: /\b(tapestry|testament to|ever.evolving|seamless\w*|robust|vibrant|crucial|pivotal)\b/gi, note: 'AI-flavoured adjective' },
   { id: 'throat-clearing', re: /\b(it'?s worth noting|it should be noted|needless to say)\b/gi, note: 'throat-clearing' },
