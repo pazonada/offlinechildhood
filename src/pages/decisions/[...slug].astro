@@ -1,0 +1,90 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Container from '../../components/Container.astro';
+import StanceLadder from '../../components/StanceLadder.astro';
+import PickCard from '../../components/PickCard.astro';
+import Button from '../../components/Button.astro';
+
+export async function getStaticPaths() {
+  const decisions = await getCollection('decisions');
+  return decisions.map((d) => ({ params: { slug: d.id }, props: { decision: d } }));
+}
+
+const { decision } = Astro.props;
+const { Content } = await render(decision);
+const d = decision.data;
+
+const picks = await Promise.all(d.picks.map((ref) => getEntry(ref)));
+const concepts = await Promise.all(d.relatedConcepts.map((ref) => getEntry(ref)));
+const updated = d.updated.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+---
+
+<Base title={d.title} description={d.description}>
+  <article>
+    <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
+      <Container width="prose">
+        <p class="font-display text-sm font-bold uppercase tracking-[0.14em] text-primary-text">
+          Decision {d.order}
+        </p>
+        <h1 class="mt-3 text-4xl font-extrabold sm:text-5xl">{d.question}</h1>
+
+        <div class="mt-8 rounded-2xl border-2 border-primary bg-surface p-6 sm:p-7">
+          <h2 class="font-display text-sm font-bold uppercase tracking-[0.14em] text-primary-text">
+            The short answer
+          </h2>
+          <p class="mt-3 text-lg leading-relaxed">{d.shortAnswer}</p>
+        </div>
+      </Container>
+    </header>
+
+    <Container width="prose" class="py-12 sm:py-16">
+      <StanceLadder stances={d.stances} />
+
+      <div class="prose mt-14">
+        <Content />
+      </div>
+
+      {picks.length > 0 && (
+        <section class="mt-16 border-t border-line pt-12">
+          <h2 class="font-display text-2xl font-extrabold">If you decided to buy something</h2>
+          <p class="mt-2 text-ink-soft">
+            Only worth reading once you have made the call above. Nothing here is required, and the
+            cheapest answer to most of these problems is no purchase at all.
+          </p>
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            {picks.map((p) => p && <PickCard {...p.data} />)}
+          </div>
+        </section>
+      )}
+
+      {concepts.length > 0 && (
+        <section class="mt-16 border-t border-line pt-12">
+          <h2 class="font-display text-2xl font-extrabold">Talk about it too</h2>
+          <p class="mt-2 text-ink-soft">
+            Rules do half the work. These are the conversations that do the other half, written for
+            every age from four up.
+          </p>
+          <ul class="mt-6 grid gap-3">
+            {concepts.map((c) => c && (
+              <li>
+                <a
+                  href={`/conversations/${c.id}`}
+                  class="block rounded-2xl border border-line bg-surface-2 p-5 transition hover:border-ink"
+                >
+                  <span class="font-display text-lg font-extrabold text-ink">{c.data.title}</span>
+                  <span class="mt-1 block text-ink-soft">{c.data.idea}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <footer class="mt-16 flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-sm text-ink-soft">Last reviewed {updated}</p>
+        <Button href="/plan" variant="primary">Build your family plan</Button>
+      </footer>
+    </Container>
+  </article>
+</Base>

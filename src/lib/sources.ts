@@ -1,0 +1,94 @@
+/**
+ * Every empirical claim on the site cites one of these. Keeping them in one file
+ * means a claim can be traced, and a superseded source is fixed once.
+ *
+ * All metadata below was verified against Crossref rather than recalled. Links use
+ * doi.org where a DOI exists, because publisher pages block automated checks.
+ *
+ * Editorial rule for this project: the positive case for analog rests on firmer
+ * ground than the negative case against screens. Lead with displacement, play,
+ * sleep and reading. Where a finding is disputed, say so on the page.
+ */
+export interface Source {
+  id: string;
+  title: string;
+  authors: string;
+  venue: string;
+  year: number;
+  url: string;
+  /** What this source does and does not establish, in plain language. */
+  claim: string;
+  /** True when the finding is genuinely disputed, so pages must say so. */
+  contested?: boolean;
+}
+
+export const SOURCES = {
+  readingPaperMeta: {
+    id: 'readingPaperMeta',
+    title: "A Comparison of Children's Reading on Paper Versus Screen: A Meta-Analysis",
+    authors: 'Furenes, Kucirkova & Bus',
+    venue: 'Review of Educational Research',
+    year: 2021,
+    url: 'https://doi.org/10.3102/0034654321998074',
+    claim:
+      'Across 39 studies of roughly 1,800 children aged 1–8, comprehension was lower for digital books than paper books when digitisation was the only difference. Digital books built with story-congruent enhancements did better than plain ports.',
+  },
+  freePlaySelfRegulation: {
+    id: 'freePlaySelfRegulation',
+    title:
+      'Free play predicts self-regulation years later: Longitudinal evidence from a large Australian sample of toddlers and preschoolers',
+    authors: 'Colliver, Harrison, Brown & Humburg',
+    venue: 'Early Childhood Research Quarterly',
+    year: 2022,
+    url: 'https://doi.org/10.1016/j.ecresq.2021.11.011',
+    claim:
+      'Time spent in unstructured free play in the early years predicted stronger self-regulation years later. That capacity tracks with health, educational and financial outcomes across a lifetime.',
+  },
+  riskyPlayCPS: {
+    id: 'riskyPlayCPS',
+    title:
+      'Healthy childhood development through outdoor risky play: Navigating the balance with injury prevention',
+    authors: 'Canadian Paediatric Society',
+    venue: 'CPS position statement',
+    year: 2024,
+    url: 'https://cps.ca/en/documents/position/outdoor-risky-play',
+    claim:
+      'A national paediatric body’s formal position that outdoor risky play supports physical activity, social competence, risk perception and self-esteem, and that over-restricting it carries its own developmental costs.',
+  },
+  sleepPortableDevices: {
+    id: 'sleepPortableDevices',
+    title:
+      'Associations between screen time and sleep duration are primarily driven by portable electronic devices',
+    authors: 'Twenge, Hisler & Krizan',
+    venue: 'Sleep Medicine',
+    year: 2019,
+    url: 'https://doi.org/10.1016/j.sleep.2018.11.009',
+    claim:
+      'In a population sample of US children aged 0–17, the screen-time and sleep relationship was driven mainly by portable devices, the ones that follow a child into the bedroom, rather than by screens in general.',
+  },
+  sleepMeta: {
+    id: 'sleepMeta',
+    title:
+      'The association of screen time and the risk of sleep outcomes: a systematic review and meta-analysis',
+    authors: 'Systematic review',
+    venue: 'PubMed Central',
+    year: 2025,
+    url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12754674/',
+    claim:
+      'Pooled evidence that higher screen time, especially in the evening and at bedtime, is associated with shorter sleep, later sleep onset, more disturbance and more daytime sleepiness in school-aged children.',
+  },
+  socialMediaUnsettled: {
+    id: 'socialMediaUnsettled',
+    title: 'Unsettled science on social media',
+    authors: 'Thorp',
+    venue: 'Science',
+    year: 2024,
+    url: 'https://doi.org/10.1126/science.adr1730',
+    claim:
+      'An editorial in Science on the unresolved state of the field. Large analyses have not found consistent associations between social media use and wellbeing, and where links appear, the direction of causation remains open.',
+    contested: true,
+  },
+} as const satisfies Record<string, Source>;
+
+export type SourceId = keyof typeof SOURCES;
+export const sourceList: Source[] = Object.values(SOURCES);

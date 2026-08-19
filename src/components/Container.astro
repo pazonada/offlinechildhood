@@ -1,0 +1,16 @@
+---
+interface Props {
+  /** prose = reading width; wide = layout width; full = edge padding only */
+  width?: 'prose' | 'wide' | 'full';
+  class?: string;
+}
+const { width = 'wide', class: className = '' } = Astro.props;
+const widths = {
+  prose: 'max-w-[46rem]',
+  wide: 'max-w-6xl',
+  full: 'max-w-none',
+};
+---
+<div class:list={['mx-auto w-full px-5 sm:px-8', widths[width], className]}>
+  <slot />
+</div>

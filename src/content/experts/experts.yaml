@@ -1,0 +1,32 @@
+# People worth reading. Listing someone is not an endorsement of everything they argue,
+# and the list deliberately includes people who disagree with each other.
+- id: haidt
+  name: Jonathan Haidt
+  role: Social psychologist, NYU Stern
+  focus: Argues that a play-based childhood gave way to a phone-based one. The most influential case for restriction, and the most contested.
+  url: https://jonathanhaidt.com
+- id: thorp-science
+  name: Science editorial desk
+  role: Peer-reviewed journal
+  focus: Useful counterweight on how unsettled the social media research actually is.
+  url: https://doi.org/10.1126/science.adr1730
+- id: price
+  name: Catherine Price
+  role: Author, How to Break Up With Your Phone
+  focus: Practical habit change for adults, which is where most family screen problems actually start.
+  url: https://www.catherineprice.com
+- id: harris
+  name: Tristan Harris
+  role: Co-founder, Center for Humane Technology
+  focus: How products are designed to hold attention, explained clearly enough to repeat to a child.
+  url: https://www.humanetech.com
+- id: gregory
+  name: Sam Gregory
+  role: Executive Director, WITNESS
+  focus: Deepfakes, synthetic media and how anyone can tell what is real.
+  url: https://www.witness.org
+- id: matias
+  name: J. Nathan Matias
+  role: Cornell, Citizens and Technology Lab
+  focus: Studies how platforms are governed, and runs research communities can actually participate in.
+  url: https://citizensandtech.org

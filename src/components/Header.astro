@@ -1,0 +1,101 @@
+---
+import Container from './Container.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { primaryNav, secondaryNav } from '../lib/nav';
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`);
+---
+
+<header class="sticky top-0 z-50 border-b border-line bg-surface/85 backdrop-blur-md">
+  <Container>
+    <div class="flex h-[4.5rem] items-center justify-between gap-4">
+      <a href="/" class="group flex items-center gap-2.5 font-display text-[1.15rem] font-extrabold tracking-tight text-ink">
+        <span class="block shrink-0 transition group-hover:rotate-12" aria-hidden="true">
+          <svg aria-hidden="true" viewBox="0 0 64 64" class="h-9 w-9">
+            <rect width="64" height="64" rx="17" fill="var(--primary)" />
+            <circle cx="32" cy="32" r="10.5" fill="var(--accent)" />
+            <g stroke="var(--on-primary)" stroke-width="3.4" stroke-linecap="round">
+              <path d="M32 9v5.5M32 49.5V55M9 32h5.5M49.5 32H55M15.8 15.8l3.9 3.9M44.3 44.3l3.9 3.9M48.2 15.8l-3.9 3.9M19.7 44.3l-3.9 3.9" />
+            </g>
+          </svg>
+        </span>
+        Offline Childhood
+      </a>
+
+      <nav aria-label="Main" class="hidden items-center gap-1 lg:flex">
+        {primaryNav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isCurrent(item.href) ? 'page' : undefined}
+            class:list={[
+              'rounded-full px-4 py-2 text-[0.95rem] font-semibold transition',
+              isCurrent(item.href) ? 'bg-surface-3 text-ink' : 'text-ink-soft hover:bg-surface-2 hover:text-ink',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+        <span class="mx-1 h-5 w-px bg-line" aria-hidden="true"></span>
+        {secondaryNav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isCurrent(item.href) ? 'page' : undefined}
+            class:list={[
+              'rounded-full px-4 py-2 text-[0.95rem] font-medium transition',
+              isCurrent(item.href) ? 'bg-surface-3 text-ink' : 'text-ink-soft hover:bg-surface-2 hover:text-ink',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <ThemeToggle />
+        <button
+          id="menu-toggle"
+          type="button"
+          class="grid h-10 w-10 place-items-center rounded-full border border-line text-ink lg:hidden"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Open menu"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </Container>
+
+  <div id="mobile-menu" hidden class="border-t border-line bg-surface lg:hidden">
+    <Container>
+      <nav aria-label="Main (mobile)" class="flex flex-col gap-1 py-4">
+        {primaryNav.map((item) => (
+          <a href={item.href} class="rounded-xl px-3 py-3 hover:bg-surface-2">
+            <span class="block font-display font-bold text-ink">{item.label}</span>
+            {item.blurb && <span class="block text-sm text-ink-soft">{item.blurb}</span>}
+          </a>
+        ))}
+        <span class="my-2 h-px bg-line" aria-hidden="true"></span>
+        {secondaryNav.map((item) => (
+          <a href={item.href} class="rounded-xl px-3 py-2.5 font-medium text-ink-soft hover:bg-surface-2 hover:text-ink">
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </Container>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+    if (menu) menu.hidden = open;
+  });
+</script>

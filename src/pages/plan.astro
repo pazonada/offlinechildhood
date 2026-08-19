@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Container from '../components/Container.astro';
+import PlanBuilder from '../components/PlanBuilder';
+import type { PlanConcept, PlanDecision } from '../lib/plan';
+
+const decisions: PlanDecision[] = (await getCollection('decisions'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((d) => ({
+    id: d.id,
+    title: d.data.title,
+    question: d.data.question,
+    shortAnswer: d.data.shortAnswer,
+    appliesToBands: d.data.appliesToBands,
+    stances: d.data.stances,
+  }));
+
+const concepts: PlanConcept[] = (await getCollection('concepts'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((c) => ({
+    id: c.id,
+    title: c.data.title,
+    idea: c.data.idea,
+    strand: c.data.strand,
+    bands: c.data.bands.map((b) => ({ band: b.band, explain: b.explain, tryThis: b.tryThis })),
+  }));
+---
+
+<Base
+  title="Your family plan"
+  description="Answer a few questions about your kids and get a plan you can print. Free, no sign-up, and nothing you enter leaves your browser."
+>
+  <header class="no-print border-b border-line bg-surface-2 py-14 sm:py-20">
+    <Container width="prose">
+      <h1 class="text-4xl font-extrabold sm:text-5xl">Your family plan</h1>
+      <p class="mt-5 text-lg text-ink-soft">
+        Answer four questions and get something you can stick on the fridge: house rules, the
+        decisions that apply to each of your kids right now, and the conversations to have with them
+        at their age.
+      </p>
+      <p class="mt-4 rounded-2xl border-2 border-line bg-surface p-5 text-ink">
+        <span class="font-display font-extrabold">No sign-up, and no data leaves your browser.</span>{' '}
+        We do not ask for your email to give you the plan, and nothing you type here is sent to us or
+        to anyone else. Reload the page and it is gone.
+      </p>
+    </Container>
+  </header>
+
+  <Container width="prose" class="py-12">
+    <PlanBuilder decisions={decisions} concepts={concepts} client:load />
+  </Container>
+</Base>

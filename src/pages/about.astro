@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import Container from '../components/Container.astro';
+import Button from '../components/Button.astro';
+---
+<Base
+  title="About"
+  description="Why Offline Childhood exists, what we argue for, what we will not do, and how the site is paid for."
+>
+  <header class="border-b border-line bg-surface-2 py-16 sm:py-24">
+    <Container width="prose">
+      <h1 class="text-4xl font-extrabold sm:text-5xl">Why Offline Childhood?</h1>
+      <p class="mt-5 text-xl leading-relaxed text-ink">
+        We're parents, and we're trying. Trying to get outside more, delay the smartphone, keep
+        dinner screen-free, and raise kids who can think for themselves about all of it.
+      </p>
+    </Container>
+  </header>
+
+  <Container width="prose" class="py-14">
+    <div class="prose">
+      <p>
+        We are not purists. Nobody here lives offline, and if you do, we salute you. What we think is
+        that the culture has gotten badly out of hand on screen addiction, algorithmic feeds, and now
+        AI, and that childhood is where that costs the most.
+      </p>
+      <p>
+        So we argue for the analog side. More unstructured play, more paper, more time outdoors, more
+        boredom. Not because technology is evil, but because an hour spent on a screen is an hour
+        spent on something else, and at this age the something else matters enormously.
+      </p>
+
+      <h2>Why we teach kids how the tech works too</h2>
+      <p>
+        Because they are going to use it. Probably in their careers, certainly for the rest of their
+        lives. A kid who does not understand how an algorithm decides what she sees, or where an AI
+        model got its material, or who is paying for the free app, is not protected. She is just
+        unprepared.
+      </p>
+      <p>
+        That is what the <a href="/conversations">Conversations</a> half of this site is for. Every
+        idea is written four times over, for ages 4 to 6 through 13 and up, because a four-year-old
+        can absolutely understand that a person chose what she is watching. Limits buy you the years
+        in which understanding gets built. You need both.
+      </p>
+
+      <h2>What we will not do</h2>
+      <p>
+        <strong>Scare you.</strong> Fear is the easiest way to get a parent's attention and about the
+        worst way to actually help. There is already plenty of it going around. Your worries here are
+        reasonable, and we are not going to farm them.
+      </p>
+      <p>
+        <strong>Overstate the research.</strong> Whether smartphones caused the rise in teenage
+        anxiety is a live fight among serious researchers, and we say so on the pages where it comes
+        up. The case for a more analog childhood does not need that argument, and a site that
+        oversells its evidence deserves to be doubted on everything else.
+      </p>
+      <p>
+        <strong>Tell you that you have already blown it.</strong> Most people arrive here with
+        devices in the house and habits already set. Every recommendation on this site has a first
+        step that a family in exactly that position can take this week.
+      </p>
+
+      <h2>Who is it for?</h2>
+      <p>
+        Parents and caregivers of kids under 13, mostly. Teachers as well: the conversations work with
+        one kid at a dinner table or a class of thirty, and each one has a note on running it as a
+        group.
+      </p>
+
+      <h2>Who are you?</h2>
+      <p>
+        This site was founded by a mom who lives outside New York City and works in technology,
+        supported by a group of other parents who read drafts, argue with them, and send us things
+        worth including. She also built a few AI agents to help with the research, because these
+        tools can and should be used for good.
+      </p>
+
+      <h2>How is it paid for?</h2>
+      <p>
+        Some product links earn us a commission, and that pays for the site. It does not decide what
+        goes on it. The structure is deliberate: every recommendation shows up only after a decision
+        has been argued through on its own terms, and the honest answer to most of these questions is
+        that you do not need to buy anything at all.{' '}
+        <a href="/disclosure">Here is the full disclosure</a>, including what we refuse to take money
+        for.
+      </p>
+    </div>
+
+    <div class="mt-14 rounded-3xl border-2 border-accent bg-accent/12 p-7">
+      <h2 class="font-display text-2xl font-extrabold">Tell us what's missing</h2>
+      <p class="mt-3">
+        Got a product or service we should look at? Know someone we should be reading? Came here for
+        something and did not find it? Please tell us.{' '}
+        <a href="mailto:hello@offlinechildhood.com" class="font-semibold text-primary-text underline underline-offset-4">
+          hello@offlinechildhood.com
+        </a>
+      </p>
+      <Button href="/plan" variant="primary" class="mt-6">Build your family plan</Button>
+    </div>
+  </Container>
+</Base>

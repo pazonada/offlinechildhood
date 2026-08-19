@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Container from '../components/Container.astro';
+import PickCard from '../components/PickCard.astro';
+
+const picks = await getCollection('picks');
+const CATEGORIES = [
+  'Phones and watches',
+  'Audio and stories',
+  'Cameras and making',
+  'Games and play',
+  'Books and paper',
+  'Outdoor',
+  'Software and settings',
+] as const;
+
+const grouped = CATEGORIES.map((category) => ({
+  category,
+  items: picks.filter((p) => p.data.category === category),
+})).filter((g) => g.items.length > 0);
+---
+
+<Base
+  title="What to buy"
+  description="A short list of things worth owning, with what each one is bad at stated plainly. The honest answer to most of these questions is that you do not need to buy anything."
+>
+  <header class="border-b border-line bg-surface-2 py-16 sm:py-24">
+    <Container width="prose">
+      <h1 class="text-4xl font-extrabold sm:text-5xl">What to buy</h1>
+      <p class="mt-5 text-lg text-ink-soft">
+        A short list, kept short on purpose. Every entry says what it is bad at, because a
+        recommendation with no stated downside is an advert. Some links pay us a commission, and
+        those are labelled.
+      </p>
+      <div class="mt-7 rounded-2xl border-2 border-accent bg-accent/12 p-5">
+        <p class="font-display font-extrabold text-ink">Read the decision first</p>
+        <p class="mt-2 text-ink">
+          This page is deliberately the least important one on the site. Work out what you want to
+          do in <a href="/decisions" class="font-semibold text-primary-text underline underline-offset-4">Decisions</a>,
+          then come back if a purchase turns out to be part of the answer. Often it is not.
+        </p>
+      </div>
+    </Container>
+  </header>
+
+  <Container class="py-14">
+    {grouped.map((group) => (
+      <section class="mb-14">
+        <h2 class="font-display text-sm font-bold uppercase tracking-[0.14em] text-ink-soft">
+          {group.category}
+        </h2>
+        <div class="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {group.items.map((p) => <PickCard {...p.data} />)}
+        </div>
+      </section>
+    ))}
+  </Container>
+</Base>

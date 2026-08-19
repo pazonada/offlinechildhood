@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+/* Manual theme toggle wins over the system preference; system preference is the default. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------
+   Ink and Sky. Blue leads, coral and mint support, yellow accents.
+   Components reference these names and never raw hex, so a palette
+   change stays a one-file edit. Every pairing the UI actually uses is
+   verified against WCAG AA by scripts/contrast.mjs.
+   --------------------------------------------------------------- */
+:root {
+  --surface: #ffffff;
+  --surface-2: #eef2f7;
+  --surface-3: #e2e9f3;
+  --ink: #101828;
+  --ink-soft: #525f70;
+  --line: #d7dfe9;
+
+  --primary: #2451d6;
+  --primary-strong: #1d42b0;
+  --primary-text: #2451d6;
+  --on-primary: #ffffff;
+
+  /* Text-safe mint. The brighter tone is for fills only. */
+  --secondary: #0c7568;
+  --secondary-deep: #0a5f55;
+  --secondary-bright: #12b0a0;
+  --on-secondary: #ffffff;
+
+  --coral: #c9412d;
+  --coral-bright: #e8543f;
+  --on-coral: #ffffff;
+
+  /* Yellow never carries text. Highlights, underlines and the mark only. */
+  --accent: #f7b928;
+  --on-accent: #101828;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --surface: #0e1524;
+    --surface-2: #151e30;
+    --surface-3: #1d2942;
+    --ink: #e9eef6;
+    --ink-soft: #9aa8bc;
+    --line: #26334a;
+
+    --primary: #7aa2ff;
+    --primary-strong: #9cbaff;
+    --primary-text: #7aa2ff;
+    --on-primary: #0e1524;
+
+    --secondary: #3fd5c3;
+    --secondary-deep: #6fe6d8;
+    --secondary-bright: #3fd5c3;
+    --on-secondary: #0e1524;
+
+    --coral: #ff8a73;
+    --coral-bright: #ff8a73;
+    --on-coral: #0e1524;
+
+    --accent: #f7b928;
+    --on-accent: #0e1524;
+  }
+}
+
+:root.dark {
+  --surface: #0e1524;
+  --surface-2: #151e30;
+  --surface-3: #1d2942;
+  --ink: #e9eef6;
+  --ink-soft: #9aa8bc;
+  --line: #26334a;
+
+  --primary: #7aa2ff;
+  --primary-strong: #9cbaff;
+  --primary-text: #7aa2ff;
+  --on-primary: #0e1524;
+
+  --secondary: #3fd5c3;
+  --secondary-deep: #6fe6d8;
+  --secondary-bright: #3fd5c3;
+  --on-secondary: #0e1524;
+
+  --coral: #ff8a73;
+  --coral-bright: #ff8a73;
+  --on-coral: #0e1524;
+
+  --accent: #f7b928;
+  --on-accent: #0e1524;
+}
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-text: var(--primary-text);
+  --color-on-primary: var(--on-primary);
+  --color-secondary: var(--secondary);
+  --color-secondary-deep: var(--secondary-deep);
+  --color-secondary-bright: var(--secondary-bright);
+  --color-on-secondary: var(--on-secondary);
+  --color-coral: var(--coral);
+  --color-coral-bright: var(--coral-bright);
+  --color-on-coral: var(--on-coral);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+
+  --font-display: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Bright and optimistic reads as generous roundness, not timid corners. */
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 2.75rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  body {
+    background-color: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+
+  /* A visible, high-contrast focus ring everywhere. Keyboard users are not an edge case. */
+  :focus-visible {
+    outline: 3px solid var(--primary-strong);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--on-primary);
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    background: var(--primary);
+    color: var(--on-primary);
+    font-weight: 600;
+    border-radius: 0 0 0.75rem 0;
+  }
+  .skip-link:focus {
+    left: 0;
+  }
+}
+
+@layer components {
+  /* Long-form reading styles. Hand-rolled rather than a plugin so headings,
+     quotes and links all resolve to the same tokens as the rest of the site. */
+  .prose {
+    font-size: 1.125rem;
+    line-height: 1.72;
+  }
+  .prose > * + * { margin-top: 1.35em; }
+  .prose h2 {
+    font-size: clamp(1.5rem, 1.2rem + 1.1vw, 1.95rem);
+    margin-top: 2.75em;
+    margin-bottom: 0.2em;
+  }
+  .prose h3 {
+    font-size: 1.3rem;
+    margin-top: 2em;
+    margin-bottom: 0.1em;
+  }
+  .prose h2 + *, .prose h3 + * { margin-top: 0.6em; }
+  .prose a {
+    color: var(--primary-text);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+  }
+  .prose a:hover { color: var(--ink); }
+  .prose strong { font-weight: 700; }
+  .prose ul, .prose ol { padding-left: 1.3em; }
+  .prose ul { list-style: disc; }
+  .prose ol { list-style: decimal; }
+  .prose li + li { margin-top: 0.45em; }
+  .prose li::marker { color: var(--primary-strong); }
+
+  /* Scripts and quoted language a parent can say out loud. */
+  .prose blockquote {
+    border-left: 4px solid var(--primary);
+    background: var(--surface-2);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    padding: 1rem 1.35rem;
+    font-size: 1.06rem;
+  }
+  .prose blockquote p { margin: 0; }
+  .prose blockquote + blockquote { margin-top: 0.9em; }
+  .prose hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+  .prose code {
+    background: var(--surface-3);
+    padding: 0.15em 0.4em;
+    border-radius: 0.4em;
+    font-size: 0.92em;
+  }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  a { text-decoration: none; color: #000; }
+  .print-break { break-before: page; }
+}
