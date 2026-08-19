@@ -26,6 +26,13 @@ const RULES = [
   { id: 'ai-adjectives', re: /\b(tapestry|testament to|ever.evolving|seamless\w*|robust|vibrant|crucial|pivotal)\b/gi, note: 'AI-flavoured adjective' },
   { id: 'throat-clearing', re: /\b(it'?s worth noting|it should be noted|needless to say)\b/gi, note: 'throat-clearing' },
   { id: 'hedge', re: /\b(arguably|perhaps it|it could be said)\b/gi, note: 'weak hedge' },
+  // Stray characters from generation. Allows ordinary typography and accented
+  // Latin, flags anything beyond it (CJK, symbols, emoji) so it cannot ship.
+  {
+    id: 'stray-char',
+    re: /[^\u0000-\u024F\u2010-\u201F\u2026\u20AC]/g,
+    note: 'unexpected character',
+  },
 ];
 
 let total = 0;
