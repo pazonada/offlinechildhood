@@ -1,7 +1,7 @@
 # Offline Childhood
 
-The site at [offlinechildhood.com](https://offlinechildhood.com). Static, fast, and editable either
-in a browser or as plain text files.
+The site at [offlinechildhood.com](https://offlinechildhood.com). Static HTML, no database, no
+server, no CMS.
 
 ## What the site argues
 
@@ -27,10 +27,11 @@ npm run build
 
 ## Editing content
 
-Two equivalent paths, both operating on the same files:
+Content is Markdown and YAML under `src/content/`. Schemas live in
+`src/content.config.ts`, so a malformed entry fails the build rather than shipping broken.
 
-- **Browser.** Go to `/keystatic`. Everything is a form field.
-- **Files.** Markdown and YAML under `src/content/`. Schemas live in `src/content.config.ts`.
+There is deliberately no CMS. The site is fully static with no serverless functions, which keeps
+hosting free and removes an entire category of things that can break.
 
 | Collection | Path | What it is |
 | --- | --- | --- |
