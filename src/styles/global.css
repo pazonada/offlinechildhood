@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-/* Manual theme toggle wins over the system preference; system preference is the default. */
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* ---------------------------------------------------------------
    Ink and Sky. Blue leads, coral and mint support, yellow accents.
    Components reference these names and never raw hex, so a palette
    change stays a one-file edit. Every pairing the UI actually uses is
    verified against WCAG AA by scripts/contrast.mjs.
+
+   Light only, deliberately. The site is a bright, optimistic brand and
+   a dark variant earned nothing for the extra surface area.
    --------------------------------------------------------------- */
 :root {
   --surface: #ffffff;
@@ -35,60 +35,6 @@
   /* Yellow never carries text. Highlights, underlines and the mark only. */
   --accent: #f7b928;
   --on-accent: #101828;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    --surface: #0e1524;
-    --surface-2: #151e30;
-    --surface-3: #1d2942;
-    --ink: #e9eef6;
-    --ink-soft: #9aa8bc;
-    --line: #26334a;
-
-    --primary: #7aa2ff;
-    --primary-strong: #9cbaff;
-    --primary-text: #7aa2ff;
-    --on-primary: #0e1524;
-
-    --secondary: #3fd5c3;
-    --secondary-deep: #6fe6d8;
-    --secondary-bright: #3fd5c3;
-    --on-secondary: #0e1524;
-
-    --coral: #ff8a73;
-    --coral-bright: #ff8a73;
-    --on-coral: #0e1524;
-
-    --accent: #f7b928;
-    --on-accent: #0e1524;
-  }
-}
-
-:root.dark {
-  --surface: #0e1524;
-  --surface-2: #151e30;
-  --surface-3: #1d2942;
-  --ink: #e9eef6;
-  --ink-soft: #9aa8bc;
-  --line: #26334a;
-
-  --primary: #7aa2ff;
-  --primary-strong: #9cbaff;
-  --primary-text: #7aa2ff;
-  --on-primary: #0e1524;
-
-  --secondary: #3fd5c3;
-  --secondary-deep: #6fe6d8;
-  --secondary-bright: #3fd5c3;
-  --on-secondary: #0e1524;
-
-  --coral: #ff8a73;
-  --coral-bright: #ff8a73;
-  --on-coral: #0e1524;
-
-  --accent: #f7b928;
-  --on-accent: #0e1524;
 }
 
 @theme inline {
