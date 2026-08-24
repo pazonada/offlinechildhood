@@ -36,33 +36,48 @@ const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
   </header>
 
   <Container class="py-12">
-    {/* Filter. Without JS every card stays visible, so nothing is ever hidden
-        behind a control that failed to load. */}
-    <div class="no-print" role="group" aria-label="Filter by category">
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="mr-1 text-sm font-semibold text-ink-soft">Filter</span>
-        <button
-          type="button"
-          data-filter="all"
-          aria-pressed="true"
-          class="filter-btn rounded-full border-2 border-ink bg-ink px-3.5 py-1.5 text-sm font-bold text-surface"
-        >
-          Everything ({picks.length})
-        </button>
-        {tags.map(([tag, count]) => (
+    {/* Multi-select filter. Built on <details> so it opens and closes without
+        JavaScript, and every card stays visible if the script never runs. */}
+    <details class="no-print relative w-full max-w-sm" id="filter">
+      <summary
+        class="flex cursor-pointer list-none items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 py-2.5 text-ink-soft transition hover:border-ink/30"
+      >
+        <span>
+          Categories
+          <span id="filter-label" class="text-ink">All</span>
+        </span>
+        <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </summary>
+
+      <div class="absolute left-0 top-full z-30 mt-2 w-full rounded-xl border border-line bg-surface p-2 shadow-lg shadow-ink/5">
+        <ul class="grid gap-0.5">
+          {tags.map(([tag, count]) => (
+            <li>
+              <label class="flex cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 hover:bg-surface-2">
+                <input type="checkbox" value={tag} class="filter-check h-4 w-4 rounded border-line accent-primary" />
+                <span class:list={['grid h-6 w-6 shrink-0 place-items-center rounded-md', TAG_STYLE[tag].tile]}>
+                  <CategoryIcon category={tag} class="h-3.5 w-3.5" />
+                </span>
+                <span class="flex-1 text-[0.95rem]">{tag}</span>
+                <span class="text-sm text-ink-soft">{count}</span>
+              </label>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-1 border-t border-line pt-1">
           <button
             type="button"
-            data-filter={tag}
-            aria-pressed="false"
-            class="filter-btn flex items-center gap-1.5 rounded-full border-2 border-line px-3.5 py-1.5 text-sm font-bold text-ink transition hover:border-ink"
+            id="filter-clear"
+            class="w-full rounded-lg px-2.5 py-2 text-left text-[0.95rem] text-ink-soft hover:bg-surface-2 hover:text-ink"
           >
-            <CategoryIcon category={tag} class="h-4 w-4" />
-            {tag} ({count})
+            Clear all
           </button>
-        ))}
+        </div>
       </div>
-      <p id="filter-status" class="mt-3 text-sm text-ink-soft" role="status" aria-live="polite"></p>
-    </div>
+    </details>
+    <p id="filter-status" class="no-print mt-3 text-sm text-ink-soft" role="status" aria-live="polite"></p>
 
     {[
       { title: 'Products', blurb: 'Things you buy once.', items: products },
@@ -84,43 +99,56 @@ const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
 </Base>
 
 <script>
-  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-btn'));
+  const root = document.getElementById('filter') as HTMLDetailsElement | null;
+  const checks = Array.from(document.querySelectorAll<HTMLInputElement>('.filter-check'));
   const cards = Array.from(document.querySelectorAll<HTMLElement>('article[data-tags]'));
   const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-group]'));
+  const label = document.getElementById('filter-label');
   const status = document.getElementById('filter-status');
-  const on = ['border-ink', 'bg-ink', 'text-surface'];
-  const off = ['border-line', 'text-ink'];
+  const clear = document.getElementById('filter-clear');
 
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const want = btn.dataset.filter!;
-      buttons.forEach((b) => {
-        const active = b === btn;
-        b.setAttribute('aria-pressed', String(active));
-        b.classList.remove(...on, ...off);
-        b.classList.add(...(active ? on : off));
-      });
+  function apply() {
+    const chosen = checks.filter((c) => c.checked).map((c) => c.value);
+    let shown = 0;
 
-      let shown = 0;
-      cards.forEach((card) => {
-        const match = want === 'all' || (card.dataset.tags ?? '').split('|').includes(want);
-        card.hidden = !match;
-        if (match) shown++;
-      });
-
-      // Hide a whole section when the filter empties it, so there is no
-      // orphaned heading with nothing under it.
-      groups.forEach((g) => {
-        const visible = Array.from(g.querySelectorAll<HTMLElement>('article[data-tags]')).some(
-          (c) => !c.hidden,
-        );
-        g.hidden = !visible;
-      });
-
-      if (status) {
-        status.textContent =
-          want === 'all' ? '' : `Showing ${shown} ${shown === 1 ? 'entry' : 'entries'} in ${want}.`;
-      }
+    cards.forEach((card) => {
+      const tags = (card.dataset.tags ?? '').split('|');
+      // No selection means no filter, rather than an empty page.
+      const match = chosen.length === 0 || chosen.some((t) => tags.includes(t));
+      card.hidden = !match;
+      if (match) shown++;
     });
+
+    // Collapse a section the filter has emptied, so no heading is left orphaned.
+    groups.forEach((g) => {
+      g.hidden = !Array.from(g.querySelectorAll<HTMLElement>('article[data-tags]')).some(
+        (c) => !c.hidden,
+      );
+    });
+
+    if (label) {
+      label.textContent =
+        chosen.length === 0 ? 'All' : chosen.length === 1 ? chosen[0]! : `${chosen.length} selected`;
+    }
+    if (status) {
+      status.textContent =
+        chosen.length === 0 ? '' : `Showing ${shown} of ${cards.length} entries.`;
+    }
+  }
+
+  checks.forEach((c) => c.addEventListener('change', apply));
+  clear?.addEventListener('click', () => {
+    checks.forEach((c) => (c.checked = false));
+    apply();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (root?.open && !root.contains(e.target as Node)) root.open = false;
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && root?.open) {
+      root.open = false;
+      root.querySelector('summary')?.focus();
+    }
   });
 </script>

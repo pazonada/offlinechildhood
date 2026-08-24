@@ -111,6 +111,13 @@
   }
 }
 
+@layer base {
+  /* The filter dropdown uses <details>, so the default disclosure triangle
+     has to go in every engine, not just the ones that respect list-style. */
+  summary::-webkit-details-marker { display: none; }
+  summary::marker { content: ''; }
+}
+
 @layer components {
   .skip-link {
     position: absolute;
