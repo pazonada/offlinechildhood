@@ -165,7 +165,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                   type="button"
                   aria-pressed={on}
                   onClick={() => toggle(devices, setDevices, o.id)}
-                  className={`rounded-full border-2 px-4 py-2 font-semibold transition ${
+                  className={`rounded-full border-2 px-4 py-2 font-medium transition ${
                     on ? 'border-primary bg-primary text-on-primary' : 'border-line hover:border-ink'
                   }`}
                 >
@@ -188,7 +188,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                   type="button"
                   aria-pressed={on}
                   onClick={() => toggle(worries, setWorries, o.id)}
-                  className={`rounded-full border-2 px-4 py-2 font-semibold transition ${
+                  className={`rounded-full border-2 px-4 py-2 font-medium transition ${
                     on ? 'border-secondary bg-secondary text-on-secondary' : 'border-line hover:border-ink'
                   }`}
                 >
