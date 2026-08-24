@@ -16,6 +16,7 @@ const modes = {
       primary: '#2451D6', primaryStrong: '#1D42B0', primaryText: '#2451D6',
       coral: '#C9412D', coralBright: '#E8543F', mint: '#0C7568', mintBright: '#12B0A0',
       accent: '#F7B928',
+      white: '#FFFFFF',
     },
     pairs: [
       ['body text', 'ink', 'surface', 4.5],
@@ -31,6 +32,11 @@ const modes = {
       ['coral button label', 'surface', 'coral', 4.5],
       ['mint button label', 'surface', 'mint', 4.5],
       ['ink on yellow highlight', 'ink', 'accent', 4.5],
+      // White text on the filled "Not good at" boxes on the picks cards.
+      ['note text on phones fill', 'white', 'primary', 4.5],
+      ['note text on audio fill', 'white', 'mint', 4.5],
+      ['note text on cameras fill', 'white', 'coral', 4.5],
+      ['note text on software fill', 'white', 'inkSoft', 4.5],
       ['border on surface', 'line', 'surface', 1.2],
     ],
   }
