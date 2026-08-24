@@ -25,19 +25,18 @@ const grouped = CATEGORIES.map((category) => ({
   title="What to buy"
   description="A short list of things worth owning, with what each one is bad at stated plainly. The honest answer to most of these questions is that you do not need to buy anything."
 >
-  <header class="border-b border-line bg-surface-2 py-16 sm:py-24">
-    <Container width="prose">
-      <h1 class="text-4xl font-extrabold sm:text-5xl">What to buy</h1>
-      <p class="mt-5 text-lg text-ink-soft">
-        A short list, kept short on purpose. Every entry says what it is bad at, because a
-        recommendation with no stated downside is an advert. Nothing here pays us.
-      </p>
-      <div class="mt-7 rounded-2xl border-2 border-accent bg-accent/12 p-5">
-        <p class="font-display font-extrabold text-ink">Read the decision first</p>
-        <p class="mt-2 text-ink">
-          This page is deliberately the least important one on the site. Work out what you want to
-          do in <a href="/decisions" class="font-semibold text-primary-text underline underline-offset-4">Decisions</a>,
-          then come back if a purchase turns out to be part of the answer. Often it is not.
+  {/* Wide container to match the card grid below. Using the prose width here
+      left the heading centred to a different measure than its own content. */}
+  <header class="border-b border-line bg-surface-2 py-16 sm:py-20">
+    <Container>
+      <div class="grid items-start gap-x-14 gap-y-5 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <h1 class="text-4xl font-extrabold sm:text-5xl">What to buy</h1>
+        <p class="text-lg text-ink-soft md:mt-2">
+          A short list, kept short on purpose. Every entry says what it is bad at, because a
+          recommendation with no stated downside is an advert. Nothing here pays us, and the honest
+          answer is usually that you do not need to buy anything. Work out what you want to do in{' '}
+          <a href="/decisions" class="font-semibold text-primary-text underline underline-offset-4">Decisions</a>{' '}
+          first.
         </p>
       </div>
     </Container>
