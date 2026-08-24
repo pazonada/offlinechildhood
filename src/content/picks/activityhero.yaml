@@ -3,7 +3,6 @@ maker: ActivityHero
 kind: Service
 tags: ['Classes and activities']
 summary: Camps, classes and after-school activities searchable by age and area, useful in the school holidays.
-priceBand: $$
 price: Varies by provider
 url: https://www.activityhero.com
 limitations: Listings quality varies and coverage is strongest in US metro areas.

@@ -3,7 +3,6 @@ maker: KidPass
 kind: Service
 tags: ['Classes and activities']
 summary: A membership that bundles access to local classes and activities, for families who try a lot of different things.
-priceBand: $$
 price: Monthly membership plus per-class credits
 url: https://kidpass.com
 limitations: Only worth the membership if you use it often, and availability is concentrated in a handful of cities.

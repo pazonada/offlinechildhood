@@ -3,7 +3,6 @@ maker: Bark
 kind: Product
 tags: ['Phones and watches', 'Parental controls']
 summary: A locked-down phone, watch and home router with heavy monitoring built in, for families who want maximum control in one package.
-priceBand: $$
 price: Device plus a monthly plan
 url: https://www.bark.us
 limitations: This is surveillance, and worth naming as such. Constant monitoring buys short-term safety at the cost of trust, and a kid who knows they are watched learns to route around it rather than to self-regulate.

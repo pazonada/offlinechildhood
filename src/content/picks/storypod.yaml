@@ -3,7 +3,6 @@ maker: Storypod
 kind: Product
 tags: ['Audio and stories']
 summary: A screen-free audio player using yarn figures and cards, with more interactive and quiz-style content than its rivals.
-priceBand: $$
 price: Player around $100, figures and cards extra
 url: https://www.storypod.com
 limitations: The interactive content nudges toward a subscription, and the extras cost more than the Yoto or Tonies equivalents.

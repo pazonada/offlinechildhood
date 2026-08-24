@@ -3,7 +3,6 @@ maker: Dayo
 kind: Service
 tags: ['Parental controls']
 summary: Tracks daily screen use and rewards staying under a threshold with brand discounts, aimed at teenagers who respond to a target.
-priceBand: $
 price: Free, funded by the brands offering the rewards
 url: https://www.dayo.co
 limitations: It swaps one incentive for another and pays kids in vouchers, so it teaches that attention has a price rather than that time has a value. Read the reward partners before signing up.

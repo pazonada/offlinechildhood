@@ -3,7 +3,6 @@ maker: Light
 kind: Product
 tags: ['Phones and watches']
 summary: A phone that makes calls and sends texts and does close to nothing else, for a teenager who genuinely needs to be reachable.
-priceBand: $$$
 price: About $800, plus a plan from roughly $25 a month
 url: https://www.thelightphone.com
 limitations: Expensive for what it does, and the lack of a group-chat experience is a real social cost for a kid whose friends coordinate that way. Maps and music exist but are deliberately basic.

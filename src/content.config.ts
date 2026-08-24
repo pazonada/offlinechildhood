@@ -123,7 +123,6 @@ const picks = defineCollection({
       tags: z.array(z.enum(PICK_TAGS)).nonempty(),
       /** One honest sentence on who it's actually for. */
       summary: z.string(),
-      priceBand: z.enum(['$', '$$', '$$$']),
       /** The actual number where we know it. Vague pricing helps nobody. */
       price: z.string().optional(),
       url: z.string().url(),
