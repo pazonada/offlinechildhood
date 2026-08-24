@@ -3,6 +3,8 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Container from '../components/Container.astro';
 import PickCard from '../components/PickCard.astro';
+import CategoryIcon from '../components/CategoryIcon.astro';
+import { CATEGORY_STYLE } from '../lib/categories';
 
 const picks = await getCollection('picks');
 const CATEGORIES = [
@@ -43,15 +45,28 @@ const grouped = CATEGORIES.map((category) => ({
   </header>
 
   <Container class="py-14">
-    {grouped.map((group) => (
-      <section class="mb-14">
-        <h2 class="font-display text-sm font-bold uppercase tracking-[0.14em] text-ink-soft">
-          {group.category}
-        </h2>
-        <div class="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {group.items.map((p) => <PickCard {...p.data} />)}
-        </div>
-      </section>
-    ))}
+    {grouped.map((group) => {
+      const style = CATEGORY_STYLE[group.category];
+      return (
+        <section class="mb-16">
+          <div class="flex items-center gap-3">
+            <span class:list={['grid h-9 w-9 shrink-0 place-items-center rounded-xl', style.tile]}>
+              <CategoryIcon category={group.category} class="h-5 w-5" />
+            </span>
+            <h2 class:list={['font-display text-sm font-bold uppercase tracking-[0.14em]', style.text]}>
+              {group.category}
+            </h2>
+            <span class:list={['h-0.5 flex-1 rounded-full', style.rule]} aria-hidden="true"></span>
+            <span class="shrink-0 text-sm text-ink-soft">
+              {group.items.length} {group.items.length === 1 ? 'pick' : 'picks'}
+            </span>
+          </div>
+
+          <div class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {group.items.map((p) => <PickCard {...p.data} />)}
+          </div>
+        </section>
+      );
+    })}
   </Container>
 </Base>

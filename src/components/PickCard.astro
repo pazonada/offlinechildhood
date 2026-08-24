@@ -1,41 +1,61 @@
 ---
+import CategoryIcon from './CategoryIcon.astro';
+import type { Category } from './CategoryIcon.astro';
+import { CATEGORY_STYLE, PRICE_LEVEL } from '../lib/categories';
+
 interface Props {
   name: string;
   maker: string;
+  category: Category;
   summary: string;
   priceBand: string;
   url: string;
   affiliate: boolean;
   limitations?: string;
 }
-const { name, maker, summary, priceBand, url, affiliate, limitations } = Astro.props;
+const { name, maker, category, summary, priceBand, url, affiliate, limitations } = Astro.props;
+const style = CATEGORY_STYLE[category];
+const level = PRICE_LEVEL[priceBand] ?? 1;
 ---
-<article class="not-prose flex flex-col rounded-2xl border border-line bg-surface-2 p-5">
-  <div class="flex items-start justify-between gap-3">
-    <div>
-      <h3 class="font-display text-lg font-extrabold text-ink">{name}</h3>
+<article class="not-prose flex flex-col rounded-3xl border-2 border-line bg-surface p-6 transition hover:border-ink/25">
+  <div class="flex items-start gap-4">
+    <span class:list={['grid h-12 w-12 shrink-0 place-items-center rounded-2xl', style.tile]}>
+      <CategoryIcon category={category} class="h-6 w-6" />
+    </span>
+
+    <div class="min-w-0 flex-1">
+      <h3 class="font-display text-lg font-extrabold leading-tight text-ink">{name}</h3>
       <p class="text-sm text-ink-soft">{maker}</p>
     </div>
-    <span
-      class="shrink-0 rounded-full bg-surface-3 px-2.5 py-1 text-sm font-semibold text-ink-soft"
-      aria-label={`Price band ${priceBand}`}
-    >{priceBand}</span>
+
+    <span class="flex shrink-0 items-center gap-1 pt-1.5" title={`Price band ${priceBand}`}>
+      <span class="sr-only">Price band {priceBand} out of $$$</span>
+      {[1, 2, 3].map((i) => (
+        <span
+          class:list={[
+            'block h-2 w-2 rounded-full',
+            i <= level ? style.dot : 'bg-line',
+          ]}
+          aria-hidden="true"
+        ></span>
+      ))}
+    </span>
   </div>
 
-  <p class="mt-3 text-[0.97rem] leading-relaxed">{summary}</p>
+  <p class="mt-4 leading-relaxed">{summary}</p>
 
   {limitations && (
-    <p class="mt-3 rounded-xl bg-surface px-3.5 py-3 text-sm text-ink-soft">
-      <span class="font-semibold text-ink">What it isn't good at.</span> {limitations}
+    <p class:list={['mt-4 border-l-4 pl-4 text-[0.95rem] text-ink-soft', style.rule]}>
+      <span class="font-display font-bold text-ink">Not good at.</span> {limitations}
     </p>
   )}
 
-  <div class="mt-4 flex items-center justify-between gap-3 pt-1">
+  <div class="mt-auto flex items-center justify-between gap-3 pt-5">
     <a
       href={url}
       rel={affiliate ? 'sponsored noopener' : 'noopener'}
       target="_blank"
-      class="font-display font-bold text-primary-text underline underline-offset-4 hover:text-ink"
+      class:list={['font-display font-bold underline underline-offset-4 hover:text-ink', style.text]}
     >
       Visit {maker}
       <span class="sr-only">(opens in a new tab)</span>
