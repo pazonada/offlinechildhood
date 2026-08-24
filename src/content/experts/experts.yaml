@@ -1,10 +1,13 @@
 # People worth reading. Listing someone is not an endorsement of everything they argue,
 # and the list deliberately includes people who disagree with each other.
+#
+# Prefer a personal site or newsletter over an employer's page: people change jobs, and
+# a link to where someone actually publishes outlives their current affiliation.
 - id: haidt
   name: Jonathan Haidt
-  role: Social psychologist, NYU Stern
-  focus: Argues that a play-based childhood gave way to a phone-based one. The most influential case for restriction, and the most contested.
-  url: https://jonathanhaidt.com
+  role: Writes After Babel
+  focus: Argues that a play-based childhood gave way to a phone-based one. The most influential case for restriction, and the most contested. He publishes the argument, and the pushback to it, here rather than in books alone.
+  url: https://www.afterbabel.com
 - id: thorp-science
   name: Science editorial desk
   role: Peer-reviewed journal
@@ -12,21 +15,21 @@
   url: https://doi.org/10.1126/science.adr1730
 - id: price
   name: Catherine Price
-  role: Author, How to Break Up With Your Phone
-  focus: Practical habit change for adults, which is where most family screen problems actually start.
-  url: https://www.catherineprice.com
+  role: Writes How to Feel Alive
+  focus: Practical habit change for adults, which is where most family screen problems actually start. She runs a phone breakup challenge each February that is worth doing yourself before asking it of your kids.
+  url: https://catherineprice.substack.com
 - id: harris
   name: Tristan Harris
   role: Co-founder, Center for Humane Technology
-  focus: How products are designed to hold attention, explained clearly enough to repeat to a child.
+  focus: How products are designed to hold attention, explained clearly enough to repeat to a child. Their podcast, Your Undivided Attention, is the easiest way in.
   url: https://www.humanetech.com
 - id: gregory
   name: Sam Gregory
-  role: Executive Director, WITNESS
-  focus: Deepfakes, synthetic media and how anyone can tell what is real.
-  url: https://www.witness.org
+  role: Researcher on deepfakes and media authenticity
+  focus: Deepfakes, synthetic media and how anyone can tell what is real. He helped write the technical standard for signalling where an image came from, and argues for preparing rather than panicking.
+  url: https://www.samgregory.info
 - id: matias
   name: J. Nathan Matias
   role: Cornell, Citizens and Technology Lab
-  focus: Studies how platforms are governed, and runs research communities can actually participate in.
-  url: https://citizensandtech.org
+  focus: Studies how platforms are governed and runs research that communities can actually take part in, rather than be the subject of.
+  url: https://natematias.com
