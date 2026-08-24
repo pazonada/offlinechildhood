@@ -40,12 +40,10 @@ const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
         JavaScript, and every card stays visible if the script never runs. */}
     <details class="no-print relative w-full max-w-sm" id="filter">
       <summary
-        class="flex cursor-pointer list-none items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 py-2.5 text-ink-soft transition hover:border-ink/30"
+        class="flex cursor-pointer list-none items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 py-2.5 text-ink transition hover:border-ink/30"
+        aria-label="Filter by category"
       >
-        <span>
-          Categories
-          <span id="filter-label" class="text-ink">All</span>
-        </span>
+        <span id="filter-label">All</span>
         <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="m6 9 6 6 6-6" />
         </svg>
