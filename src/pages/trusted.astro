@@ -10,31 +10,70 @@ const people = await getCollection('experts');
   title="People we read"
   description="Writers and researchers worth your time on children and technology, including ones who disagree with each other."
 >
-  <header class="border-b border-line bg-surface-2 py-16 sm:py-24">
-    <Container width="prose">
-      <h1 class="text-4xl font-extrabold sm:text-5xl">People we read</h1>
-      <p class="mt-5 text-lg text-ink-soft">
-        Being listed here is not an endorsement of everything someone argues. The list deliberately
-        includes people who disagree with each other, because on this subject the disagreement is
-        the most useful thing to understand.
-      </p>
+  <header class="border-b border-line bg-surface-2 py-16 sm:py-20">
+    <Container>
+      <div class="grid items-start gap-x-14 gap-y-5 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <h1 class="text-4xl font-extrabold sm:text-5xl">People we read</h1>
+        <p class="text-lg text-ink-soft md:mt-2">
+          Being listed here is not an endorsement of everything someone argues. The list
+          deliberately includes people who disagree with each other, because on this subject the
+          disagreement is the most useful thing to understand. Each link goes to where they actually
+          publish.
+        </p>
+      </div>
     </Container>
   </header>
 
-  <Container width="prose" class="py-14">
-    <ul class="grid gap-4">
+  <Container class="py-14">
+    <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
       {people.map((p) => (
-        <li>
-          <a
-            href={p.data.url}
-            target="_blank"
-            rel="noopener"
-            class="group block rounded-2xl border-2 border-line bg-surface p-6 transition hover:border-primary hover:bg-surface-2"
-          >
-            <p class="font-display text-xl font-extrabold text-ink">{p.data.name}</p>
-            <p class="mt-0.5 text-sm font-semibold text-primary-text">{p.data.role}</p>
-            <p class="mt-3 leading-relaxed text-ink-soft">{p.data.focus}</p>
-          </a>
+        <li class="flex flex-col rounded-3xl border-2 border-line bg-surface p-6 transition hover:border-ink/25">
+          <h2 class="font-display text-xl font-extrabold text-ink">{p.data.name}</h2>
+          <p class="mt-0.5 text-sm font-semibold text-primary-text">{p.data.role}</p>
+          <p class="mt-3 leading-relaxed text-ink-soft">{p.data.focus}</p>
+
+          <div class="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-4">
+            <a
+              href={p.data.url}
+              target="_blank"
+              rel="noopener"
+              class="font-display font-bold text-primary-text underline underline-offset-4 hover:text-ink"
+            >
+              Read
+              <span class="sr-only"> {p.data.name}</span>
+            </a>
+
+            {p.data.instagram && (
+              <a
+                href={`https://www.instagram.com/${p.data.instagram}/`}
+                target="_blank"
+                rel="noopener"
+                class="text-sm text-ink-soft underline underline-offset-4 hover:text-ink"
+              >
+                Instagram<span class="sr-only"> for {p.data.name}</span>
+              </a>
+            )}
+            {p.data.linkedin && (
+              <a
+                href={`https://www.linkedin.com/in/${p.data.linkedin}/`}
+                target="_blank"
+                rel="noopener"
+                class="text-sm text-ink-soft underline underline-offset-4 hover:text-ink"
+              >
+                LinkedIn<span class="sr-only"> for {p.data.name}</span>
+              </a>
+            )}
+            {p.data.x && (
+              <a
+                href={`https://x.com/${p.data.x}`}
+                target="_blank"
+                rel="noopener"
+                class="text-sm text-ink-soft underline underline-offset-4 hover:text-ink"
+              >
+                X<span class="sr-only"> for {p.data.name}</span>
+              </a>
+            )}
+          </div>
         </li>
       ))}
     </ul>

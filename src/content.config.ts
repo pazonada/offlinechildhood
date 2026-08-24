@@ -132,7 +132,7 @@ const picks = defineCollection({
     }),
 });
 
-/** Carried over from the old Expertise page: people worth reading, not endorsements. */
+/** People worth reading, not endorsements. */
 const experts = defineCollection({
   loader: file('./src/content/experts/experts.yaml'),
   schema: z.object({
@@ -140,7 +140,15 @@ const experts = defineCollection({
     name: z.string(),
     role: z.string(),
     focus: z.string(),
+    /** Where they actually publish. A newsletter beats a personal site, which
+     *  beats an employer's page, because only the last one breaks when they
+     *  change jobs. */
     url: z.string().url(),
+    /** Handle only, no @ and no URL. */
+    instagram: z.string().optional(),
+    /** The path segment after /in/. */
+    linkedin: z.string().optional(),
+    x: z.string().optional(),
   }),
 });
 

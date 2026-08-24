@@ -1,35 +1,87 @@
-# People worth reading. Listing someone is not an endorsement of everything they argue,
-# and the list deliberately includes people who disagree with each other.
+# People worth reading. Listing someone is not an endorsement of everything they
+# argue, and the list deliberately includes people who disagree with each other.
 #
-# Prefer a personal site or newsletter over an employer's page: people change jobs, and
-# a link to where someone actually publishes outlives their current affiliation.
+# `url` should be where they actually publish. A newsletter beats a personal
+# site, which beats an employer's page, because only the last one breaks when
+# they change jobs.
+- id: yeung
+  name: Alison Yeung
+  role: Writes The Smartphone Effect MD
+  focus: A doctor and a mother, writing weekly on helping parents push back against a tech-driven culture. Practical toolkits rather than theory.
+  url: https://thesmartphoneeffectmd.substack.com
+  instagram: thesmartphoneeffectmd
 - id: haidt
   name: Jonathan Haidt
   role: Writes After Babel
   focus: Argues that a play-based childhood gave way to a phone-based one. The most influential case for restriction, and the most contested. He publishes the argument, and the pushback to it, here rather than in books alone.
   url: https://www.afterbabel.com
-- id: thorp-science
-  name: Science editorial desk
-  role: Peer-reviewed journal
-  focus: Useful counterweight on how unsettled the social media research actually is.
-  url: https://doi.org/10.1126/science.adr1730
+  instagram: jonathanhaidt
 - id: price
   name: Catherine Price
   role: Writes How to Feel Alive
   focus: Practical habit change for adults, which is where most family screen problems actually start. She runs a phone breakup challenge each February that is worth doing yourself before asking it of your kids.
   url: https://catherineprice.substack.com
+  instagram: catherinepriceofficial
+- id: broderick
+  name: Ryan Broderick
+  role: Writes Garbage Day
+  focus: A journalist on internet culture, which is the water your kids are swimming in. The best way to understand the gaming and meme ecosystems they are joining, told with more affection than alarm.
+  url: https://www.garbageday.email
+  instagram: ryanhatesthis
+  x: broderick
+- id: abby
+  name: Abby
+  role: Speech language pathologist
+  focus: On the role of play in language development, including gestalt language processors, and on building responsible screen habits early. Her feed is the main channel and carries most of the resources.
+  url: https://www.instagram.com/playmore_techless/
+  instagram: playmore_techless
 - id: harris
   name: Tristan Harris
   role: Co-founder, Center for Humane Technology
   focus: How products are designed to hold attention, explained clearly enough to repeat to a child. Their podcast, Your Undivided Attention, is the easiest way in.
-  url: https://www.humanetech.com
+  url: https://www.tristanharris.com
+  instagram: tristanharris
 - id: gregory
   name: Sam Gregory
   role: Researcher on deepfakes and media authenticity
   focus: Deepfakes, synthetic media and how anyone can tell what is real. He helped write the technical standard for signalling where an image came from, and argues for preparing rather than panicking.
   url: https://www.samgregory.info
+  linkedin: samgregory
 - id: matias
   name: J. Nathan Matias
   role: Cornell, Citizens and Technology Lab
   focus: Studies how platforms are governed and runs research that communities can actually take part in, rather than be the subject of.
   url: https://natematias.com
+  linkedin: natematias
+- id: ciriello
+  name: Raffaele Ciriello
+  role: University of Sydney
+  focus: Writes on human and AI companionship, which is becoming one of the harder things for parents to think clearly about, and on the ethics of emerging technology.
+  url: https://www.sydney.edu.au/business/about/our-people/academic-staff/raffaele-ciriello.html
+  linkedin: raffaele-ciriello
+- id: kosmyna
+  name: Nataliya Kos'myna
+  role: Research scientist, MIT Media Lab
+  focus: Works on the interaction between AI and the brain, including attention and learning, with UNICEF and Google.
+  url: https://www.media.mit.edu/people/nkosmyna/overview/
+- id: dekai
+  name: De Kai
+  role: Professor and author, The Future Society
+  focus: An AI researcher writing about what these systems do to the societies using them, rather than only what they can do.
+  url: https://dek.ai
+- id: haskell
+  name: Christine Haskell
+  role: Technology advisor and author
+  focus: On data practice and technology leadership, and runs workshops. Useful if you are the person raising this at a school or a workplace.
+  url: https://christinehaskell.com
+- id: kim
+  name: Na Young Kim
+  role: Lawyer and data scientist
+  focus: Advises on AI governance and cybersecurity, which is the layer most parenting coverage skips entirely.
+  url: https://www.linkedin.com/in/nayoungkimjd/
+  linkedin: nayoungkimjd
+- id: thorp-science
+  name: Science editorial desk
+  role: Peer-reviewed journal
+  focus: Useful counterweight on how unsettled the social media research actually is. Worth reading against Haidt rather than instead of him.
+  url: https://doi.org/10.1126/science.adr1730
