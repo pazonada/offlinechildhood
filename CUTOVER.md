@@ -36,6 +36,19 @@ You are only ever changing the four apex `A` records and the `www` `CNAME`.
    minutes instead of hours.
 2. **Vercel** → project → Settings → Domains → add `offlinechildhood.com` and
    `www.offlinechildhood.com`. Vercel shows the records it wants.
+
+   **The bare domain is the canonical one.** When Vercel asks, set
+   `offlinechildhood.com` as the primary domain with no redirect, and set
+   `www.offlinechildhood.com` to redirect to it. Vercel defaults to the opposite
+   often enough to be worth checking: if the www entry is the one marked
+   primary, change it, or every URL on the site gains a `www.` it should not
+   have.
+
+   This matches the rest of the build. `astro.config.mjs` sets
+   `site: 'https://offlinechildhood.com'`, so every canonical tag and every
+   sitemap entry already uses the bare domain. Making www primary in Vercel
+   would put the redirect target at odds with the canonical tags, which is the
+   kind of mismatch search engines handle badly.
 3. **Gandi** → Domain → DNS records. Delete the four Squarespace `A` records,
    add the `A` record Vercel gave you, and repoint the `www` `CNAME` at the value
    Vercel gave you. Use Vercel's values rather than any written here, since they
