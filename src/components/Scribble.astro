@@ -1,0 +1,103 @@
+---
+/**
+ * Hand-drawn marks, inline as SVG. Roughly a kilobyte each, no licensing, no
+ * image service, nothing to maintain. Paths are deliberately irregular and
+ * overshoot slightly at the ends, because a mark that is too even reads as a
+ * shape rather than as something drawn.
+ */
+export type ScribbleType =
+  | 'underline'
+  | 'underline-double'
+  | 'circle'
+  | 'arrow'
+  | 'arrow-down'
+  | 'burst'
+  | 'divider'
+  | 'bracket'
+  | 'check'
+  | 'box';
+
+interface Props {
+  type: ScribbleType;
+  class?: string;
+  /** Defaults to the accent yellow. Any CSS colour works. */
+  color?: string;
+  width?: number;
+}
+
+const { type, class: className = '', color = 'var(--accent)', width = 2.5 } = Astro.props;
+
+const paths: Record<ScribbleType, { d: string[]; box: string; fill?: boolean }> = {
+  underline: {
+    box: '0 0 200 14',
+    d: ['M3 9c34-6 71 3 106-2 22-3 61 4 88-1'],
+  },
+  'underline-double': {
+    box: '0 0 200 16',
+    d: [
+      'M4 7c33-5 70 3 104-1 22-3 60 3 88-2',
+      'M10 12c30-3 64 2 96-1 20-2 55 2 82-1',
+    ],
+  },
+  circle: {
+    box: '0 0 200 70',
+    d: [
+      'M60 6C24 8 4 22 6 40c2 17 32 26 78 25 40-1 88-9 105-25 14-14-11-27-52-31C110 6 85 5 60 6Z',
+      'M40 12c-18 6-28 16-26 27',
+    ],
+  },
+  arrow: {
+    box: '0 0 90 42',
+    d: ['M4 22c18-14 44-20 78-14', 'M66 2c8 3 14 6 16 6-6 3-11 8-14 15'],
+  },
+  'arrow-down': {
+    box: '0 0 42 80',
+    d: ['M20 4c-9 22-6 44 2 66', 'M8 54c6 8 12 16 14 20 3-8 8-15 14-20'],
+  },
+  burst: {
+    box: '0 0 44 44',
+    d: ['M22 3v38', 'M3 22h38', 'M8 8l28 28', 'M36 8L8 36'],
+  },
+  divider: {
+    box: '0 0 240 12',
+    d: ['M3 7c18-6 36 4 54-1s36-6 54 0 36 6 54 1 36-5 72 1'],
+  },
+  bracket: {
+    box: '0 0 20 90',
+    d: ['M15 3C6 8 4 24 5 45c1 20 2 36 10 42'],
+  },
+  check: {
+    box: '0 0 34 30',
+    d: ['M3 16c4 3 8 7 10 11C17 17 24 8 31 3'],
+  },
+  box: {
+    box: '0 0 200 60',
+    d: [
+      'M6 8c48-4 100-5 150-2 20 1 40 2 42 6',
+      'M197 14c2 12 1 26-1 36',
+      'M195 50c-40 5-96 6-146 4',
+      'M6 52C3 40 3 22 6 10',
+    ],
+  },
+};
+
+const mark = paths[type];
+
+// Underlines and dividers are meant to stretch to whatever they sit under.
+// Circles, arrows and ticks would just look distorted, so they keep their ratio.
+const stretches = ['underline', 'underline-double', 'divider', 'box', 'bracket'].includes(type);
+---
+<svg
+  viewBox={mark.box}
+  class:list={['pointer-events-none', className]}
+  fill="none"
+  stroke={color}
+  stroke-width={width}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+  preserveAspectRatio={stretches ? 'none' : 'xMidYMid meet'}
+>
+  {mark.d.map((d) => <path d={d} />)}
+</svg>
