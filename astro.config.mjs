@@ -52,10 +52,9 @@ export default defineConfig({
     '/products-services/the-light-phone': '/decisions/first-phone',
     '/resources/category/Smartphones': '/decisions/first-phone',
 
-    // Monitoring and parental-control entries have no equivalent on purpose:
-    // we take no commission on surveillance software, and this page says why.
-    '/products-services/bark-products-for-monitoring-kids-digital-consumption': '/disclosure',
-    '/products-services/canopy-online-safety-app': '/disclosure',
+    // Monitoring and parental-control entries are listed on the picks page.
+    '/products-services/bark-products-for-monitoring-kids-digital-consumption': '/picks',
+    '/products-services/canopy-online-safety-app': '/picks',
 
     // The rest of the old product directory.
     '/products-services': '/picks',

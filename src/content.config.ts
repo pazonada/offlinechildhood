@@ -127,7 +127,6 @@ const picks = defineCollection({
       /** The actual number where we know it. Vague pricing helps nobody. */
       price: z.string().optional(),
       url: z.string().url(),
-      affiliate: z.boolean().default(false),
       /** Stated plainly on the page. Credibility depends on naming the limits. */
       limitations: z.string().optional(),
       updated: z.coerce.date(),

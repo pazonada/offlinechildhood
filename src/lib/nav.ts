@@ -21,5 +21,4 @@ export const footerNav: NavItem[] = [
   ...primaryNav,
   ...secondaryNav,
   { href: '/trusted', label: 'People we read' },
-  { href: '/disclosure', label: 'How we make money' },
 ];
