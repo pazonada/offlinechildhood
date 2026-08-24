@@ -1,9 +1,11 @@
 name: Toniebox
 maker: tonies
-category: Audio and stories
+kind: Product
+tags: ['Audio and stories']
 summary: The same idea as Yoto for younger children, with figures instead of cards, which suits hands that cannot yet read labels.
 priceBand: $$
-url: https://www.tonies.com
+price: Box around $100, figures from about $15
+url: https://us.tonies.com
 affiliate: false
 limitations: Figures are licensed and pricey, and the catalogue leans heavily on brand tie-ins. Best paired with a library card.
-updated: 2026-08-18
+updated: 2026-08-19

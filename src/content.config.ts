@@ -96,24 +96,36 @@ const concepts = defineCollection({
  * is a single-file edit and never leaves a decision page half-broken, which is
  * exactly what went wrong with the old product-directory site.
  */
+/**
+ * Products and services. The top-level split is the one the old site used and
+ * the one readers actually think in: is this a thing you buy once, or something
+ * you subscribe to. Tags are the finer grain and drive the filter.
+ */
+export const PICK_TAGS = [
+  'Phones and watches',
+  'Audio and stories',
+  'Computers and tablets',
+  'Toys and play',
+  'STEM and building',
+  'Outdoor and clothing',
+  'Cameras and making',
+  'Classes and activities',
+  'Parental controls',
+] as const;
+
 const picks = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/picks' }),
   schema: () =>
     z.object({
       name: z.string(),
       maker: z.string(),
-      category: z.enum([
-        'Phones and watches',
-        'Audio and stories',
-        'Cameras and making',
-        'Games and play',
-        'Books and paper',
-        'Outdoor',
-        'Software and settings',
-      ]),
+      kind: z.enum(['Product', 'Service']),
+      tags: z.array(z.enum(PICK_TAGS)).nonempty(),
       /** One honest sentence on who it's actually for. */
       summary: z.string(),
       priceBand: z.enum(['$', '$$', '$$$']),
+      /** The actual number where we know it. Vague pricing helps nobody. */
+      price: z.string().optional(),
       url: z.string().url(),
       affiliate: z.boolean().default(false),
       /** Stated plainly on the page. Credibility depends on naming the limits. */

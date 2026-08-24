@@ -4,39 +4,30 @@ import Base from '../layouts/Base.astro';
 import Container from '../components/Container.astro';
 import PickCard from '../components/PickCard.astro';
 import CategoryIcon from '../components/CategoryIcon.astro';
-import { CATEGORY_STYLE } from '../lib/categories';
+import { TAG_STYLE, type PickTag } from '../lib/categories';
 
-const picks = await getCollection('picks');
-const CATEGORIES = [
-  'Phones and watches',
-  'Audio and stories',
-  'Cameras and making',
-  'Games and play',
-  'Books and paper',
-  'Outdoor',
-  'Software and settings',
-] as const;
+const picks = (await getCollection('picks')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const products = picks.filter((p) => p.data.kind === 'Product');
+const services = picks.filter((p) => p.data.kind === 'Service');
 
-const grouped = CATEGORIES.map((category) => ({
-  category,
-  items: picks.filter((p) => p.data.category === category),
-})).filter((g) => g.items.length > 0);
+// Only offer filters for tags that actually have something behind them.
+const tagCounts = new Map<PickTag, number>();
+for (const p of picks) for (const t of p.data.tags) tagCounts.set(t, (tagCounts.get(t) ?? 0) + 1);
+const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
 ---
 
 <Base
   title="What to buy"
-  description="A short list of things worth owning, with what each one is bad at stated plainly. The honest answer to most of these questions is that you do not need to buy anything."
+  description="Products and services worth considering, with what each one is bad at stated plainly. Nothing here pays us."
 >
-  {/* Wide container to match the card grid below. Using the prose width here
-      left the heading centred to a different measure than its own content. */}
   <header class="border-b border-line bg-surface-2 py-16 sm:py-20">
     <Container>
       <div class="grid items-start gap-x-14 gap-y-5 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
         <h1 class="text-4xl font-extrabold sm:text-5xl">What to buy</h1>
         <p class="text-lg text-ink-soft md:mt-2">
-          A short list, kept short on purpose. Every entry says what it is bad at, because a
-          recommendation with no stated downside is an advert. Nothing here pays us, and the honest
-          answer is usually that you do not need to buy anything. Work out what you want to do in{' '}
+          Every entry says what it is bad at, because a recommendation with no stated downside is an
+          advert. Nothing here pays us, and the honest answer is usually that you do not need to buy
+          anything. Work out what you want to do in{' '}
           <a href="/decisions" class="font-semibold text-primary-text underline underline-offset-4">Decisions</a>{' '}
           first.
         </p>
@@ -44,29 +35,92 @@ const grouped = CATEGORIES.map((category) => ({
     </Container>
   </header>
 
-  <Container class="py-14">
-    {grouped.map((group) => {
-      const style = CATEGORY_STYLE[group.category];
-      return (
-        <section class="mb-16">
-          <div class="flex items-center gap-3">
-            <span class:list={['grid h-9 w-9 shrink-0 place-items-center rounded-xl', style.tile]}>
-              <CategoryIcon category={group.category} class="h-5 w-5" />
-            </span>
-            <h2 class:list={['font-display text-sm font-bold uppercase tracking-[0.14em]', style.text]}>
-              {group.category}
-            </h2>
-            <span class:list={['h-0.5 flex-1 rounded-full', style.rule]} aria-hidden="true"></span>
-            <span class="shrink-0 text-sm text-ink-soft">
-              {group.items.length} {group.items.length === 1 ? 'pick' : 'picks'}
-            </span>
-          </div>
+  <Container class="py-12">
+    {/* Filter. Without JS every card stays visible, so nothing is ever hidden
+        behind a control that failed to load. */}
+    <div class="no-print" role="group" aria-label="Filter by category">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="mr-1 text-sm font-semibold text-ink-soft">Filter</span>
+        <button
+          type="button"
+          data-filter="all"
+          aria-pressed="true"
+          class="filter-btn rounded-full border-2 border-ink bg-ink px-3.5 py-1.5 text-sm font-bold text-surface"
+        >
+          Everything ({picks.length})
+        </button>
+        {tags.map(([tag, count]) => (
+          <button
+            type="button"
+            data-filter={tag}
+            aria-pressed="false"
+            class="filter-btn flex items-center gap-1.5 rounded-full border-2 border-line px-3.5 py-1.5 text-sm font-bold text-ink transition hover:border-ink"
+          >
+            <CategoryIcon category={tag} class="h-4 w-4" />
+            {tag} ({count})
+          </button>
+        ))}
+      </div>
+      <p id="filter-status" class="mt-3 text-sm text-ink-soft" role="status" aria-live="polite"></p>
+    </div>
 
-          <div class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {group.items.map((p) => <PickCard {...p.data} />)}
-          </div>
-        </section>
-      );
-    })}
+    {[
+      { title: 'Products', blurb: 'Things you buy once.', items: products },
+      { title: 'Services', blurb: 'Things you subscribe to or book.', items: services },
+    ].map((group) => (
+      <section class="mt-14" data-group={group.title}>
+        <div class="flex items-baseline gap-3">
+          <h2 class="font-display text-2xl font-extrabold">{group.title}</h2>
+          <span class="text-ink-soft">{group.blurb}</span>
+          <span class="h-0.5 flex-1 rounded-full bg-line" aria-hidden="true"></span>
+        </div>
+        <div class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {group.items.map((p) => <PickCard {...p.data} />)}
+        </div>
+        <p class="mt-6 hidden text-ink-soft" data-empty>Nothing in this category.</p>
+      </section>
+    ))}
   </Container>
 </Base>
+
+<script>
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-btn'));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('article[data-tags]'));
+  const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-group]'));
+  const status = document.getElementById('filter-status');
+  const on = ['border-ink', 'bg-ink', 'text-surface'];
+  const off = ['border-line', 'text-ink'];
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const want = btn.dataset.filter!;
+      buttons.forEach((b) => {
+        const active = b === btn;
+        b.setAttribute('aria-pressed', String(active));
+        b.classList.remove(...on, ...off);
+        b.classList.add(...(active ? on : off));
+      });
+
+      let shown = 0;
+      cards.forEach((card) => {
+        const match = want === 'all' || (card.dataset.tags ?? '').split('|').includes(want);
+        card.hidden = !match;
+        if (match) shown++;
+      });
+
+      // Hide a whole section when the filter empties it, so there is no
+      // orphaned heading with nothing under it.
+      groups.forEach((g) => {
+        const visible = Array.from(g.querySelectorAll<HTMLElement>('article[data-tags]')).some(
+          (c) => !c.hidden,
+        );
+        g.hidden = !visible;
+      });
+
+      if (status) {
+        status.textContent =
+          want === 'all' ? '' : `Showing ${shown} ${shown === 1 ? 'entry' : 'entries'} in ${want}.`;
+      }
+    });
+  });
+</script>

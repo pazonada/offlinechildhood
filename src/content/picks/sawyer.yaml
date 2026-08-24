@@ -1,0 +1,11 @@
+name: Sawyer
+maker: Sawyer
+kind: Service
+tags: ['Classes and activities']
+summary: Finds and books in-person classes and camps nearby, and lets local instructors list their own.
+priceBand: $$
+price: Varies by provider
+url: https://hisawyer.com
+affiliate: false
+limitations: Coverage is patchy outside larger cities. Also worth remembering that a packed schedule fills time as effectively as a screen does.
+updated: 2026-08-19

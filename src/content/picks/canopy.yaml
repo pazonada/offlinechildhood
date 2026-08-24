@@ -1,0 +1,11 @@
+name: Canopy
+maker: Canopy
+kind: Service
+tags: ['Parental controls']
+summary: Filtering and screen-time limits across a family's devices, for households that have decided they want a technical backstop.
+priceBand: $$
+price: Subscription, from roughly $8 a month
+url: https://canopy.us
+affiliate: false
+limitations: Filters are a backstop, never a substitute for the conversations. They also break, get worked around by determined teenagers, and can push use onto devices you do not control.
+updated: 2026-08-19

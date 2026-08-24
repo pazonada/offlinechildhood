@@ -1,26 +1,32 @@
 ---
 import CategoryIcon from './CategoryIcon.astro';
-import type { Category } from './CategoryIcon.astro';
-import { CATEGORY_STYLE, PRICE_LEVEL } from '../lib/categories';
+import { TAG_STYLE, PRICE_LEVEL, type PickTag } from '../lib/categories';
 
 interface Props {
   name: string;
   maker: string;
-  category: Category;
+  kind: 'Product' | 'Service';
+  tags: PickTag[];
   summary: string;
   priceBand: string;
+  price?: string;
   url: string;
   affiliate: boolean;
   limitations?: string;
 }
-const { name, maker, category, summary, priceBand, url, affiliate, limitations } = Astro.props;
-const style = CATEGORY_STYLE[category];
+const { name, maker, kind, tags, summary, priceBand, price, url, affiliate, limitations } = Astro.props;
+const primaryTag = tags[0]!;
+const style = TAG_STYLE[primaryTag];
 const level = PRICE_LEVEL[priceBand] ?? 1;
 ---
-<article class="not-prose flex flex-col rounded-3xl border-2 border-line bg-surface p-6 transition hover:border-ink/25">
+<article
+  class="not-prose flex flex-col rounded-3xl border-2 border-line bg-surface p-6 transition hover:border-ink/25"
+  data-kind={kind}
+  data-tags={tags.join('|')}
+>
   <div class="flex items-start gap-4">
     <span class:list={['grid h-12 w-12 shrink-0 place-items-center rounded-2xl', style.tile]}>
-      <CategoryIcon category={category} class="h-6 w-6" />
+      <CategoryIcon category={primaryTag} class="h-6 w-6" />
     </span>
 
     <div class="min-w-0 flex-1">
@@ -28,14 +34,11 @@ const level = PRICE_LEVEL[priceBand] ?? 1;
       <p class="text-sm text-ink-soft">{maker}</p>
     </div>
 
-    <span class="flex shrink-0 items-center gap-1 pt-1.5" title={`Price band ${priceBand}`}>
+    <span class="flex shrink-0 items-center gap-1 pt-1.5">
       <span class="sr-only">Price band {priceBand} out of $$$</span>
       {[1, 2, 3].map((i) => (
         <span
-          class:list={[
-            'block h-2 w-2 rounded-full',
-            i <= level ? style.dot : 'bg-line',
-          ]}
+          class:list={['block h-2 w-2 rounded-full', i <= level ? style.dot : 'bg-line']}
           aria-hidden="true"
         ></span>
       ))}
@@ -44,13 +47,23 @@ const level = PRICE_LEVEL[priceBand] ?? 1;
 
   <p class="mt-4 leading-relaxed">{summary}</p>
 
+  {price && <p class="mt-3 text-sm font-semibold text-ink-soft">{price}</p>}
+
   {limitations && (
     <p class:list={['mt-4 rounded-xl px-4 py-3 text-sm leading-relaxed', style.note]}>
       <span class="font-display font-bold">Not good at.</span> {limitations}
     </p>
   )}
 
-  <div class="mt-auto flex items-center justify-between gap-3 pt-5">
+  <div class="mt-auto flex flex-wrap items-center gap-2 pt-5">
+    {tags.map((t) => (
+      <span class:list={['rounded-full px-2.5 py-1 text-xs font-semibold', TAG_STYLE[t].tile]}>
+        {t}
+      </span>
+    ))}
+  </div>
+
+  <div class="mt-4 flex items-center justify-between gap-3 border-t border-line pt-4">
     <a
       href={url}
       rel={affiliate ? 'sponsored noopener' : 'noopener'}
