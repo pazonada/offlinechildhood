@@ -57,6 +57,15 @@ const unpaid = picks.filter((p) => !p.data.affiliate);
       <h2>Every product we link, and whether it pays us</h2>
     </div>
 
+    {paid.length === 0 && (
+      <p class="mt-8 rounded-2xl border-2 border-accent bg-accent/12 p-5">
+        <span class="font-display font-extrabold">Today, nothing on this site pays us.</span>{' '}
+        We have not joined any affiliate programme yet, so every link below earns us nothing at all.
+        When that changes, the paid ones get labelled here and on the page they appear on. This
+        notice will disappear on its own once there is anything to declare.
+      </p>
+    )}
+
     <div class="mt-8 grid gap-6 sm:grid-cols-2">
       <section class="rounded-2xl border-2 border-line bg-surface-2 p-6">
         <h3 class="font-display text-lg font-extrabold">Paid links ({paid.length})</h3>

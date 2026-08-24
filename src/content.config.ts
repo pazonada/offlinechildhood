@@ -98,7 +98,7 @@ const concepts = defineCollection({
  */
 const picks = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/picks' }),
-  schema: ({ image }) =>
+  schema: () =>
     z.object({
       name: z.string(),
       maker: z.string(),
@@ -116,14 +116,6 @@ const picks = defineCollection({
       priceBand: z.enum(['$', '$$', '$$$']),
       url: z.string().url(),
       affiliate: z.boolean().default(false),
-      /**
-       * Optional product thumbnail, relative to this file. Processed at build
-       * time into a static file, so it costs nothing to serve and never touches
-       * a metered image service. Cards fall back to a lettered tile without it.
-       */
-      image: image().optional(),
-      /** Describe the product, not the photograph. Empty is wrong; omit instead. */
-      imageAlt: z.string().optional(),
       /** Stated plainly on the page. Credibility depends on naming the limits. */
       limitations: z.string().optional(),
       updated: z.coerce.date(),
