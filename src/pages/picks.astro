@@ -3,8 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Container from '../components/Container.astro';
 import PickCard from '../components/PickCard.astro';
-import CategoryIcon from '../components/CategoryIcon.astro';
-import { TAG_STYLE, type PickTag } from '../lib/categories';
+import type { PickTag } from '../lib/categories';
 
 const picks = (await getCollection('picks')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 const products = picks.filter((p) => p.data.kind === 'Product');
@@ -55,9 +54,6 @@ const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
             <li>
               <label class="flex cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 hover:bg-surface-2">
                 <input type="checkbox" value={tag} class="filter-check h-4 w-4 rounded border-line accent-primary" />
-                <span class:list={['grid h-6 w-6 shrink-0 place-items-center rounded-md', TAG_STYLE[tag].tile]}>
-                  <CategoryIcon category={tag} class="h-3.5 w-3.5" />
-                </span>
                 <span class="flex-1 text-[0.95rem]">{tag}</span>
                 <span class="text-sm text-ink-soft">{count}</span>
               </label>

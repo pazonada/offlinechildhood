@@ -35,6 +35,18 @@
   /* Yellow never carries text. Highlights, underlines and the mark only. */
   --accent: #f7b928;
   --on-accent: #101828;
+
+  /* One distinct hue per pick category. Every one is verified as text on both
+     white and the panel tint by scripts/contrast.mjs. */
+  --cat-phones: #2451d6;
+  --cat-audio: #0c7568;
+  --cat-computers: #6d28d9;
+  --cat-toys: #be3a24;
+  --cat-stem: #8a5200;
+  --cat-outdoor: #297046;
+  --cat-cameras: #a81e63;
+  --cat-classes: #0f6c8c;
+  --cat-controls: #525f70;
 }
 
 @theme inline {
@@ -57,6 +69,15 @@
   --color-on-coral: var(--on-coral);
   --color-accent: var(--accent);
   --color-on-accent: var(--on-accent);
+  --color-cat-phones: var(--cat-phones);
+  --color-cat-audio: var(--cat-audio);
+  --color-cat-computers: var(--cat-computers);
+  --color-cat-toys: var(--cat-toys);
+  --color-cat-stem: var(--cat-stem);
+  --color-cat-outdoor: var(--cat-outdoor);
+  --color-cat-cameras: var(--cat-cameras);
+  --color-cat-classes: var(--cat-classes);
+  --color-cat-controls: var(--cat-controls);
 
   --font-display: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;

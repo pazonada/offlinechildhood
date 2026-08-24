@@ -3,46 +3,39 @@ import type { PICK_TAGS } from '../content.config';
 export type PickTag = (typeof PICK_TAGS)[number];
 
 /**
- * A colour per tag, so the page has rhythm as you scroll rather than being one
- * long run of identical cards. Classes are written out in full because Tailwind
- * scans source text and cannot resolve a string built at runtime.
+ * One distinct hue per category. Colour now lives only in the iconography, the
+ * price dots and the outbound link; the downsides box is neutral on every card.
+ *
+ * Classes are written out in full because Tailwind scans source text and cannot
+ * resolve a string assembled at runtime.
  */
-export const TAG_STYLE: Record<PickTag, { text: string; tile: string; dot: string; note: string }> = {
+export const TAG_STYLE: Record<PickTag, { text: string; tile: string; dot: string }> = {
   'Phones and watches': {
-    text: 'text-primary-text', tile: 'bg-primary/10 text-primary-text',
-    dot: 'bg-primary', note: 'bg-primary text-white',
+    text: 'text-cat-phones', tile: 'bg-cat-phones/10 text-cat-phones', dot: 'bg-cat-phones',
   },
   'Audio and stories': {
-    text: 'text-secondary', tile: 'bg-secondary/10 text-secondary',
-    dot: 'bg-secondary', note: 'bg-secondary text-white',
+    text: 'text-cat-audio', tile: 'bg-cat-audio/10 text-cat-audio', dot: 'bg-cat-audio',
   },
   'Computers and tablets': {
-    text: 'text-primary-text', tile: 'bg-primary/10 text-primary-text',
-    dot: 'bg-primary', note: 'bg-primary text-white',
+    text: 'text-cat-computers', tile: 'bg-cat-computers/10 text-cat-computers', dot: 'bg-cat-computers',
   },
   'Toys and play': {
-    text: 'text-coral', tile: 'bg-coral/10 text-coral',
-    dot: 'bg-coral', note: 'bg-coral text-white',
+    text: 'text-cat-toys', tile: 'bg-cat-toys/10 text-cat-toys', dot: 'bg-cat-toys',
   },
   'STEM and building': {
-    text: 'text-coral', tile: 'bg-coral/10 text-coral',
-    dot: 'bg-coral', note: 'bg-coral text-white',
+    text: 'text-cat-stem', tile: 'bg-cat-stem/10 text-cat-stem', dot: 'bg-cat-stem',
   },
   'Outdoor and clothing': {
-    text: 'text-secondary', tile: 'bg-secondary/10 text-secondary',
-    dot: 'bg-secondary', note: 'bg-secondary text-white',
+    text: 'text-cat-outdoor', tile: 'bg-cat-outdoor/10 text-cat-outdoor', dot: 'bg-cat-outdoor',
   },
   'Cameras and making': {
-    text: 'text-coral', tile: 'bg-coral/10 text-coral',
-    dot: 'bg-coral', note: 'bg-coral text-white',
+    text: 'text-cat-cameras', tile: 'bg-cat-cameras/10 text-cat-cameras', dot: 'bg-cat-cameras',
   },
   'Classes and activities': {
-    text: 'text-primary-text', tile: 'bg-primary/10 text-primary-text',
-    dot: 'bg-primary', note: 'bg-primary text-white',
+    text: 'text-cat-classes', tile: 'bg-cat-classes/10 text-cat-classes', dot: 'bg-cat-classes',
   },
   'Parental controls': {
-    text: 'text-ink-soft', tile: 'bg-surface-3 text-ink-soft',
-    dot: 'bg-ink-soft', note: 'bg-ink-soft text-white',
+    text: 'text-cat-controls', tile: 'bg-cat-controls/10 text-cat-controls', dot: 'bg-cat-controls',
   },
 };
 
