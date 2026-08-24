@@ -90,8 +90,8 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
       {/* ---------------- questions ---------------- */}
       <div className="no-print grid gap-8">
         <fieldset className="rounded-3xl border-2 border-line bg-surface-2 p-6 sm:p-7">
-          <legend className="px-2 font-display text-lg font-extrabold">Who is this for?</legend>
-          <p className="mt-1 text-ink-soft">
+          <legend className="float-left w-full font-display text-xl font-extrabold text-ink">Who is this for?</legend>
+          <p className="clear-both pt-2 text-ink-soft">
             Ages only. Names are optional and never leave your browser.
           </p>
 
@@ -154,8 +154,8 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
         </fieldset>
 
         <fieldset className="rounded-3xl border-2 border-line bg-surface-2 p-6 sm:p-7">
-          <legend className="px-2 font-display text-lg font-extrabold">What is in the house now?</legend>
-          <p className="mt-1 text-ink-soft">Be honest. The plan is more useful if it starts where you are.</p>
+          <legend className="float-left w-full font-display text-xl font-extrabold text-ink">What is in the house now?</legend>
+          <p className="clear-both pt-2 text-ink-soft">Be honest. The plan is more useful if it starts where you are.</p>
           <div className="mt-5 flex flex-wrap gap-2.5">
             {DEVICE_OPTIONS.map((o) => {
               const on = devices.includes(o.id);
@@ -177,8 +177,8 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
         </fieldset>
 
         <fieldset className="rounded-3xl border-2 border-line bg-surface-2 p-6 sm:p-7">
-          <legend className="px-2 font-display text-lg font-extrabold">What worries you most?</legend>
-          <p className="mt-1 text-ink-soft">Pick as many as apply. This orders your plan.</p>
+          <legend className="float-left w-full font-display text-xl font-extrabold text-ink">What worries you most?</legend>
+          <p className="clear-both pt-2 text-ink-soft">Pick as many as apply. This orders your plan.</p>
           <div className="mt-5 flex flex-wrap gap-2.5">
             {WORRY_OPTIONS.map((o) => {
               const on = worries.includes(o.id);
@@ -200,8 +200,8 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
         </fieldset>
 
         <fieldset className="rounded-3xl border-2 border-line bg-surface-2 p-6 sm:p-7">
-          <legend className="px-2 font-display text-lg font-extrabold">How far do you want to go?</legend>
-          <p className="mt-1 text-ink-soft">
+          <legend className="float-left w-full font-display text-xl font-extrabold text-ink">How far do you want to go?</legend>
+          <p className="clear-both pt-2 text-ink-soft">
             There is no wrong answer. A rule you keep beats a rule you announce.
           </p>
           <div className="mt-5 grid gap-3 md:grid-cols-3">
