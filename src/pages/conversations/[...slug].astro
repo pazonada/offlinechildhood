@@ -5,6 +5,7 @@ import Container from '../../components/Container.astro';
 import BandFilter from '../../components/BandFilter.astro';
 import PrevNext from '../../components/PrevNext.astro';
 import BackLink from '../../components/BackLink.astro';
+import Scribble from '../../components/Scribble.astro';
 
 export async function getStaticPaths() {
   // Sorted so prev and next follow the curriculum order rather than file order.
@@ -49,7 +50,10 @@ const updated = c.updated.toLocaleDateString('en-US', { month: 'long', year: 'nu
       <BandFilter bands={c.bands.map((b) => b.band)} />
 
       <div class="py-12">
-        <h2 class="font-display text-2xl font-extrabold">How to explain it, by age</h2>
+        <h2 class="relative inline-block font-display text-2xl font-extrabold">
+          How to explain it, by age
+          <Scribble type="underline" class="absolute -bottom-3 left-0 h-2.5 w-full" />
+        </h2>
         <p class="mt-2 text-ink-soft">
           Same idea every time. What changes is how much of the machinery a kid can hold, so pick the
           version that fits and go up a band when it stops being interesting.
@@ -98,7 +102,7 @@ const updated = c.updated.toLocaleDateString('en-US', { month: 'long', year: 'nu
 
         {c.misconceptions.length > 0 && (
           <section class="mt-16 border-t border-line pt-12">
-            <h2 class="font-display text-2xl font-extrabold">What kids get wrong about this</h2>
+            <h2 class="font-display text-2xl font-extrabold">Misconceptions to address</h2>
             <ul class="mt-5 grid gap-3">
               {c.misconceptions.map((m) => (
                 <li class="rounded-2xl border border-line bg-surface-2 p-5 leading-relaxed">{m}</li>

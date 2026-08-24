@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import Container from '../components/Container.astro';
 import Button from '../components/Button.astro';
 import { SOURCES } from '../lib/sources';
+import Scribble from '../components/Scribble.astro';
 
 const decisions = (await getCollection('decisions')).sort((a, b) => a.data.order - b.data.order);
 const concepts = (await getCollection('concepts')).sort((a, b) => a.data.order - b.data.order);
@@ -109,8 +110,9 @@ const evidence = [
           and stretching the paragraph across the full width would push the
           line length past comfortable reading. */}
       <div class="grid items-start gap-x-14 gap-y-4 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        <h2 class="font-display text-3xl font-extrabold text-balance sm:text-4xl">
+        <h2 class="relative font-display text-3xl font-extrabold text-balance sm:text-4xl">
           We argue from what a childhood gains
+          <Scribble type="underline-double" class="absolute -bottom-4 left-0 h-3 w-full" />
         </h2>
         <p class="text-lg text-ink-soft md:mt-1">
           Whether phones are behind the rise in teenage anxiety is still genuinely disputed among
@@ -146,7 +148,10 @@ const evidence = [
         Answer a few questions about your kids and get a plan you can stick on the fridge. It takes
         about three minutes, and we do not ask for your email to give it to you.
       </p>
-      <Button href="/plan" variant="primary" size="lg" class="mt-8">Build your family plan</Button>
+      <div class="mt-8 flex items-center justify-center gap-3">
+        <Scribble type="arrow" class="hidden h-10 w-20 shrink-0 sm:block" color="var(--primary)" />
+        <Button href="/plan" variant="primary" size="lg">Build your family plan</Button>
+      </div>
     </div>
   </Container>
 </Base>
