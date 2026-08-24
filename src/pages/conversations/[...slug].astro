@@ -3,13 +3,25 @@ import { getCollection, getEntry, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Container from '../../components/Container.astro';
 import BandFilter from '../../components/BandFilter.astro';
+import PrevNext from '../../components/PrevNext.astro';
+import BackLink from '../../components/BackLink.astro';
 
 export async function getStaticPaths() {
-  const concepts = await getCollection('concepts');
-  return concepts.map((c) => ({ params: { slug: c.id }, props: { concept: c } }));
+  // Sorted so prev and next follow the curriculum order rather than file order.
+  const concepts = (await getCollection('concepts')).sort((a, b) => a.data.order - b.data.order);
+  return concepts.map((c, i) => ({
+    params: { slug: c.id },
+    props: {
+      concept: c,
+      prev: concepts[i - 1],
+      next: concepts[i + 1],
+      position: i + 1,
+      total: concepts.length,
+    },
+  }));
 }
 
-const { concept } = Astro.props;
+const { concept, prev, next, position, total } = Astro.props;
 const { Content } = await render(concept);
 const c = concept.data;
 const decisions = await Promise.all(c.relatedDecisions.map((ref) => getEntry(ref)));
@@ -20,8 +32,11 @@ const updated = c.updated.toLocaleDateString('en-US', { month: 'long', year: 'nu
   <article>
     <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
       <Container width="prose">
-        <p class="font-display text-sm font-bold uppercase tracking-[0.14em] text-secondary-deep">
-          {c.strand}
+        <BackLink href="/conversations" label="All conversations" />
+        <p class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 font-display text-sm font-bold uppercase tracking-[0.14em] text-secondary-deep">
+          <span>{c.strand}</span>
+          <span class="text-ink-soft/60" aria-hidden="true">/</span>
+          <span class="text-ink-soft">{position} of {total}</span>
         </p>
         <h1 class="mt-3 text-4xl font-extrabold sm:text-5xl">{c.title}</h1>
         <p class="mt-6 border-l-4 border-secondary pl-5 text-xl leading-relaxed text-ink">
@@ -116,6 +131,14 @@ const updated = c.updated.toLocaleDateString('en-US', { month: 'long', year: 'nu
         )}
 
         <p class="mt-14 border-t border-line pt-8 text-sm text-ink-soft">Last reviewed {updated}</p>
+
+        <PrevNext
+          label="Conversations"
+          backHref="/conversations"
+          backLabel={`See all ${total} conversations`}
+          prev={prev && { href: `/conversations/${prev.id}`, title: prev.data.title, kicker: prev.data.strand }}
+          next={next && { href: `/conversations/${next.id}`, title: next.data.title, kicker: next.data.strand }}
+        />
       </div>
     </Container>
   </article>

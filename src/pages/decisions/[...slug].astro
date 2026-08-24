@@ -5,13 +5,24 @@ import Container from '../../components/Container.astro';
 import StanceLadder from '../../components/StanceLadder.astro';
 import PickCard from '../../components/PickCard.astro';
 import Button from '../../components/Button.astro';
+import PrevNext from '../../components/PrevNext.astro';
+import BackLink from '../../components/BackLink.astro';
 
 export async function getStaticPaths() {
-  const decisions = await getCollection('decisions');
-  return decisions.map((d) => ({ params: { slug: d.id }, props: { decision: d } }));
+  // Sorted so prev and next follow the reading order rather than file order.
+  const decisions = (await getCollection('decisions')).sort((a, b) => a.data.order - b.data.order);
+  return decisions.map((d, i) => ({
+    params: { slug: d.id },
+    props: {
+      decision: d,
+      prev: decisions[i - 1],
+      next: decisions[i + 1],
+      total: decisions.length,
+    },
+  }));
 }
 
-const { decision } = Astro.props;
+const { decision, prev, next, total } = Astro.props;
 const { Content } = await render(decision);
 const d = decision.data;
 
@@ -24,8 +35,9 @@ const updated = d.updated.toLocaleDateString('en-US', { month: 'long', year: 'nu
   <article>
     <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
       <Container width="prose">
-        <p class="font-display text-sm font-bold uppercase tracking-[0.14em] text-primary-text">
-          Decision {d.order}
+        <BackLink href="/decisions" label="All decisions" />
+        <p class="mt-5 font-display text-sm font-bold uppercase tracking-[0.14em] text-primary-text">
+          Decision {d.order} of {total}
         </p>
         <h1 class="mt-3 text-4xl font-extrabold sm:text-5xl">{d.question}</h1>
 
@@ -85,6 +97,14 @@ const updated = d.updated.toLocaleDateString('en-US', { month: 'long', year: 'nu
         <p class="text-sm text-ink-soft">Last reviewed {updated}</p>
         <Button href="/plan" variant="primary">Build your family plan</Button>
       </footer>
+
+      <PrevNext
+        label="Decisions"
+        backHref="/decisions"
+        backLabel={`See all ${total} decisions`}
+        prev={prev && { href: `/decisions/${prev.id}`, title: prev.data.question, kicker: `Decision ${prev.data.order}` }}
+        next={next && { href: `/decisions/${next.id}`, title: next.data.question, kicker: `Decision ${next.data.order}` }}
+      />
     </Container>
   </article>
 </Base>
