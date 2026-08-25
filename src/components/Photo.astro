@@ -5,32 +5,95 @@ import type { ImageMetadata } from 'astro';
 interface Props {
   src: ImageMetadata;
   alt: string;
-  /**
-   * Crop to a band. Portrait phone photographs otherwise run 700px tall and
-   * push the actual content of a landing page below the fold.
-   */
+  /** Crop to a band, so a portrait photograph does not dominate a page. */
   ratio?: string;
   /** Where the crop favours, when a ratio is set. Defaults to the centre. */
   position?: string;
+  /** Cap the width, in px. */
+  width?: number;
+  /** duotone pulls the image into the brand blue and yellow. */
+  treatment?: 'duotone' | 'mono' | 'none';
   class?: string;
 }
-const { src, alt, ratio, position, class: className = '' } = Astro.props;
+const {
+  src,
+  alt,
+  ratio,
+  position,
+  width,
+  treatment = 'duotone',
+  class: className = '',
+} = Astro.props;
 
 // Never upscaled past its own size.
-const maxW = Math.min(src.width, 900);
+const maxW = Math.min(src.width, width ?? 460);
+
+const style = [
+  `max-width:${maxW}px`,
+  ratio ? `aspect-ratio:${ratio}` : null,
+  ratio && position ? `object-position:${position}` : null,
+]
+  .filter(Boolean)
+  .join(';');
 ---
-<figure class:list={['not-prose', className]}>
-  <Image
-    src={src}
-    alt={alt}
-    widths={[Math.round(maxW / 2), maxW]}
-    sizes={`(max-width: 700px) 100vw, ${maxW}px`}
-    loading="lazy"
-    decoding="async"
+<figure class:list={['not-prose', className]} style={`max-width:${maxW}px`}>
+  <div
     class:list={[
-      'w-full rounded-3xl border border-line bg-surface-2',
-      ratio ? 'object-cover' : '',
+      'relative isolate overflow-hidden rounded-3xl border border-line bg-surface-2',
+      treatment !== 'none' && 'photo-treated',
+      treatment === 'duotone' && 'photo-duotone',
     ]}
-    style={ratio ? `aspect-ratio:${ratio}${position ? `;object-position:${position}` : ''}` : undefined}
-  />
+  >
+    <Image
+      src={src}
+      alt={alt}
+      widths={[Math.round(maxW / 2), maxW]}
+      sizes={`(max-width: 700px) 100vw, ${maxW}px`}
+      loading="lazy"
+      decoding="async"
+      class:list={['w-full', ratio && 'object-cover']}
+      style={style}
+    />
+  </div>
 </figure>
+
+<style>
+  /* Flatten to greyscale first, then push shadows toward the brand blue and
+     highlights toward the warm accent. Two blended layers rather than an image
+     filter, so nothing has to be processed or stored twice. */
+  .photo-treated :global(img) {
+    filter: grayscale(1) contrast(1.25) brightness(1.02);
+  }
+
+  .photo-duotone::before,
+  .photo-duotone::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  /* A duotone needs a genuinely dark shadow colour and a genuinely light
+     highlight colour. Brand blue against brand yellow compresses into mud,
+     so the ends are a deep navy drawn from the blue and a pale warm drawn
+     from the yellow. */
+  .photo-duotone::before {
+    background: #24408f;
+    mix-blend-mode: lighten;
+    opacity: 0.72;
+  }
+  .photo-duotone::after {
+    background: #ffd79a;
+    mix-blend-mode: darken;
+    opacity: 0.72;
+  }
+  /* lighten and darken only reach the extremes, so the midtones, which are most
+     of a photograph, need a hue pass of their own. */
+  .photo-duotone :global(img) {
+    filter: grayscale(1) contrast(1.18) sepia(0.5) hue-rotate(178deg) saturate(2.1)
+      brightness(1.04);
+  }
+
+  .photo-mono :global(img) {
+    filter: grayscale(1) contrast(1.06) sepia(0.35) hue-rotate(190deg) saturate(1.6);
+  }
+</style>

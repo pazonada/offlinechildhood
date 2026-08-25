@@ -135,11 +135,30 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                   <button
                     type="button"
                     onClick={() => setChildren((prev) => prev.filter((x) => x.key !== c.key))}
-                    className="rounded-xl border-2 border-line px-3.5 py-2.5 font-semibold text-ink-soft hover:border-coral hover:text-coral"
+                    className="rounded-xl border-2 border-line px-3.5 py-2.5 font-medium text-ink-soft hover:border-coral hover:text-coral"
                   >
                     Remove<span className="sr-only"> {label(c, i)}</span>
                   </button>
                 )}
+
+                <p
+                  className={`flex w-full items-center gap-1.5 text-sm ${
+                    c.age === null ? 'text-ink-soft' : 'text-secondary'
+                  }`}
+                >
+                  {c.age === null ? (
+                    'Enter an age to include this child.'
+                  ) : (
+                    <>
+                      <svg viewBox="0 0 20 20" className="h-4 w-4 shrink-0" fill="none"
+                        stroke="currentColor" strokeWidth={2.4} strokeLinecap="round"
+                        strokeLinejoin="round" aria-hidden="true">
+                        <path d="m4 10.5 4 4 8-9" />
+                      </svg>
+                      Added. {label(c, i)} is in your plan.
+                    </>
+                  )}
+                </p>
               </div>
             ))}
           </div>
@@ -233,6 +252,8 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
             className="rounded-full bg-primary px-8 py-4 font-display text-lg font-bold text-on-primary transition hover:bg-primary-strong disabled:cursor-not-allowed disabled:opacity-40"
           >
             {built ? 'Update my plan' : 'Build my plan'}
+            {validChildren.length > 0 &&
+              ` for ${validChildren.length} ${validChildren.length === 1 ? 'child' : 'children'}`}
           </button>
           {validChildren.length === 0 && (
             <p className="mt-3 text-ink-soft">Add at least one age to build a plan.</p>
