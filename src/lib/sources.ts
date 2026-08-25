@@ -77,6 +77,16 @@ export const SOURCES = {
     claim:
       'Pooled evidence that higher screen time, especially in the evening and at bedtime, is associated with shorter sleep, later sleep onset, more disturbance and more daytime sleepiness in school-aged children.',
   },
+  mitAiEducation: {
+    id: 'mitAiEducation',
+    title: 'Report of the Ad Hoc Committee on AI Use in Teaching, Learning, and Research Training',
+    authors: 'Klopfer, Madden et al.',
+    venue: 'Massachusetts Institute of Technology',
+    year: 2026,
+    url: 'https://aiandeducation.mit.edu/report/',
+    claim:
+      'After five months studying AI use across MIT, a committee of students, faculty and staff reported that learning requires productive struggle, and that offloading that struggle to a chatbot produces an illusion of learning rather than the thing itself. It names cognitive surrender, falling back on AI at the first hint of difficulty, and records early signals that overreliance diminishes critical thinking, weakens memory, erodes confidence and undermines mastery. It also found AI increasing isolation by displacing study groups and contact with teachers.',
+  },
   socialMediaUnsettled: {
     id: 'socialMediaUnsettled',
     title: 'Unsettled science on social media',
