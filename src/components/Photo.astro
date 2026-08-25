@@ -11,8 +11,15 @@ interface Props {
   position?: string;
   /** Cap the width, in px. */
   width?: number;
-  /** duotone pulls the image into the brand blue and yellow. */
-  treatment?: 'duotone' | 'mono' | 'none';
+  /**
+   * duotone pulls the image into the brand blue and yellow.
+   * spotlight keeps the middle in full colour and fades the surroundings to
+   * greyscale. It is a shaped mask, not subject detection, so it suits
+   * photographs whose subject sits centrally and fills the frame.
+   */
+  treatment?: 'duotone' | 'mono' | 'spotlight' | 'none';
+  /** Tune the spotlight: CSS radial-gradient shape, e.g. '62% 78% at 50% 48%'. */
+  spotlight?: string;
   class?: string;
 }
 const {
@@ -22,6 +29,7 @@ const {
   position,
   width,
   treatment = 'duotone',
+  spotlight = '62% 76% at 50% 48%',
   class: className = '',
 } = Astro.props;
 
@@ -40,8 +48,10 @@ const style = [
   <div
     class:list={[
       'relative isolate overflow-hidden rounded-3xl border border-line bg-surface-2',
-      treatment !== 'none' && 'photo-treated',
+      treatment !== 'none' && treatment !== 'spotlight' && 'photo-treated',
       treatment === 'duotone' && 'photo-duotone',
+      treatment === 'mono' && 'photo-mono',
+      treatment === 'spotlight' && 'photo-spotlight',
     ]}
   >
     <Image
@@ -54,6 +64,20 @@ const style = [
       class:list={['w-full', ratio && 'object-cover']}
       style={style}
     />
+
+    {treatment === 'spotlight' && (
+      <Image
+        src={src}
+        alt=""
+        aria-hidden="true"
+        widths={[Math.round(maxW / 2), maxW]}
+        sizes={`(max-width: 700px) 100vw, ${maxW}px`}
+        loading="lazy"
+        decoding="async"
+        class:list={['absolute inset-0 h-full w-full', ratio && 'object-cover']}
+        style={`${style};-webkit-mask-image:radial-gradient(ellipse ${spotlight}, #000 38%, rgba(0,0,0,0.85) 55%, transparent 78%);mask-image:radial-gradient(ellipse ${spotlight}, #000 38%, rgba(0,0,0,0.85) 55%, transparent 78%)`}
+      />
+    )}
   </div>
 </figure>
 
@@ -91,6 +115,11 @@ const style = [
   .photo-duotone :global(img) {
     filter: grayscale(1) contrast(1.18) sepia(0.5) hue-rotate(178deg) saturate(2.1)
       brightness(1.04);
+  }
+
+  /* Base layer greyscale; the masked colour copy sits on top. */
+  .photo-spotlight :global(img:first-child) {
+    filter: grayscale(1) contrast(1.05);
   }
 
   .photo-mono :global(img) {
