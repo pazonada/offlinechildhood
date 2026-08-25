@@ -35,7 +35,7 @@ const stance = z.object({
 
 const decisions = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/decisions' }),
-  schema: ({ image }) =>
+  schema: () =>
     z.object({
       title: z.string(),
       /** The question as a parent would actually type it. Drives search and the plan builder. */
@@ -47,12 +47,6 @@ const decisions = defineCollection({
       /** The honest one-paragraph answer, before any product enters the picture. */
       shortAnswer: z.string(),
       stances: z.array(stance).length(3),
-      /**
-       * Optional photograph, processed at build time into static files. Own
-       * photographs only, and only ones in which no child is identifiable.
-       */
-      image: image().optional(),
-      imageAlt: z.string().optional(),
       picks: z.array(reference('picks')).default([]),
       relatedConcepts: z.array(reference('concepts')).default([]),
       updated: z.coerce.date(),

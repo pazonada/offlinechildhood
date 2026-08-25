@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Container from '../../components/Container.astro';
+import Photo from '../../components/Photo.astro';
+import ballPit from '../../assets/photos/ball-pit.jpg';
 
 const concepts = (await getCollection('concepts')).sort((a, b) => a.data.order - b.data.order);
 
@@ -35,7 +37,14 @@ const grouped = STRANDS.map((strand) => ({
         Every idea below is written four times, for ages 4 to 6, 7 to 9, 10 to 12, and 13 and up.
         Start at any age. A four-year-old can understand that a person chose what she is watching.
       </p>
-    </Container>
+    
+      <Photo
+        src={ballPit}
+        alt="A small child sits in a vast pit of blue and green plastic balls, seen from directly above."
+        ratio="16/9"
+        class="mt-10"
+      />
+</Container>
   </header>
 
   <Container width="prose" class="py-14">

@@ -7,7 +7,6 @@ import PickCard from '../../components/PickCard.astro';
 import Button from '../../components/Button.astro';
 import PrevNext from '../../components/PrevNext.astro';
 import BackLink from '../../components/BackLink.astro';
-import Photo from '../../components/Photo.astro';
 
 export async function getStaticPaths() {
   // Sorted so prev and next follow the reading order rather than file order.
@@ -53,10 +52,6 @@ const updated = d.updated.toLocaleDateString('en-US', { month: 'long', year: 'nu
 
     <Container width="prose" class="py-12 sm:py-16">
       <StanceLadder stances={d.stances} />
-
-      {d.image && (
-        <Photo src={d.image} alt={d.imageAlt ?? ''} class="mt-14" />
-      )}
 
       <div class="prose mt-14">
         <Content />
