@@ -53,7 +53,6 @@ const decisions = defineCollection({
        */
       image: image().optional(),
       imageAlt: z.string().optional(),
-      imageCaption: z.string().optional(),
       picks: z.array(reference('picks')).default([]),
       relatedConcepts: z.array(reference('concepts')).default([]),
       updated: z.coerce.date(),
