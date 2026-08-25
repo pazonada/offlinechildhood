@@ -7,6 +7,7 @@ import PickCard from '../../components/PickCard.astro';
 import Button from '../../components/Button.astro';
 import PrevNext from '../../components/PrevNext.astro';
 import BackLink from '../../components/BackLink.astro';
+import Sources from '../../components/Sources.astro';
 
 export async function getStaticPaths() {
   // Sorted so prev and next follow the reading order rather than file order.
@@ -92,6 +93,8 @@ const updated = d.updated.toLocaleDateString('en-US', { month: 'long', year: 'nu
           </ul>
         </section>
       )}
+
+      <Sources ids={d.sources} />
 
       <footer class="mt-16 flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
         <p class="text-sm text-ink-soft">Last reviewed {updated}</p>

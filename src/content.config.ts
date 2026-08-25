@@ -1,5 +1,6 @@
 import { defineCollection, reference, z } from 'astro:content';
 import { glob, file } from 'astro/loaders';
+import { SOURCES } from './lib/sources';
 
 /**
  * Age bands for the Conversations curriculum. The same concept is explained at
@@ -7,6 +8,9 @@ import { glob, file } from 'astro/loaders';
  * kid already has are handled as notes inside a band, deliberately not as a
  * second axis, which would double the matrix without adding much.
  */
+/** Citing a source that does not exist should fail the build, not ship. */
+const SOURCE_IDS = Object.keys(SOURCES) as [string, ...string[]];
+
 export const AGE_BANDS = ['4-6', '7-9', '10-12', '13+'] as const;
 export type AgeBand = (typeof AGE_BANDS)[number];
 
@@ -47,6 +51,8 @@ const decisions = defineCollection({
       /** The honest one-paragraph answer, before any product enters the picture. */
       shortAnswer: z.string(),
       stances: z.array(stance).length(3),
+      /** Ids from src/lib/sources.ts, listed under the page. */
+      sources: z.array(z.enum(SOURCE_IDS)).default([]),
       picks: z.array(reference('picks')).default([]),
       relatedConcepts: z.array(reference('concepts')).default([]),
       updated: z.coerce.date(),
