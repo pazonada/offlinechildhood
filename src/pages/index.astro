@@ -5,6 +5,8 @@ import Container from '../components/Container.astro';
 import Button from '../components/Button.astro';
 import { SOURCES } from '../lib/sources';
 import Scribble from '../components/Scribble.astro';
+import Photo from '../components/Photo.astro';
+import stamping from '../assets/photos/stamping.jpg';
 
 const decisions = (await getCollection('decisions')).sort((a, b) => a.data.order - b.data.order);
 const concepts = (await getCollection('concepts')).sort((a, b) => a.data.order - b.data.order);
@@ -122,7 +124,24 @@ const evidence = [
         </p>
       </div>
 
-      <ul class="mt-12 grid gap-5 md:grid-cols-3">
+      <div class="mt-10 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+        <Photo
+          src={stamping}
+          alt="A child seen from above, pressing halved apples and onions into trays of blue and yellow paint."
+          caption="Halved apples, an onion, two trays of paint. The whole afternoon cost nothing and nobody had to be entertained."
+        />
+        <div>
+          <p class="font-display text-2xl font-extrabold text-balance sm:text-3xl">
+            None of this requires a purchase, a subscription or an app.
+          </p>
+          <p class="mt-4 text-lg text-ink-soft">
+            The evidence below is about what a childhood is made of. Time is the scarce thing, and
+            an hour spent on a screen is an hour spent on something else.
+          </p>
+        </div>
+      </div>
+
+      <ul class="mt-14 grid gap-5 md:grid-cols-3">
         {evidence.map((e) => (
           <li class="rounded-3xl border border-line bg-surface p-6">
             <p class="font-display text-xl font-extrabold text-ink">{e.stat}</p>
