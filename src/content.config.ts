@@ -71,6 +71,12 @@ const bandExplainer = z.object({
   tryThis: z.string(),
   /** What you're hoping to hear back, so a parent knows it landed. */
   listenFor: z.string(),
+  /**
+   * The same pitch for a room of thirty rather than one child at a table.
+   * Written separately because the parent version says things like "in this
+   * house" and assumes you know the kid.
+   */
+  inClass: z.string().optional(),
   /** Adjustment if this kid already has more access/experience than typical. */
   ifMoreExperienced: z.string().optional(),
 });
