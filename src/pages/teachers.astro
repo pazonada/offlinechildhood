@@ -26,6 +26,14 @@ const total = grouped.reduce((n, g) => n + g.items.length, 0);
 
 // Every concept carries all four bands, so choosing one never empties the page.
 const allBands = ['4-6', '7-9', '10-12', '13+'];
+
+/** Every classroom explainer closes with "It has landed when ...". On a page that
+ *  gets scanned rather than read, that belongs on its own line with a label. */
+function splitLanding(text: string): [string, string | null] {
+  const i = text.indexOf('It has landed when');
+  if (i === -1) return [text, null];
+  return [text.slice(0, i).trim(), text.slice(i).replace(/^It has landed when /, '').trim()];
+}
 ---
 
 <Base
@@ -103,19 +111,48 @@ const allBands = ['4-6', '7-9', '10-12', '13+'];
                 <a href={`/conversations/${c.id}`} class="hover:text-primary">{c.data.title}</a>
               </h3>
               <p class="mt-2 border-l-4 border-secondary pl-4 text-ink-soft">{c.data.idea}</p>
-              <p class="mt-4 leading-relaxed">{c.data.classroom}</p>
-
-              {c.data.bands.map((b) => (
-                <section
-                  data-band-panel={b.band}
-                  class="mt-4 rounded-2xl border border-line bg-surface-2 p-5"
-                >
-                  <p class="font-display text-sm font-bold uppercase tracking-[0.12em] text-primary-text">
-                    Ages {b.band}
+              {c.data.classSteps.length > 0 ? (
+                <div class="mt-5">
+                  <p class="font-display text-sm font-bold uppercase tracking-[0.12em] text-secondary-deep">
+                    Run it like this
                   </p>
-                  <p class="mt-2 leading-relaxed">{b.inClass ?? b.explain}</p>
-                </section>
-              ))}
+                  <ol class="mt-3 grid gap-2.5">
+                    {c.data.classSteps.map((step, i) => (
+                      <li class="flex gap-3 leading-relaxed">
+                        <span
+                          class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-surface-3 font-display text-sm font-bold"
+                          aria-hidden="true"
+                        >
+                          {i + 1}
+                        </span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              ) : (
+                <p class="mt-4 leading-relaxed">{c.data.classroom}</p>
+              )}
+
+              {c.data.bands.map((b) => {
+                const [pitch, landing] = splitLanding(b.inClass ?? b.explain);
+                return (
+                  <section
+                    data-band-panel={b.band}
+                    class="mt-5 rounded-2xl border border-line bg-surface-2 p-5"
+                  >
+                    <p class="font-display text-sm font-bold uppercase tracking-[0.12em] text-primary-text">
+                      Ages {b.band}
+                    </p>
+                    <p class="mt-2 leading-relaxed">{pitch}</p>
+                    {landing && (
+                      <p class="mt-3 border-t border-line pt-3 text-[0.97rem]">
+                        <span class="font-semibold">You are listening for</span> {landing}
+                      </p>
+                    )}
+                  </section>
+                );
+              })}
 
             </article>
           ))}

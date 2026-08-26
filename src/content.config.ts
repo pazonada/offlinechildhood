@@ -108,6 +108,8 @@ const concepts = defineCollection({
       misconceptions: z.array(z.string()).default([]),
       /** How to run this with a class rather than one kid. */
       classroom: z.string().optional(),
+      /** The same activity as steps, for the teachers page, which is scanned rather than read. */
+      classSteps: z.array(z.string()).default([]),
       relatedDecisions: z.array(reference('decisions')).default([]),
       updated: z.coerce.date(),
     }),
