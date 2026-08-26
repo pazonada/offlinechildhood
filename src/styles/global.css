@@ -258,11 +258,6 @@
     margin: 16mm;
   }
 
-  /* Two columns are for using a wide screen. Paper is not a wide screen. */
-  .teacher-grid {
-    grid-template-columns: 1fr !important;
-  }
-
   .print-break {
     break-before: page;
   }

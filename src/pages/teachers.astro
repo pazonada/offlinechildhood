@@ -83,14 +83,14 @@ function splitLanding(text: string): [string, string | null] {
     </Container>
   </header>
 
-  <Container class="pb-14">
+  <Container width="prose" class="pb-14">
     <BandFilter
       bands={allBands}
       label="Which age group are you teaching?"
       allLabel="Every age"
     />
 
-    <p class="mt-8 max-w-3xl text-ink-soft no-print">
+    <p class="mt-8 text-ink-soft no-print">
       Each activity below carries the version for the age you picked: how to pitch the idea to a
       room that age, and what it sounds like when it has landed. Say it in your own words. The point
       of the age is the altitude, meaning how much of the machinery a class that age can hold.
@@ -104,7 +104,7 @@ function splitLanding(text: string): [string, string | null] {
           <Scribble type="underline" class="absolute -bottom-2 left-0 h-2 w-full" />
         </h2>
 
-        <div class="teacher-grid mt-10 grid gap-8 xl:grid-cols-2">
+        <div class="mt-10 grid gap-8">
           {group.items.map((c) => (
             <article class="print-keep rounded-3xl border-2 border-line bg-surface p-7 sm:p-9">
               <h3 class="font-display text-xl font-extrabold">
@@ -161,7 +161,7 @@ function splitLanding(text: string): [string, string | null] {
     ))}
     </div>
 
-    <section class="mt-6 max-w-3xl rounded-3xl border-2 border-primary/35 bg-primary/8 p-6 sm:p-7 no-print">
+    <section class="mt-6 rounded-3xl border-2 border-primary/35 bg-primary/8 p-6 sm:p-7 no-print">
       <h2 class="font-display text-xl font-extrabold">Using these with families</h2>
       <p class="mt-3 leading-relaxed">
         The same ideas are written for parents, one age at a time, under{' '}
