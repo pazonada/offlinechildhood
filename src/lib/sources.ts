@@ -77,6 +77,16 @@ export const SOURCES = {
     claim:
       'Pooled evidence that higher screen time, especially in the evening and at bedtime, is associated with shorter sleep, later sleep onset, more disturbance and more daytime sleepiness in school-aged children.',
   },
+  csAiCensus: {
+    id: 'csAiCensus',
+    title: 'The Common Sense Media Census: AI Use by Tweens and Teens (2026)',
+    authors: 'Common Sense Media Youth AI Safety Institute',
+    venue: 'Common Sense Media',
+    year: 2026,
+    url: 'https://www.commonsensemedia.org/press-releases/common-sense-media-releases-inaugural-annual-study-on-ai-use-by-tweens-and-teens',
+    claim:
+      'A survey of 1,204 children aged 9 to 17. 86 per cent use AI and nearly a quarter use it daily, but more than four in ten say no parent or guardian has ever talked to them about AI safety. Only a third know AI cannot reliably tell fact from fiction. Over half of users have asked it about their health or body and more than a third have used it to discuss feelings; a quarter of those say it sometimes understands them better than most people. One in six have seen inappropriate material through a chatbot and only a third told an adult. Kids who find it hard to focus on schoolwork lean on AI more.',
+  },
   mitAiEducation: {
     id: 'mitAiEducation',
     title: 'Report of the Ad Hoc Committee on AI Use in Teaching, Learning, and Research Training',
