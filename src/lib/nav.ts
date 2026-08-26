@@ -13,6 +13,7 @@ export const primaryNav: NavItem[] = [
 ];
 
 export const secondaryNav: NavItem[] = [
+  { href: '/teachers', label: 'For teachers' },
   { href: '/picks', label: 'What to buy' },
   { href: '/about', label: 'About' },
 ];

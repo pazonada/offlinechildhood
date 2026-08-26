@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Container from '../components/Container.astro';
+import Scribble from '../components/Scribble.astro';
+
+const concepts = (await getCollection('concepts')).sort((a, b) => a.data.order - b.data.order);
+
+const STRANDS = [
+  'What it is',
+  'How it works',
+  'Who controls it',
+  'How it was built',
+  'Risks and guardrails',
+] as const;
+
+const grouped = STRANDS.map((strand) => ({
+  strand,
+  items: concepts.filter((c) => c.data.strand === strand && c.data.classroom),
+})).filter((g) => g.items.length > 0);
+
+const total = grouped.reduce((n, g) => n + g.items.length, 0);
+---
+
+<Base
+  title="For teachers"
+  description={`${total} classroom activities for teaching kids how media and AI actually work. Each one is a single lesson, most need no devices, and every one has a version for ages 4 to 6 through 13 and up.`}
+>
+  <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
+    <Container>
+      <div class="max-w-3xl">
+        <p class="font-display text-sm font-bold uppercase tracking-[0.14em] text-secondary-deep">
+          For teachers
+        </p>
+        <h1 class="mt-3 text-4xl font-extrabold sm:text-5xl">{total} lessons you can run this week</h1>
+        <p class="mt-5 text-lg text-ink-soft">
+          Most schools have told students what they may and may not do with AI. Far fewer have
+          taught them how any of it works. In a 2026 survey of 1,204 children, three quarters said
+          their school had set the rules and only just over half had been taught to use these tools
+          safely. The rules are the easy half.
+        </p>
+        <p class="mt-4 text-lg text-ink-soft">
+          Every activity below is one lesson. Most need no devices at all, and the ones that do work
+          just as well as a thought experiment. Each links to the full idea, written four times for
+          ages 4 to 6, 7 to 9, 10 to 12, and 13 and up, so the same lesson works in a Year 2 room and
+          a Year 9 room.
+        </p>
+        <p class="mt-6 no-print">
+          <button
+            type="button"
+            onclick="window.print()"
+            class="rounded-full bg-primary px-5 py-2.5 font-semibold text-on-primary transition hover:brightness-110"
+          >
+            Print all {total}
+          </button>
+        </p>
+      </div>
+    </Container>
+  </header>
+
+  <Container width="prose" class="py-14">
+    {grouped.map((group) => (
+      <section class="mb-14">
+        <h2 class="relative inline-block font-display text-sm font-bold uppercase tracking-[0.14em] text-secondary-deep">
+          {group.strand}
+          <Scribble type="underline" class="absolute -bottom-2 left-0 h-2 w-full" />
+        </h2>
+
+        <div class="mt-8 grid gap-5">
+          {group.items.map((c) => (
+            <article class="print-keep rounded-3xl border-2 border-line bg-surface p-6 sm:p-7">
+              <h3 class="font-display text-xl font-extrabold">
+                <a href={`/conversations/${c.id}`} class="hover:text-primary">{c.data.title}</a>
+              </h3>
+              <p class="mt-2 border-l-4 border-secondary pl-4 text-ink-soft">{c.data.idea}</p>
+              <p class="mt-4 leading-relaxed">{c.data.classroom}</p>
+              <p class="mt-4 text-sm font-semibold no-print">
+                <a href={`/conversations/${c.id}`} class="text-primary hover:underline">
+                  How to explain it at each age
+                </a>
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <section class="rounded-3xl border-2 border-primary/35 bg-primary/8 p-6 sm:p-7 no-print">
+      <h2 class="font-display text-xl font-extrabold">Using these with families</h2>
+      <p class="mt-3 leading-relaxed">
+        The same ideas are written for parents, one age at a time, under{' '}
+        <a href="/conversations" class="font-semibold text-primary hover:underline">conversations</a>.
+        Sending that page home is worth more than it looks. A lesson lands harder when somebody at
+        the kitchen table asks about it the same evening, and most of these children are having the
+        conversation nowhere else: in the same survey, more than four in ten said no parent had ever
+        talked to them about using AI safely.
+      </p>
+    </section>
+  </Container>
+</Base>

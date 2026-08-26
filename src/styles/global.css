@@ -211,7 +211,54 @@
 
 @media print {
   .no-print { display: none !important; }
-  body { background: #fff; color: #000; font-size: 11pt; }
-  a { text-decoration: none; color: #000; }
-  .print-break { break-before: page; }
+
+  /* The sticky header and the footer are navigation. Neither is any use on
+     paper, and the header reprints on every page if it is left in. */
+  body > header,
+  body > footer,
+  header.sticky,
+  nav {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  /* Panels are drawn with tinted backgrounds on screen. Most printers drop
+     those, so give the shapes an outline that survives. */
+  article,
+  section > div > article {
+    border: 1px solid #999 !important;
+    background: none !important;
+  }
+
+  /* A classroom activity split across a page break is useless to the person
+     holding it. */
+  .print-keep,
+  article,
+  li {
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  @page {
+    margin: 16mm;
+  }
+
+  .print-break {
+    break-before: page;
+  }
 }
