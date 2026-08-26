@@ -5,127 +5,50 @@ import type { ImageMetadata } from 'astro';
 interface Props {
   src: ImageMetadata;
   alt: string;
-  /** Crop to a band, so a portrait photograph does not dominate a page. */
-  ratio?: string;
-  /** Where the crop favours, when a ratio is set. Defaults to the centre. */
+  /** Diameter in px. */
+  size?: number;
+  /** Which part of the photograph the circle keeps, e.g. '50% 35%'. */
   position?: string;
-  /** Cap the width, in px. Omit with band=true to span the container. */
-  width?: number;
-  /** Span the full container as a wide band. */
-  band?: boolean;
-  /**
-   * duotone pulls the image into the brand blue and yellow.
-   * spotlight keeps the middle in full colour and fades the surroundings to
-   * greyscale. It is a shaped mask, not subject detection, so it suits
-   * photographs whose subject sits centrally and fills the frame.
-   */
-  treatment?: 'duotone' | 'mono' | 'spotlight' | 'none';
-  /** Tune the spotlight: CSS radial-gradient shape, e.g. '62% 78% at 50% 48%'. */
-  spotlight?: string;
   class?: string;
 }
-const {
-  src,
-  alt,
-  ratio,
-  position,
-  width,
-  band = false,
-  treatment = 'duotone',
-  spotlight = '62% 76% at 50% 48%',
-  class: className = '',
-} = Astro.props;
+const { src, alt, size = 340, position = '50% 50%', class: className = '' } = Astro.props;
 
-// Never upscaled past its own size.
-const maxW = band ? src.width : Math.min(src.width, width ?? 460);
-
-const style = [
-  band ? null : `max-width:${maxW}px`,
-  ratio ? `aspect-ratio:${ratio}` : null,
-  ratio && position ? `object-position:${position}` : null,
-]
-  .filter(Boolean)
-  .join(';');
+// The traced ring sits outside the photograph, so the figure needs room for it.
+const pad = Math.round(size * 0.055);
 ---
-<figure class:list={['not-prose', className]} style={band ? undefined : `max-width:${maxW}px`}>
-  <div
-    class:list={[
-      'relative isolate overflow-hidden rounded-3xl border border-line bg-surface-2',
-      treatment !== 'none' && treatment !== 'spotlight' && 'photo-treated',
-      treatment === 'duotone' && 'photo-duotone',
-      treatment === 'mono' && 'photo-mono',
-      treatment === 'spotlight' && 'photo-spotlight',
-    ]}
-  >
+<figure
+  class:list={['not-prose relative mx-auto', className]}
+  style={`width:${size + pad * 2}px;max-width:100%`}
+>
+  <div class="relative aspect-square w-full">
     <Image
       src={src}
       alt={alt}
-      widths={[Math.round(maxW / 2), maxW]}
-      sizes={band ? '100vw' : `(max-width: 700px) 100vw, ${maxW}px`}
+      widths={[size, size * 2]}
+      sizes={`${size}px`}
       loading="lazy"
       decoding="async"
-      class:list={['w-full', ratio && 'object-cover']}
-      style={style}
+      class="absolute rounded-full object-cover"
+      style={`inset:${pad}px;width:calc(100% - ${pad * 2}px);height:calc(100% - ${pad * 2}px);object-position:${position}`}
     />
 
-    {treatment === 'spotlight' && (
-      <Image
-        src={src}
-        alt=""
-        aria-hidden="true"
-        widths={[Math.round(maxW / 2), maxW]}
-        sizes={`(max-width: 700px) 100vw, ${maxW}px`}
-        loading="lazy"
-        decoding="async"
-        class:list={['absolute inset-0 h-full w-full', ratio && 'object-cover']}
-        style={`${style};-webkit-mask-image:radial-gradient(ellipse ${spotlight}, #000 38%, rgba(0,0,0,0.85) 55%, transparent 78%);mask-image:radial-gradient(ellipse ${spotlight}, #000 38%, rgba(0,0,0,0.85) 55%, transparent 78%)`}
+    {/* Drawn rather than a border: the radii vary, the line overshoots where it
+        closes, and it does not quite meet itself, the way a traced circle
+        never does. */}
+    <svg
+      class="pointer-events-none absolute inset-0 h-full w-full"
+      viewBox="0 0 100 100"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M51.2 2.6C77 3.4 97.1 24.6 97.4 50.6c.3 25.8-20.4 46.6-46.2 46.8C25.6 97.6 4.2 77.2 3.4 51.4 2.6 25.8 23.4 3.6 49.2 2.6c9.4-.4 18.6 2 26.4 6.8"
+        stroke="var(--ink)"
+        stroke-width="0.9"
+        stroke-linecap="round"
+        opacity="0.85"
       />
-    )}
+    </svg>
   </div>
 </figure>
-
-<style>
-  /* Flatten to greyscale first, then push shadows toward the brand blue and
-     highlights toward the warm accent. Two blended layers rather than an image
-     filter, so nothing has to be processed or stored twice. */
-  .photo-treated :global(img) {
-    filter: grayscale(1) contrast(1.25) brightness(1.02);
-  }
-
-  .photo-duotone::before,
-  .photo-duotone::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-  /* A duotone needs a genuinely dark shadow colour and a genuinely light
-     highlight colour. Brand blue against brand yellow compresses into mud,
-     so the ends are a deep navy drawn from the blue and a pale warm drawn
-     from the yellow. */
-  .photo-duotone::before {
-    background: #24408f;
-    mix-blend-mode: lighten;
-    opacity: 0.72;
-  }
-  .photo-duotone::after {
-    background: #ffd79a;
-    mix-blend-mode: darken;
-    opacity: 0.72;
-  }
-  /* lighten and darken only reach the extremes, so the midtones, which are most
-     of a photograph, need a hue pass of their own. */
-  .photo-duotone :global(img) {
-    filter: grayscale(1) contrast(1.18) sepia(0.5) hue-rotate(178deg) saturate(2.1)
-      brightness(1.04);
-  }
-
-  /* Base layer greyscale; the masked colour copy sits on top. */
-  .photo-spotlight :global(img:first-child) {
-    filter: grayscale(1) contrast(1.05);
-  }
-
-  .photo-mono :global(img) {
-    filter: grayscale(1) contrast(1.06) sepia(0.35) hue-rotate(190deg) saturate(1.6);
-  }
-</style>
