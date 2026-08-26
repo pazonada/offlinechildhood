@@ -9,22 +9,27 @@ import Button from '../components/Button.astro';
   title="About"
   description="Why Offline Childhood exists, what we argue for, what we will not do, and how the site is paid for."
 >
-  <header class="border-b border-line bg-surface-2 py-16 sm:py-24">
-    <Container width="prose">
-      <h1 class="text-4xl font-extrabold sm:text-5xl">Why Offline Childhood?</h1>
-      <p class="mt-5 text-xl leading-relaxed text-ink">
-        We're parents, and we're trying. Trying to get outside more, delay the smartphone, keep
-        dinner screen-free, and raise kids who can think for themselves about all of it.
-      </p>
-    
-      <Photo
-        src={painting}
-        alt="A child seen from above, leaning over a small canvas thick with layered paint, brush in hand."
-        position="50% 52%"
-        size={340}
-        class="mt-10"
-      />
-</Container>
+  {/* Text left, photograph right. A centred narrow column left most of a wide
+      screen empty, and the circle sat below it with nothing beside it. */}
+  <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
+    <Container>
+      <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <div>
+          <h1 class="text-4xl font-extrabold sm:text-5xl">Why Offline Childhood?</h1>
+          <p class="mt-5 text-xl leading-relaxed text-ink">
+            We're parents, and we're trying. Trying to get outside more, delay the smartphone, keep
+            dinner screen-free, and raise kids who can think for themselves about all of it.
+          </p>
+        </div>
+
+        <Photo
+          src={painting}
+          alt="A child seen from above, leaning over a small canvas thick with layered paint, brush in hand."
+          position="50% 52%"
+          size={320}
+        />
+      </div>
+    </Container>
   </header>
 
   <Container width="prose" class="py-14">

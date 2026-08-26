@@ -25,27 +25,33 @@ const grouped = STRANDS.map((strand) => ({
   title="Conversations"
   description="Critical media literacy for kids, one idea at a time, explained at four different ages. What these technologies are, how they work, who owns them, and how to stay safe."
 >
-  <header class="border-b border-line bg-surface-2 py-16 sm:py-24">
-    <Container width="prose">
-      <h1 class="text-4xl font-extrabold sm:text-5xl">The conversations</h1>
-      <p class="mt-5 text-lg text-ink-soft">
-        Limits are half the work. The other half is a kid who understands what these systems are,
-        how they work, who owns them, and what they do with her attention and her data. She will use
-        this technology in her career. She should not be mystified by it.
-      </p>
-      <p class="mt-4 text-lg text-ink-soft">
-        Every idea below is written four times, for ages 4 to 6, 7 to 9, 10 to 12, and 13 and up.
-        Start at any age. A four-year-old can understand that a person chose what she is watching.
-      </p>
-    
-      <Photo
-        src={ballPit}
-        alt="A small child sits in a vast pit of blue and green plastic balls, seen from directly above."
-        position="28% 30%"
-        size={340}
-        class="mt-10"
-      />
-</Container>
+  {/* Text left, photograph right. A centred narrow column left most of a wide
+      screen empty, and the circle sat below it with nothing beside it. */}
+  <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
+    <Container>
+      <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <div>
+          <h1 class="text-4xl font-extrabold sm:text-5xl">The conversations</h1>
+          <p class="mt-5 text-lg text-ink-soft">
+            Limits are half the work. The other half is a kid who understands what these systems
+            are, how they work, who owns them, and what they do with her attention and her data.
+            She will use this technology in her career. She should not be mystified by it.
+          </p>
+          <p class="mt-4 text-lg text-ink-soft">
+            Every idea below is written four times, for ages 4 to 6, 7 to 9, 10 to 12, and 13 and
+            up. Start at any age. A four-year-old can understand that a person chose what she is
+            watching.
+          </p>
+        </div>
+
+        <Photo
+          src={ballPit}
+          alt="A small child sits in a vast pit of blue and green plastic balls, seen from directly above."
+          position="28% 30%"
+          size={320}
+        />
+      </div>
+    </Container>
   </header>
 
   <Container width="prose" class="py-14">

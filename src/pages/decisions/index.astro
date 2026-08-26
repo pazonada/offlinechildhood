@@ -13,24 +13,29 @@ const decisions = (await getCollection('decisions')).sort((a, b) => a.data.order
   title="Decisions"
   description="The device calls every family has to make, each with a clear answer and three ways to act on it."
 >
-  <header class="border-b border-line bg-surface-2 py-16 sm:py-24">
-    <Container width="prose">
-      <h1 class="text-4xl font-extrabold sm:text-5xl">The decisions</h1>
-      <p class="mt-5 text-lg text-ink-soft">
-        A handful of calls account for most of what a childhood looks like: the first phone, what
-        happens in the bedroom at night, who owns the tablet. Each one gets a straight answer and
-        three ways to act on it, so you can start where you actually are.
-      </p>
-      <Button href="/plan" variant="primary" size="lg" class="mt-8">Build your family plan</Button>
-    
-      <Photo
-        src={climbing}
-        alt="Two children partway up an indoor climbing wall, seen from below, both facing the wall."
-        position="58% 46%"
-        size={340}
-        class="mt-10"
-      />
-</Container>
+  {/* Text left, photograph right. A centred narrow column left most of a wide
+      screen empty, and the circle sat below it with nothing beside it. */}
+  <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
+    <Container>
+      <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <div>
+          <h1 class="text-4xl font-extrabold sm:text-5xl">The decisions</h1>
+          <p class="mt-5 text-lg text-ink-soft">
+            A handful of calls account for most of what a childhood looks like: the first phone,
+            what happens in the bedroom at night, who owns the tablet. Each one gets a straight
+            answer and three ways to act on it, so you can start where you actually are.
+          </p>
+          <Button href="/plan" variant="primary" size="lg" class="mt-8">Build your family plan</Button>
+        </div>
+
+        <Photo
+          src={climbing}
+          alt="Two children partway up an indoor climbing wall, seen from below, both facing the wall."
+          position="58% 46%"
+          size={320}
+        />
+      </div>
+    </Container>
   </header>
 
   <Container width="prose" class="py-14">

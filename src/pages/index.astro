@@ -111,26 +111,28 @@ const evidence = [
           A single column pinned left would leave a third of the width empty,
           and stretching the paragraph across the full width would push the
           line length past comfortable reading. */}
-      <div class="grid items-start gap-x-14 gap-y-9 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        <h2 class="relative font-display text-3xl font-extrabold text-balance sm:text-4xl">
-          We argue from what a childhood gains
-          <Scribble type="underline-double" class="absolute -bottom-4 left-0 h-3 w-full" />
-        </h2>
-        <p class="text-lg text-ink-soft md:mt-1">
+      <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <div>
+          <h2 class="relative inline-block font-display text-3xl font-extrabold text-balance sm:text-4xl">
+            We argue from what a childhood gains
+            <Scribble type="underline-double" class="absolute -bottom-4 left-0 h-3 w-full" />
+          </h2>
+          <p class="mt-9 text-lg text-ink-soft">
           Whether phones are behind the rise in teenage anxiety is still genuinely disputed among
           researchers, and we will not pretend otherwise. We do not need that argument. The case for
           analog stands on firmer ground, starting with arithmetic: an hour on a screen is an hour
-          spent on something else.
-        </p>
+            spent on something else.
+          </p>
+        </div>
+
+        <Photo
+          src={stamping}
+          alt="A child seen from above, pressing halved apples and onions into trays of blue and yellow paint."
+          position="50% 42%"
+          size={320}
+        />
       </div>
 
-      <Photo
-        src={stamping}
-        alt="A child seen from above, pressing halved apples and onions into trays of blue and yellow paint."
-        position="50% 42%"
-        size={340}
-        class="mt-10"
-      />
 
       <ul class="mt-12 grid gap-5 md:grid-cols-3">
         {evidence.map((e) => (
