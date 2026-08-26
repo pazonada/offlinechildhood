@@ -77,7 +77,7 @@ const bandExplainer = z.object({
 
 const concepts = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/concepts' }),
-  schema: () =>
+  schema: ({ image }) =>
     z.object({
       title: z.string(),
       /** The whole idea in one sentence a ten-year-old could repeat. */
@@ -92,6 +92,10 @@ const concepts = defineCollection({
         'Risks and guardrails',
       ]),
       bands: z.array(bandExplainer).nonempty(),
+      /** Own photographs only, and only where no child is identifiable. */
+      image: image().optional(),
+      imageAlt: z.string().optional(),
+      imageSpotlight: z.string().optional(),
       /** Misconceptions worth heading off, including ones adults hold. */
       misconceptions: z.array(z.string()).default([]),
       /** How to run this with a class rather than one kid. */

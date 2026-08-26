@@ -6,6 +6,7 @@ import BandFilter from '../../components/BandFilter.astro';
 import PrevNext from '../../components/PrevNext.astro';
 import BackLink from '../../components/BackLink.astro';
 import Scribble from '../../components/Scribble.astro';
+import Photo from '../../components/Photo.astro';
 
 export async function getStaticPaths() {
   // Sorted so prev and next follow the curriculum order rather than file order.
@@ -97,6 +98,16 @@ const updated = c.updated.toLocaleDateString('en-US', { month: 'long', year: 'nu
             </section>
           ))}
         </div>
+
+        {c.image && (
+          <Photo
+            src={c.image}
+            alt={c.imageAlt ?? ''}
+            position={c.imageSpotlight}
+            size={360}
+            class="mt-16"
+          />
+        )}
 
         <div class="prose mt-16">
           <Content />
