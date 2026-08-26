@@ -77,6 +77,8 @@ const bandExplainer = z.object({
    * house" and assumes you know the kid.
    */
   inClass: z.string().optional(),
+  /** Completes "You are listening for ...", so it must read as a noun phrase. */
+  listenForClass: z.string().optional(),
   /** Adjustment if this kid already has more access/experience than typical. */
   ifMoreExperienced: z.string().optional(),
 });
