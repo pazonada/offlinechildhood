@@ -26,9 +26,10 @@ const decisions = (await getCollection('decisions')).sort((a, b) => a.data.order
       <Photo
         src={climbing}
         alt="Two children partway up an indoor climbing wall, seen from below, both facing the wall."
-        ratio="16/9"
-        width={420}
-        position="50% 32%"
+        ratio="3/1"
+        band
+        treatment="spotlight"
+        spotlight="86% 96% at 52% 44%"
         class="mt-10"
       />
 </Container>

@@ -9,8 +9,10 @@ interface Props {
   ratio?: string;
   /** Where the crop favours, when a ratio is set. Defaults to the centre. */
   position?: string;
-  /** Cap the width, in px. */
+  /** Cap the width, in px. Omit with band=true to span the container. */
   width?: number;
+  /** Span the full container as a wide band. */
+  band?: boolean;
   /**
    * duotone pulls the image into the brand blue and yellow.
    * spotlight keeps the middle in full colour and fades the surroundings to
@@ -28,23 +30,24 @@ const {
   ratio,
   position,
   width,
+  band = false,
   treatment = 'duotone',
   spotlight = '62% 76% at 50% 48%',
   class: className = '',
 } = Astro.props;
 
 // Never upscaled past its own size.
-const maxW = Math.min(src.width, width ?? 460);
+const maxW = band ? src.width : Math.min(src.width, width ?? 460);
 
 const style = [
-  `max-width:${maxW}px`,
+  band ? null : `max-width:${maxW}px`,
   ratio ? `aspect-ratio:${ratio}` : null,
   ratio && position ? `object-position:${position}` : null,
 ]
   .filter(Boolean)
   .join(';');
 ---
-<figure class:list={['not-prose', className]} style={`max-width:${maxW}px`}>
+<figure class:list={['not-prose', className]} style={band ? undefined : `max-width:${maxW}px`}>
   <div
     class:list={[
       'relative isolate overflow-hidden rounded-3xl border border-line bg-surface-2',
@@ -58,7 +61,7 @@ const style = [
       src={src}
       alt={alt}
       widths={[Math.round(maxW / 2), maxW]}
-      sizes={`(max-width: 700px) 100vw, ${maxW}px`}
+      sizes={band ? '100vw' : `(max-width: 700px) 100vw, ${maxW}px`}
       loading="lazy"
       decoding="async"
       class:list={['w-full', ratio && 'object-cover']}
