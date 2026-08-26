@@ -104,7 +104,8 @@ const updated = c.updated.toLocaleDateString('en-US', { month: 'long', year: 'nu
             src={c.image}
             alt={c.imageAlt ?? ''}
             position={c.imageSpotlight}
-            size={360}
+            ratio={c.imageRatio}
+            size={c.imageRatio ? 672 : 360}
             class="mt-16"
           />
         )}

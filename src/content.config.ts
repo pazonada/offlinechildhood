@@ -96,6 +96,8 @@ const concepts = defineCollection({
       image: image().optional(),
       imageAlt: z.string().optional(),
       imageSpotlight: z.string().optional(),
+      /** Set for a landscape band instead of the usual circle. */
+      imageRatio: z.number().optional(),
       /** Misconceptions worth heading off, including ones adults hold. */
       misconceptions: z.array(z.string()).default([]),
       /** How to run this with a class rather than one kid. */
