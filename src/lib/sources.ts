@@ -87,6 +87,47 @@ export const SOURCES = {
     claim:
       'A survey of 1,204 children aged 9 to 17. 86 per cent use AI and nearly a quarter use it daily, but more than four in ten say no parent or guardian has ever talked to them about AI safety. Only a third know AI cannot reliably tell fact from fiction. Over half of users have asked it about their health or body and more than a third have used it to discuss feelings; a quarter of those say it sometimes understands them better than most people. One in six have seen inappropriate material through a chatbot and only a third told an adult. Kids who find it hard to focus on schoolwork lean on AI more.',
   },
+  geminiClassroom: {
+    id: 'geminiClassroom',
+    title: 'Gemini in Google Classroom is expanding to users of all ages',
+    authors: 'Google Workspace Updates',
+    venue: 'Google',
+    year: 2026,
+    url: 'https://workspaceupdates.googleblog.com/2026/08/gemini-in-google-classroom-is-expanding-to-users-of-all-ages-with-contextualized-Gemini-starter-prompts-for-students.html',
+    claim:
+      "Google's own announcement. It states that access to the Gemini tab in Classroom is on by default for teachers and students of all ages, rolling out from 10 August 2026 on the web. Access is controlled by the school's Workspace administrator. The post describes no teacher-level control and no parental notification.",
+  },
+  oneToOneLaptops: {
+    id: 'oneToOneLaptops',
+    title: 'Learning in One-to-One Laptop Environments: A Meta-Analysis and Research Synthesis',
+    authors: 'Zheng, B., Warschauer, M., Lin, C.-H., & Chang, C.',
+    venue: 'Review of Educational Research',
+    year: 2016,
+    url: 'https://doi.org/10.3102/0034654316628645',
+    claim:
+      'Pooling the usable studies, one-to-one laptop programmes produced small positive effects on achievement in English, writing, mathematics and science, around 0.16 standard deviations. This is evidence against the claim that giving every child a laptop harms achievement. It is a small effect next to interventions like tutoring, and only ten studies met the bar for the statistical pooling, so the base is thin.',
+  },
+  screenReading: {
+    id: 'screenReading',
+    title:
+      "Don't throw away your printed books: A meta-analysis on the effects of reading media on reading comprehension",
+    authors: 'Delgado, P., Vargas, C., Ackerman, R., & Salmerón, L.',
+    venue: 'Educational Research Review',
+    year: 2018,
+    url: 'https://doi.org/10.1016/j.edurev.2018.09.003',
+    claim:
+      'Across 54 studies and more than 170,000 readers, comprehension was better on paper than on screen, and the advantage for paper grew over the years rather than shrinking as screens improved. Strongest where the reader is working against a time limit and for informational text.',
+  },
+  danishChromebooks: {
+    id: 'danishChromebooks',
+    title: 'Decision on the use of Google Workspace for Education in Danish municipal schools',
+    authors: 'Datatilsynet, the Danish Data Protection Authority',
+    venue: 'Datatilsynet',
+    year: 2024,
+    url: 'https://www.datatilsynet.dk/english',
+    claim:
+      'A national regulator found that the way student data reached Google through Chromebooks and Google Workspace lacked a legal basis for all of the purposes it was disclosed for, and ordered 53 municipalities to change their practices. It is a data protection finding and says nothing about whether the devices help children learn.',
+  },
   mitAiEducation: {
     id: 'mitAiEducation',
     title: 'Report of the Ad Hoc Committee on AI Use in Teaching, Learning, and Research Training',
