@@ -1,15 +1,21 @@
 ---
 import { AGE_BANDS } from '../content.config';
-interface Props { bands: readonly string[] }
-const { bands } = Astro.props;
+interface Props {
+  bands: readonly string[];
+  /** The question above the buttons. Teachers are not asked about "your kid". */
+  label?: string;
+  /** Wording for the unfiltered state. */
+  allLabel?: string;
+}
+const { bands, label = "How old is your kid?", allLabel = 'Show all' } = Astro.props;
 const ordered = AGE_BANDS.filter((b) => bands.includes(b));
 ---
 <div class="not-prose no-print sticky top-[4.5rem] z-40 -mx-5 border-y border-line bg-surface/90 px-5 py-3 backdrop-blur-md sm:-mx-8 sm:px-8">
-  <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filter by your child's age">
-    <span class="mr-1 text-sm font-semibold text-ink-soft">How old is your kid?</span>
+  <div class="flex flex-wrap items-center gap-2" role="group" aria-label={label}>
+    <span class="mr-1 text-sm font-semibold text-ink-soft">{label}</span>
     <button type="button" data-band="all" aria-pressed="true"
       class="band-btn rounded-full border-2 border-ink bg-ink px-3.5 py-1.5 text-sm font-bold text-surface">
-      Show all
+      {allLabel}
     </button>
     {ordered.map((b) => (
       <button type="button" data-band={b} aria-pressed="false"
