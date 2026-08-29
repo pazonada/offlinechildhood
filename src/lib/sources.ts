@@ -128,6 +128,36 @@ export const SOURCES = {
     claim:
       'A national regulator found that the way student data reached Google through Chromebooks and Google Workspace lacked a legal basis for all of the purposes it was disclosed for, and ordered 53 municipalities to change their practices. It is a data protection finding and says nothing about whether the devices help children learn.',
   },
+  craAiEducation: {
+    id: 'craAiEducation',
+    title: 'AI in Computing Education: Principles and Practical Guidance for Program Leaders',
+    authors: 'Bell, J., Hilton, M., Kam, M., Poshyvanyk, D., Sotomayor, B., & Troy, C.',
+    venue: 'Computing Research Association (CRA-E) white paper',
+    year: 2026,
+    url: 'https://cra.org/crae/wp-content/uploads/sites/3/2026/08/AI-in-Computing-Education_-Principles-and-Practical-Guidance-for-Program-Leaders.pdf',
+    claim:
+      'Guidance for university computing departments rather than research about children, and the paper is expert opinion rather than a peer-reviewed study. Its transferable point is about how rules are framed: a restriction stated without a reason reads as arbitrary, while the same restriction tied to what it is protecting is engaged with honestly. Two of the six authors work at Google and Mozilla.',
+  },
+  pratherWideningGap: {
+    id: 'pratherWideningGap',
+    title: 'The Widening Gap: The Benefits and Harms of Generative AI for Novice Programmers',
+    authors: 'Prather, J., Reeves, B. N., Leinonen, J., MacNeil, S., Randrianasolo, A. S., et al.',
+    venue: 'ACM Conference on International Computing Education Research (ICER)',
+    year: 2024,
+    url: 'https://doi.org/10.1145/3632620.3671116',
+    claim:
+      'Beginners who produced correct work with AI assistance overestimated how much they had understood. Independent corroboration, from a different field and method, of the illusion of learning the MIT report describes. It studies university novices rather than children.',
+  },
+  hakObserving: {
+    id: 'hakObserving',
+    title: 'Observing Without Doing: Pseudo-Apprenticeship Patterns in Student LLM Use',
+    authors: 'Hak, J., Lam Johnson, N., Amoozadeh, M., Alipour, A., & Chattopadhyay, S.',
+    venue: 'Koli Calling International Conference on Computing Education Research',
+    year: 2025,
+    url: 'https://doi.org/10.1145/3769994.3770027',
+    claim:
+      'Names the pattern where a learner watches a system solve a problem and comes away feeling taught, having practised nothing. Apprenticeship works because the apprentice does the work under supervision; watching alone removes the part that builds the skill.',
+  },
   mitAiEducation: {
     id: 'mitAiEducation',
     title: 'Report of the Ad Hoc Committee on AI Use in Teaching, Learning, and Research Training',
