@@ -85,3 +85,28 @@
   role: Peer-reviewed journal
   focus: Useful counterweight on how unsettled the social media research actually is. Worth reading against Haidt rather than instead of him.
   url: https://doi.org/10.1126/science.adr1730
+- id: skenazy
+  name: Lenore Skenazy
+  role: Founder, Let Grow
+  focus: Made the case for free-range childhood before it had a movement. Let Grow turns the argument into school programmes and a defence of ordinary independence, and it is the practical arm of everything this site says about play.
+  url: https://letgrow.org
+- id: gray
+  name: Peter Gray
+  role: Research professor, Boston College
+  focus: The psychologist of free play. Decades of evidence that children build judgement and courage in play adults stay out of, written up weekly on his Substack with patience and heat.
+  url: https://petergray.substack.com
+- id: brussoni
+  name: Mariana Brussoni
+  role: Professor, University of British Columbia
+  focus: Leads the research on risky play that position statements cite. Built OutsidePlay, a free tool that walks a worried parent through letting go a little, which is rarer and more useful than another warning.
+  url: https://outsideplay.org
+- id: livingstone
+  name: Sonia Livingstone
+  role: Professor, LSE
+  focus: Has studied children's online lives longer and across more countries than anyone. The evidence-first voice in a debate that runs hot on both sides, and the person to read when a headline seems too tidy.
+  url: https://www.sonialivingstone.net
+- id: nesi
+  name: Jacqueline Nesi
+  role: Psychologist, Brown University
+  focus: Reads the studies before summarising them. Her Techno Sapiens newsletter is weekly, practical and allergic to panic, and is the closest thing this field has to a fair referee.
+  url: https://technosapiens.substack.com
