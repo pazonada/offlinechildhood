@@ -30,7 +30,6 @@ const d = decision.data;
 
 const picks = await Promise.all(d.picks.map((ref) => getEntry(ref)));
 const concepts = await Promise.all(d.relatedConcepts.map((ref) => getEntry(ref)));
-const updated = d.updated.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 ---
 
 <Base title={d.title} description={d.description}>
@@ -107,8 +106,7 @@ const updated = d.updated.toLocaleDateString('en-US', { month: 'long', year: 'nu
 
       <Sources ids={d.sources} />
 
-      <footer class="mt-16 flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-        <p class="text-sm text-ink-soft">Last reviewed {updated}</p>
+      <footer class="mt-16 border-t border-line pt-8">
         <Button href="/plan" variant="primary">Build your family plan</Button>
       </footer>
 
