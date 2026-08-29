@@ -178,6 +178,26 @@ export const SOURCES = {
     claim:
       'A settlement announced on 21 April 2026 requiring Roblox to verify the age of all users, to stop adults and under sixteens chatting unless they are identified as trusted friends, to let parents restrict transfers of in-game currency from adults, and to leave communications involving minors unencrypted for law enforcement. A settlement is not a finding of wrongdoing. What it establishes for a parent is that these controls now exist and can be switched on.',
   },
+  technoference: {
+    id: 'technoference',
+    title: 'Technoference: Parent Distraction With Technology and Associations With Child Behavior Problems',
+    authors: 'McDaniel, B. T., & Radesky, J. S.',
+    venue: 'Child Development',
+    year: 2018,
+    url: 'https://doi.org/10.1111/cdev.12822',
+    claim:
+      "Parent reports from 170 American families with young children, average age three. Parents' own problematic phone use predicted more technology interruptions in time with their children, and those interruptions tracked with more child behaviour problems. Parent-reported and correlational: the arrow can run both ways, since a hard evening also sends a parent to the phone. What it establishes is that the parent's phone belongs in this conversation at all.",
+  },
+  odgersRewiring: {
+    id: 'odgersRewiring',
+    title: 'The great rewiring: is social media really behind an epidemic of teenage mental illness?',
+    authors: 'Odgers, C. L.',
+    venue: 'Nature',
+    year: 2024,
+    url: 'https://doi.org/10.1038/d41586-024-00902-2',
+    claim:
+      'The serious version of the counter-argument. Odgers, reviewing The Anxious Generation, argues the evidence does not show social media causing an epidemic of teenage mental illness and that the likely causes sit elsewhere. Cited so that when these pages say the question is disputed, the dispute is between named researchers on both sides.',
+  },
   mitAiEducation: {
     id: 'mitAiEducation',
     title: 'Report of the Ad Hoc Committee on AI Use in Teaching, Learning, and Research Training',
