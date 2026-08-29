@@ -8,14 +8,14 @@ import { SOURCES } from './lib/sources';
  * kid already has are handled as notes inside a band, deliberately not as a
  * second axis, which would double the matrix without adding much.
  */
-/** Citing a source that does not exist should fail the build, not ship. */
+/** Citing a source that does not exist should fail the build rather than ship. */
 const SOURCE_IDS = Object.keys(SOURCES) as [string, ...string[]];
 
 export const AGE_BANDS = ['4-6', '7-9', '10-12', '13+'] as const;
 export type AgeBand = (typeof AGE_BANDS)[number];
 
 /**
- * A ladder, not a menu. The site has a point of view (more analog), so the three
+ * A ladder rather than a menu. The site has a point of view (more analog), so the three
  * rungs point in one direction rather than presenting neutral flavors. A family on
  * the first rung is met where it is. It is just not told that all rungs are equal.
  */
@@ -158,7 +158,7 @@ const picks = defineCollection({
     }),
 });
 
-/** People worth reading, not endorsements. */
+/** People worth reading. Listing is short of endorsing. */
 const experts = defineCollection({
   loader: file('./src/content/experts/experts.yaml'),
   schema: z.object({

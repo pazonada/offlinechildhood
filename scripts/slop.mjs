@@ -40,6 +40,9 @@ const RULES = [
     note: '"not X, it is Y" comma snap (banned outright)',
   },
   { id: 'genuinely', re: /\bgenuinely\b/gi, note: '"genuinely" (banned outright)' },
+  // The contrastive appositive ("provenance, not perception") is the comma
+  // cousin of the snap and just as much a giveaway. Also banned outright.
+  { id: 'comma-not', re: /,\s+not\s+\w/g, note: '"X, not Y" appositive (banned outright)' },
   // Stray characters from generation. Allows ordinary typography and accented
   // Latin, flags anything beyond it (CJK, symbols, emoji) so it cannot ship.
   {
