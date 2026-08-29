@@ -106,10 +106,6 @@ const concepts = await Promise.all(d.relatedConcepts.map((ref) => getEntry(ref))
 
       <Sources ids={d.sources} />
 
-      <footer class="mt-16 border-t border-line pt-8">
-        <Button href="/plan" variant="primary">Build your family plan</Button>
-      </footer>
-
       <PrevNext
         label="Decisions"
         backHref="/decisions"
