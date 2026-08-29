@@ -22,10 +22,18 @@ const RULES = [
   { id: 'dive-in', re: /\b(let'?s )?(dive|delve) (in|into)\b/gi, note: '"dive/delve into"' },
   { id: 'navigate', re: /navigat\w+ the (landscape|complexit)/gi, note: '"navigate the landscape"' },
   { id: 'filler-verbs', re: /\b(unlock\w*|unleash\w*|leverag\w+|empower\w*|supercharg\w+|delve\w*)\b/gi, note: 'filler verb' },
-  { id: 'jargon', re: /\b(moat|beachhead|north star|synergy|table stakes|game.chang\w+|10x|double.click)\b/gi, note: 'banned jargon' },
+  { id: 'jargon', re: /\b(moat|beachhead|north star|synergy|table stakes|game.chang\w+|10x|double.click|at scale|learnings|actionable|best.practices?|stakeholders?|holistic|streamlin\w+|utiliz\w+|touch base|circle back|value.add|ecosystems?)\b/gi, note: 'banned jargon' },
   { id: 'ai-adjectives', re: /\b(tapestry|testament to|ever.evolving|seamless\w*|robust|vibrant|crucial|pivotal)\b/gi, note: 'AI-flavoured adjective' },
   { id: 'throat-clearing', re: /\b(it'?s worth noting|it should be noted|needless to say)\b/gi, note: 'throat-clearing' },
   { id: 'hedge', re: /\b(arguably|perhaps it|it could be said)\b/gi, note: 'weak hedge' },
+  // The "not X. It is Y." snap is the house's favourite move and an AI tell when
+  // stacked. One per file is rhetoric; the second is a rut.
+  {
+    id: 'antithesis-stack',
+    re: /\bis not(?: \w+){1,10}[.] It is\b/g,
+    maxPerFile: 1,
+    note: 'second "not X. It is Y" on one page (keep the strongest, rewrite the rest)',
+  },
   // Stray characters from generation. Allows ordinary typography and accented
   // Latin, flags anything beyond it (CJK, symbols, emoji) so it cannot ship.
   {
@@ -40,7 +48,9 @@ for (const f of files) {
   const text = readFileSync(f, 'utf8');
   const hits = [];
   for (const r of RULES) {
-    for (const m of text.matchAll(r.re)) {
+    const matches = [...text.matchAll(r.re)];
+    const allowed = r.maxPerFile ?? 0;
+    for (const m of matches.slice(allowed)) {
       const line = text.slice(0, m.index).split('\n').length;
       hits.push(`  line ${line}  [${r.id}] ${r.note}: "${m[0].trim().slice(0, 60)}"`);
     }
