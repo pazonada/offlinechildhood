@@ -18,7 +18,7 @@ export interface Source {
   url: string;
   /** What this source does and does not establish, in plain language. */
   claim: string;
-  /** True when the finding is genuinely disputed, so pages must say so. */
+  /** True when the finding is disputed among serious researchers, so pages must say so. */
   contested?: boolean;
 }
 

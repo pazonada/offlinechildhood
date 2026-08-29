@@ -26,14 +26,20 @@ const RULES = [
   { id: 'ai-adjectives', re: /\b(tapestry|testament to|ever.evolving|seamless\w*|robust|vibrant|crucial|pivotal)\b/gi, note: 'AI-flavoured adjective' },
   { id: 'throat-clearing', re: /\b(it'?s worth noting|it should be noted|needless to say)\b/gi, note: 'throat-clearing' },
   { id: 'hedge', re: /\b(arguably|perhaps it|it could be said)\b/gi, note: 'weak hedge' },
-  // The "not X. It is Y." snap is the house's favourite move and an AI tell when
-  // stacked. One per file is rhetoric; the second is a rut.
+  // The "not X. It is Y." snap gives away machine writing. Banned outright,
+  // in both its two-sentence and comma forms, owner's orders. The negated run
+  // must not cross a blank line, or a heading plus its opening sentence match.
   {
-    id: 'antithesis-stack',
-    re: /\bis not(?: \w+){1,10}[.] It is\b/g,
-    maxPerFile: 1,
-    note: 'second "not X. It is Y" on one page (keep the strongest, rewrite the rest)',
+    id: 'antithesis-snap',
+    re: /\b(?:is|are|was|were) not (?:[^.!?\n]|\n(?!\s*\n)){2,90}[.!?]\s+(?:It|That|They|This|She|He)\s+(?:is|are|was|were)\b/g,
+    note: '"not X. It is Y" snap (banned outright)',
   },
+  {
+    id: 'antithesis-comma',
+    re: /\b(?:is|are|was|were) not (?:[^.;!?\n]|\n(?!\s*\n)){2,70},\s+(?:it|that|they)\s+(?:is|are)\b/g,
+    note: '"not X, it is Y" comma snap (banned outright)',
+  },
+  { id: 'genuinely', re: /\bgenuinely\b/gi, note: '"genuinely" (banned outright)' },
   // Stray characters from generation. Allows ordinary typography and accented
   // Latin, flags anything beyond it (CJK, symbols, emoji) so it cannot ship.
   {

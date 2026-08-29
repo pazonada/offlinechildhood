@@ -11,7 +11,7 @@ illustrations should survive that advice.
 
 ## Two exceptions on record
 
-`classroom.jpg` is not an original. It is an Unsplash photograph by Taylor
+`classroom.jpg` came from Unsplash, a photograph by Taylor
 Flowe, licensed for commercial use with no attribution required, standing in on
 the teachers page until the owner takes one. Replace it when that happens.
 
