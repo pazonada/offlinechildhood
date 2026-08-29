@@ -7,7 +7,7 @@
 - id: yeung
   name: Alison Yeung
   role: Writes The Smartphone Effect MD
-  focus: A doctor and a mother, writing weekly on helping parents push back against a tech-driven culture. Practical toolkits rather than theory.
+  focus: A doctor and a mother, writing weekly on helping parents push back against a tech-driven culture. Practical toolkits, light on theory.
   url: https://thesmartphoneeffectmd.substack.com
   instagram: thesmartphoneeffectmd
 - id: haidt
@@ -44,7 +44,7 @@
 - id: gregory
   name: Sam Gregory
   role: Researcher on deepfakes and media authenticity
-  focus: Deepfakes, synthetic media and how anyone can tell what is real. He helped write the technical standard for signalling where an image came from, and argues for preparing rather than panicking.
+  focus: Deepfakes, synthetic media and how anyone can tell what is real. He helped write the technical standard for signalling where an image came from, and argues for preparation without the panic.
   url: https://www.samgregory.info
   linkedin: samgregory
 - id: matias
@@ -67,7 +67,7 @@
 - id: dekai
   name: De Kai
   role: Professor and author, The Future Society
-  focus: An AI researcher writing about what these systems do to the societies using them, rather than only what they can do.
+  focus: An AI researcher writing about what these systems do to the societies using them, beyond what they can do.
   url: https://dek.ai
 - id: haskell
   name: Christine Haskell
@@ -83,7 +83,7 @@
 - id: thorp-science
   name: Science editorial desk
   role: Peer-reviewed journal
-  focus: Useful counterweight on how unsettled the social media research actually is. Worth reading against Haidt rather than instead of him.
+  focus: Useful counterweight on how unsettled the social media research actually is. Worth reading next to Haidt, as the cross-examination.
   url: https://doi.org/10.1126/science.adr1730
 - id: skenazy
   name: Lenore Skenazy

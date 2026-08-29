@@ -2,7 +2,7 @@
  * Every empirical claim on the site cites one of these. Keeping them in one file
  * means a claim can be traced, and a superseded source is fixed once.
  *
- * All metadata below was verified against Crossref rather than recalled. Links use
+ * All metadata below was verified against Crossref, none of it recalled from memory. Links use
  * doi.org where a DOI exists, because publisher pages block automated checks.
  *
  * Editorial rule for this project: the positive case for analog rests on firmer
@@ -116,7 +116,7 @@ export const SOURCES = {
     year: 2018,
     url: 'https://doi.org/10.1016/j.edurev.2018.09.003',
     claim:
-      'Across 54 studies and more than 170,000 readers, comprehension was better on paper than on screen, and the advantage for paper grew over the years rather than shrinking as screens improved. Strongest where the reader is working against a time limit and for informational text.',
+      'Across 54 studies and more than 170,000 readers, comprehension was better on paper than on screen, and the advantage for paper widened over the years even as screens improved. Strongest where the reader is working against a time limit and for informational text.',
   },
   danishChromebooks: {
     id: 'danishChromebooks',
@@ -136,7 +136,7 @@ export const SOURCES = {
     year: 2026,
     url: 'https://cra.org/crae/wp-content/uploads/sites/3/2026/08/AI-in-Computing-Education_-Principles-and-Practical-Guidance-for-Program-Leaders.pdf',
     claim:
-      'Guidance for university computing departments rather than research about children, and the paper is expert opinion rather than a peer-reviewed study. Its transferable point is about how rules are framed: a restriction stated without a reason reads as arbitrary, while the same restriction tied to what it is protecting is engaged with honestly. Two of the six authors work at Google and Mozilla.',
+      'Written as guidance for university computing departments, by experts, without peer review, and none of it studies children. Its transferable point is about how rules are framed: a restriction stated without a reason reads as arbitrary, while the same restriction tied to what it is protecting is engaged with honestly. Two of the six authors work at Google and Mozilla.',
   },
   pratherWideningGap: {
     id: 'pratherWideningGap',
@@ -146,7 +146,7 @@ export const SOURCES = {
     year: 2024,
     url: 'https://doi.org/10.1145/3632620.3671116',
     claim:
-      'Beginners who produced correct work with AI assistance overestimated how much they had understood. Independent corroboration, from a different field and method, of the illusion of learning the MIT report describes. It studies university novices rather than children.',
+      'Beginners who produced correct work with AI assistance overestimated how much they had understood. Independent corroboration, from a different field and method, of the illusion of learning the MIT report describes. Its subjects are university novices, so the bridge to children is an inference.',
   },
   hakObserving: {
     id: 'hakObserving',
@@ -166,7 +166,7 @@ export const SOURCES = {
     year: 2022,
     url: 'https://info.thorn.org/hubfs/Research/2022_Online_Grooming_Report.pdf',
     claim:
-      'A survey of 1,200 young people aged 9 to 17. Two thirds said somebody they met online had asked them to move from a public forum into a private conversation on a different platform. Nearly a quarter stayed in contact with somebody who had made them uncomfortable, and for one in three their closest friendship had formed online. Survey research by a child-safety organisation rather than a peer-reviewed study, and the authors state plainly that stigma around the subject probably means undercounting. The figures cover online life in general and are not specific to games.',
+      'A survey of 1,200 young people aged 9 to 17. Two thirds said somebody they met online had asked them to move from a public forum into a private conversation on a different platform. Nearly a quarter stayed in contact with somebody who had made them uncomfortable, and for one in three their closest friendship had formed online. Survey research by a child-safety organisation, without peer review, and the authors state plainly that stigma around the subject probably means undercounting. The figures cover online life in general and are not specific to games.',
   },
   robloxSettlement: {
     id: 'robloxSettlement',

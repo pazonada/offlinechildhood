@@ -8,15 +8,15 @@ import { SOURCES } from './lib/sources';
  * kid already has are handled as notes inside a band, deliberately not as a
  * second axis, which would double the matrix without adding much.
  */
-/** Citing a source that does not exist should fail the build rather than ship. */
+/** Citing a source that does not exist should fail the build, never ship. */
 const SOURCE_IDS = Object.keys(SOURCES) as [string, ...string[]];
 
 export const AGE_BANDS = ['4-6', '7-9', '10-12', '13+'] as const;
 export type AgeBand = (typeof AGE_BANDS)[number];
 
 /**
- * A ladder rather than a menu. The site has a point of view (more analog), so the three
- * rungs point in one direction rather than presenting neutral flavors. A family on
+ * A ladder, and no menu. The site has a point of view (more analog), so the three
+ * rungs point in one direction instead of presenting neutral flavors. A family on
  * the first rung is met where it is. It is just not told that all rungs are equal.
  */
 export const STANCES = ['start', 'further', 'allin'] as const;
@@ -108,7 +108,7 @@ const concepts = defineCollection({
       imageRatio: z.number().optional(),
       /** Misconceptions worth heading off, including ones adults hold. */
       misconceptions: z.array(z.string()).default([]),
-      /** How to run this with a class rather than one kid. */
+      /** How to run this with a class instead of one kid. */
       classroom: z.string().optional(),
       /** The same activity as steps, for the teachers page, which is scanned rather than read. */
       classSteps: z.array(z.string()).default([]),

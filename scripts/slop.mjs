@@ -43,6 +43,9 @@ const RULES = [
   // The contrastive appositive ("provenance, not perception") is the comma
   // cousin of the snap and just as much a giveaway. Also banned outright.
   { id: 'comma-not', re: /,\s+not\s+\w/g, note: '"X, not Y" appositive (banned outright)' },
+  // Normal English, but the house leans on it. Two per file at most; vary the
+  // construction past that (instead of, before, over, flip it, or cut it).
+  { id: 'rather-than', re: /\brather\s+than\b/gi, maxPerFile: 2, note: 'third "rather than" on one page' },
   // Stray characters from generation. Allows ordinary typography and accented
   // Latin, flags anything beyond it (CJK, symbols, emoji) so it cannot ship.
   {
