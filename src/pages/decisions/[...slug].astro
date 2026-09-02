@@ -1,12 +1,8 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Container from '../../components/Container.astro';
 import StanceLadder from '../../components/StanceLadder.astro';
-import PickCard from '../../components/PickCard.astro';
-import Button from '../../components/Button.astro';
 import PrevNext from '../../components/PrevNext.astro';
-import BackLink from '../../components/BackLink.astro';
 import Sources from '../../components/Sources.astro';
 import Photo from '../../components/Photo.astro';
 
@@ -34,24 +30,29 @@ const concepts = await Promise.all(d.relatedConcepts.map((ref) => getEntry(ref))
 
 <Base title={d.title} description={d.description}>
   <article>
-    <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
-      <Container width="prose">
-        <BackLink href="/decisions" label="All decisions" />
-        <p class="mt-5 font-display text-sm font-bold uppercase tracking-[0.14em] text-primary-text">
+    {/* Full-bleed blue hero carrying the question and the short answer. */}
+    <header class="bg-primary text-on-navy-bright">
+      <div class="mx-auto max-w-[860px] px-6 pb-[58px] pt-10 sm:px-10">
+        <a
+          href="/decisions"
+          class="font-label text-[13px] font-bold tracking-[0.04em] text-on-primary-faint transition hover:text-on-navy-bright"
+        >
+          &larr; All decisions
+        </a>
+        <p class="mb-4 mt-[30px] font-label text-xs font-bold uppercase tracking-[0.22em] text-accent-light">
           Decision {d.order} of {total}
         </p>
-        <h1 class="mt-3 text-4xl font-extrabold sm:text-5xl">{d.question}</h1>
-
-        <div class="mt-8 rounded-2xl border-2 border-primary bg-surface p-6 sm:p-7">
-          <h2 class="font-display text-sm font-bold uppercase tracking-[0.14em] text-primary-text">
-            The short answer
-          </h2>
-          <p class="mt-3 text-lg leading-relaxed">{d.shortAnswer}</p>
-        </div>
-      </Container>
+        <h1 class="mb-[30px] font-display text-[clamp(32px,4vw,50px)] font-extrabold leading-[1.08] tracking-[-0.015em] text-on-navy-bright">
+          {d.question}
+        </h1>
+        <h2 class="mb-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-accent-light">
+          The short answer
+        </h2>
+        <p class="text-[1.1rem] leading-[1.68] text-on-primary-soft">{d.shortAnswer}</p>
+      </div>
     </header>
 
-    <Container width="prose" class="py-12 sm:py-16">
+    <div class="article-col pt-[54px]">
       <StanceLadder stances={d.stances} />
 
       {d.image && (
@@ -59,52 +60,44 @@ const concepts = await Promise.all(d.relatedConcepts.map((ref) => getEntry(ref))
           src={d.image}
           alt={d.imageAlt ?? ''}
           position={d.imageSpotlight}
-          size={360}
+          ratio={d.imageRatio}
+          size={d.imageRatio ? 672 : 360}
           class="mt-14"
         />
       )}
 
-      <div class="prose mt-14">
+      <div class="prose mt-2">
         <Content />
       </div>
 
-      {picks.length > 0 && (
-        <section class="mt-16 border-t border-line pt-12">
-          <h2 class="font-display text-2xl font-extrabold">If you decided to buy something</h2>
-          <p class="mt-2 text-ink-soft">
-            Only worth reading once you have made the call above. Nothing here is required, and the
-            cheapest answer to most of these problems is no purchase at all.
-          </p>
-          <div class="mt-6 grid gap-4 sm:grid-cols-2">
-            {picks.map((p) => p && <PickCard {...p.data} />)}
-          </div>
-        </section>
-      )}
-
       {concepts.length > 0 && (
-        <section class="mt-16 border-t border-line pt-12">
-          <h2 class="font-display text-2xl font-extrabold">Talk about it too</h2>
-          <p class="mt-2 text-ink-soft">
+        <section class="mt-[84px]">
+          <h2 class="sun-heading mb-2 font-display text-[29px] font-extrabold text-navy">Talk about it too</h2>
+          <p class="mb-[22px] text-[1.03rem] leading-relaxed text-ink-soft">
             Rules do half the work. These are the conversations that do the other half, written for
             every age from four up.
           </p>
-          <ul class="mt-6 grid gap-3">
+          <ul class="flex flex-col gap-7">
             {concepts.map((c) => c && (
-              <li>
-                <a
-                  href={`/conversations/${c.id}`}
-                  class="block rounded-2xl border border-line bg-surface-2 p-5 transition hover:border-ink"
-                >
-                  <span class="font-display text-lg font-extrabold text-ink">{c.data.title}</span>
-                  <span class="mt-1 block text-ink-soft">{c.data.idea}</span>
-                </a>
+              <li class="grid grid-cols-[6px_minmax(0,1fr)] gap-[22px]">
+                <span class="rounded-[3px] bg-accent" aria-hidden="true"></span>
+                <div>
+                  <p class="mb-2 font-label text-[11.5px] font-bold uppercase tracking-[0.2em] text-ink-soft">
+                    Conversation
+                  </p>
+                  <a
+                    href={`/conversations/${c.id}`}
+                    class="text-balance text-[21px] font-semibold leading-[1.34] text-primary-text underline decoration-panel-blue-line-strong decoration-[1.5px] underline-offset-4 transition hover:decoration-primary"
+                  >
+                    {c.data.title}
+                  </a>
+                  <p class="mt-2.5 text-[1rem] leading-relaxed text-ink-soft">{c.data.idea}</p>
+                </div>
               </li>
             ))}
           </ul>
         </section>
       )}
-
-      <Sources ids={d.sources} />
 
       <PrevNext
         label="Decisions"
@@ -113,6 +106,50 @@ const concepts = await Promise.all(d.relatedConcepts.map((ref) => getEntry(ref))
         prev={prev && { href: `/decisions/${prev.id}`, title: prev.data.question, kicker: `Decision ${prev.data.order}` }}
         next={next && { href: `/decisions/${next.id}`, title: next.data.question, kicker: `Decision ${next.data.order}` }}
       />
-    </Container>
+    </div>
+
+    {/* Full bleed, so the commercial aside reads as separate from the answer. */}
+    {picks.length > 0 && (
+      <section class="mt-[84px] bg-panel-blue-deep">
+        <div class="article-col pb-[66px] pt-[62px]">
+          <h2 class="mb-2 font-display text-[27px] font-extrabold text-navy">
+            If you decided to buy something
+          </h2>
+          <p class="mb-[26px] max-w-[44em] text-[1.03rem] leading-relaxed text-ink-soft">
+            Only worth reading once you have made the call above. Nothing here is required, and the
+            cheapest answer to most of these problems is no purchase at all.
+          </p>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {picks.map((p) => p && (
+              <a
+                href={p.data.url}
+                target="_blank"
+                rel="noopener"
+                class="block rounded-[18px] bg-surface px-[26px] py-6 transition hover:bg-card-hover-cool"
+              >
+                <span class="flex items-baseline justify-between gap-3">
+                  <span class="text-balance font-display text-[21px] font-extrabold text-navy">{p.data.name}</span>
+                  <span class="font-label text-[15px] font-bold text-primary-text" aria-hidden="true">&#8599;</span>
+                </span>
+                <span class="mt-1 block font-label text-[11.5px] font-bold uppercase tracking-[0.16em] text-ink-soft">
+                  {p.data.maker} &middot; {p.data.tags[0]}
+                </span>
+                <span class="mt-3 block text-[1rem] leading-[1.58] text-ink">{p.data.summary}</span>
+                <span class="mt-3.5 block text-[0.95rem] font-medium text-navy">{p.data.price}</span>
+                <span class="mt-3.5 block border-t border-card-line-cool pt-3.5 text-sm leading-[1.55] text-ink-soft">
+                  {p.data.limitations}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    {d.sources.length > 0 && (
+      <div class="article-col pt-[34px]">
+        <Sources ids={d.sources} />
+      </div>
+    )}
   </article>
 </Base>

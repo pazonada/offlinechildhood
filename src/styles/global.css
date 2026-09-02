@@ -26,6 +26,8 @@
 
   /* Cool panels: asides, downsides, the buy band. */
   --panel-blue: #eef3fc;
+  --panel-blue-deep: #e7edf9;
+  --card-hover-cool: #f7faff;
   --panel-blue-line: #c9d8f3;
   --panel-blue-line-strong: #a8bef0;
   --panel-accent: #faf1dc;
@@ -110,6 +112,8 @@
   --color-surface-warm: var(--surface-warm);
   --color-navy: var(--navy);
   --color-panel-blue: var(--panel-blue);
+  --color-panel-blue-deep: var(--panel-blue-deep);
+  --color-card-hover-cool: var(--card-hover-cool);
   --color-panel-blue-line: var(--panel-blue-line);
   --color-panel-blue-line-strong: var(--panel-blue-line-strong);
   --color-panel-accent: var(--panel-accent);
@@ -194,6 +198,17 @@
 }
 
 @layer base {
+  .article-col {
+    max-width: 922px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+  @media (min-width: 1000px) {
+    .article-col { padding-left: 102px; padding-right: 40px; }
+  }
+}
+
+@layer base {
   /* The filter dropdown uses <details>, so the default disclosure triangle
      has to go in every engine, not just the ones that respect list-style. */
   summary::-webkit-details-marker { display: none; }
@@ -226,9 +241,10 @@
   }
   .prose > * + * { margin-top: 1.35em; }
   .prose h2 {
-    font-size: clamp(1.5rem, 1.2rem + 1.1vw, 1.95rem);
-    margin-top: 2.75em;
+    font-size: clamp(1.65rem, 1.3rem + 1.1vw, 2.0625rem);
+    margin-top: 3.4em;
     margin-bottom: 0.2em;
+    position: relative;
   }
   .prose h3 {
     font-size: 1.3rem;
@@ -253,13 +269,44 @@
 
   /* Scripts and quoted language a parent can say out loud. */
   .prose blockquote {
-    border-left: 4px solid var(--primary);
-    background: var(--surface-2);
-    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    border-left: 4px solid var(--accent);
+    background: none;
+    border-radius: 0;
     padding: 1rem 1.35rem;
     font-size: 1.06rem;
   }
-  .prose blockquote p { margin: 0; }
+  .prose blockquote p {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: 1.19rem;
+    line-height: 1.5;
+    color: var(--navy);
+    text-wrap: balance;
+  }
+
+  /* The section-heading sun. Drawn as a data URI because url() cannot read
+     custom properties; the colours are the accent and navy tokens. Hidden
+     when the reserved gutter collapses, so it never clips. */
+  @media (min-width: 1000px) {
+    .sun-heading { position: relative; }
+    .sun-heading::before,
+    .prose h2::before {
+      content: '';
+      position: absolute;
+      left: -62px;
+      top: 10px;
+      width: 26px;
+      height: 26px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26' fill='none'%3E%3Ccircle cx='13' cy='13' r='4.6' fill='%23EFAF29'/%3E%3Cg stroke='%231B2A5E' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M13 1.6v3.4M13 21v3.4M24.4 13H21M5 13H1.6M21.1 4.9l-2.4 2.4M7.3 18.7l-2.4 2.4M21.1 21.1l-2.4-2.4M7.3 7.3L4.9 4.9'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    .prose h2:hover::before,
+    .sun-heading:hover::before { transform: rotate(22deg); }
+  }
   .prose blockquote + blockquote { margin-top: 0.9em; }
   .prose hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
   .prose code {

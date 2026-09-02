@@ -1,6 +1,5 @@
 ---
 import type { StanceId } from '../content.config';
-import Scribble from './Scribble.astro';
 
 interface Stance {
   id: StanceId;
@@ -12,38 +11,21 @@ interface Props {
   stances: Stance[];
 }
 const { stances } = Astro.props;
-
-const tone: Record<StanceId, string> = {
-  start: 'border-accent/60 bg-accent/12',
-  further: 'border-secondary/45 bg-secondary/10',
-  allin: 'border-primary/50 bg-primary/10',
-};
 ---
 
-<section aria-labelledby="ladder-heading" class="not-prose">
-  <h2 id="ladder-heading" class="font-display text-2xl font-extrabold">Three ways to do this</h2>
-  <p class="mt-2 text-ink-soft">
-    These all point the same direction. They are rungs on a ladder rather than options on a menu, so
-    start wherever you can actually hold the line. A rule you keep beats a rule you announce.
-  </p>
-
-  <ol class="mt-6 grid gap-4 md:grid-cols-3">
-    {stances.map((s, i) => (
-      <li class:list={['rounded-2xl border-2 p-5', tone[s.id]]}>
-        <p class="flex items-center gap-2 font-display text-lg font-extrabold text-ink">
-          <span
-            class="relative grid h-9 w-9 shrink-0 place-items-center font-display text-base font-extrabold text-ink"
-            aria-hidden="true"
-          >
-            {i + 1}
-            <Scribble type="circle" class="absolute inset-0 h-full w-full" width={3} />
-          </span>
+{/* Labelled rows on hairlines, no cards, and no rule above the first row.
+    The rungs still read top to bottom as a ladder. */}
+<section aria-label="Three ways to do this" class="not-prose">
+  <ol>
+    {stances.map((s) => (
+      <li class="grid gap-x-7 gap-y-2 border-b border-line-strong py-[26px] sm:grid-cols-[150px_minmax(0,1fr)]">
+        <p class="font-label text-[13px] font-bold uppercase tracking-[0.14em] text-navy">
           {s.label}
         </p>
-        <p class="mt-3 text-[0.97rem] leading-relaxed text-ink">{s.summary}</p>
-        <p class="mt-3 border-t border-line pt-3 text-sm text-ink-soft">
-          For families who {s.forFamiliesWho}
-        </p>
+        <div>
+          <p class="mb-2 text-lg leading-relaxed text-ink">{s.summary}</p>
+          <p class="text-[1rem] leading-[1.55] text-ink-soft">For families who {s.forFamiliesWho}</p>
+        </div>
       </li>
     ))}
   </ol>

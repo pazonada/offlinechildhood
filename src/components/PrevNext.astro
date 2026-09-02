@@ -1,67 +1,45 @@
 ---
-interface Neighbour {
+interface Card {
   href: string;
   title: string;
-  /** Shown above the title, e.g. "Decision 3" or the strand name. */
-  kicker?: string;
+  kicker: string;
 }
-
 interface Props {
-  prev?: Neighbour;
-  next?: Neighbour;
+  label: string;
   backHref: string;
   backLabel: string;
-  /** Describes what is being paged through, for screen readers. */
-  label: string;
+  prev?: Card;
+  next?: Card;
 }
-
-const { prev, next, backHref, backLabel, label } = Astro.props;
-
+const { label, backHref, backLabel, prev, next } = Astro.props;
 const card =
-  'group flex h-full flex-col rounded-2xl border-2 border-line bg-surface p-5 transition hover:border-primary hover:bg-surface-2';
+  'block rounded-[22px] border-[1.5px] border-card-line-cool bg-surface px-7 py-[22px] transition hover:border-primary';
 ---
 
-<nav aria-label={label} class="no-print mt-16 border-t border-line pt-10">
-  <div class="grid gap-4 sm:grid-cols-2">
+<nav aria-label={label} class="no-print mt-[60px] border-t border-line-strong pt-[52px]">
+  <div class="grid gap-[18px] sm:grid-cols-2">
     {prev ? (
-      <a href={prev.href} rel="prev" class:list={[card, 'items-start text-left']}>
-        <span class="flex items-center gap-1.5 text-sm font-bold text-ink-soft">
-          <span aria-hidden="true" class="inline-block transition group-hover:-translate-x-1">&larr;</span>
-          Previous
+      <a href={prev.href} rel="prev" class={card}>
+        <span class="flex items-center gap-2.5 font-label text-sm font-bold text-ink-soft">
+          <span aria-hidden="true" class="text-lg leading-none">&larr;</span>Previous
         </span>
-        {prev.kicker && (
-          <span class="mt-3 font-display text-xs font-bold uppercase tracking-[0.12em] text-primary-text">
-            {prev.kicker}
-          </span>
-        )}
-        <span class="mt-1 font-display text-lg font-extrabold text-ink">{prev.title}</span>
+        <span class="mt-3 block font-label text-xs font-bold uppercase tracking-[0.18em] text-primary-text">{prev.kicker}</span>
+        <span class="mt-1.5 block font-display text-xl font-extrabold leading-[1.26] text-navy">{prev.title}</span>
       </a>
     ) : (
-      <div class="hidden sm:block" aria-hidden="true"></div>
+      <span aria-hidden="true"></span>
     )}
-
     {next && (
-      <a href={next.href} rel="next" class:list={[card, 'items-end text-right']}>
-        <span class="flex items-center gap-1.5 text-sm font-bold text-ink-soft">
-          Next
-          <span aria-hidden="true" class="inline-block transition group-hover:translate-x-1">&rarr;</span>
+      <a href={next.href} rel="next" class:list={[card, 'text-right']}>
+        <span class="flex items-center justify-end gap-2.5 font-label text-sm font-bold text-ink-soft">
+          Next<span aria-hidden="true" class="text-lg leading-none">&rarr;</span>
         </span>
-        {next.kicker && (
-          <span class="mt-3 font-display text-xs font-bold uppercase tracking-[0.12em] text-primary-text">
-            {next.kicker}
-          </span>
-        )}
-        <span class="mt-1 font-display text-lg font-extrabold text-ink">{next.title}</span>
+        <span class="mt-3 block font-label text-xs font-bold uppercase tracking-[0.18em] text-primary-text">{next.kicker}</span>
+        <span class="mt-1.5 block font-display text-xl font-extrabold leading-[1.26] text-navy">{next.title}</span>
       </a>
     )}
   </div>
-
-  <p class="mt-6 text-center">
-    <a
-      href={backHref}
-      class="font-display font-bold text-primary-text underline underline-offset-4 hover:text-ink"
-    >
-      {backLabel}
-    </a>
+  <p class="mt-[26px] text-center">
+    <a href={backHref} class="font-label text-[15px] font-bold text-primary-text hover:text-navy">{backLabel}</a>
   </p>
 </nav>

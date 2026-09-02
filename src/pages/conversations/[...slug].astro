@@ -1,11 +1,7 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Container from '../../components/Container.astro';
-import BandFilter from '../../components/BandFilter.astro';
 import PrevNext from '../../components/PrevNext.astro';
-import BackLink from '../../components/BackLink.astro';
-import Scribble from '../../components/Scribble.astro';
 import Photo from '../../components/Photo.astro';
 
 export async function getStaticPaths() {
@@ -31,130 +27,202 @@ const decisions = await Promise.all(c.relatedDecisions.map((ref) => getEntry(ref
 
 <Base title={c.title} description={c.description}>
   <article>
-    <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
-      <Container width="prose">
-        <BackLink href="/conversations" label="All conversations" />
-        <p class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 font-display text-sm font-bold uppercase tracking-[0.14em] text-secondary-deep">
-          <span>{c.strand}</span>
-          <span class="text-ink-soft/60" aria-hidden="true">/</span>
-          <span class="text-ink-soft">{position} of {total}</span>
+    {/* Navy hero: the concept's home colour, against the decisions' blue. */}
+    <header class="bg-navy text-on-navy-bright">
+      <div class="article-col pb-[58px] pt-10">
+        <a
+          href="/conversations"
+          class="font-label text-[13px] font-bold tracking-[0.04em] text-on-primary-faint transition hover:text-on-navy-bright"
+        >
+          &larr; All conversations
+        </a>
+        <p class="mb-4 mt-[30px] flex flex-wrap items-center gap-3 font-label text-xs font-bold uppercase tracking-[0.22em]">
+          <span class="text-accent-light">{c.strand}</span>
+          <span class="text-on-navy-faint" aria-hidden="true">/</span>
+          <span class="text-on-navy-soft">{position} of {total}</span>
         </p>
-        <h1 class="mt-3 text-4xl font-extrabold sm:text-5xl">{c.title}</h1>
-        <p class="mt-6 border-l-4 border-secondary pl-5 text-xl leading-relaxed text-ink">
+        <h1 class="mb-[30px] text-balance font-display text-[clamp(32px,4vw,50px)] font-extrabold leading-[1.06] tracking-[-0.015em] text-on-navy-bright">
+          {c.title}
+        </h1>
+        <p class="border-l-4 border-accent pl-[22px] text-[1.19rem] leading-[1.58] text-on-primary-soft">
           {c.idea}
         </p>
-      </Container>
+      </div>
     </header>
 
-    <Container width="prose">
-      <BandFilter bands={c.bands.map((b) => b.band)} />
+    <div class="article-col pt-14">
+      <h2 class="sun-heading mb-2 text-balance font-display text-[33px] font-extrabold leading-[1.14] text-navy">
+        How to explain it, by age
+      </h2>
+      <p class="mb-[26px] text-[1.09rem] leading-[1.68] text-ink-soft">
+        Same idea every time. What changes is how much of the machinery a kid can hold, so pick the
+        version that fits and go up a band when it stops being interesting.
+      </p>
 
-      <div class="py-12">
-        <h2 class="relative inline-block font-display text-2xl font-extrabold">
-          How to explain it, by age
-          <Scribble type="underline" class="absolute -bottom-3 left-0 h-2.5 w-full" />
-        </h2>
-        {/* The mark is absolutely positioned, so it adds no height of its own.
-            This margin has to clear it as well as separate the paragraph. */}
-        <p class="mt-7 text-ink-soft">
-          Same idea every time. What changes is how much of the machinery a kid can hold, so pick the
-          version that fits and go up a band when it stops being interesting.
-        </p>
-
-        <div class="mt-8 grid gap-6">
-          {c.bands.map((b) => (
-            <section
-              data-band-panel={b.band}
-              class="rounded-3xl border-2 border-line bg-surface-2 p-6 sm:p-7"
-              aria-labelledby={`band-${b.band}`}
-            >
-              <h3 id={`band-${b.band}`} class="font-display text-xl font-extrabold text-ink">
-                Ages {b.band}
-              </h3>
-
-              <p class="mt-4 leading-relaxed">{b.explain}</p>
-
-              <div class="mt-5 rounded-2xl bg-surface p-5">
-                <p class="font-display text-sm font-bold uppercase tracking-[0.12em] text-primary-text">
-                  Try this
-                </p>
-                <p class="mt-2 leading-relaxed">{b.tryThis}</p>
-              </div>
-
-              <div class="mt-4 rounded-2xl bg-surface p-5">
-                <p class="font-display text-sm font-bold uppercase tracking-[0.12em] text-secondary-deep">
-                  Listen for
-                </p>
-                <p class="mt-2 leading-relaxed">{b.listenFor}</p>
-              </div>
-
-              {b.ifMoreExperienced && (
-                <p class="mt-4 border-t border-line pt-4 text-[0.97rem] text-ink-soft">
-                  <span class="font-semibold text-ink">If she already has more access than most.</span>{' '}
-                  {b.ifMoreExperienced}
-                </p>
-              )}
-            </section>
-          ))}
-        </div>
-
-        {c.image && (
-          <Photo
-            src={c.image}
-            alt={c.imageAlt ?? ''}
-            position={c.imageSpotlight}
-            ratio={c.imageRatio}
-            size={c.imageRatio ? 672 : 360}
-            class="mt-16"
-          />
-        )}
-
-        <div class="prose mt-16">
-          <Content />
-        </div>
-
-        {c.misconceptions.length > 0 && (
-          <section class="mt-16 border-t border-line pt-12">
-            <h2 class="font-display text-2xl font-extrabold">Misconceptions to address</h2>
-            <ul class="mt-5 grid gap-3">
-              {c.misconceptions.map((m) => (
-                <li class="rounded-2xl border border-line bg-surface-2 p-5 leading-relaxed">{m}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {c.classroom && (
-          <section class="mt-16 rounded-3xl border-2 border-primary/35 bg-primary/8 p-6 sm:p-7">
-            <h2 class="font-display text-xl font-extrabold">Running this with a class</h2>
-            <p class="mt-3 leading-relaxed">{c.classroom}</p>
-          </section>
-        )}
-
-        {decisions.length > 0 && (
-          <section class="mt-16 border-t border-line pt-12">
-            <h2 class="font-display text-2xl font-extrabold">The decision this connects to</h2>
-            <ul class="mt-5 grid gap-3">
-              {decisions.map((d) => d && (
-                <li>
-                  <a href={`/decisions/${d.id}`} class="block rounded-2xl border border-line bg-surface-2 p-5 transition hover:border-ink">
-                    <span class="font-display text-lg font-extrabold text-ink">{d.data.question}</span>
-                    <span class="mt-1 block text-ink-soft">{d.data.description}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        <PrevNext
-          label="Conversations"
-          backHref="/conversations"
-          backLabel={`See all ${total} conversations`}
-          prev={prev && { href: `/conversations/${prev.id}`, title: prev.data.title, kicker: prev.data.strand }}
-          next={next && { href: `/conversations/${next.id}`, title: next.data.title, kicker: next.data.strand }}
-        />
+      {/* The active and inactive pills are two literal class strings picked by a
+          boolean in the script below. Interpolating styles left the highlight
+          stuck on the first option, which is why this is spelled out. */}
+      <div class="mb-[30px] flex flex-wrap items-center gap-2" role="group" aria-label="Show one age band">
+        <button type="button" data-band="all" aria-pressed="true" class="band-pill border-navy bg-navy text-on-navy-bright">All ages</button>
+        {c.bands.map((b) => (
+          <button type="button" data-band={b.band} aria-pressed="false" class="band-pill border-line-strong bg-transparent text-ink-soft">
+            Ages {b.band}
+          </button>
+        ))}
       </div>
-    </Container>
+
+      <div class="flex flex-col gap-5">
+        {c.bands.map((b) => (
+          <section
+            data-band-panel={b.band}
+            class="rounded-[26px] border-[1.5px] border-line bg-surface px-[30px] pb-[30px] pt-7"
+            aria-labelledby={`band-${b.band}`}
+          >
+            <h3 id={`band-${b.band}`} class="mb-3.5 font-display text-[22px] font-extrabold text-navy">
+              Ages {b.band}
+            </h3>
+
+            <p class="mb-5 text-[1.09rem] leading-[1.68] text-ink">{b.explain}</p>
+
+            <div class="mb-7 rounded-[18px] bg-panel-blue px-[22px] py-5">
+              <p class="mb-2 font-label text-[11.5px] font-bold uppercase tracking-[0.18em] text-primary-text">
+                Try this
+              </p>
+              <p class="text-[1.03rem] leading-[1.62] text-ink">{b.tryThis}</p>
+            </div>
+
+            <div class="border-l-4 border-accent py-0.5 pl-[22px]">
+              <p class="mb-2 font-label text-[11.5px] font-bold uppercase tracking-[0.18em] text-accent-text">
+                Listen for
+              </p>
+              <p class="text-[1.03rem] leading-[1.62] text-ink">{b.listenFor}</p>
+            </div>
+
+            {b.ifMoreExperienced && (
+              <p class="mt-[18px] border-t border-line pt-4 text-[1rem] leading-[1.62] text-ink-soft">
+                <span class="font-semibold text-ink">If the child already has more access than most:</span>{' '}
+                {b.ifMoreExperienced}
+              </p>
+            )}
+          </section>
+        ))}
+      </div>
+
+      {c.image && (
+        <Photo
+          src={c.image}
+          alt={c.imageAlt ?? ''}
+          position={c.imageSpotlight}
+          ratio={c.imageRatio}
+          size={c.imageRatio ? 672 : 360}
+          class="mt-16"
+        />
+      )}
+
+      <div class="prose mt-4">
+        <Content />
+      </div>
+
+      {c.misconceptions.length > 0 && (
+        <section class="mt-[78px]">
+          <h2 class="sun-heading mb-[22px] text-balance font-display text-[33px] font-extrabold leading-[1.14] text-navy">
+            Misconceptions to address
+          </h2>
+          <ul class="flex flex-col gap-0.5">
+            {c.misconceptions.map((m) => (
+              <li class="grid grid-cols-[30px_minmax(0,1fr)] gap-3.5 border-b border-line py-[18px]">
+                <span class="font-label text-xl font-bold leading-[1.2] text-coral" aria-hidden="true">&#10005;</span>
+                <p class="text-[1.06rem] leading-[1.66] text-ink">{m}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {c.classroom && (
+        <section class="mt-[66px] rounded-[26px] border-[1.5px] border-panel-blue-line bg-panel-blue px-9 py-[34px]">
+          <h2 class="mb-3 text-balance font-display text-[26px] font-extrabold text-navy">
+            Running this with a class
+          </h2>
+          <p class="text-[1.06rem] leading-[1.7] text-ink">{c.classroom}</p>
+        </section>
+      )}
+
+      {decisions.length > 0 && (
+        <section class="mt-[78px]">
+          <h2 class="sun-heading mb-[22px] text-balance font-display text-[33px] font-extrabold leading-[1.14] text-navy">
+            The decision this connects to
+          </h2>
+          <ul class="flex flex-col gap-[26px]">
+            {decisions.map((d) => d && (
+              <li class="grid grid-cols-[6px_minmax(0,1fr)] gap-[22px]">
+                <span class="rounded-[3px] bg-accent" aria-hidden="true"></span>
+                <div>
+                  <p class="mb-2 font-label text-[11.5px] font-bold uppercase tracking-[0.2em] text-ink-soft">
+                    Decision
+                  </p>
+                  <a
+                    href={`/decisions/${d.id}`}
+                    class="text-balance text-[21px] font-semibold leading-[1.34] text-primary-text underline decoration-panel-blue-line-strong decoration-[1.5px] underline-offset-4 transition hover:decoration-primary"
+                  >
+                    {d.data.question}
+                  </a>
+                  <p class="mt-2.5 text-[1rem] leading-relaxed text-ink-soft">{d.data.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <PrevNext
+        label="Conversations"
+        backHref="/conversations"
+        backLabel={`See all ${total} conversations`}
+        prev={prev && { href: `/conversations/${prev.id}`, title: prev.data.title, kicker: prev.data.strand }}
+        next={next && { href: `/conversations/${next.id}`, title: next.data.title, kicker: next.data.strand }}
+      />
+    </div>
   </article>
 </Base>
+
+<script>
+  const ACTIVE = ['bg-navy', 'text-on-navy-bright', 'border-navy'];
+  const IDLE = ['bg-transparent', 'text-ink-soft', 'border-line-strong'];
+
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.band-pill'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-band-panel]'));
+
+  const paint = (btn: HTMLButtonElement, on: boolean) => {
+    btn.setAttribute('aria-pressed', String(on));
+    btn.classList.remove(...(on ? IDLE : ACTIVE));
+    btn.classList.add(...(on ? ACTIVE : IDLE));
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const want = btn.dataset.band;
+      buttons.forEach((b) => paint(b, b === btn));
+      panels.forEach((p) => {
+        p.hidden = want !== 'all' && p.dataset.bandPanel !== want;
+      });
+    });
+  });
+</script>
+
+<style>
+  .band-pill {
+    font-family: var(--font-label);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border-width: 1.5px;
+    cursor: pointer;
+    transition:
+      background-color 0.15s,
+      color 0.15s,
+      border-color 0.15s;
+  }
+</style>
