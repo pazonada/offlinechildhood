@@ -354,22 +354,38 @@
     color: #000;
   }
 
-  /* Panels are drawn with tinted backgrounds on screen. Most printers drop
-     those, so give the shapes an outline that survives. */
+  /* On paper, sections print as plain text: no boxes, no fills, no rounded
+     shapes. The structure comes from the headings. */
   article,
-  section > div > article {
-    border: 1px solid #999 !important;
+  section,
+  li,
+  details,
+  header,
+  [class*="rounded-"] {
+    border: 0 !important;
+    border-radius: 0 !important;
     background: none !important;
+    box-shadow: none !important;
   }
 
-  /* A classroom activity split across a page break is useless to the person
-     holding it. */
-  .print-keep,
+  /* The text spans the printable page. Screen widths and paddings collapse,
+     so nothing narrows the column inside the page margins. */
+  .mx-auto,
+  .article-col,
+  [class*="max-w-"] {
+    max-width: none !important;
+  }
+  [class*="px-"],
+  .article-col,
   article,
+  details > div,
   li {
-    break-inside: avoid;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
+  /* Cards can now run longer than a page, so only headings steer the breaks:
+     forcing whole cards to stay together produced half-empty pages. */
   h1,
   h2,
   h3 {
@@ -377,7 +393,7 @@
   }
 
   @page {
-    margin: 16mm;
+    margin: 0.75in;
   }
 
   .print-break {
