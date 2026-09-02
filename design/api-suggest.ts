@@ -1,5 +1,5 @@
 /**
- * POST /api/suggest — receives a "people we read" suggestion and emails it.
+ * POST /api/suggest: receives a "people we read" suggestion and emails it.
  *
  * Requires:
  *   - @astrojs/vercel adapter, with output: 'server' (or this route left
