@@ -56,9 +56,16 @@ const RULES = [
   },
 ];
 
+// Owner-authored lines that use words the rules ban. Each entry is exact
+// copy approved verbatim; anything else with the banned word still fails.
+const APPROVED = [
+  'Raising kids who love the real world, while empowering them to understand how machines have become a part of it.',
+];
+
 let total = 0;
 for (const f of files) {
-  const text = readFileSync(f, 'utf8');
+  let text = readFileSync(f, 'utf8');
+  for (const a of APPROVED) text = text.split(a).join('');
   const hits = [];
   for (const r of RULES) {
     const matches = [...text.matchAll(r.re)];
