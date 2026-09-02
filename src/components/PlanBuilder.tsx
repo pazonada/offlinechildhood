@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   bandForAge,
   conceptsForChild,
@@ -74,6 +74,16 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
       }),
     [devices, wanted, validChildren],
   );
+
+  useEffect(() => {
+    const openAll = () => {
+      document.querySelectorAll<HTMLDetailsElement>('details.plan-full').forEach((d) => {
+        d.open = true;
+      });
+    };
+    window.addEventListener('beforeprint', openAll);
+    return () => window.removeEventListener('beforeprint', openAll);
+  }, []);
 
   const build = () => {
     setBuilt(true);
@@ -328,12 +338,16 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                                 {s.summary}
                               </p>
                             )}
-                            <a
-                              href={`/decisions/${d.id}`}
-                              className="mt-3.5 inline-block font-semibold text-primary-text underline decoration-panel-blue-line-strong decoration-[1.5px] underline-offset-4 hover:decoration-primary"
-                            >
-                              Read the full answer
-                            </a>
+                            <details className="plan-full mt-4 rounded-2xl border border-line bg-page/60">
+                              <summary className="no-print cursor-pointer list-none px-[18px] py-3 font-semibold text-primary-text">
+                                The full answer, right here
+                                <span aria-hidden="true" className="ml-1.5 text-ink-soft">&#9662;</span>
+                              </summary>
+                              <div
+                                className="prose prose-compact px-[18px] pb-4"
+                                dangerouslySetInnerHTML={{ __html: d.bodyHtml }}
+                              />
+                            </details>
                           </li>
                         );
                       })}
@@ -356,12 +370,20 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                             <span className="font-display font-extrabold">Try this. </span>
                             {b.tryThis}
                           </p>
-                          <a
-                            href={`/conversations/${concept.id}`}
-                            className="mt-3.5 inline-block font-semibold text-primary-text underline decoration-panel-blue-line-strong decoration-[1.5px] underline-offset-4 hover:decoration-primary"
-                          >
-                            Read the whole conversation
-                          </a>
+                          <p className="mt-3 rounded-2xl bg-panel-accent px-[18px] py-4 leading-[1.62]">
+                            <span className="font-display font-extrabold">Listen for. </span>
+                            {b.listenFor}
+                          </p>
+                          <details className="plan-full mt-4 rounded-2xl border border-line bg-page/60">
+                            <summary className="no-print cursor-pointer list-none px-[18px] py-3 font-semibold text-primary-text">
+                              The whole conversation, right here
+                              <span aria-hidden="true" className="ml-1.5 text-ink-soft">&#9662;</span>
+                            </summary>
+                            <div
+                              className="prose prose-compact px-[18px] pb-4"
+                              dangerouslySetInnerHTML={{ __html: concept.bodyHtml }}
+                            />
+                          </details>
                         </li>
                       ))}
                     </ul>

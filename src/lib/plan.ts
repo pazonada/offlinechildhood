@@ -17,12 +17,15 @@ export interface PlanDecision {
   shortAnswer: string;
   appliesToBands: AgeBand[];
   stances: PlanStance[];
+  /** The whole page body as HTML, so the printed plan stands on its own. */
+  bodyHtml: string;
 }
 
 export interface PlanConceptBand {
   band: AgeBand;
   explain: string;
   tryThis: string;
+  listenFor: string;
 }
 
 export interface PlanConcept {
@@ -31,6 +34,8 @@ export interface PlanConcept {
   idea: string;
   strand: string;
   bands: PlanConceptBand[];
+  /** The whole page body as HTML, so the printed plan stands on its own. */
+  bodyHtml: string;
 }
 
 export interface Child {

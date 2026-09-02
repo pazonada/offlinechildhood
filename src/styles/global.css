@@ -208,6 +208,15 @@
   }
 }
 
+@layer components {
+  .prose-compact h2 {
+    font-size: 1.3rem;
+    margin-top: 2em;
+  }
+  .prose-compact h2::before { display: none !important; }
+  .prose-compact { font-size: 1.03rem; }
+}
+
 @layer base {
   /* The filter dropdown uses <details>, so the default disclosure triangle
      has to go in every engine, not just the ones that respect list-style. */
@@ -319,6 +328,11 @@
 
 @media print {
   .no-print { display: none !important; }
+
+  /* The plan's full answers are collapsed on screen and always open on
+     paper. The JS belt (beforeprint opens them) plus this brace. */
+  details.plan-full > summary { display: none !important; }
+  details.plan-full:not([open])::details-content { display: block !important; }
 
   /* The sticky header and the footer are navigation. Neither is any use on
      paper, and the header reprints on every page if it is left in. */

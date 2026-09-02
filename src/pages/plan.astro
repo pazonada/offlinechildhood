@@ -5,7 +5,12 @@ import Container from '../components/Container.astro';
 import PlanBuilder from '../components/PlanBuilder';
 import { Image } from 'astro:assets';
 import blacklight from '../assets/photos/blacklight.jpg';
+import { marked } from 'marked';
 import type { PlanConcept, PlanDecision } from '../lib/plan';
+
+// The bodies are plain markdown, so they compile straight to HTML and travel
+// with the plan. This is what lets the printout stand on its own.
+const toHtml = (body: string | undefined) => marked.parse(body ?? '') as string;
 
 const decisions: PlanDecision[] = (await getCollection('decisions'))
   .sort((a, b) => a.data.order - b.data.order)
@@ -16,6 +21,7 @@ const decisions: PlanDecision[] = (await getCollection('decisions'))
     shortAnswer: d.data.shortAnswer,
     appliesToBands: d.data.appliesToBands,
     stances: d.data.stances,
+    bodyHtml: toHtml(d.body),
   }));
 
 const concepts: PlanConcept[] = (await getCollection('concepts'))
@@ -25,7 +31,13 @@ const concepts: PlanConcept[] = (await getCollection('concepts'))
     title: c.data.title,
     idea: c.data.idea,
     strand: c.data.strand,
-    bands: c.data.bands.map((b) => ({ band: b.band, explain: b.explain, tryThis: b.tryThis })),
+    bands: c.data.bands.map((b) => ({
+      band: b.band,
+      explain: b.explain,
+      tryThis: b.tryThis,
+      listenFor: b.listenFor,
+    })),
+    bodyHtml: toHtml(c.body),
   }));
 ---
 
