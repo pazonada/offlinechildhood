@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Container from '../components/Container.astro';
 import PlanBuilder from '../components/PlanBuilder';
-import Photo from '../components/Photo.astro';
+import { Image } from 'astro:assets';
 import blacklight from '../assets/photos/blacklight.jpg';
 import type { PlanConcept, PlanDecision } from '../lib/plan';
 
@@ -37,25 +37,29 @@ const concepts: PlanConcept[] = (await getCollection('concepts'))
     <Container>
       <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
         <div>
-          <h1 class="text-4xl font-extrabold sm:text-5xl">Your family plan</h1>
+          <h1 class="font-display text-[clamp(38px,4vw,52px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">Your family plan</h1>
           <p class="mt-5 text-lg text-ink-soft">
             Answer four questions and get something you can stick on the fridge: house rules, the
             decisions that apply to each of your kids right now, and the conversations to have with
             them at their age.
           </p>
-          <p class="mt-5 rounded-2xl border-2 border-line bg-surface p-5 text-ink">
-            <span class="font-display font-extrabold">No sign-up, and no data leaves your browser.</span>{' '}
+          {/* A footnote rather than a card: the promise matters more than the box. */}
+          <p class="mt-[18px] max-w-[40em] text-[0.97rem] leading-relaxed text-ink-soft">
+            <span class="font-semibold text-primary-text">No sign-up, and no data leaves your browser.</span>{' '}
             We do not ask for your email to give you the plan, and nothing you type here is sent to
             us or to anyone else. Reload the page and it is gone.
           </p>
         </div>
 
-        <Photo
-          src={blacklight}
-          alt="A darkened play room lit in green and pink, with a child and an adult in silhouette."
-          position="45% 45%"
-          size={320}
-        />
+        <div class="overflow-hidden rounded-[240px_240px_24px_24px] bg-surface-3">
+          <Image
+            src={blacklight}
+            alt="A darkened play room lit in green and pink, with a child and an adult in silhouette."
+            widths={[520, 1040]}
+            sizes="(min-width: 768px) 480px, 92vw"
+            class="h-[380px] w-full object-cover object-[45%_45%]"
+          />
+        </div>
       </div>
     </Container>
   </header>

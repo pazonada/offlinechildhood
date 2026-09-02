@@ -89,9 +89,9 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
     <div>
       {/* ---------------- questions ---------------- */}
       <div className="no-print grid gap-8">
-        <fieldset className="rounded-3xl border-2 border-line bg-surface-2 p-6 sm:p-7">
-          <legend className="float-left w-full font-display text-xl font-extrabold text-ink">Who is this for?</legend>
-          <p className="clear-both pt-2 text-ink-soft">
+        <section aria-labelledby="q-kids" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
+          <h2 id="q-kids" className="font-display text-[23px] font-extrabold text-navy">Who is this for?</h2>
+          <p className="mt-1.5 text-[1.03rem] text-ink-soft">
             Ages only. Names are optional and never leave your browser.
           </p>
 
@@ -109,7 +109,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                         prev.map((x) => (x.key === c.key ? { ...x, name: e.target.value } : x)),
                       )
                     }
-                    className="mt-1 w-full rounded-xl border-2 border-line bg-surface px-3.5 py-2.5"
+                    className="mt-1.5 w-full rounded-[14px] border-2 border-panel-blue-line bg-panel-blue px-3.5 py-[11px] text-ink"
                   />
                 </label>
                 <label className="w-28">
@@ -128,14 +128,14 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                         ),
                       )
                     }
-                    className="mt-1 w-full rounded-xl border-2 border-line bg-surface px-3.5 py-2.5"
+                    className="mt-1.5 w-full rounded-[14px] border-2 border-panel-blue-line bg-panel-blue px-3.5 py-[11px] text-ink"
                   />
                 </label>
                 {children.length > 1 && (
                   <button
                     type="button"
                     onClick={() => setChildren((prev) => prev.filter((x) => x.key !== c.key))}
-                    className="rounded-xl border-2 border-line px-3.5 py-2.5 font-medium text-ink-soft hover:border-coral hover:text-coral"
+                    className="rounded-[14px] border-2 border-line px-4 py-[11px] font-medium text-ink-soft transition hover:border-coral hover:text-coral"
                   >
                     Remove<span className="sr-only"> {label(c, i)}</span>
                   </button>
@@ -143,7 +143,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
 
                 <p
                   className={`flex w-full items-center gap-1.5 text-sm ${
-                    c.age === null ? 'text-ink-soft' : 'text-secondary'
+                    c.age === null ? 'text-ink-soft' : 'text-green-deep'
                   }`}
                 >
                   {c.age === null ? (
@@ -166,15 +166,15 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
           <button
             type="button"
             onClick={() => setChildren((prev) => [...prev, newChild()])}
-            className="mt-4 rounded-full border-2 border-line px-4 py-2 font-display font-bold hover:border-ink"
+            className="mt-5 rounded-full border-2 border-line px-5 py-2.5 font-label text-[14.5px] font-bold text-navy transition hover:border-navy"
           >
             Add another child
           </button>
-        </fieldset>
+        </section>
 
-        <fieldset className="rounded-3xl border-2 border-line bg-surface-2 p-6 sm:p-7">
-          <legend className="float-left w-full font-display text-xl font-extrabold text-ink">What is in the house now?</legend>
-          <p className="clear-both pt-2 text-ink-soft">Be honest. The plan is more useful if it starts where you are.</p>
+        <section aria-labelledby="q-devices" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
+          <h2 id="q-devices" className="font-display text-[23px] font-extrabold text-navy">What is in the house now?</h2>
+          <p className="mt-1.5 text-[1.03rem] text-ink-soft">Be honest. The plan is more useful if it starts where you are.</p>
           <div className="mt-5 flex flex-wrap gap-2.5">
             {DEVICE_OPTIONS.map((o) => {
               const on = devices.includes(o.id);
@@ -185,7 +185,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                   aria-pressed={on}
                   onClick={() => toggle(devices, setDevices, o.id)}
                   className={`rounded-full border-2 px-4 py-2 font-medium transition ${
-                    on ? 'border-primary bg-primary text-on-primary' : 'border-line hover:border-ink'
+                    on ? 'border-primary bg-primary font-semibold text-on-navy-bright' : 'border-line text-ink hover:border-navy'
                   }`}
                 >
                   {o.label}
@@ -193,11 +193,11 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
               );
             })}
           </div>
-        </fieldset>
+        </section>
 
-        <fieldset className="rounded-3xl border-2 border-line bg-surface-2 p-6 sm:p-7">
-          <legend className="float-left w-full font-display text-xl font-extrabold text-ink">What worries you most?</legend>
-          <p className="clear-both pt-2 text-ink-soft">Pick as many as apply. This orders your plan.</p>
+        <section aria-labelledby="q-worries" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
+          <h2 id="q-worries" className="font-display text-[23px] font-extrabold text-navy">What worries you most?</h2>
+          <p className="mt-1.5 text-[1.03rem] text-ink-soft">Pick as many as apply. This orders your plan.</p>
           <div className="mt-5 flex flex-wrap gap-2.5">
             {WORRY_OPTIONS.map((o) => {
               const on = worries.includes(o.id);
@@ -208,7 +208,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                   aria-pressed={on}
                   onClick={() => toggle(worries, setWorries, o.id)}
                   className={`rounded-full border-2 px-4 py-2 font-medium transition ${
-                    on ? 'border-secondary bg-secondary text-on-secondary' : 'border-line hover:border-ink'
+                    on ? 'border-primary bg-primary font-semibold text-on-navy-bright' : 'border-line text-ink hover:border-navy'
                   }`}
                 >
                   {o.label}
@@ -216,11 +216,11 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
               );
             })}
           </div>
-        </fieldset>
+        </section>
 
-        <fieldset className="rounded-3xl border-2 border-line bg-surface-2 p-6 sm:p-7">
-          <legend className="float-left w-full font-display text-xl font-extrabold text-ink">How far do you want to go?</legend>
-          <p className="clear-both pt-2 text-ink-soft">
+        <section aria-labelledby="q-stance" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
+          <h2 id="q-stance" className="font-display text-[23px] font-extrabold text-navy">How far do you want to go?</h2>
+          <p className="mt-1.5 text-[1.03rem] text-ink-soft">
             There is no wrong answer. A rule you keep beats a rule you announce.
           </p>
           <div className="mt-5 grid gap-3 md:grid-cols-3">
@@ -232,28 +232,26 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                   type="button"
                   aria-pressed={on}
                   onClick={() => setWanted(o.id)}
-                  className={`rounded-2xl border-2 p-5 text-left transition ${
-                    on ? 'border-primary bg-primary/10' : 'border-line hover:border-ink'
+                  className={`rounded-[20px] border-2 p-5 text-left transition ${
+                    on ? 'border-primary bg-panel-blue' : 'border-line hover:border-navy'
                   }`}
                 >
-                  <span className="block font-display text-lg font-extrabold">{o.label}</span>
+                  <span className="block font-display text-[19px] font-extrabold text-navy">{o.label}</span>
                   <span className="mt-1.5 block text-[0.95rem] text-ink-soft">{o.blurb}</span>
                 </button>
               );
             })}
           </div>
-        </fieldset>
+        </section>
 
         <div>
           <button
             type="button"
             onClick={build}
             disabled={validChildren.length === 0}
-            className="rounded-full bg-primary px-8 py-4 font-display text-lg font-bold text-on-primary transition hover:bg-primary-strong disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-full bg-primary px-[34px] py-[17px] font-label text-lg font-bold text-on-navy-bright transition hover:bg-primary-strong disabled:cursor-not-allowed disabled:opacity-40"
           >
             {built ? 'Update my plan' : 'Build my plan'}
-            {validChildren.length > 0 &&
-              ` for ${validChildren.length} ${validChildren.length === 1 ? 'child' : 'children'}`}
           </button>
           {validChildren.length === 0 && (
             <p className="mt-3 text-ink-soft">Add at least one age to build a plan.</p>
@@ -264,29 +262,37 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
       {/* ---------------- the plan ---------------- */}
       {built && validChildren.length > 0 && (
         <div ref={planRef} tabIndex={-1} className="mt-16 scroll-mt-24">
-          <div className="no-print mb-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border-2 border-accent bg-accent/12 p-5">
-            <p className="font-display font-extrabold">Your plan is ready. Print it and put it somewhere visible.</p>
+          <div className="no-print mb-[34px] flex flex-wrap items-center justify-between gap-4 rounded-[20px] border-2 border-accent bg-panel-accent px-6 py-5">
+            <p className="font-display text-lg font-extrabold text-navy">Your plan is ready. Print it and put it somewhere visible.</p>
             <button
               type="button"
               onClick={() => window.print()}
-              className="rounded-full bg-ink px-5 py-2.5 font-display font-bold text-surface"
+              className="rounded-full bg-navy px-[22px] py-3 font-label text-[15px] font-bold text-page"
             >
               Print this
             </button>
           </div>
 
-          <h2 className="font-display text-3xl font-extrabold">Your family plan</h2>
+          <h2 className="font-display text-[38px] font-extrabold leading-[1.08] text-navy">Your family plan</h2>
 
           <section className="mt-10">
-            <h3 className="font-display text-2xl font-extrabold">House rules</h3>
+            <h3 className="font-display text-[28px] font-extrabold text-navy">House rules</h3>
             <p className="mt-2 text-ink-soft">
               These apply to everybody and do more work than any single device decision.
             </p>
-            <ol className="mt-5 grid gap-3">
+            <ol className="mt-5">
               {rules.map((r, i) => (
-                <li key={i} className="rounded-2xl border-2 border-line bg-surface-2 p-5">
-                  <p className="font-display text-lg font-extrabold">{r.rule}</p>
-                  <p className="mt-2 text-ink-soft">{r.why}</p>
+                <li key={i} className="grid grid-cols-[38px_minmax(0,1fr)] gap-4 border-t border-line py-5">
+                  <span
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-panel-accent font-label text-[15px] font-bold text-navy"
+                    aria-hidden="true"
+                  >
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="mb-2 font-display text-[19px] font-extrabold leading-[1.34] text-navy">{r.rule}</p>
+                    <p className="text-[1.03rem] leading-[1.64] text-ink-soft">{r.why}</p>
+                  </div>
                 </li>
               ))}
             </ol>
@@ -299,32 +305,32 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
             const cs = conceptsForChild(age, concepts);
             return (
               <section key={c.key} className="mt-14 print-break">
-                <h3 className="font-display text-2xl font-extrabold">
+                <h3 className="font-display text-[28px] font-extrabold text-navy">
                   {label(c, i)}, age {age}
                 </h3>
                 <p className="mt-1 text-ink-soft">Explanations below are written for ages {band}.</p>
 
                 {ds.length > 0 && (
                   <div className="mt-6">
-                    <h4 className="font-display text-sm font-bold uppercase tracking-[0.14em] text-primary-text">
+                    <h4 className="font-label text-xs font-bold uppercase tracking-[0.18em] text-primary-text">
                       Decisions that apply now
                     </h4>
                     <ul className="mt-3 grid gap-3">
                       {ds.map((d) => {
                         const s = stanceFor(d, wanted);
                         return (
-                          <li key={d.id} className="rounded-2xl border-2 border-line bg-surface-2 p-5">
-                            <p className="font-display text-lg font-extrabold">{d.question}</p>
-                            <p className="mt-2">{d.shortAnswer}</p>
+                          <li key={d.id} className="rounded-[22px] border-[1.5px] border-line bg-surface px-[26px] py-6">
+                            <p className="font-display text-xl font-extrabold leading-[1.28] text-navy">{d.question}</p>
+                            <p className="mt-2.5 leading-[1.64]">{d.shortAnswer}</p>
                             {s && (
-                              <p className="mt-3 rounded-xl bg-surface p-4">
+                              <p className="mt-4 rounded-2xl bg-panel-blue px-[18px] py-4 leading-relaxed">
                                 <span className="font-display font-extrabold">{s.label}. </span>
                                 {s.summary}
                               </p>
                             )}
                             <a
                               href={`/decisions/${d.id}`}
-                              className="mt-3 inline-block font-semibold text-primary-text underline underline-offset-4"
+                              className="mt-3.5 inline-block font-semibold text-primary-text underline decoration-panel-blue-line-strong decoration-[1.5px] underline-offset-4 hover:decoration-primary"
                             >
                               Read the full answer
                             </a>
@@ -337,24 +343,24 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
 
                 {cs.length > 0 && (
                   <div className="mt-8">
-                    <h4 className="font-display text-sm font-bold uppercase tracking-[0.14em] text-secondary-deep">
+                    <h4 className="font-label text-xs font-bold uppercase tracking-[0.18em] text-accent-text">
                       Conversations to have
                     </h4>
                     <ul className="mt-3 grid gap-3">
                       {cs.map(({ concept, band: b }) => (
-                        <li key={concept.id} className="rounded-2xl border-2 border-line bg-surface-2 p-5">
-                          <p className="font-display text-lg font-extrabold">{concept.title}</p>
-                          <p className="mt-1 text-ink-soft">{concept.idea}</p>
-                          <p className="mt-3 rounded-xl bg-surface p-4">{b.explain}</p>
-                          <p className="mt-2 rounded-xl bg-surface p-4">
+                        <li key={concept.id} className="rounded-[22px] border-[1.5px] border-line bg-surface px-[26px] py-6">
+                          <p className="font-display text-xl font-extrabold leading-[1.28] text-navy">{concept.title}</p>
+                          <p className="mt-1.5 text-ink-soft">{concept.idea}</p>
+                          <p className="mt-4 rounded-2xl bg-panel-accent px-[18px] py-4 leading-[1.62]">{b.explain}</p>
+                          <p className="mt-3 rounded-2xl bg-panel-accent px-[18px] py-4 leading-[1.62]">
                             <span className="font-display font-extrabold">Try this. </span>
                             {b.tryThis}
                           </p>
                           <a
                             href={`/conversations/${concept.id}`}
-                            className="mt-3 inline-block font-semibold text-primary-text underline underline-offset-4"
+                            className="mt-3.5 inline-block font-semibold text-primary-text underline decoration-panel-blue-line-strong decoration-[1.5px] underline-offset-4 hover:decoration-primary"
                           >
-                            Read the whole thing
+                            Read the whole conversation
                           </a>
                         </li>
                       ))}
@@ -363,7 +369,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                 )}
 
                 {ds.length === 0 && cs.length === 0 && (
-                  <p className="mt-4 rounded-2xl border-2 border-line bg-surface-2 p-5 text-ink-soft">
+                  <p className="mt-4 rounded-[22px] border-[1.5px] border-line bg-surface px-[26px] py-6 text-ink-soft">
                     Nothing on the site is written for this age yet. The house rules above still apply.
                   </p>
                 )}
