@@ -22,13 +22,10 @@ const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
   <header class="border-b border-line bg-surface-2 py-16 sm:py-20">
     <Container>
       <div class="grid items-start gap-x-14 gap-y-5 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        <h1 class="text-4xl font-extrabold sm:text-5xl">What to buy</h1>
-        <p class="text-lg text-ink-soft md:mt-2">
-          Every entry says what it is bad at, because a recommendation with no stated downside is an
-          advert. Nothing here pays us, and the honest answer is usually that you do not need to buy
-          anything. Work out what you want to do in{' '}
-          <a href="/decisions" class="font-semibold text-primary-text underline underline-offset-4">Decisions</a>{' '}
-          first.
+        <h1 class="font-display text-[clamp(36px,4vw,50px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">What to buy</h1>
+        <p class="text-[1.09rem] leading-[1.66] text-ink-soft md:mt-2">
+          Explore products and services that help kids stay a little less digitally entrenched and
+          enable parents to manage device use and find fun activities.
         </p>
       </div>
     
@@ -40,7 +37,7 @@ const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
         JavaScript, and every card stays visible if the script never runs. */}
     <details class="no-print relative w-full max-w-sm" id="filter">
       <summary
-        class="flex cursor-pointer list-none items-center justify-between gap-3 rounded-xl border border-line bg-surface px-4 py-2.5 text-ink transition hover:border-ink/30"
+        class="flex cursor-pointer list-none items-center justify-between gap-3 rounded-[14px] border-[1.5px] border-line-dark/60 bg-surface px-4 py-3 text-ink transition hover:border-line-dark"
         aria-label="Filter by category"
       >
         <span id="filter-label">All</span>
@@ -49,7 +46,7 @@ const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
         </svg>
       </summary>
 
-      <div class="absolute left-0 top-full z-30 mt-2 w-full rounded-xl border border-line bg-surface p-2 shadow-lg shadow-ink/5">
+      <div class="absolute left-0 top-full z-30 mt-2 w-full rounded-[14px] border-[1.5px] border-line-dark/60 bg-surface p-2 shadow-lg shadow-navy/10">
         <ul class="grid gap-0.5">
           {tags.map(([tag, count]) => (
             <li>
@@ -79,15 +76,14 @@ const tags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
       { title: 'Services', blurb: 'Things you subscribe to or book.', items: services },
     ].map((group) => (
       <section class="mt-14" data-group={group.title}>
-        <div class="flex items-baseline gap-3">
-          <h2 class="font-display text-2xl font-extrabold">{group.title}</h2>
+        <div class="flex items-baseline gap-3.5">
+          <h2 class="font-display text-[27px] font-extrabold text-navy">{group.title}</h2>
           <span class="text-ink-soft">{group.blurb}</span>
           <span class="h-0.5 flex-1 rounded-full bg-line" aria-hidden="true"></span>
         </div>
         <div class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {group.items.map((p) => <PickCard {...p.data} />)}
         </div>
-        <p class="mt-6 hidden text-ink-soft" data-empty>Nothing in this category.</p>
       </section>
     ))}
   </Container>
