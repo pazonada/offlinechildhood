@@ -1,12 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Container from '../components/Container.astro';
 import Button from '../components/Button.astro';
 import { SOURCES } from '../lib/sources';
 import Scribble from '../components/Scribble.astro';
-import Photo from '../components/Photo.astro';
 import stamping from '../assets/photos/stamping.jpg';
+import forestPath from '../assets/photos/jens-lelie-u0vgcIOQG08-unsplash.jpg';
+import kidsTalking from '../assets/photos/vitaly-gariev-sbHo9rRSIZc-unsplash.jpg';
+import robot from '../assets/photos/robot.jpg';
 
 const decisions = (await getCollection('decisions')).sort((a, b) => a.data.order - b.data.order);
 const concepts = (await getCollection('concepts')).sort((a, b) => a.data.order - b.data.order);
@@ -16,16 +19,19 @@ const evidence = [
     stat: 'Paper beats screen',
     body: 'Across 39 studies of about 1,800 young children, comprehension was lower from a digital book than from the same book on paper.',
     source: SOURCES.readingPaperMeta,
+    rule: 'border-accent',
   },
   {
     stat: 'It is the portable ones',
     body: 'When researchers asked which screens actually cost children sleep, the answer was the devices that follow a kid into the bedroom.',
     source: SOURCES.sleepPortableDevices,
+    rule: 'border-primary',
   },
   {
     stat: 'Play compounds',
     body: 'Unstructured free play in the early years predicted stronger self-regulation years later, and that capacity tracks with outcomes across a lifetime.',
     source: SOURCES.freePlaySelfRegulation,
+    rule: 'border-leaf',
   },
 ];
 ---
@@ -35,133 +41,176 @@ const evidence = [
   bareTitle={true}
   description="A growing movement toward more analog ways of living, plus the media literacy adults and kids need to understand how these technologies work, who owns the platforms, and how to navigate them safely."
 >
-  <section class="relative overflow-hidden border-b border-line bg-surface-2">
-    <div class="pointer-events-none absolute -right-24 -top-28 h-96 w-96 rounded-full bg-accent/30 blur-3xl" aria-hidden="true"></div>
-    <div class="pointer-events-none absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-primary/15 blur-3xl" aria-hidden="true"></div>
+  {/* Full-bleed blue hero. The headline never wraps: it shrinks via clamp and
+      centres itself with width:max-content, which is what keeps it true-centred
+      at every viewport. */}
+  <section class="relative overflow-hidden bg-primary">
+    <svg
+      viewBox="0 0 1200 200"
+      preserveAspectRatio="none"
+      class="absolute inset-x-0 bottom-0 h-[200px] w-full"
+      aria-hidden="true"
+    >
+      <path
+        d="M0 200c98-52 190-24 292-78 86-46 174-6 256-48 74-36 168-20 240 18 68 36 174 48 230 18 48-28 128-32 182-12v102H0z"
+        fill="var(--primary-strong)"
+      />
+    </svg>
 
-    <Container class="relative py-20 sm:py-28">
-      <div class="max-w-3xl">
-        <p class="font-display text-sm font-bold uppercase tracking-[0.16em] text-primary-text">
+    <Container class="relative pb-[76px] pt-[52px]">
+      <div class="flex flex-col items-center text-center">
+        <svg viewBox="0 0 260 260" class="mb-5 w-[78px]" aria-hidden="true">
+          <circle cx="130" cy="130" r="62" fill="var(--accent)" />
+          <g stroke="var(--page)" stroke-width="13" stroke-linecap="round">
+            <path d="M130 44V14M130 216v30M216 130h30M14 130h30M191 69l21-21M48 212l21-21M191 191l21 21M48 48l21 21" />
+          </g>
+        </svg>
+
+        <p class="mb-3.5 font-label text-xs font-bold uppercase tracking-[0.22em] text-accent-light">
           For parents and teachers
         </p>
-        <h1 class="mt-4 text-5xl font-extrabold leading-[1.05] sm:text-6xl lg:text-7xl">
+        <h1 class="mx-auto w-max max-w-full whitespace-nowrap font-display text-[clamp(26px,3.5vw,56px)] font-extrabold leading-[1.1] tracking-[-0.015em] text-on-navy-bright">
           Childhood in the{' '}
-          <span class="relative whitespace-nowrap">
-            <span class="relative z-10">real world</span>
-            <span class="absolute inset-x-0 bottom-1.5 z-0 h-4 rounded-sm bg-accent sm:h-5" aria-hidden="true"></span>
+          <span class="relative inline-block">
+            real world
+            <Scribble type="underline" class="absolute -bottom-1.5 -left-1 h-3.5 w-[calc(100%+12px)]" color="var(--accent)" />
           </span>
         </h1>
-        <p class="mt-7 max-w-2xl text-lg leading-relaxed text-ink sm:text-xl">
+        <p class="mx-auto mt-[22px] max-w-[36em] text-lg leading-relaxed text-on-primary-soft">
           Our culture is saturated with screens, but there's a growing movement toward more analog
           ways of living: more play, more paper, more outside time. And because technology is
           unavoidable for this generation, media literacy is critical for adults and kids to
           understand how these technologies actually work, who owns the platforms, and how to
           navigate them safely and responsibly.
         </p>
-        <div class="mt-9 flex flex-wrap gap-3">
-          <Button href="/plan" variant="primary" size="lg">Build your family plan</Button>
-          <Button href="/decisions" variant="ghost" size="lg">Start with the decisions</Button>
+        <div class="mt-7 flex flex-wrap items-center justify-center gap-3.5">
+          <Button href="/plan" variant="accent" size="lg">Build your family plan</Button>
+          <Button href="/decisions" variant="outline-light" size="lg">Start with the decisions</Button>
         </div>
-        <p class="mt-5 text-ink-soft">Free, no sign-up, and yours to print.</p>
+        <p class="mt-[18px] text-[15px] text-on-primary-faint">Free, no sign-up, and yours to print.</p>
       </div>
     </Container>
   </section>
 
-  <Container class="py-20">
-    <div class="grid gap-6 lg:grid-cols-2">
-      <a href="/decisions" class="group rounded-3xl border-2 border-line bg-surface p-8 transition hover:border-primary hover:bg-surface-2">
-        <span class="inline-grid h-12 w-12 place-items-center rounded-2xl bg-primary text-on-primary" aria-hidden="true">
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3v6M12 21v-6" /><path d="m7 9-4 3 4 3" /><path d="m17 9 4 3-4 3" /><path d="M3 12h18" />
-          </svg>
-        </span>
-        <h2 class="mt-5 font-display text-3xl font-extrabold">Decisions</h2>
-        <p class="mt-3 text-lg text-ink-soft">
+  {/* The two pillars, each in an arched card. minmax(0,1fr) keeps the images
+      from forcing their column wide and crushing the other. */}
+  <Container class="pt-[74px]">
+    <div class="grid gap-[34px] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+      <a
+        href="/decisions"
+        class="group block rounded-[210px_32px_32px_32px] bg-surface-3 p-6 pb-10 transition hover:bg-card-cream-hover"
+      >
+        <div class="mb-7 overflow-hidden rounded-[190px_20px_20px_20px]">
+          <Image
+            src={forestPath}
+            alt=""
+            widths={[560, 1120]}
+            sizes="(min-width: 768px) 540px, 92vw"
+            class="h-[250px] w-full object-cover object-[50%_62%]"
+          />
+        </div>
+        <h2 class="mb-3 px-[22px] font-display text-[32px] font-extrabold text-navy">Decisions</h2>
+        <p class="mb-5 px-[22px] text-[1.03rem] leading-relaxed text-ink-soft">
           The calls that shape a childhood: the first phone, the tablet, the bedroom at night. Each
           one gets a straight answer and three ways to act on it, so you can start where you are.
         </p>
-        <p class="mt-5 font-display font-bold text-primary-text">
+        <span class="mx-[22px] inline-block font-label text-[13px] font-bold uppercase tracking-[0.06em] text-primary-text">
           {decisions.length} {decisions.length === 1 ? 'decision' : 'decisions'}
           <span aria-hidden="true" class="inline-block transition group-hover:translate-x-1">&nbsp;&rarr;</span>
-        </p>
+        </span>
       </a>
 
-      <a href="/conversations" class="group rounded-3xl border-2 border-line bg-surface p-8 transition hover:border-secondary hover:bg-surface-2">
-        <span class="inline-grid h-12 w-12 place-items-center rounded-2xl bg-secondary text-on-secondary" aria-hidden="true">
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12a8 8 0 0 1-8 8H7l-4 3V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8Z" /><path d="M9 11h6M9 15h3" />
-          </svg>
-        </span>
-        <h2 class="mt-5 font-display text-3xl font-extrabold">Conversations</h2>
-        <p class="mt-3 text-lg text-ink-soft">
+      <a
+        href="/conversations"
+        class="group block rounded-[32px_210px_32px_32px] bg-card-blue p-6 pb-10 transition hover:bg-card-blue-hover"
+      >
+        <div class="mb-7 overflow-hidden rounded-[20px_190px_20px_20px]">
+          <Image
+            src={kidsTalking}
+            alt=""
+            widths={[560, 1120]}
+            sizes="(min-width: 768px) 540px, 92vw"
+            class="h-[250px] w-full object-cover object-[42%_40%]"
+          />
+        </div>
+        <h2 class="mb-3 px-[22px] font-display text-[32px] font-extrabold text-navy">Conversations</h2>
+        <p class="mb-5 px-[22px] text-[1.03rem] leading-relaxed text-ink-soft">
           What an algorithm is. Where AI got its material. Who pays for the feed. Every idea written
           four times over, for ages 4 to 6, 7 to 9, 10 to 12, and 13 and up.
         </p>
-        <p class="mt-5 font-display font-bold text-secondary-deep">
+        <span class="mx-[22px] inline-block font-label text-[13px] font-bold uppercase tracking-[0.06em] text-primary-text">
           {concepts.length} {concepts.length === 1 ? 'conversation' : 'conversations'}
           <span aria-hidden="true" class="inline-block transition group-hover:translate-x-1">&nbsp;&rarr;</span>
-        </p>
+        </span>
       </a>
     </div>
   </Container>
 
-  <section class="border-y border-line bg-surface-2 py-20">
-    <Container>
-      {/* Heading and standfirst sit side by side so the row is actually used.
-          A single column pinned left would leave a third of the width empty,
-          and stretching the paragraph across the full width would push the
-          line length past comfortable reading. */}
-      <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-        <div>
-          <h2 class="relative inline-block font-display text-3xl font-extrabold text-balance sm:text-4xl">
-            We argue from what a childhood gains
-            <Scribble type="underline-double" class="absolute -bottom-4 left-0 h-3 w-full" />
-          </h2>
-          <p class="mt-9 text-lg text-ink-soft">
+  {/* The evidence section: standfirst beside the arched photograph, then the
+      three findings on coloured rules rather than cards. */}
+  <Container class="pt-[84px]">
+    <div class="grid items-start gap-x-[60px] gap-y-10 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+      <div>
+        <h2 class="mb-[22px] font-display text-[clamp(34px,4vw,50px)] font-extrabold leading-[1.08] tracking-[-0.015em] text-navy">
+          We argue from what a childhood gains
+        </h2>
+        <p class="max-w-[32em] text-[1.1rem] leading-[1.68] text-ink-soft">
           Whether phones are behind the rise in teenage anxiety is still disputed among
-          researchers, and we will not pretend otherwise. We do not need that argument. The case for
-          analog stands on firmer ground, starting with arithmetic: an hour on a screen is an
-            hour not spent on something else.
-          </p>
-        </div>
-
-        <Photo
-          src={stamping}
-          alt="A child seen from above, pressing halved apples and onions into trays of blue and yellow paint."
-          position="50% 42%"
-          size={320}
-        />
+          researchers, and we will not pretend otherwise. We do not need that argument. The case
+          for analog stands on firmer ground, starting with arithmetic: an hour on a screen is an
+          hour not spent on something else.
+        </p>
       </div>
 
+      <div class="overflow-hidden rounded-[260px_260px_24px_24px] bg-surface-3">
+        <Image
+          src={stamping}
+          alt="A child seen from above, pressing halved apples and onions into trays of blue and yellow paint."
+          widths={[540, 1080]}
+          sizes="(min-width: 768px) 520px, 92vw"
+          class="h-[440px] w-full object-cover object-[50%_40%]"
+        />
+      </div>
+    </div>
 
-      <ul class="mt-12 grid gap-5 md:grid-cols-3">
-        {evidence.map((e) => (
-          <li class="rounded-3xl border border-line bg-surface p-6">
-            <p class="font-display text-xl font-extrabold text-ink">{e.stat}</p>
-            <p class="mt-3 leading-relaxed text-ink-soft">{e.body}</p>
-            <a
-              href={e.source.url}
-              target="_blank"
-              rel="noopener"
-              class="mt-4 inline-block text-sm font-semibold text-primary-text underline underline-offset-4"
-            >
-              {e.source.authors}, {e.source.venue}, {e.source.year}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </Container>
-  </section>
+    <ul class="mt-[62px] grid gap-[30px] md:grid-cols-3">
+      {evidence.map((e) => (
+        <li class:list={['border-t-[3px] pt-6', e.rule]}>
+          <p class="font-display text-2xl font-extrabold text-navy">{e.stat}</p>
+          <p class="mt-3 leading-relaxed text-ink-soft">{e.body}</p>
+          <a
+            href={e.source.url}
+            target="_blank"
+            rel="noopener"
+            class="mt-3.5 inline-block text-[0.9rem] leading-normal text-ink-soft underline underline-offset-4 hover:text-navy"
+          >
+            {e.source.authors}, {e.source.venue}, {e.source.year}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Container>
 
-  <Container class="py-20">
-    <div class="rounded-3xl border-2 border-primary bg-primary/12 p-8 text-center sm:p-14">
-      <h2 class="font-display text-3xl font-extrabold sm:text-4xl">Not sure where to start?</h2>
-      <p class="mx-auto mt-4 max-w-xl text-lg text-ink">
-        Answer a few questions about your kids and get a plan you can stick on the fridge. It takes
-        about three minutes, and we do not ask for your email to give it to you.
-      </p>
-      <div class="mt-8 flex items-center justify-center gap-3">
-        <Scribble type="arrow" class="hidden h-10 w-20 shrink-0 sm:block" color="var(--primary)" />
+  {/* Closing panel: photograph left in its arch, the plan invitation right. */}
+  <Container class="mt-[86px]">
+    <div class="grid items-center gap-11 rounded-[40px] bg-surface-3 p-6 md:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
+      <div class="overflow-hidden rounded-[28px_28px_190px_28px]">
+        <Image
+          src={robot}
+          alt="A child holds a magnifying glass up to the face of a robot built from cardboard boxes, painted purple and pink."
+          widths={[480, 960]}
+          sizes="(min-width: 768px) 460px, 92vw"
+          class="h-[340px] w-full object-cover object-[45%_50%]"
+        />
+      </div>
+      <div class="pb-5 pr-2 pt-5 md:pr-10">
+        <h2 class="mb-4 font-display text-[clamp(26px,3vw,40px)] font-extrabold leading-[1.1] text-navy md:whitespace-nowrap">
+          Not sure where to start?
+        </h2>
+        <p class="mb-[30px] max-w-[32em] text-lg leading-relaxed text-ink-soft">
+          Answer a few questions about your kids and get a plan you can stick on the fridge. It
+          takes about three minutes, and we do not ask for your email to give it to you.
+        </p>
         <Button href="/plan" variant="primary" size="lg">Build your family plan</Button>
       </div>
     </div>

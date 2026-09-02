@@ -34,6 +34,15 @@
   --card-line-cool: #e3e8f2;
   --green-deep: #2e6b3e;
 
+  /* Homepage card grounds and hover states, and the hero's on-blue tones. */
+  --card-blue: #dce7f5;
+  --card-blue-hover: #ceddf2;
+  --card-cream-hover: #eedcb6;
+  --accent-hover: #ffc549;
+  --on-primary-soft: #dde5fb;
+  --on-primary-faint: #d7e1fc;
+  --leaf: #7bae5c;
+
   /* Text tones for the navy footer, brightest to faintest. */
   --on-navy: #e6eaf7;
   --on-navy-soft: #b9c4e4;
@@ -102,6 +111,13 @@
   --color-accent-light: var(--accent-light);
   --color-card-line-cool: var(--card-line-cool);
   --color-green-deep: var(--green-deep);
+  --color-card-blue: var(--card-blue);
+  --color-card-blue-hover: var(--card-blue-hover);
+  --color-card-cream-hover: var(--card-cream-hover);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-primary-soft: var(--on-primary-soft);
+  --color-on-primary-faint: var(--on-primary-faint);
+  --color-leaf: var(--leaf);
   --color-on-navy: var(--on-navy);
   --color-on-navy-soft: var(--on-navy-soft);
   --color-on-navy-faint: var(--on-navy-faint);

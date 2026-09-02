@@ -1,22 +1,24 @@
 ---
 interface Props {
   href: string;
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'accent' | 'outline-light';
   size?: 'md' | 'lg';
   class?: string;
 }
 const { href, variant = 'primary', size = 'md', class: className = '' } = Astro.props;
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full font-display font-bold transition active:translate-y-px';
+  'inline-flex items-center justify-center gap-2 rounded-full font-label font-bold transition active:translate-y-px';
 const variants = {
-  primary: 'bg-primary text-on-primary hover:bg-primary-strong',
+  primary: 'bg-primary text-on-navy-bright hover:bg-primary-strong',
   secondary: 'bg-secondary text-on-secondary hover:bg-secondary-deep',
-  ghost: 'border-2 border-line text-ink hover:border-ink hover:bg-surface-2',
+  ghost: 'border-2 border-line text-ink hover:border-navy hover:bg-surface-2',
+  accent: 'bg-accent text-navy hover:bg-accent-hover',
+  'outline-light': 'border-2 border-on-navy-bright/50 text-on-navy-bright hover:border-on-navy-bright',
 };
 const sizes = {
-  md: 'px-5 py-2.5 text-[0.95rem]',
-  lg: 'px-7 py-3.5 text-lg',
+  md: 'px-6 py-3 text-[15px]',
+  lg: 'px-[30px] py-4 text-[16px]',
 };
 ---
 <a href={href} class:list={[base, variants[variant], sizes[size], className]}>
