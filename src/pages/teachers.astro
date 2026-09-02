@@ -1,11 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Container from '../components/Container.astro';
 import Scribble from '../components/Scribble.astro';
-import Photo from '../components/Photo.astro';
-import BandFilter from '../components/BandFilter.astro';
-import classroom from '../assets/photos/classroom.jpg';
+import classroom from '../assets/photos/quilia-zFSo6bnZJTw-unsplash.jpg';
 
 const concepts = (await getCollection('concepts')).sort((a, b) => a.data.order - b.data.order);
 
@@ -26,64 +25,77 @@ const total = grouped.reduce((n, g) => n + g.items.length, 0);
 
 // Every concept carries all four bands, so choosing one never empties the page.
 const allBands = ['4-6', '7-9', '10-12', '13+'];
-
 ---
 
 <Base
   title="For teachers"
   description={`${total} classroom activities for teaching kids how media and AI actually work. Each one is a single lesson, most need no devices, and every one has a version for ages 4 to 6 through 13 and up.`}
 >
-  <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
+  <header class="border-b border-line bg-surface-2 py-14">
     <Container>
-      {/* Text left, photograph right, the same shape as the other landing pages.
-          A narrow column left most of a wide screen empty. */}
       <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
         <div>
-        <p class="font-display text-sm font-bold uppercase tracking-[0.14em] text-secondary-deep">
-          For teachers
-        </p>
-        <h1 class="mt-3 text-4xl font-extrabold sm:text-5xl">{total} lessons you can run this week</h1>
-        <p class="mt-5 text-lg text-ink-soft">
-          Most schools have told students what they may and may not do with AI. Far fewer have
-          taught them how any of it works. In a 2026 survey of 1,204 children, three quarters said
-          their school had set the rules and only just over half had been taught to use these tools
-          safely. The rules are the easy half.
-        </p>
-        <p class="mt-4 text-lg text-ink-soft">
-          Every activity below is one lesson, and most need no devices at all. Pick the age you
-          teach once, at the top, and the whole page rewrites itself to that age. Then print it.
-          You should not have to open thirteen pages and choose the age on each one.
-        </p>
-        <p class="mt-6 no-print">
-          <button
-            type="button"
-            onclick="window.print()"
-            class="rounded-full bg-primary px-5 py-2.5 font-semibold text-on-primary transition hover:brightness-110"
-          >
-            Print this page
-          </button>
-        </p>
+          <p class="mb-3.5 font-label text-xs font-bold uppercase tracking-[0.22em] text-primary-text">
+            For teachers
+          </p>
+          <h1 class="text-balance font-display text-[clamp(36px,4vw,50px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">
+            {total} lessons you can run this week
+          </h1>
+          <p class="mt-[22px] max-w-[36em] text-[1.09rem] leading-[1.66] text-ink-soft">
+            Most schools have told students what they may and may not do with AI. Far fewer have
+            taught them how any of it works. In a 2026 survey of 1,204 children, three quarters said
+            their school had set the rules and only just over half had been taught to use these tools
+            safely. The rules are the easy half.
+          </p>
+          <p class="mt-4 max-w-[36em] text-[1.09rem] leading-[1.66] text-ink-soft">
+            Every activity below is one lesson, and most need no devices at all. Pick the age you
+            teach once, at the top, and the whole page rewrites itself to that age. Then print it.
+            You should not have to open thirteen pages and choose the age on each one.
+          </p>
+          <p class="mt-[26px] no-print">
+            <button
+              type="button"
+              onclick="window.print()"
+              class="rounded-full bg-primary px-7 py-[15px] font-label text-[16px] font-bold text-on-navy-bright transition hover:bg-primary-strong"
+            >
+              Print this page
+            </button>
+          </p>
         </div>
 
-        <Photo
-          src={classroom}
-          alt="Seen from the back of a classroom, students at desks facing a teacher standing at the whiteboard."
-          position="35% 45%"
-          size={320}
-          class="no-print"
-        />
+        <div class="no-print overflow-hidden rounded-[240px_240px_24px_24px] bg-surface-3">
+          <Image
+            src={classroom}
+            alt="Seen from the back of a classroom, students at desks facing a teacher standing at the whiteboard."
+            widths={[520, 1040]}
+            sizes="(min-width: 768px) 480px, 92vw"
+            class="h-[380px] w-full object-cover object-[35%_45%]"
+          />
+        </div>
       </div>
     </Container>
   </header>
 
-  <Container width="prose" class="pb-14">
-    <BandFilter
-      bands={allBands}
-      label="Which age group are you teaching?"
-      allLabel="Every age"
-    />
+  <div class="mx-auto w-full max-w-[900px] px-6 pt-12 sm:px-10">
+    {/* Active and idle chip looks are two literal class sets swapped by a
+        boolean, the same pattern as the concept pages. */}
+    <div class="no-print rounded-[26px] border-2 border-line bg-surface px-[30px] pb-7 pt-[26px]">
+      <p class="mb-4 font-display text-[21px] font-extrabold text-navy">
+        Which age group are you teaching?
+      </p>
+      <div class="flex flex-wrap gap-2.5" role="group" aria-label="Which age group are you teaching?">
+        <button type="button" data-band="all" aria-pressed="true" class="age-chip border-primary bg-primary font-semibold text-on-navy-bright">
+          Every age
+        </button>
+        {allBands.map((b) => (
+          <button type="button" data-band={b} aria-pressed="false" class="age-chip border-line bg-transparent font-medium text-ink">
+            Ages {b}
+          </button>
+        ))}
+      </div>
+    </div>
 
-    <p class="mt-8 text-ink-soft no-print">
+    <p class="mt-[30px] text-[1.03rem] leading-[1.68] text-ink-soft no-print">
       Each activity below carries the version for the age you picked: how to pitch the idea to a
       room that age, and what it sounds like when it has landed. Say it in your own words. The point
       of the age is the altitude, meaning how much of the machinery a class that age can hold.
@@ -91,62 +103,66 @@ const allBands = ['4-6', '7-9', '10-12', '13+'];
 
     <div class="mt-14">
     {grouped.map((group) => (
-      <section class="mb-20">
-        <h2 class="relative inline-block font-display text-sm font-bold uppercase tracking-[0.14em] text-secondary-deep">
+      <section class="mb-[76px]">
+        <h2 class="relative mb-10 inline-block font-label text-[13px] font-bold uppercase tracking-[0.16em] text-primary-text">
           {group.strand}
-          <Scribble type="underline" class="absolute -bottom-2 left-0 h-2 w-full" />
+          <Scribble type="underline" class="absolute -bottom-2 left-0 h-2 w-full" color="var(--accent)" />
         </h2>
 
-        <div class="mt-10 grid gap-8">
+        <div class="flex flex-col gap-[30px]">
           {group.items.map((c) => (
-            <article class="print-keep rounded-3xl border-2 border-line bg-surface p-7 sm:p-9">
-              <h3 class="font-display text-xl font-extrabold">
-                <a href={`/conversations/${c.id}`} class="hover:text-primary">{c.data.title}</a>
+            <article class="print-keep rounded-[28px] border-2 border-line bg-surface px-[34px] pb-[34px] pt-8">
+              <h3 class="mb-4">
+                <a href={`/conversations/${c.id}`} class="text-balance font-display text-[25px] font-extrabold leading-[1.2] text-navy transition hover:text-primary-text">
+                  {c.data.title}
+                </a>
               </h3>
-              <p class="mt-4 border-l-4 border-secondary pl-5 text-ink-soft">{c.data.idea}</p>
+              <p class="mb-7 border-l-4 border-accent pl-5 text-[1.03rem] leading-[1.62] text-ink-soft">{c.data.idea}</p>
+
               {c.data.classSteps.length > 0 ? (
-                <div class="mt-8">
-                  <p class="font-display text-sm font-bold uppercase tracking-[0.12em] text-secondary-deep">
+                <div>
+                  <p class="mb-[18px] font-label text-xs font-bold uppercase tracking-[0.16em] text-primary-text">
                     Run it like this
                   </p>
-                  <ol class="mt-5 grid gap-4">
+                  <ol class="flex flex-col gap-3.5">
                     {c.data.classSteps.map((step, i) => (
-                      <li class="flex gap-3 leading-relaxed">
+                      <li class="grid grid-cols-[26px_minmax(0,1fr)] items-start gap-3.5">
                         <span
-                          class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-surface-3 font-display text-sm font-bold"
+                          class="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-surface-3 font-label text-[13.5px] font-bold text-navy"
                           aria-hidden="true"
                         >
                           {i + 1}
                         </span>
-                        <span>{step}</span>
+                        <span class="text-[1.03rem] leading-[1.62] text-ink">{step}</span>
                       </li>
                     ))}
                   </ol>
                 </div>
               ) : (
-                <p class="mt-6 leading-relaxed">{c.data.classroom}</p>
+                <p class="leading-relaxed text-ink">{c.data.classroom}</p>
               )}
 
-              {c.data.bands.map((b) => {
-                const landing = b.listenForClass;
-                return (
-                  <section
-                    data-band-panel={b.band}
-                    class="mt-8 rounded-2xl border border-line bg-surface-2 p-6 sm:p-7"
-                  >
-                    <p class="font-display text-sm font-bold uppercase tracking-[0.12em] text-primary-text">
-                      Ages {b.band}
-                    </p>
-                    <p class="mt-3 leading-relaxed">{b.inClass ?? b.explain}</p>
-                    {landing && (
-                      <p class="mt-5 border-t-2 border-primary/70 pt-4 text-[0.97rem]">
-                        <span class="font-semibold text-primary-text">You are listening for:</span> {landing}
+              <div class="mt-[30px] flex flex-col gap-4">
+                {c.data.bands.map((b) => {
+                  const landing = b.listenForClass;
+                  return (
+                    <section
+                      data-band-panel={b.band}
+                      class="rounded-[22px] border-[1.5px] border-panel-blue-line-strong bg-surface px-[26px] py-6"
+                    >
+                      <p class="mb-3 font-label text-xs font-bold uppercase tracking-[0.16em] text-navy">
+                        Ages {b.band}
                       </p>
-                    )}
-                  </section>
-                );
-              })}
-
+                      <p class="text-[1.03rem] leading-[1.66] text-ink">{b.inClass ?? b.explain}</p>
+                      {landing && (
+                        <p class="mt-[18px] border-t-2 border-panel-blue-line-strong/70 pt-4 text-[1rem] leading-[1.62] text-ink">
+                          <span class="font-semibold text-primary-strong">You are listening for:</span> {landing}
+                        </p>
+                      )}
+                    </section>
+                  );
+                })}
+              </div>
             </article>
           ))}
         </div>
@@ -154,16 +170,54 @@ const allBands = ['4-6', '7-9', '10-12', '13+'];
     ))}
     </div>
 
-    <section class="mt-6 rounded-3xl border-2 border-primary/35 bg-primary/8 p-6 sm:p-7 no-print">
-      <h2 class="font-display text-xl font-extrabold">Using these with families</h2>
-      <p class="mt-3 leading-relaxed">
+    <section class="mb-2 rounded-[28px] border-2 border-panel-blue-line bg-panel-blue px-[34px] pb-8 pt-[30px] no-print">
+      <h2 class="mb-3 font-display text-2xl font-extrabold text-navy">Using these with families</h2>
+      <p class="text-[1.03rem] leading-[1.7] text-ink">
         The same ideas are written for parents, one age at a time, under{' '}
-        <a href="/conversations" class="font-semibold text-primary hover:underline">conversations</a>.
+        <a href="/conversations" class="font-semibold text-primary-text underline underline-offset-4 hover:text-navy">conversations</a>.
         Sending that page home is worth more than it looks. A lesson lands harder when somebody at
         the kitchen table asks about it the same evening, and most of these children are having the
         conversation nowhere else: in the same survey, more than four in ten said no parent had ever
         talked to them about using AI safely.
       </p>
     </section>
-  </Container>
+  </div>
 </Base>
+
+<script>
+  const ACTIVE = ['bg-primary', 'text-on-navy-bright', 'border-primary', 'font-semibold'];
+  const IDLE = ['bg-transparent', 'text-ink', 'border-line', 'font-medium'];
+
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.age-chip'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-band-panel]'));
+
+  const paint = (btn: HTMLButtonElement, on: boolean) => {
+    btn.setAttribute('aria-pressed', String(on));
+    btn.classList.remove(...(on ? IDLE : ACTIVE));
+    btn.classList.add(...(on ? ACTIVE : IDLE));
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const want = btn.dataset.band;
+      buttons.forEach((b) => paint(b, b === btn));
+      panels.forEach((p) => {
+        p.hidden = want !== 'all' && p.dataset.bandPanel !== want;
+      });
+    });
+  });
+</script>
+
+<style>
+  .age-chip {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    border-width: 2px;
+    cursor: pointer;
+    transition:
+      background-color 0.15s,
+      color 0.15s,
+      border-color 0.15s;
+  }
+</style>
