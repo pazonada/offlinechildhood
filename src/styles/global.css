@@ -34,6 +34,12 @@
   --card-line-cool: #e3e8f2;
   --green-deep: #2e6b3e;
 
+  /* Text tones for the navy footer, brightest to faintest. */
+  --on-navy: #e6eaf7;
+  --on-navy-soft: #b9c4e4;
+  --on-navy-faint: #9eaad2;
+  --on-navy-bright: #fffdf6;
+
   --primary: #2451d6;
   --primary-strong: #1b3fae;
   --primary-text: #2451d6;
@@ -96,6 +102,10 @@
   --color-accent-light: var(--accent-light);
   --color-card-line-cool: var(--card-line-cool);
   --color-green-deep: var(--green-deep);
+  --color-on-navy: var(--on-navy);
+  --color-on-navy-soft: var(--on-navy-soft);
+  --color-on-navy-faint: var(--on-navy-faint);
+  --color-on-navy-bright: var(--on-navy-bright);
   --color-cat-phones: var(--cat-phones);
   --color-cat-audio: var(--cat-audio);
   --color-cat-computers: var(--cat-computers);
@@ -131,7 +141,7 @@
     }
   }
   body {
-    background-color: var(--surface);
+    background-color: var(--page);
     color: var(--ink);
     font-family: var(--font-sans);
     font-size: 1.0625rem;

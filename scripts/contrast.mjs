@@ -20,6 +20,7 @@ const modes = {
       panelBlue: '#EEF3FC', panelBlueLine: '#C9D8F3', panelBlueLineStrong: '#A8BEF0',
       panelAccent: '#FAF1DC', accentText: '#8A6410', accentLight: '#FFD166',
       cardLineCool: '#E3E8F2', greenDeep: '#2E6B3E', printLine: '#D7E1FC',
+      onNavy: '#E6EAF7', onNavySoft: '#B9C4E4', onNavyFaint: '#9EAAD2', onNavyBright: '#FFFDF6',
       white: '#FFFFFF',
       catPhones: '#2451D6', catAudio: '#0C7568', catComputers: '#6D28D9',
       catToys: '#BE3A24', catStem: '#8A5200', catOutdoor: '#297046',
@@ -86,6 +87,10 @@ const modes = {
       ['coral cross on white', 'coral', 'surface', 3.0],
       ['panel border on blue panel', 'panelBlueLine', 'panelBlue', 1.2],
       ['cool card border on white', 'cardLineCool', 'surface', 1.1],
+      ['footer link on navy', 'onNavy', 'navy', 4.5],
+      ['footer description on navy', 'onNavySoft', 'navy', 4.5],
+      ['footer fine print on navy', 'onNavyFaint', 'navy', 4.5],
+      ['footer wordmark on navy', 'onNavyBright', 'navy', 4.5],
     ],
   }
 };
