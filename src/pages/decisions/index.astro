@@ -1,26 +1,32 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Container from '../../components/Container.astro';
-import Photo from '../../components/Photo.astro';
+import Scribble from '../../components/Scribble.astro';
 import climbing from '../../assets/photos/climbing.jpg';
 import Button from '../../components/Button.astro';
 
 const decisions = (await getCollection('decisions')).sort((a, b) => a.data.order - b.data.order);
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <Base
   title="Decisions"
   description="The device calls every family has to make, each with a clear answer and three ways to act on it."
 >
-  {/* Text left, photograph right. A centred narrow column left most of a wide
-      screen empty, and the circle sat below it with nothing beside it. */}
-  <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
+  <header class="pt-8">
     <Container>
-      <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+      <div class="grid items-center gap-x-14 gap-y-10 md:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)]">
         <div>
-          <h1 class="text-4xl font-extrabold sm:text-5xl">The decisions</h1>
-          <p class="mt-5 text-lg text-ink-soft">
+          <h1 class="font-display text-[clamp(38px,4.5vw,60px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">
+            The{' '}
+            <span class="relative inline-block">
+              decisions
+              <Scribble type="underline" class="absolute -bottom-1 -left-1 h-3.5 w-[calc(100%+12px)]" color="var(--accent)" />
+            </span>
+          </h1>
+          <p class="mt-[30px] max-w-[34em] text-[1.1rem] leading-[1.65] text-ink-soft">
             A handful of calls account for most of what a childhood looks like: the first phone,
             what happens in the bedroom at night, who owns the tablet. Each one gets a straight
             answer and three ways to act on it, so you can start where you actually are.
@@ -28,33 +34,42 @@ const decisions = (await getCollection('decisions')).sort((a, b) => a.data.order
           <Button href="/plan" variant="primary" size="lg" class="mt-8">Build your family plan</Button>
         </div>
 
-        <Photo
-          src={climbing}
-          alt="Two children partway up an indoor climbing wall, seen from below, both facing the wall."
-          position="58% 46%"
-          size={320}
-        />
+        <div class="overflow-hidden rounded-[240px_240px_24px_24px] bg-surface-3">
+          <Image
+            src={climbing}
+            alt="Two children partway up an indoor climbing wall, seen from below, both facing the wall."
+            widths={[520, 1040]}
+            sizes="(min-width: 768px) 480px, 92vw"
+            class="h-[380px] w-full object-cover object-[58%_46%]"
+          />
+        </div>
       </div>
     </Container>
   </header>
 
-  <Container width="prose" class="py-14">
-    <ol class="grid gap-5">
+  <Container class="pt-[76px]">
+    <ol class="max-w-[62rem] border-t border-line-strong">
       {decisions.map((d) => (
         <li>
           <a
             href={`/decisions/${d.id}`}
-            class="group block rounded-3xl border-2 border-line bg-surface p-6 transition hover:border-primary hover:bg-surface-2 sm:p-8"
+            class="grid grid-cols-[minmax(0,1fr)] gap-x-7 gap-y-3 rounded-r-[26px] border-b border-line-strong py-[34px] pl-5 pr-7 transition hover:bg-surface-3 sm:grid-cols-[88px_minmax(0,1fr)]"
           >
-            <p class="font-display text-sm font-bold uppercase tracking-[0.14em] text-primary-text">
-              Decision {d.data.order}
-            </p>
-            <h2 class="mt-2 font-display text-2xl font-extrabold text-ink">{d.data.question}</h2>
-            <p class="mt-3 text-ink-soft">{d.data.description}</p>
-            <p class="mt-4 font-display font-bold text-ink group-hover:text-primary-text">
-              Read the answer
-              <span aria-hidden="true" class="inline-block transition group-hover:translate-x-1">&nbsp;&rarr;</span>
-            </p>
+            <span class="font-label text-[40px] font-extrabold leading-none text-accent" aria-hidden="true">
+              {pad(d.data.order)}
+            </span>
+            <div>
+              <h2 class="mb-2.5 font-display text-[27px] font-extrabold leading-[1.2] text-navy">
+                {d.data.question}
+              </h2>
+              <p class="mb-3.5 max-w-[44em] text-[1.03rem] leading-relaxed text-ink-soft">
+                {d.data.description}
+              </p>
+              <span class="font-label text-[13px] font-bold uppercase tracking-[0.06em] text-primary-text">
+                Read the answer
+                <span aria-hidden="true">&nbsp;&rarr;</span>
+              </span>
+            </div>
           </a>
         </li>
       ))}

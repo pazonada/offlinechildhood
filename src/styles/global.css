@@ -16,9 +16,12 @@
   --ink: #24263a;
   --ink-soft: #525f70;
   --line: #e9e1ce;
+  --line-strong: #dcceac;
+  --line-dark: #c3bba8;
 
   /* The warm ground and the navy that carries every display heading. */
   --page: #fdf9f0;
+  --surface-warm: #fffdf6;
   --navy: #1b2a5e;
 
   /* Cool panels: asides, downsides, the buy band. */
@@ -88,6 +91,8 @@
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-line-dark: var(--line-dark);
   --color-primary: var(--primary);
   --color-primary-strong: var(--primary-strong);
   --color-primary-text: var(--primary-text);
@@ -102,6 +107,7 @@
   --color-accent: var(--accent);
   --color-on-accent: var(--on-accent);
   --color-page: var(--page);
+  --color-surface-warm: var(--surface-warm);
   --color-navy: var(--navy);
   --color-panel-blue: var(--panel-blue);
   --color-panel-blue-line: var(--panel-blue-line);
