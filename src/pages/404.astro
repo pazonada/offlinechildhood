@@ -1,45 +1,71 @@
 ---
 import Base from '../layouts/Base.astro';
-import Container from '../components/Container.astro';
 import Button from '../components/Button.astro';
----
-<Base title="Page not found" description="That page does not exist. Here is where everything lives now.">
-  <Container width="prose" class="py-20 sm:py-28">
-    <p class="font-display text-sm font-bold uppercase tracking-[0.14em] text-primary-text">404</p>
-    <h1 class="mt-3 text-4xl font-extrabold sm:text-5xl">That page isn't here</h1>
-    <p class="mt-5 text-lg text-ink-soft">
-      We rebuilt this site from scratch, so a few old links no longer have a home. Nothing is lost.
-      Here is where everything lives now.
-    </p>
 
-    <ul class="mt-10 grid gap-4">
-      <li>
-        <a href="/decisions" class="block rounded-2xl border-2 border-line bg-surface-2 p-6 transition hover:border-primary">
-          <span class="font-display text-xl font-extrabold text-ink">Decisions</span>
-          <span class="mt-1 block text-ink-soft">
-            The device calls: the first phone, tablets, games, what happens at bedtime.
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="/conversations" class="block rounded-2xl border-2 border-line bg-surface-2 p-6 transition hover:border-secondary">
-          <span class="font-display text-xl font-extrabold text-ink">Conversations</span>
-          <span class="mt-1 block text-ink-soft">
-            How to explain algorithms, AI and the rest to a kid, at every age from four up.
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="/picks" class="block rounded-2xl border-2 border-line bg-surface-2 p-6 transition hover:border-primary">
-          <span class="font-display text-xl font-extrabold text-ink">What to buy</span>
-          <span class="mt-1 block text-ink-soft">
-            The old product directory lives here now, shorter and more honest.
-          </span>
-        </a>
-      </li>
+const destinations = [
+  {
+    href: '/decisions',
+    title: 'Decisions',
+    blurb: 'The device calls: the first phone, tablets, games, what happens at bedtime.',
+    hover: 'hover:border-primary',
+  },
+  {
+    href: '/conversations',
+    title: 'Conversations',
+    blurb: 'How to explain algorithms, AI and the rest to a kid, at every age from four up.',
+    hover: 'hover:border-accent',
+  },
+  {
+    href: '/picks',
+    title: 'What to buy',
+    blurb: 'Products and services that help kids stay a little less digitally entrenched.',
+    hover: 'hover:border-primary',
+  },
+];
+---
+
+<Base title="Page not found" description="That page does not exist. Here is where everything lives now.">
+  <main class="mx-auto w-full max-w-[900px] px-6 pt-[72px] sm:px-10">
+    <div class="grid items-start gap-x-12 gap-y-8 sm:grid-cols-[minmax(0,1fr)_auto]">
+      <div>
+        <p class="mb-3.5 font-label text-xs font-bold uppercase tracking-[0.22em] text-primary-text">404</p>
+        <h1 class="text-balance font-display text-[clamp(36px,4vw,50px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">
+          That page isn't here
+        </h1>
+        <p class="mt-6 max-w-[34em] text-[1.1rem] leading-[1.68] text-ink-soft">
+          Sorry, we weren't able to find the page you're looking for. Here's where you can go:
+        </p>
+      </div>
+
+      {/* The big sun. Slower spin and a bigger swing than the heading suns. */}
+      <svg
+        viewBox="0 0 26 26"
+        class="big-sun mt-1.5 hidden h-32 w-32 shrink-0 sm:block"
+        fill="none"
+        aria-hidden="true"
+      >
+        <circle cx="13" cy="13" r="4.6" fill="var(--accent)" />
+        <g stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round">
+          <path d="M13 1.6v3.4M13 21v3.4M24.4 13H21M5 13H1.6M21.1 4.9l-2.4 2.4M7.3 18.7l-2.4 2.4M21.1 21.1l-2.4-2.4M7.3 7.3L4.9 4.9" />
+        </g>
+      </svg>
+    </div>
+
+    <ul class="mt-11 flex flex-col gap-4">
+      {destinations.map((d) => (
+        <li>
+          <a
+            href={d.href}
+            class:list={['block rounded-[22px] border-2 border-line bg-surface px-7 py-6 transition', d.hover]}
+          >
+            <span class="block font-display text-[21px] font-extrabold text-navy">{d.title}</span>
+            <span class="mt-1.5 block text-[1.03rem] leading-relaxed text-ink-soft">{d.blurb}</span>
+          </a>
+        </li>
+      ))}
     </ul>
 
-    <p class="mt-10 text-ink-soft">
+    <p class="mt-10 max-w-[34em] text-[1.06rem] leading-[1.68] text-ink-soft">
       Looking for something specific that used to be here? Tell us at{' '}
       <a href="mailto:hello@offlinechildhood.com" class="font-semibold text-primary-text underline underline-offset-4">
         hello@offlinechildhood.com
@@ -47,6 +73,15 @@ import Button from '../components/Button.astro';
       and we will point you to it.
     </p>
 
-    <Button href="/" variant="primary" class="mt-8">Back to the start</Button>
-  </Container>
+    <Button href="/" variant="primary" size="lg" class="mt-8">Back to the start</Button>
+  </main>
 </Base>
+
+<style>
+  .big-sun {
+    transition: transform 0.6s cubic-bezier(0.34, 1.3, 0.64, 1);
+  }
+  .big-sun:hover {
+    transform: rotate(45deg);
+  }
+</style>

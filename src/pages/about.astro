@@ -1,38 +1,57 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Container from '../components/Container.astro';
-import Photo from '../components/Photo.astro';
-import painting from '../assets/photos/painting.jpg';
 import Button from '../components/Button.astro';
+import ballPit from '../assets/photos/ball-pit.jpg';
+
+const refusals = [
+  {
+    lead: 'Scare you.',
+    body: "Fear is the easiest way to get a parent's attention and about the worst way to actually help. There is already plenty of it going around. Your worries here are reasonable, and we are not going to farm them.",
+  },
+  {
+    lead: 'Overstate the research.',
+    body: 'Whether smartphones caused the rise in teenage anxiety is a live fight among serious researchers, and we say so on the pages where it comes up. The case for a more analog childhood does not need that argument, and a site that oversells its evidence deserves to be doubted on everything else.',
+  },
+  {
+    lead: 'Tell you that you have already blown it.',
+    body: 'Most people arrive here with devices in the house and habits already set. Every recommendation on this site has a first step that a family in exactly that position can take this week.',
+  },
+];
 ---
+
 <Base
   title="About"
   description="Why Offline Childhood exists, what we argue for, what we will not do, and how the site is paid for."
 >
-  {/* Text left, photograph right. A centred narrow column left most of a wide
-      screen empty, and the circle sat below it with nothing beside it. */}
-  <header class="border-b border-line bg-surface-2 py-14 sm:py-20">
+  <header class="border-b border-line bg-surface-2 py-14">
     <Container>
       <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
         <div>
-          <h1 class="text-4xl font-extrabold sm:text-5xl">Why Offline Childhood?</h1>
-          <p class="mt-5 text-xl leading-relaxed text-ink">
+          <h1 class="text-balance font-display text-[clamp(36px,4vw,50px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">
+            Why Offline Childhood?
+          </h1>
+          <p class="mt-6 max-w-[32em] text-[1.19rem] leading-[1.62] text-ink">
             We're parents, and we're trying. Trying to get outside more, delay the smartphone, keep
             dinner screen-free, and raise kids who can think for themselves about all of it.
           </p>
         </div>
 
-        <Photo
-          src={painting}
-          alt="A child seen from above, leaning over a small canvas thick with layered paint, brush in hand."
-          position="50% 52%"
-          size={320}
-        />
+        <div class="overflow-hidden rounded-[240px_240px_24px_24px] bg-surface-3">
+          <Image
+            src={ballPit}
+            alt="A young child seen from above, sitting in a ball pit of blue and green balls, holding a red cup."
+            widths={[520, 1040]}
+            sizes="(min-width: 768px) 480px, 92vw"
+            class="h-[420px] w-full object-cover object-[30%_30%]"
+          />
+        </div>
       </div>
     </Container>
   </header>
 
-  <Container width="prose" class="py-14">
+  <div class="article-col pt-14">
     <div class="prose">
       <p>
         We are not purists. Nobody here lives offline, and if you do, we salute you. What we think is
@@ -60,23 +79,22 @@ import Button from '../components/Button.astro';
       </p>
 
       <h2>What we will not do</h2>
-      <p>
-        <strong>Scare you.</strong> Fear is the easiest way to get a parent's attention and about the
-        worst way to actually help. There is already plenty of it going around. Your worries here are
-        reasonable, and we are not going to farm them.
-      </p>
-      <p>
-        <strong>Overstate the research.</strong> Whether smartphones caused the rise in teenage
-        anxiety is a live fight among serious researchers, and we say so on the pages where it comes
-        up. The case for a more analog childhood does not need that argument, and a site that
-        oversells its evidence deserves to be doubted on everything else.
-      </p>
-      <p>
-        <strong>Tell you that you have already blown it.</strong> Most people arrive here with
-        devices in the house and habits already set. Every recommendation on this site has a first
-        step that a family in exactly that position can take this week.
-      </p>
+    </div>
 
+    {/* The refusals as the coral cross list rather than bold-led paragraphs. */}
+    <ul class="mt-6 flex flex-col gap-0.5">
+      {refusals.map((r) => (
+        <li class="grid grid-cols-[30px_minmax(0,1fr)] gap-4 border-b border-line py-5">
+          <span class="font-label text-xl font-bold leading-[1.3] text-coral" aria-hidden="true">&#10005;</span>
+          <p class="text-[1.09rem] leading-[1.7] text-ink">
+            <span class="font-display font-extrabold tracking-[-0.02em] text-navy">{r.lead}</span>{' '}
+            {r.body}
+          </p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="prose mt-2">
       <h2>Who is it for?</h2>
       <p>
         Parents and caregivers. The advice leans younger, because that is where most of these
@@ -94,16 +112,16 @@ import Button from '../components/Button.astro';
       </p>
     </div>
 
-    <div class="mt-14 rounded-3xl border-2 border-accent bg-accent/12 p-7">
-      <h2 class="font-display text-2xl font-extrabold">Tell us what's missing</h2>
-      <p class="mt-3">
+    <section class="mt-[72px] rounded-[28px] border-2 border-accent bg-panel-accent px-9 pb-[34px] pt-8">
+      <h2 class="mb-3.5 font-display text-[26px] font-extrabold text-navy">Tell us what's missing</h2>
+      <p class="text-[1.06rem] leading-[1.7] text-ink">
         Got a product or service we should look at? Know someone we should be reading? Came here for
         something and did not find it? Please tell us.{' '}
         <a href="mailto:hello@offlinechildhood.com" class="font-semibold text-primary-text underline underline-offset-4">
           hello@offlinechildhood.com
         </a>
       </p>
-      <Button href="/plan" variant="primary" class="mt-6">Build your family plan</Button>
-    </div>
-  </Container>
+      <Button href="/plan" variant="primary" class="mt-[26px]">Build your family plan</Button>
+    </section>
+  </div>
 </Base>
