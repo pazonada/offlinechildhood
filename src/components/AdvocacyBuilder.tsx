@@ -276,17 +276,21 @@ export default function AdvocacyBuilder() {
                 For whoever manages the devices
               </p>
               <h3 className="mt-2.5 font-display text-[22px] font-extrabold leading-[1.2] text-navy">
-                The switches behind these requests
+                A guide to enact guardrails
               </h3>
               <p className="mt-2 text-[0.98rem] leading-[1.6] text-ink-soft">
-                Every request above is a setting that already exists. Where each one lives:
+                Every request we made relates to a setting that can be controlled on the device. Here's where each one lives:
               </p>
               <ul className="mt-4 grid gap-3">
-                {sheet.howTo.map((h, i) => (
-                  <li key={i} className="border-l-4 border-panel-blue-line-strong pl-4 text-[0.98rem] leading-[1.6] text-ink">
-                    {h}
-                  </li>
-                ))}
+                {sheet.howTo.map((h, i) => {
+                  const cut = h.indexOf(': ');
+                  return (
+                    <li key={i} className="border-l-4 border-panel-blue-line-strong pl-4 text-[0.98rem] leading-[1.6] text-ink">
+                      <span className="font-semibold text-navy">{h.slice(0, cut + 1)}</span>
+                      {h.slice(cut + 1)}
+                    </li>
+                  );
+                })}
               </ul>
               <div className="sheet-sources mt-6 border-t border-line pt-4 text-[0.82rem] leading-[1.55] text-ink-soft">
                 <p className="font-semibold text-ink">Where these are documented</p>
