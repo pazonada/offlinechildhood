@@ -287,6 +287,21 @@ export default function AdvocacyBuilder() {
                   </li>
                 ))}
               </ul>
+              <div className="sheet-sources mt-6 border-t border-line pt-4 text-[0.82rem] leading-[1.55] text-ink-soft">
+                <p className="font-semibold text-ink">Where these are documented</p>
+                <p>
+                  Google Workspace Admin Help, &ldquo;Turn the Gemini app on or off&rdquo; and
+                  &ldquo;Manage access to Gemini in Classroom&rdquo;. knowledge.workspace.google.com
+                </p>
+                <p>
+                  Federal Communications Commission, &ldquo;Children&rsquo;s Internet Protection Act
+                  (CIPA)&rdquo;. https://www.fcc.gov/consumers/guides/childrens-internet-protection-act
+                </p>
+                <p>
+                  Student Data Privacy Consortium, &ldquo;National Data Privacy Agreement&rdquo;.
+                  https://privacy.a4l.org/national-dpa/
+                </p>
+              </div>
             </div>
           )}
 
