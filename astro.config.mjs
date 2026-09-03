@@ -9,7 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://offlinechildhood.com',
   output: 'static',
-  adapter: vercel(),
+  adapter: vercel({ webAnalytics: { enabled: true } }),
   integrations: [
     react(),
     mdx(),
