@@ -51,7 +51,7 @@ const DEVICE_ASKS: Record<Exclude<DeviceChoice, 'fine'>, string[]> = {
 
 const AI_ASKS: Record<Exclude<AiChoice, 'fine'>, string> = {
   optin:
-    'AI assistants off by default on student accounts, and switched on per student only with that family's consent, so one kid's device can have it while another's does not.',
+    "AI assistants off by default on student accounts, and switched on per student only with that family's consent, so one kid's device can have it while another's does not.",
   off: 'AI assistants disabled on student accounts, with a written policy for what would change that and how parents would hear about it first.',
   teach:
     'Where AI tools are on, lessons that teach how they actually work: where they get their material, when they are confidently wrong, and who pays for them.',
