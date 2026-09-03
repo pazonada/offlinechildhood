@@ -367,15 +367,19 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                         <li key={concept.id} className="rounded-[22px] border-[1.5px] border-line bg-surface px-[26px] py-6">
                           <p className="font-display text-xl font-extrabold leading-[1.28] text-navy">{concept.title}</p>
                           <p className="mt-1.5 text-ink-soft">{concept.idea}</p>
-                          <p className="mt-4 rounded-2xl bg-panel-accent px-[18px] py-4 leading-[1.62]">{b.explain}</p>
-                          <p className="mt-3 rounded-2xl border-[1.5px] border-panel-blue-line-strong bg-surface px-[18px] py-4 leading-[1.62]">
-                            <span className="font-display font-extrabold">Try this. </span>
-                            {b.tryThis}
-                          </p>
-                          <p className="mt-4 border-l-4 border-accent py-0.5 pl-[18px] leading-[1.62]">
-                            <span className="font-display font-extrabold">Listen for. </span>
-                            {b.listenFor}
-                          </p>
+                          <p className="mt-4 text-[1.03rem] leading-[1.62] text-ink">{b.explain}</p>
+                          <div className="mt-5 rounded-[18px] bg-panel-blue px-[22px] py-5">
+                            <p className="mb-2 font-label text-[11.5px] font-bold uppercase tracking-[0.18em] text-primary-text">
+                              Try this
+                            </p>
+                            <p className="text-[1.03rem] leading-[1.62] text-ink">{b.tryThis}</p>
+                          </div>
+                          <div className="mt-5 border-l-4 border-accent py-0.5 pl-[22px]">
+                            <p className="mb-2 font-label text-[11.5px] font-bold uppercase tracking-[0.18em] text-accent-text">
+                              Listen for
+                            </p>
+                            <p className="text-[1.03rem] leading-[1.62] text-ink">{b.listenFor}</p>
+                          </div>
                           <details className="plan-full mt-4 rounded-2xl border border-line bg-page/60">
                             <summary className="no-print cursor-pointer list-none px-[18px] py-3 font-semibold text-primary-text">
                               The whole conversation, right here
