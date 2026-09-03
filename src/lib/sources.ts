@@ -198,6 +198,16 @@ export const SOURCES = {
     claim:
       'The serious version of the counter-argument. Odgers, reviewing The Anxious Generation, argues the evidence does not show social media causing an epidemic of teenage mental illness and that the likely causes sit elsewhere. Cited so that when these pages say the question is disputed, the dispute is between named researchers on both sides.',
   },
+  edWeekPhones: {
+    id: 'edWeekPhones',
+    title: 'Which States Ban or Restrict Cellphones in Schools?',
+    authors: 'Education Week',
+    venue: 'Education Week policy tracker',
+    year: 2026,
+    url: 'https://www.edweek.org/technology/which-states-ban-or-restrict-cellphones-in-schools/2024/06',
+    claim:
+      'A continuously updated tracker. As of late July 2026, at least 39 states and the District of Columbia require school districts to ban or restrict student phone use in schools, most of that legislation passed within two years. What it establishes for a parent: asking a school to restrain technology is now the mainstream position across most of the country.',
+  },
   mitAiEducation: {
     id: 'mitAiEducation',
     title: 'Report of the Ad Hoc Committee on AI Use in Teaching, Learning, and Research Training',
