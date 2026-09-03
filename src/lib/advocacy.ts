@@ -122,15 +122,16 @@ export function buildSheet(sel: Selections): Sheet {
   const anyDeviceAsk = sel.devices !== 'fine' || sel.classDevices !== 'fine';
   if (sel.ai !== 'fine' && sel.ai !== 'teach') {
     howTo.push(
-      'Built-in AI: in the Google Admin console (admin.google.com), Gemini is listed under Additional Google services and can be turned off for student organizational units. Other built-in AI features live under each service, and every one has an off switch at the admin level.',
+      'Built-in AI: in the Google Admin console (admin.google.com), the Generative AI settings control the Gemini app and Gemini in Classroom separately, each with its own off switch, applied per student organizational unit so access can differ by grade.',
     );
   }
   if (anyDeviceAsk) {
     howTo.push(
-      'Browsing limits: managed Chromebooks take a URL blocklist (YouTube, social media, personal email) or the stricter allowlist-only mode, plus forced SafeSearch and YouTube Restricted Mode, all set per grade level in the Admin console under Chrome policies.',
+      'Browsing limits: managed Chromebooks take a URL blocklist (YouTube, social media, personal email) or the stricter allowlist-only mode, plus forced SafeSearch and YouTube Restricted Mode, all set per grade level under Chrome policies. These ride on the student profile, so they keep working on the home wifi.',
       'Data privacy on shared devices: forced ephemeral sessions wipe browsing data, cookies, and any typed passwords when a student signs out, and blocking guest mode means every session runs under a managed student profile that carries the limits with it.',
       'Apps and hardware: Chrome policies can block all extensions and apps except an approved list, and disable the camera and microphone by default. On iPads, the same lives in any device manager as an app allowlist, allowed-websites-only mode in Safari, and camera restrictions.',
-      'The network layer: content filtering at the school router covers every device at once. US public schools taking E-Rate funding are already required to filter under the Children\u2019s Internet Protection Act, and a school with nobody in the IT chair can point its router at a free family-shield DNS service and block whole categories with one setting.',
+      'The network layer: content filtering at the school router covers every device at once. US public schools taking E-Rate funding are already required by the Children\u2019s Internet Protection Act to filter, to monitor minors\u2019 online activity, and to adopt an internet safety policy at a publicly noticed meeting, which any parent can ask to read. A school with nobody in the IT chair can point its router at a free family-shield DNS service and block whole categories with one setting.',
+      'Vendor data: districts in most states can use the Student Data Privacy Consortium\u2019s standard national agreement, which binds an app maker on how student data is collected, kept, and deleted. Asking whether each app on the device has a signed agreement takes one email.',
     );
   }
   const school = sel.school.trim() || 'our school';
