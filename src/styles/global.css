@@ -208,14 +208,18 @@
   }
 }
 
-@layer components {
-  .prose-compact h2 {
-    font-size: 1.3rem;
-    margin-top: 2em;
-  }
-  .prose-compact h2::before { display: none !important; }
-  .prose-compact { font-size: 1.03rem; }
+/* Compact prose for the plan's inline full answers. These live unlayered
+   with doubled-up class specificity: in @layer components they lost to the
+   unlayered .prose rules and never applied, which is why the expanders
+   showed article-scale headings and gaps. */
+.prose.prose-compact { font-size: 1.03rem; }
+.prose.prose-compact > * + * { margin-top: 1.1em; }
+.prose.prose-compact h2 {
+  font-size: 1.3rem;
+  margin-top: 1.6em;
+  margin-bottom: 0.1em;
 }
+.prose.prose-compact h2::before { display: none !important; }
 
 @layer base {
   /* The filter dropdown uses <details>, so the default disclosure triangle
