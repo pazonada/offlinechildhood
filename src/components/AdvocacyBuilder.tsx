@@ -3,6 +3,7 @@ import {
   buildSheet,
   shortCite,
   type AiChoice,
+  type ClassDeviceChoice,
   type Audience,
   type DeviceChoice,
   type PhoneChoice,
@@ -21,6 +22,12 @@ const DEVICE_OPTIONS: { id: DeviceChoice; label: string; blurb: string }[] = [
   { id: 'guardrails', label: 'Keep them, with guardrails', blurb: 'Notifications off, browser limited, paper on request.' },
   { id: 'reduce', label: 'Fewer of them', blurb: 'Devices stay at school, homework works on paper.' },
   { id: 'none', label: 'None at all', blurb: 'Wind them down, or an opt-out for your family.' },
+];
+
+const CLASS_DEVICE_OPTIONS: { id: ClassDeviceChoice; label: string; blurb: string }[] = [
+  { id: 'fine', label: 'Fine as they are', blurb: 'The class sets and carts are not a worry.' },
+  { id: 'guardrails', label: 'Locked to the lesson', blurb: 'Browser limited to what the lesson needs.' },
+  { id: 'reduce', label: 'Screens as the exception', blurb: 'Reserved for work that actually needs a device.' },
 ];
 
 const AI_OPTIONS: { id: AiChoice; label: string; blurb: string }[] = [
@@ -79,6 +86,7 @@ function OptionGrid<T extends string>({
 export default function AdvocacyBuilder() {
   const [phones, setPhones] = useState<PhoneChoice>('fine');
   const [devices, setDevices] = useState<DeviceChoice>('fine');
+  const [classDevices, setClassDevices] = useState<ClassDeviceChoice>('fine');
   const [ai, setAi] = useState<AiChoice>('fine');
   const [audience, setAudience] = useState<Audience>('principal');
   const [school, setSchool] = useState('');
@@ -98,6 +106,7 @@ export default function AdvocacyBuilder() {
     const any = [
       pick('phones', PHONE_OPTIONS, setPhones),
       pick('devices', DEVICE_OPTIONS, setDevices),
+      pick('class', CLASS_DEVICE_OPTIONS, setClassDevices),
       pick('ai', AI_OPTIONS, setAi),
       pick('who', AUDIENCE_OPTIONS, setAudience),
     ].some(Boolean);
@@ -106,8 +115,8 @@ export default function AdvocacyBuilder() {
     if (any) setBuilt(true);
   }, []);
 
-  const sel: Selections = { phones, devices, ai, audience, school };
-  const sheet = useMemo(() => buildSheet(sel), [phones, devices, ai, audience, school]);
+  const sel: Selections = { phones, devices, classDevices, ai, audience, school };
+  const sheet = useMemo(() => buildSheet(sel), [phones, devices, classDevices, ai, audience, school]);
   const empty = sheet.asks.length === 0;
 
   const build = () => {
@@ -130,10 +139,17 @@ export default function AdvocacyBuilder() {
         />
         <OptionGrid
           legend="School-issued devices"
-          hint="The laptops and tablets the school hands out."
+          hint="The one-to-one laptops and tablets handed to each kid, the ones that travel home."
           options={DEVICE_OPTIONS}
           value={devices}
           onChange={setDevices}
+        />
+        <OptionGrid
+          legend="Devices used in class"
+          hint="The shared carts and class sets kids pick up for project work, even when nothing goes home."
+          options={CLASS_DEVICE_OPTIONS}
+          value={classDevices}
+          onChange={setClassDevices}
         />
         <OptionGrid
           legend="AI on school accounts"

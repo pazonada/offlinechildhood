@@ -2,12 +2,14 @@ import { SOURCES, type Source } from './sources';
 
 export type PhoneChoice = 'fine' | 'class' | 'bell' | 'none';
 export type DeviceChoice = 'fine' | 'guardrails' | 'reduce' | 'none';
+export type ClassDeviceChoice = 'fine' | 'guardrails' | 'reduce';
 export type AiChoice = 'fine' | 'optin' | 'off' | 'teach';
 export type Audience = 'principal' | 'board' | 'parents';
 
 export interface Selections {
   phones: PhoneChoice;
   devices: DeviceChoice;
+  classDevices: ClassDeviceChoice;
   ai: AiChoice;
   audience: Audience;
   school: string;
@@ -49,6 +51,16 @@ const DEVICE_ASKS: Record<Exclude<DeviceChoice, 'fine'>, string[]> = {
   ],
 };
 
+const CLASS_DEVICE_ASKS: Record<Exclude<ClassDeviceChoice, 'fine'>, string[]> = {
+  guardrails: [
+    'The browser on shared classroom devices limited to the sites the lesson needs, with the open internet switched on by the teacher for a named purpose and switched off after.',
+    'A written answer to what a student can reach on a classroom device during independent work time.',
+  ],
+  reduce: [
+    'Shared classroom devices reserved for the work that actually needs them, with paper as the default for reading and writing.',
+  ],
+};
+
 const AI_ASKS: Record<Exclude<AiChoice, 'fine'>, string> = {
   optin:
     "AI assistants off by default on student accounts, and switched on per student only with that family's consent, so one kid's device can have it while another's does not.",
@@ -69,6 +81,7 @@ export function buildSheet(sel: Selections): Sheet {
   const asks: string[] = [];
   if (sel.phones !== 'fine') asks.push(PHONE_ASKS[sel.phones]);
   if (sel.devices !== 'fine') asks.push(...DEVICE_ASKS[sel.devices]);
+  if (sel.classDevices !== 'fine') asks.push(...CLASS_DEVICE_ASKS[sel.classDevices]);
   if (sel.ai !== 'fine') asks.push(AI_ASKS[sel.ai]);
 
   // Evidence appears only for the asks actually made. A sheet that cites
@@ -80,7 +93,7 @@ export function buildSheet(sel: Selections): Sheet {
       source: SOURCES.edWeekPhones,
     });
   }
-  if (sel.devices !== 'fine') {
+  if (sel.devices !== 'fine' || sel.classDevices !== 'fine') {
     evidence.push({
       text: 'Across 54 studies and more than 170,000 readers, comprehension was reliably better on paper than on screens, and the advantage for paper has widened even as screens improved.',
       source: SOURCES.screenReading,
