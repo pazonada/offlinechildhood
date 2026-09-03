@@ -4,7 +4,7 @@ export type PhoneChoice = 'fine' | 'class' | 'bell' | 'none';
 export type DeviceChoice = 'fine' | 'guardrails' | 'reduce' | 'none';
 export type ClassDeviceChoice = 'fine' | 'guardrails' | 'reduce';
 export type AiChoice = 'fine' | 'optin' | 'off' | 'teach';
-export type Audience = 'principal' | 'board' | 'parents';
+export type Audience = 'principal' | 'board' | 'parents' | 'admin';
 
 export interface Selections {
   phones: PhoneChoice;
@@ -148,6 +148,11 @@ export function buildSheet(sel: Selections): Sheet {
         ? ' Thirty-nine states now restrict phones in schools, so nothing in our requests asks this district to lead the country.'
         : ''
     } We are asking the board to review what is switched on by default on the technology our children use, to tell parents the reasons, and to consider the requests on our sheet. Each one is a change the district can grant, and we have put it all in writing so it can circulate and be read on its own time.`;
+  } else if (sel.audience === 'admin') {
+    scriptHeading = 'The email to the administrator';
+    script = `We are writing about the technology our children use at ${school}, and we are coming to you because you are closest to how the devices are actually set up. The requests on our sheet are specific settings${
+      howTo.length > 0 ? ', and the page after it names where each one lives' : ''
+    }. We would be glad to go through them together, and a written note on what is enabled today would give every parent involved the same facts to start from.`;
   } else {
     scriptHeading = 'The message to another parent';
     script = `Have you looked at what is switched on for the kids at ${school}? I am going to ask about it in writing, and this sheet is what I am sending. Want to sign it with me? One parent asking is feedback. A few families asking together is an agenda item.`;
