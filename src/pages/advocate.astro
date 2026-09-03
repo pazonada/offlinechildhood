@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Container from '../components/Container.astro';
 import AdvocacyBuilder from '../components/AdvocacyBuilder';
+import cornerSign from '../assets/photos/andrei-shiptenko-FzYbSqjzmqM-unsplash.jpg';
 ---
 
 <Base
@@ -10,7 +12,8 @@ import AdvocacyBuilder from '../components/AdvocacyBuilder';
 >
   <header class="no-print border-b border-line bg-surface-2 py-14 sm:py-20">
     <Container>
-      <div class="max-w-[46em]">
+      <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+      <div>
         <p class="mb-3.5 font-label text-xs font-bold uppercase tracking-[0.22em] text-primary-text">
           For talking to schools
         </p>
@@ -28,6 +31,17 @@ import AdvocacyBuilder from '../components/AdvocacyBuilder';
           The sheet is assembled on your device, and printing it or saving it as a PDF happens
           there too. Nothing you enter is sent to us or to anyone else.
         </p>
+      </div>
+
+      <div class="overflow-hidden rounded-[240px_240px_24px_24px] bg-surface-3">
+        <Image
+          src={cornerSign}
+          alt="On the granite corner of a building, a black arrow sign reads: a change may be just around the corner."
+          widths={[520, 1040]}
+          sizes="(min-width: 768px) 480px, 92vw"
+          class="h-[400px] w-full object-cover object-[62%_50%]"
+        />
+      </div>
       </div>
     </Container>
   </header>
