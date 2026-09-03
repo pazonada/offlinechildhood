@@ -9,13 +9,17 @@ interface Props {
   /** Omit the site-name suffix when the page title already carries it. */
   bareTitle?: boolean;
   ogTitle?: string;
+  ogDescription?: string;
 }
 
-const { title, description, bareTitle = false, ogTitle } = Astro.props;
+const { title, description, bareTitle = false, ogTitle, ogDescription } = Astro.props;
 const fullTitle = bareTitle ? title : `${title} · Offline Childhood`;
 // LinkedIn cards render only image, title, and domain, so a page can put its
 // one-sentence description in the social title without touching the tab title.
 const shareTitle = ogTitle ?? fullTitle;
+// Some share surfaces render title and description together, so the two must
+// never carry the same sentence.
+const shareDescription = ogDescription ?? description;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -30,7 +34,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={shareTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={shareDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Offline Childhood" />
     <meta property="og:image" content="https://offlinechildhood.com/og-see-through.png" />
