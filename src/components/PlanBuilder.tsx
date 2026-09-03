@@ -368,7 +368,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                           <p className="font-display text-xl font-extrabold leading-[1.28] text-navy">{concept.title}</p>
                           <p className="mt-1.5 text-ink-soft">{concept.idea}</p>
                           <p className="mt-4 rounded-2xl bg-panel-accent px-[18px] py-4 leading-[1.62]">{b.explain}</p>
-                          <p className="mt-3 rounded-2xl bg-panel-blue px-[18px] py-4 leading-[1.62]">
+                          <p className="mt-3 rounded-2xl border-[1.5px] border-panel-blue-line-strong bg-surface px-[18px] py-4 leading-[1.62]">
                             <span className="font-display font-extrabold">Try this. </span>
                             {b.tryThis}
                           </p>
