@@ -80,6 +80,7 @@ export function stanceFor(decision: PlanDecision, wanted: StanceId): PlanStance 
  */
 export function householdRules(opts: {
   hasBedroomDevices: boolean;
+  hasSchoolDevice: boolean;
   wanted: StanceId;
   anyUnder13: boolean;
 }): { rule: string; why: string }[] {
@@ -98,6 +99,12 @@ export function householdRules(opts: {
     rules.push({
       rule: 'Move the device that is currently in a bedroom this week.',
       why: 'This is the single highest-value change available to you right now, and it costs nothing.',
+    });
+  }
+  if (opts.hasSchoolDevice) {
+    rules.push({
+      rule: 'Email the school and ask what is switched on inside the device it sent home.',
+      why: 'School platforms turn features on by default, AI assistants included, and the class teacher usually had no say. Three questions, in writing: which AI tools are enabled, who can see what my child types into them, and can I opt out.',
     });
   }
 

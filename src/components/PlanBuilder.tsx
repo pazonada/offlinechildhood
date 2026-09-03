@@ -21,6 +21,7 @@ const DEVICE_OPTIONS = [
   { id: 'phone', label: 'A phone a child owns' },
   { id: 'console', label: 'A games console' },
   { id: 'bedroom', label: 'A screen in a bedroom' },
+  { id: 'school-laptop', label: 'A laptop or tablet from school' },
   { id: 'tv', label: 'A TV in a shared room' },
   { id: 'none', label: 'None of these yet' },
 ];
@@ -69,6 +70,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
     () =>
       householdRules({
         hasBedroomDevices: devices.includes('bedroom'),
+        hasSchoolDevice: devices.includes('school-laptop'),
         wanted,
         anyUnder13: validChildren.some((c) => (c.age ?? 0) < 13),
       }),
