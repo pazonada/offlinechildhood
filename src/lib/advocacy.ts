@@ -54,7 +54,9 @@ const DEVICE_ASKS: Record<Exclude<DeviceChoice, 'fine'>, string[]> = {
 const CLASS_DEVICE_ASKS: Record<Exclude<ClassDeviceChoice, 'fine'>, string[]> = {
   guardrails: [
     'The browser on shared classroom devices limited to the sites the lesson needs, with the open internet switched on by the teacher for a named purpose and switched off after.',
-    'A written answer to what a student can reach on a classroom device during independent work time.',
+    'Only the apps the lesson calls for enabled, with webcams and microphones off unless the lesson is actually using them.',
+    'Personal sign-ins blocked and browsing data cleared between students, so no password gets typed into a machine that remembers it and no cookie follows a kid to the next session.',
+    'An adult who can see the screens whenever devices are out, independent work time included, which is the one guardrail no filter replaces.',
   ],
   reduce: [
     'Shared classroom devices reserved for the work that actually needs them, with paper as the default for reading and writing.',

@@ -26,7 +26,7 @@ const DEVICE_OPTIONS: { id: DeviceChoice; label: string; blurb: string }[] = [
 
 const CLASS_DEVICE_OPTIONS: { id: ClassDeviceChoice; label: string; blurb: string }[] = [
   { id: 'fine', label: 'Fine as they are', blurb: 'The class sets and carts are not a worry.' },
-  { id: 'guardrails', label: 'Locked to the lesson', blurb: 'Browser limited to what the lesson needs.' },
+  { id: 'guardrails', label: 'Locked to the lesson', blurb: 'Filtered browser, approved apps only, cameras off, screens watched.' },
   { id: 'reduce', label: 'Screens as the exception', blurb: 'Reserved for work that actually needs a device.' },
 ];
 
