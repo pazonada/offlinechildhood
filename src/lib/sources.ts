@@ -105,7 +105,7 @@ export const SOURCES = {
     year: 2016,
     url: 'https://doi.org/10.3102/0034654316628645',
     claim:
-      'Pooling the usable studies, one-to-one laptop programmes produced small positive effects on achievement in English, writing, mathematics and science, around 0.16 standard deviations. This is evidence against the claim that giving every child a laptop harms achievement. It is a small effect next to interventions like tutoring, and only ten studies met the bar for the statistical pooling, so the base is thin.',
+      'Pooling the usable studies, one-to-one laptop programs produced small positive effects on achievement in English, writing, mathematics and science, around 0.16 standard deviations. This is evidence against the claim that giving every child a laptop harms achievement. It is a small effect next to interventions like tutoring, and only ten studies met the bar for the statistical pooling, so the base is thin.',
   },
   screenReading: {
     id: 'screenReading',
@@ -156,7 +156,7 @@ export const SOURCES = {
     year: 2025,
     url: 'https://doi.org/10.1145/3769994.3770027',
     claim:
-      'Names the pattern where a learner watches a system solve a problem and comes away feeling taught, having practised nothing. Apprenticeship works because the apprentice does the work under supervision; watching alone removes the part that builds the skill.',
+      'Names the pattern where a learner watches a system solve a problem and comes away feeling taught, having practiced nothing. Apprenticeship works because the apprentice does the work under supervision; watching alone removes the part that builds the skill.',
   },
   thornGrooming: {
     id: 'thornGrooming',
@@ -166,7 +166,7 @@ export const SOURCES = {
     year: 2022,
     url: 'https://info.thorn.org/hubfs/Research/2022_Online_Grooming_Report.pdf',
     claim:
-      'A survey of 1,200 young people aged 9 to 17. Two thirds said somebody they met online had asked them to move from a public forum into a private conversation on a different platform. Nearly a quarter stayed in contact with somebody who had made them uncomfortable, and for one in three their closest friendship had formed online. Survey research by a child-safety organisation, without peer review, and the authors state plainly that stigma around the subject probably means undercounting. The figures cover online life in general and are not specific to games.',
+      'A survey of 1,200 young people aged 9 to 17. Two thirds said somebody they met online had asked them to move from a public forum into a private conversation on a different platform. Nearly a quarter stayed in contact with somebody who had made them uncomfortable, and for one in three their closest friendship had formed online. Survey research by a child-safety organization, without peer review, and the authors state plainly that stigma around the subject probably means undercounting. The figures cover online life in general and are not specific to games.',
   },
   robloxSettlement: {
     id: 'robloxSettlement',
@@ -186,7 +186,7 @@ export const SOURCES = {
     year: 2018,
     url: 'https://doi.org/10.1111/cdev.12822',
     claim:
-      "Parent reports from 170 American families with young children, average age three. Parents' own problematic phone use predicted more technology interruptions in time with their children, and those interruptions tracked with more child behaviour problems. Parent-reported and correlational: the arrow can run both ways, since a hard evening also sends a parent to the phone. What it establishes is that the parent's phone belongs in this conversation at all.",
+      "Parent reports from 170 American families with young children, average age three. Parents' own problematic phone use predicted more technology interruptions in time with their children, and those interruptions tracked with more child behavior problems. Parent-reported and correlational: the arrow can run both ways, since a hard evening also sends a parent to the phone. What it establishes is that the parent's phone belongs in this conversation at all.",
   },
   odgersRewiring: {
     id: 'odgersRewiring',

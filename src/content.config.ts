@@ -33,7 +33,7 @@ const stance = z.object({
   label: z.string(),
   /** One or two sentences. Reused verbatim in the generated family plan. */
   summary: z.string(),
-  /** "For families who...", so a reader can self-select without judgement. */
+  /** "For families who...", so a reader can self-select without judgment. */
   forFamiliesWho: z.string(),
 });
 

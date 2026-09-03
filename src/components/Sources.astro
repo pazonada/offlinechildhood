@@ -8,10 +8,10 @@ const { ids } = Astro.props;
 const cited = ids.map((id) => SOURCES[id as keyof typeof SOURCES]).filter(Boolean);
 ---
 
-{/* Numbered footnotes in small grey at the very bottom of the page, so the
+{/* Numbered footnotes in small gray at the very bottom of the page, so the
     receipts are checkable without reading as a section of the argument. */}
 {cited.length > 0 && (
-  <section aria-labelledby="sources-heading">
+  <section aria-labeledby="sources-heading">
     <h2 id="sources-heading" class="mb-4 font-label text-[11px] font-bold uppercase tracking-[0.22em] text-ink-soft">
       Sources
     </h2>

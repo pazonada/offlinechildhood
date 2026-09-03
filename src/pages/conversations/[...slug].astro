@@ -27,7 +27,7 @@ const decisions = await Promise.all(c.relatedDecisions.map((ref) => getEntry(ref
 
 <Base title={c.title} description={c.description}>
   <article>
-    {/* Navy hero: the concept's home colour, against the decisions' blue. */}
+    {/* Navy hero: the concept's home color, against the decisions' blue. */}
     <header class="bg-navy text-on-navy-bright">
       <div class="article-col pb-[58px] pt-10">
         <a
@@ -76,7 +76,7 @@ const decisions = await Promise.all(c.relatedDecisions.map((ref) => getEntry(ref
           <section
             data-band-panel={b.band}
             class="rounded-[26px] border-[1.5px] border-line bg-surface px-[30px] pb-[30px] pt-7"
-            aria-labelledby={`band-${b.band}`}
+            aria-labeledby={`band-${b.band}`}
           >
             <h3 id={`band-${b.band}`} class="mb-3.5 font-display text-[22px] font-extrabold text-navy">
               Ages {b.band}

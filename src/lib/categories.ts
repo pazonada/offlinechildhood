@@ -3,7 +3,7 @@ import type { PICK_TAGS } from '../content.config';
 export type PickTag = (typeof PICK_TAGS)[number];
 
 /**
- * One distinct hue per category. Colour now lives only in the iconography, the
+ * One distinct hue per category. Color now lives only in the iconography, the
  * price dots and the outbound link; the downsides box is neutral on every card.
  *
  * Classes are written out in full because Tailwind scans source text and cannot

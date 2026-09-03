@@ -37,7 +37,7 @@ const WORRY_OPTIONS = [
 
 const STANCE_OPTIONS: { id: StanceId; label: string; blurb: string }[] = [
   { id: 'start', label: 'Start here', blurb: 'Something I can hold from this week, without a fight.' },
-  { id: 'further', label: 'Going further', blurb: 'I have some room to organise and I want to change the norm.' },
+  { id: 'further', label: 'Going further', blurb: 'I have some room to organize and I want to change the norm.' },
   { id: 'allin', label: 'All the way', blurb: 'I am ready to be the unusual family and absorb the cost early.' },
 ];
 
@@ -101,7 +101,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
     <div>
       {/* ---------------- questions ---------------- */}
       <div className="no-print grid gap-8">
-        <section aria-labelledby="q-kids" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
+        <section aria-labeledby="q-kids" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
           <h2 id="q-kids" className="font-display text-[23px] font-extrabold text-navy">Who is this for?</h2>
           <p className="mt-1.5 text-[1.03rem] text-ink-soft">
             Ages only. Names are optional and never leave your browser.
@@ -184,7 +184,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
           </button>
         </section>
 
-        <section aria-labelledby="q-devices" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
+        <section aria-labeledby="q-devices" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
           <h2 id="q-devices" className="font-display text-[23px] font-extrabold text-navy">What is in the house now?</h2>
           <p className="mt-1.5 text-[1.03rem] text-ink-soft">Be honest. The plan is more useful if it starts where you are.</p>
           <div className="mt-5 flex flex-wrap gap-2.5">
@@ -207,7 +207,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
           </div>
         </section>
 
-        <section aria-labelledby="q-worries" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
+        <section aria-labeledby="q-worries" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
           <h2 id="q-worries" className="font-display text-[23px] font-extrabold text-navy">What worries you most?</h2>
           <p className="mt-1.5 text-[1.03rem] text-ink-soft">Pick as many as apply. This orders your plan.</p>
           <div className="mt-5 flex flex-wrap gap-2.5">
@@ -230,7 +230,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
           </div>
         </section>
 
-        <section aria-labelledby="q-stance" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
+        <section aria-labeledby="q-stance" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
           <h2 id="q-stance" className="font-display text-[23px] font-extrabold text-navy">How far do you want to go?</h2>
           <p className="mt-1.5 text-[1.03rem] text-ink-soft">
             There is no wrong answer. A rule you keep beats a rule you announce.

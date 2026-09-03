@@ -44,7 +44,7 @@
 - id: gregory
   name: Sam Gregory
   role: Researcher on deepfakes and media authenticity
-  focus: Deepfakes, synthetic media and how anyone can tell what is real. He helped write the technical standard for signalling where an image came from, and argues for preparation without the panic.
+  focus: Deepfakes, synthetic media and how anyone can tell what is real. He helped write the technical standard for signaling where an image came from, and argues for preparation without the panic.
   url: https://www.samgregory.info
   linkedin: samgregory
 - id: matias
@@ -88,12 +88,12 @@
 - id: skenazy
   name: Lenore Skenazy
   role: Founder, Let Grow
-  focus: Made the case for free-range childhood before it had a movement. Let Grow turns the argument into school programmes and a defence of ordinary independence, and it is the practical arm of everything this site says about play.
+  focus: Made the case for free-range childhood before it had a movement. Let Grow turns the argument into school programs and a defense of ordinary independence, and it is the practical arm of everything this site says about play.
   url: https://letgrow.org
 - id: gray
   name: Peter Gray
   role: Research professor, Boston College
-  focus: The psychologist of free play. Decades of evidence that children build judgement and courage in play adults stay out of, written up weekly on his Substack with patience and heat.
+  focus: The psychologist of free play. Decades of evidence that children build judgment and courage in play adults stay out of, written up weekly on his Substack with patience and heat.
   url: https://petergray.substack.com
 - id: brussoni
   name: Mariana Brussoni
@@ -108,5 +108,5 @@
 - id: nesi
   name: Jacqueline Nesi
   role: Psychologist, Brown University
-  focus: Reads the studies before summarising them. Her Techno Sapiens newsletter is weekly, practical and allergic to panic, and is the closest thing this field has to a fair referee.
+  focus: Reads the studies before summarizing them. Her Techno Sapiens newsletter is weekly, practical and allergic to panic, and is the closest thing this field has to a fair referee.
   url: https://technosapiens.substack.com
