@@ -202,7 +202,7 @@ export default function AdvocacyBuilder() {
         <div ref={sheetRef} tabIndex={-1} className="advocacy-sheet-wrap mt-16 scroll-mt-24">
           <div className="no-print mb-[34px] flex flex-wrap items-center justify-between gap-4 rounded-[20px] border-2 border-accent bg-panel-accent px-6 py-5">
             <p className="font-display text-lg font-extrabold text-navy">
-              Your sheet is ready. It prints as two pages: the first is for the school, the second is your script and stays with you.
+              Your sheet is ready. The school's pages print first, and the last page is your script, which stays with you.
             </p>
             <button
               type="button"
@@ -266,6 +266,29 @@ export default function AdvocacyBuilder() {
               </p>
             </div>
           </div>
+
+          {/* School-facing: the switches print on their own page after the
+              sheet, so the ask arrives with its own instructions. */}
+          {sheet.howTo.length > 0 && (
+            <div className="howto-page print-sheet mt-8 rounded-[28px] border-2 border-line bg-surface px-10 pb-9 pt-8">
+              <p className="font-label text-[11.5px] font-bold uppercase tracking-[0.2em] text-primary-text">
+                For whoever manages the devices
+              </p>
+              <h3 className="mt-2.5 font-display text-[22px] font-extrabold leading-[1.2] text-navy">
+                The switches behind these requests
+              </h3>
+              <p className="mt-2 text-[0.98rem] leading-[1.6] text-ink-soft">
+                Every request above is a setting that already exists. Where each one lives:
+              </p>
+              <ul className="mt-4 grid gap-3">
+                {sheet.howTo.map((h, i) => (
+                  <li key={i} className="border-l-4 border-panel-blue-line-strong pl-4 text-[0.98rem] leading-[1.6] text-ink">
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* The coaching prints on its own page, so the sheet the school
               reads never carries the tip for writing it. */}

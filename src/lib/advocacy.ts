@@ -23,6 +23,7 @@ export interface SheetEvidence {
 export interface Sheet {
   asks: string[];
   evidence: SheetEvidence[];
+  howTo: string[];
   scriptHeading: string;
   script: string;
 }
@@ -114,6 +115,24 @@ export function buildSheet(sel: Selections): Sheet {
     });
   }
 
+  // The switches, named specifically, because the person managing school
+  // devices is often an office manager with no IT training, and a request
+  // that arrives with its own instructions is far easier to grant.
+  const howTo: string[] = [];
+  const anyDeviceAsk = sel.devices !== 'fine' || sel.classDevices !== 'fine';
+  if (sel.ai !== 'fine' && sel.ai !== 'teach') {
+    howTo.push(
+      'Built-in AI: in the Google Admin console (admin.google.com), Gemini is listed under Additional Google services and can be turned off for student organizational units. Other built-in AI features live under each service, and every one has an off switch at the admin level.',
+    );
+  }
+  if (anyDeviceAsk) {
+    howTo.push(
+      'Browsing limits: managed Chromebooks take a URL blocklist (YouTube, social media, personal email) or the stricter allowlist-only mode, plus forced SafeSearch and YouTube Restricted Mode, all set per grade level in the Admin console under Chrome policies.',
+      'Data privacy on shared devices: forced ephemeral sessions wipe browsing data, cookies, and any typed passwords when a student signs out, and blocking guest mode means every session runs under a managed student profile that carries the limits with it.',
+      'Apps and hardware: Chrome policies can block all extensions and apps except an approved list, and disable the camera and microphone by default. On iPads, the same lives in any device manager as an app allowlist, allowed-websites-only mode in Safari, and camera restrictions.',
+      'The network layer: content filtering at the school router covers every device at once. US public schools taking E-Rate funding are already required to filter under the Children\u2019s Internet Protection Act, and a school with nobody in the IT chair can point its router at a free family-shield DNS service and block whole categories with one setting.',
+    );
+  }
   const school = sel.school.trim() || 'our school';
 
   let scriptHeading = '';
@@ -133,5 +152,5 @@ export function buildSheet(sel: Selections): Sheet {
     script = `Have you looked at what is switched on for the kids at ${school}? I am going to ask about it in writing, and this sheet is what I am sending. Want to sign it with me? One parent asking is feedback. A few families asking together is an agenda item.`;
   }
 
-  return { asks, evidence, scriptHeading, script };
+  return { asks, evidence, howTo, scriptHeading, script };
 }
