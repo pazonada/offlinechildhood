@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import Container from '../components/Container.astro';
+import AdvocacyBuilder from '../components/AdvocacyBuilder';
+---
+
+<Base
+  title="Your advocacy sheet"
+  description="Pick what you want your kid's school to change about phones, devices, and AI, and get a one-page handout with your requests, the evidence, and the script. Free, no sign-up."
+>
+  <header class="no-print border-b border-line bg-surface-2 py-14 sm:py-20">
+    <Container>
+      <div class="max-w-[46em]">
+        <p class="mb-3.5 font-label text-xs font-bold uppercase tracking-[0.22em] text-primary-text">
+          For talking to schools
+        </p>
+        <h1 class="font-display text-[clamp(38px,4vw,52px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">
+          Your advocacy sheet
+        </h1>
+        <p class="mt-5 text-lg text-ink-soft">
+          No two parents want the same thing from a school. Some want phones gone and the laptops
+          kept, some want AI off and everything else alone, some want the tools kept and actually
+          taught. Set the levers to what you want, and get a one-page handout with your requests,
+          the evidence for each, and the script for the person you are talking to.
+        </p>
+        <p class="mt-[18px] max-w-[40em] text-[0.97rem] leading-relaxed text-ink-soft">
+          <span class="font-semibold text-primary-text">No sign-up, and no data leaves your browser.</span>{' '}
+          The sheet is assembled on your device, and printing it or saving it as a PDF happens
+          there too. Nothing you enter is sent to us or to anyone else.
+        </p>
+      </div>
+    </Container>
+  </header>
+
+  <div class="mx-auto w-full max-w-[900px] px-6 pb-24 pt-12 sm:px-10">
+    <AdvocacyBuilder client:load />
+
+    <p class="no-print mt-14 border-t border-line pt-6 text-[0.97rem] leading-relaxed text-ink-soft">
+      The thinking behind every lever is on the
+      <a href="/decisions/asking-the-school" class="font-semibold text-primary-text underline underline-offset-4 hover:text-navy">
+        asking the school for less</a> page: who actually holds the switch, why the grantable asks
+      come first, and why three families beat one.
+    </p>
+  </div>
+</Base>
+
+<style is:global>
+  @media print {
+    /* The sheet is the only thing that prints, and it has to land on one
+       page. Screen paddings above it collapse, type steps down, and the
+       Tailwind rem sizes are overridden pointwise since a container
+       font-size cannot reach them. */
+    .advocacy-sheet-wrap {
+      margin-top: 0 !important;
+    }
+    .mx-auto {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    .advocacy-sheet p,
+    .advocacy-sheet li {
+      font-size: 10.5pt !important;
+      line-height: 1.45 !important;
+      break-inside: avoid;
+    }
+    .advocacy-sheet h2 {
+      font-size: 21pt !important;
+      margin-top: 4pt !important;
+    }
+    .advocacy-sheet h3 {
+      font-size: 9pt !important;
+      margin-top: 11pt !important;
+    }
+    .advocacy-sheet .sheet-script {
+      margin-top: 5pt !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    .advocacy-sheet ol li {
+      padding-top: 4pt !important;
+      padding-bottom: 4pt !important;
+    }
+    .advocacy-sheet .sheet-sources,
+    .advocacy-sheet .sheet-sources p {
+      font-size: 7.5pt !important;
+      line-height: 1.4 !important;
+    }
+    .advocacy-sheet .sheet-sources {
+      margin-top: 10pt !important;
+    }
+  }
+</style>
