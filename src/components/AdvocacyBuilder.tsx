@@ -202,7 +202,7 @@ export default function AdvocacyBuilder() {
         <div ref={sheetRef} tabIndex={-1} className="advocacy-sheet-wrap mt-16 scroll-mt-24">
           <div className="no-print mb-[34px] flex flex-wrap items-center justify-between gap-4 rounded-[20px] border-2 border-accent bg-panel-accent px-6 py-5">
             <p className="font-display text-lg font-extrabold text-navy">
-              Your sheet is ready. Print it, or save it as a PDF from the print dialog.
+              Your sheet is ready. It prints as two pages: the first is for the school, the second is your script and stays with you.
             </p>
             <button
               type="button"
@@ -214,7 +214,7 @@ export default function AdvocacyBuilder() {
           </div>
 
           {/* The sheet itself: everything below prints, nothing above does. */}
-          <div className="advocacy-sheet rounded-[28px] border-2 border-line bg-surface px-10 pb-9 pt-8">
+          <div className="advocacy-sheet print-sheet rounded-[28px] border-2 border-line bg-surface px-10 pb-9 pt-8">
             <p className="font-label text-[11.5px] font-bold uppercase tracking-[0.2em] text-primary-text">
               From the parents · {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
@@ -253,13 +253,6 @@ export default function AdvocacyBuilder() {
               ))}
             </ul>
 
-            <h3 className="mt-6 font-label text-xs font-bold uppercase tracking-[0.18em] text-primary-text">
-              {sheet.scriptHeading}
-            </h3>
-            <p className="sheet-script mt-3 rounded-2xl bg-panel-blue px-5 py-4 text-[0.98rem] leading-[1.6] text-ink">
-              {sheet.script}
-            </p>
-
             <div className="sheet-sources mt-7 border-t border-line pt-4 text-[0.82rem] leading-[1.55] text-ink-soft">
               <p className="font-semibold text-ink">Sources</p>
               {sheet.evidence.map((e, i) => (
@@ -272,6 +265,18 @@ export default function AdvocacyBuilder() {
                 there is collected or sent anywhere.
               </p>
             </div>
+          </div>
+
+          {/* The coaching prints on its own page, so the sheet the school
+              reads never carries the tip for writing it. */}
+          <div className="script-page print-sheet mt-8 rounded-[28px] border-2 border-accent bg-panel-accent px-10 pb-8 pt-7">
+            <p className="font-label text-[11.5px] font-bold uppercase tracking-[0.2em] text-accent-text">
+              For you &middot; the school gets the first page only
+            </p>
+            <h3 className="mt-2.5 font-label text-xs font-bold uppercase tracking-[0.18em] text-primary-text">
+              {sheet.scriptHeading}
+            </h3>
+            <p className="sheet-script mt-3 text-[0.98rem] leading-[1.6] text-ink">{sheet.script}</p>
           </div>
         </div>
       )}

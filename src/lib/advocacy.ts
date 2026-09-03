@@ -120,14 +120,14 @@ export function buildSheet(sel: Selections): Sheet {
   let script = '';
   if (sel.audience === 'principal') {
     scriptHeading = 'The email to send with this sheet';
-    script = `We are writing about the technology our children use at ${school}. Before anything else, we have three questions: which AI tools and notifications are enabled on the devices our children use, who reviewed those defaults, and can families opt out? The requests on this page are the changes we are asking for, and each carries its reasons. We would rather work with the school on this than around it, and we are glad to talk with whoever makes these calls.`;
+    script = `We are writing about the technology our children use at ${school}. Before anything else, we have three questions: which AI tools and notifications are enabled on the devices our children use, who reviewed those defaults, and can families opt out? The requests on the attached sheet are the changes we are asking for, and each carries its reasons. We would rather work with the school on this than around it, and we are glad to talk with whoever makes these calls.`;
   } else if (sel.audience === 'board') {
     scriptHeading = 'The two minutes at the board meeting';
     script = `We are parents at ${school}.${
       sel.phones !== 'fine'
-        ? ' Thirty-nine states now restrict phones in schools, so nothing on this page asks this district to lead the country.'
+        ? ' Thirty-nine states now restrict phones in schools, so nothing on the sheet we are handing over asks this district to lead the country.'
         : ''
-    } We are asking the board to review what is switched on by default on the technology our children use, to tell parents the reasons, and to consider the requests on this page. Each one is a change the district can grant, and we are handing it over in writing so it can be read after tonight.`;
+    } We are asking the board to review what is switched on by default on the technology our children use, to tell parents the reasons, and to consider the requests on the sheet. Each one is a change the district can grant, and it is in writing so it can be read after tonight.`;
   } else {
     scriptHeading = 'The message to another parent';
     script = `Have you looked at what is switched on for the kids at ${school}? I am going to ask about it in writing, and this sheet is what I am sending. Want to sign it with me? One parent asking is feedback. A few families asking together is an agenda item.`;
