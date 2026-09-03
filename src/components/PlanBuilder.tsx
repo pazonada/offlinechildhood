@@ -366,7 +366,6 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                       {cs.map(({ concept, band: b }) => (
                         <li key={concept.id} className="rounded-[22px] border-[1.5px] border-line bg-surface px-[26px] py-6">
                           <p className="font-display text-xl font-extrabold leading-[1.28] text-navy">{concept.title}</p>
-                          <p className="mt-1.5 text-ink-soft">{concept.idea}</p>
                           <p className="mt-4 text-[1.03rem] leading-[1.62] text-ink">{b.explain}</p>
                           <div className="mt-5 rounded-[18px] bg-panel-blue px-[22px] py-5">
                             <p className="mb-2 font-label text-[11.5px] font-bold uppercase tracking-[0.18em] text-primary-text">
