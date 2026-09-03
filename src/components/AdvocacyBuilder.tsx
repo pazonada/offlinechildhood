@@ -25,7 +25,7 @@ const DEVICE_OPTIONS: { id: DeviceChoice; label: string; blurb: string }[] = [
 
 const AI_OPTIONS: { id: AiChoice; label: string; blurb: string }[] = [
   { id: 'fine', label: 'Fine as it is', blurb: 'AI on school accounts is not your concern.' },
-  { id: 'optin', label: 'Off by default', blurb: 'Teachers opt in class by class, deliberately.' },
+  { id: 'optin', label: 'Off by default', blurb: 'Switched on per student, only with parent consent.' },
   { id: 'off', label: 'Off entirely', blurb: 'Disabled on student accounts, policy in writing.' },
   { id: 'teach', label: 'On, but taught', blurb: 'Keep the tools and teach how they actually work.' },
 ];
