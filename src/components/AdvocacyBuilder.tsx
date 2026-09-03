@@ -39,7 +39,7 @@ const AI_OPTIONS: { id: AiChoice; label: string; blurb: string }[] = [
 
 const AUDIENCE_OPTIONS: { id: Audience; label: string; blurb: string }[] = [
   { id: 'principal', label: 'The principal', blurb: 'An email with the sheet attached.' },
-  { id: 'board', label: 'The school board', blurb: 'Two minutes at the microphone, sheet handed over.' },
+  { id: 'board', label: 'The school board', blurb: 'Works read aloud at the microphone or sent as an email.' },
   { id: 'parents', label: 'Other parents first', blurb: 'Recruit a signature or two before anyone official.' },
 ];
 
