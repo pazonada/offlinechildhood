@@ -49,6 +49,51 @@ import cornerSign from '../assets/photos/andrei-shiptenko-FzYbSqjzmqM-unsplash.j
   <div class="mx-auto w-full max-w-[900px] px-6 pb-24 pt-12 sm:px-10">
     <AdvocacyBuilder client:load />
 
+    {/* The audit: static, so it reads and prints whether or not a sheet was
+        built. It prints last, as a parent-facing page. */}
+    <section class="audit-page print-sheet mt-16 rounded-[28px] border-2 border-line bg-surface px-10 pb-9 pt-8">
+      <p class="font-label text-[11.5px] font-bold uppercase tracking-[0.2em] text-accent-text">
+        For you &middot; before you ask for anything
+      </p>
+      <h2 class="mt-2.5 font-display text-[26px] font-extrabold leading-[1.15] text-navy">
+        Ten questions that show whether anyone is at the wheel
+      </h2>
+      <p class="mt-3 text-[1.01rem] leading-[1.62] text-ink-soft">
+        You cannot ask for the right change until you know what the school actually does, and
+        many schools have never been asked. These questions are not accusations. A school that
+        answers them easily is running things well, and you have learned to relax. A school that
+        cannot answer them has learned something too.
+      </p>
+      <ol class="mt-5">
+        {[
+          'Who administers the devices our kids use: a staff role, a contractor, or nobody in particular?',
+          'Which AI features are currently enabled on student accounts, and did anyone review them before they switched on?',
+          'What can a student reach in the browser during independent work time: is there a blocklist, an allowlist, or nothing?',
+          'Are shared devices wiped between students, or does the next kid inherit the last one’s history, cookies, and signed-in accounts?',
+          'Can students sign in to personal accounts, like email or YouTube, on school devices?',
+          'Are cameras and microphones off by default, and what turns them on?',
+          'What data do the apps on these devices collect about our kids, and who read the privacy terms before adoption?',
+          'Does the school network filter content, and when did anyone last check what students can actually reach through it?',
+          'When a new tool or feature gets switched on, do parents hear about it before or after?',
+          'If we asked for one setting to change tomorrow, who has the login to change it?',
+        ].map((q, i) => (
+          <li class="grid grid-cols-[30px_minmax(0,1fr)] gap-3 border-t border-line py-3.5">
+            <span
+              class="flex h-[26px] w-[26px] items-center justify-center rounded-full bg-panel-accent font-label text-[13.5px] font-bold text-navy"
+              aria-hidden="true"
+            >
+              {i + 1}
+            </span>
+            <p class="text-[1.01rem] leading-[1.58] text-ink">{q}</p>
+          </li>
+        ))}
+      </ol>
+      <p class="mt-5 border-t border-line pt-4 text-[0.95rem] leading-[1.6] text-ink-soft">
+        The last one matters most. Every guardrail this page can ask for is a setting that already
+        exists, and the distance between your request and the change is whoever holds that login.
+      </p>
+    </section>
+
     <p class="no-print mt-14 border-t border-line pt-6 text-[0.97rem] leading-relaxed text-ink-soft">
       The thinking behind every lever is on the{' '}
       <a href="/decisions/asking-the-school" class="font-semibold text-primary-text underline underline-offset-4 hover:text-navy">asking the school for less</a>{' '}
@@ -87,6 +132,11 @@ import cornerSign from '../assets/photos/andrei-shiptenko-FzYbSqjzmqM-unsplash.j
     }
     .script-page,
     .howto-page {
+      break-before: page;
+    }
+    /* The audit breaks onto its own page only when a built sheet precedes
+       it; unconditional, it printed a blank first page on an unbuilt page. */
+    .mx-auto:has(.advocacy-sheet-wrap) .audit-page {
       break-before: page;
     }
     .print-sheet .sheet-script {
