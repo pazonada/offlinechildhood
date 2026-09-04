@@ -1,7 +1,7 @@
 # Photos
 
 Original photographs by the site owner. Drop full-size files straight in here;
-they are optimised at build time into static files, so they cost nothing to
+they are optimized at build time into static files, so they cost nothing to
 serve and never touch a metered image service.
 
 Only use photographs in which no child is identifiable. The site tells parents

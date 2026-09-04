@@ -198,6 +198,36 @@ export const SOURCES = {
     claim:
       'The serious version of the counter-argument. Odgers, reviewing The Anxious Generation, argues the evidence does not show social media causing an epidemic of teenage mental illness and that the likely causes sit elsewhere. Cited so that when these pages say the question is disputed, the dispute is between named researchers on both sides.',
   },
+  disturbedYouTube: {
+    id: 'disturbedYouTube',
+    title: 'Disturbed YouTube for Kids: Characterizing and Detecting Inappropriate Videos Targeting Young Children',
+    authors: 'Papadamou, K., et al.',
+    venue: 'International Conference on Web and Social Media (ICWSM)',
+    year: 2020,
+    url: 'https://arxiv.org/abs/1901.07046',
+    claim:
+      'A large-scale analysis of videos aimed at toddlers, with a classifier built to detect inappropriate ones. Its findings: disturbing videos dressed as content for young children are common on the platform, young children randomly browsing from benign videos are likely to encounter them, and the deployed countermeasures were ineffective at catching them in time. Peer reviewed, from 2020, so it predates the AI wave and describes the human-made version of the problem.',
+  },
+  youngKidsYouTube: {
+    id: 'youngKidsYouTube',
+    title: 'Young Kids and YouTube: How Ads, Toys, and Games Dominate Viewing',
+    authors: 'Radesky, J., et al.',
+    venue: 'Common Sense Media',
+    year: 2020,
+    url: 'https://www.commonsensemedia.org/sites/default/files/research/report/2020_youngkidsyoutube-report_final-release_forweb_1.pdf',
+    claim:
+      'Researchers analyzed more than 1,600 videos actually watched by children aged 8 and under, collected from 183 families. One in four was intended for older audiences, and one in five carried ads, many of them violent or otherwise inappropriate for the child watching. This was real home viewing, no lab task involved, which is what makes the one-in-four number worth taking personally.',
+  },
+  aiSlopKids: {
+    id: 'aiSlopKids',
+    title: 'AI Slop Is Infiltrating Online Children\u2019s Content',
+    authors: 'Undark Magazine',
+    venue: 'Undark',
+    year: 2026,
+    url: 'https://undark.org/2026/03/20/ai-slop-children/',
+    claim:
+      'Reporting on the flood of AI-generated video aimed at toddlers, corroborating an investigation by The 74. One channel posted more than 10,000 videos in seven months, roughly 50 a day, against the roughly 3,900 Sesame Street has posted in 20 years. Documented examples include infants fed whole grapes and honey, children walking in traffic, and a vowel video that displays consonants. YouTube terminated channels only after journalists reported them. This is journalism without peer review, but the examples are shown on screen for anyone to check.',
+  },
   edWeekPhones: {
     id: 'edWeekPhones',
     title: 'Which States Ban or Restrict Cellphones in Schools?',
