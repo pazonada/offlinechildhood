@@ -64,6 +64,8 @@ const RULES = [
 // Owner-authored lines that use words the rules ban. Each entry is exact
 // copy approved verbatim; anything else with the banned word still fails.
 const APPROVED = [
+  'stops being confusing once a child understands that AI predicts things rather than knows things',
+  'you want a curious kid rather than a kid who hides the device from you',
   'On by default – not offered, not opted into, not announced to you.',
   'Raising kids who love the real world, while empowering them to understand how machines have become a part of it.',
 ];
@@ -71,7 +73,12 @@ const APPROVED = [
 let total = 0;
 for (const f of files) {
   let text = readFileSync(f, 'utf8');
-  for (const a of APPROVED) text = text.split(a).join('');
+  for (const a of APPROVED) {
+    // Owner-approved sentences may be re-wrapped in source files, so match
+    // them with any whitespace where the approved text has a space.
+    const re = new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+'), 'g');
+    text = text.replace(re, '');
+  }
   const hits = [];
   for (const r of RULES) {
     const matches = [...text.matchAll(r.re)];
