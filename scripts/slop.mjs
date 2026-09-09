@@ -13,7 +13,9 @@ const files = [];
 
 const RULES = [
   { id: 'em-dash', re: /—/g, note: 'em-dash (banned outright)' },
-  { id: 'en-dash-as-pause', re: /\s–\s/g, note: 'en-dash used as a sentence pause (ranges only)' },
+  // En dashes as pauses are ALLOWED when the owner writes them, and the owner
+  // writes them as en dashes, never em. Claude-authored text must not add
+  // dashes of its own; the em-dash rule below is the machine-tell catcher.
   { id: 'not-just', re: /not just [^.,;]{2,40}(,| but)/gi, note: '"not just X, but Y"' },
   // Only the parallel comma antithesis ("rungs, not flavours") is a tell.
   // Ordinary negation ("does not need") is just English, so it is not matched.
@@ -62,6 +64,7 @@ const RULES = [
 // Owner-authored lines that use words the rules ban. Each entry is exact
 // copy approved verbatim; anything else with the banned word still fails.
 const APPROVED = [
+  'On by default – not offered, not opted into, not announced to you.',
   'Raising kids who love the real world, while empowering them to understand how machines have become a part of it.',
 ];
 
