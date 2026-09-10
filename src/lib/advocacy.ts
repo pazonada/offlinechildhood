@@ -30,14 +30,14 @@ export interface Sheet {
 
 const PHONE_ASKS: Record<Exclude<PhoneChoice, 'fine'>, string> = {
   class:
-    'Phones away during instructional time, collected or pouched, with one policy for the whole school so no single teacher has to enforce it alone.',
+    'Phones away during instructional time, collected or pocketed, with one policy for the whole school so no single teacher has to enforce it alone.',
   bell: 'Phones put away bell to bell, from first period to last, so the policy covers the hallways and the lunchroom where most of the pressure lives.',
   none: 'Personal phones left at home or checked in for the day, with a phone in the front office for anything urgent.',
 };
 
 const DEVICE_ASKS: Record<Exclude<DeviceChoice, 'fine'>, string[]> = {
   guardrails: [
-    'Notifications switched off on school-issued devices, every app, news alerts included.',
+    'Notifications turned off on school-issued devices for every app – news alerts included.',
     'The browser on school-issued devices limited to what schoolwork actually needs.',
     'Assigned reading available on paper for any family that asks for it.',
   ],
@@ -54,10 +54,10 @@ const DEVICE_ASKS: Record<Exclude<DeviceChoice, 'fine'>, string[]> = {
 
 const CLASS_DEVICE_ASKS: Record<Exclude<ClassDeviceChoice, 'fine'>, string[]> = {
   guardrails: [
-    'The browser on shared classroom devices limited to the sites the lesson needs, with the open internet switched on by the teacher for a named purpose and switched off after.',
+    'The browser on shared classroom devices limited to the sites the lesson needs, with the internet enabled by the teacher for a named purpose and turned off after.',
     'Only the apps the lesson calls for enabled, with webcams and microphones off unless the lesson is actually using them.',
     'Personal sign-ins blocked and browsing data cleared between students, so no password gets typed into a machine that remembers it and no cookie follows a kid to the next session.',
-    'An adult who can see the screens whenever devices are out, independent work time included, which is the one guardrail no filter replaces.',
+    'An adult who can see the screens whenever devices are out, independent work time included. This is a guardrail no filter replaces.',
   ],
   reduce: [
     'Shared classroom devices reserved for the work that actually needs them, with paper as the default for reading and writing.',
@@ -66,8 +66,8 @@ const CLASS_DEVICE_ASKS: Record<Exclude<ClassDeviceChoice, 'fine'>, string[]> = 
 
 const AI_ASKS: Record<Exclude<AiChoice, 'fine'>, string> = {
   optin:
-    "AI assistants off by default on student accounts, and switched on per student only with that family's consent, so one kid's device can have it while another's does not.",
-  off: 'AI assistants disabled on student accounts, with a written policy for what would change that and how parents would hear about it first.',
+    "AI agents and assistants off by default on student accounts, and turned on per student only with that family's consent, so one kid's device can have it while another's does not.",
+  off: 'AI agents disabled on student accounts, with a written policy for what would change that and how parents would hear about it first.',
   teach:
     'Where AI tools are on, lessons that teach how they actually work: where they get their material, when they are confidently wrong, and who pays for them.',
 };
@@ -140,22 +140,22 @@ export function buildSheet(sel: Selections): Sheet {
   let script = '';
   if (sel.audience === 'principal') {
     scriptHeading = 'The email to send with this sheet';
-    script = `We are writing about the technology our children use at ${school}. Before anything else, we have three questions: which AI tools and notifications are enabled on the devices our children use, who reviewed those defaults, and can families opt out? The requests on the attached sheet are the changes we are asking for, and each carries its reasons. We would rather work with the school on this than around it, and we are glad to talk with whoever makes these calls.`;
+    script = `We are writing about the technology our children use at ${school}. Before anything else, we have three questions: Which AI tools and notifications are enabled on the devices our children use? Who reviewed those default settings? Can families opt out? The requests on the attached sheet are the changes we are asking for, with justifications for each. We would rather work with the school on this than around it, and we are glad to talk with whomever makes these calls.`;
   } else if (sel.audience === 'board') {
     scriptHeading = 'The message to the board, spoken or sent';
     script = `We are parents at ${school}.${
       sel.phones !== 'fine'
         ? ' Thirty-nine states now restrict phones in schools, so nothing in our requests asks this district to lead the country.'
         : ''
-    } We are asking the board to review what is switched on by default on the technology our children use, to tell parents the reasons, and to consider the requests on our sheet. Each one is a change the district can grant, and we have put it all in writing so it can circulate and be read on its own time.`;
+    } We are asking the board to review what is turned on by default for the technology our children use, to tell parents the reasons, and to consider the requests on our sheet. Each one is a change the district can grant, and we have put it all in writing so it can circulate and be read on its own time.`;
   } else if (sel.audience === 'admin') {
     scriptHeading = 'The email to the administrator';
     script = `We are writing about the technology our children use at ${school}, and we are coming to you because you are closest to how the devices are actually set up. The requests on our sheet are specific settings${
-      howTo.length > 0 ? ', and the page after it names where each one lives' : ''
+      howTo.length > 0 ? ', and the page after it identifies where each one lives' : ''
     }. We would be glad to go through them together, and a written note on what is enabled today would give every parent involved the same facts to start from.`;
   } else {
     scriptHeading = 'The message to another parent';
-    script = `Have you looked at what is switched on for the kids at ${school}? I am going to ask about it in writing, and this sheet is what I am sending. Want to sign it with me? One parent asking is feedback. A few families asking together is an agenda item.`;
+    script = `Have you looked at what is turned on for the kids at ${school}? I am going to ask about it in writing, and this sheet is what I am sending. Want to sign it with me? One parent asking is feedback. A few families asking together is an agenda item.`;
   }
 
   return { asks, evidence, howTo, scriptHeading, script };

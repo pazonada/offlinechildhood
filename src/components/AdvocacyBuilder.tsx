@@ -147,21 +147,21 @@ export default function AdvocacyBuilder() {
         />
         <OptionGrid
           legend="Devices used in class"
-          hint="The shared carts and class sets kids pick up for project work, even when nothing goes home."
+          hint="The shared carts and devices kids pick up for project work, even when nothing goes home."
           options={CLASS_DEVICE_OPTIONS}
           value={classDevices}
           onChange={setClassDevices}
         />
         <OptionGrid
           legend="AI on school accounts"
-          hint="Assistants and chatbots switched on inside school tools."
+          hint="AI agents and chatbots switched on inside school tools."
           options={AI_OPTIONS}
           value={ai}
           onChange={setAi}
         />
         <OptionGrid
           legend="Who are you talking to first?"
-          hint="This picks the script that prints with your sheet."
+          hint="This determines the script that will print alongside your sheet."
           options={AUDIENCE_OPTIONS}
           value={audience}
           onChange={setAudience}
@@ -170,7 +170,7 @@ export default function AdvocacyBuilder() {
         <section className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
           <h2 className="font-display text-[23px] font-extrabold text-navy">Your school's name</h2>
           <p className="mt-1.5 text-[1.03rem] text-ink-soft">
-            Optional. It goes on the sheet and nowhere else; nothing you type leaves your browser.
+            Optional. It goes on the sheet and nowhere else; nothing you type here leaves your browser.
           </p>
           <input
             type="text"

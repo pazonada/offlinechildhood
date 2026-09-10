@@ -209,7 +209,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
 
         <section aria-labeledby="q-worries" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
           <h2 id="q-worries" className="font-display text-[23px] font-extrabold text-navy">What worries you most?</h2>
-          <p className="mt-1.5 text-[1.03rem] text-ink-soft">Pick as many as apply. This orders your plan.</p>
+          <p className="mt-1.5 text-[1.03rem] text-ink-soft">Pick as many as apply. This informs your plan.</p>
           <div className="mt-5 flex flex-wrap gap-2.5">
             {WORRY_OPTIONS.map((o) => {
               const on = worries.includes(o.id);
@@ -233,7 +233,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
         <section aria-labeledby="q-stance" className="rounded-[26px] border-2 border-line bg-surface px-[30px] pb-[30px] pt-7">
           <h2 id="q-stance" className="font-display text-[23px] font-extrabold text-navy">How far do you want to go?</h2>
           <p className="mt-1.5 text-[1.03rem] text-ink-soft">
-            There is no wrong answer. A rule you keep beats a rule you announce.
+            There is no wrong answer. A rule you keep beats a rule you only talk about.
           </p>
           <div className="mt-5 grid gap-3 md:grid-cols-3">
             {STANCE_OPTIONS.map((o) => {

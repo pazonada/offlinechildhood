@@ -87,7 +87,7 @@ export function householdRules(opts: {
   const rules: { rule: string; why: string }[] = [
     {
       rule: 'Every device charges overnight in a shared room, adults included.',
-      why: 'The clearest finding in this whole field is that the screens which cost children sleep are the portable ones that follow them to bed. A rule that applies to one person in the house gets argued about every night.',
+      why: 'The clearest finding in this whole field is that the screens which cost children sleep are the portable ones that follow them to bed. A rule that applies to only one person in the house gets argued about every night.',
     },
     {
       rule: 'Screens stay in shared rooms. Bedrooms stay screen-free.',
@@ -98,19 +98,19 @@ export function householdRules(opts: {
   if (opts.hasBedroomDevices) {
     rules.push({
       rule: 'Move the device that is currently in a bedroom this week.',
-      why: 'This is the single highest-value change available to you right now, and it costs nothing.',
+      why: 'This is the single highest-value change available to you right now.',
     });
   }
   if (opts.hasSchoolDevice) {
     rules.push({
-      rule: 'Email the school and ask what is switched on inside the device it sent home.',
-      why: 'School platforms turn features on by default, AI assistants included, and the class teacher usually had no say. Three questions, in writing: which AI tools are enabled, who can see what my child types into them, and can I opt out.',
+      rule: 'Email the school and ask what is turned on inside the device it sent home.',
+      why: 'School platforms turn features on by default, AI agents included, and the class teacher usually had no say. Three questions, in writing: which AI tools are enabled, who can see what my child types into them, and can I opt out.',
     });
   }
 
   rules.push({
     rule: 'One evening a week with nothing on, for everybody.',
-    why: 'It sets a floor that does not depend on negotiating each individual request, and it is far easier to defend than a daily time limit.',
+    why: 'It sets a standard that does not depend on negotiating each individual request, and it is far easier to defend than a daily time limit.',
   });
 
   if (opts.wanted !== 'start') {
@@ -123,7 +123,7 @@ export function householdRules(opts: {
   if (opts.anyUnder13) {
     rules.push({
       rule: 'Find two other families who will hold the same line.',
-      why: 'The isolation argument is the strongest one your kid has, and it collapses as soon as a few families agree. This is the one step that changes the odds rather than the rules.',
+      why: 'The isolation argument is the strongest one your kid has, and it collapses as soon as a few families agree. This is the one step that changes the odds.',
     });
   }
 

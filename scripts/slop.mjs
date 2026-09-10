@@ -64,6 +64,7 @@ const RULES = [
 // Owner-authored lines that use words the rules ban. Each entry is exact
 // copy approved verbatim; anything else with the banned word still fails.
 const APPROVED = [
+  'a change to the setup rather than a promise to resist',
   'has had a demonstration, not instruction',
   'stops being confusing once a child understands that AI predicts things rather than knows things',
   'you want a curious kid rather than a kid who hides the device from you',
