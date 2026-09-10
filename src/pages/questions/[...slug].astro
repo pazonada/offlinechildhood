@@ -1,0 +1,87 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Sources from '../../components/Sources.astro';
+
+export async function getStaticPaths() {
+  const questions = await getCollection('questions');
+  return questions.map((q) => ({ params: { slug: q.id }, props: { question: q } }));
+}
+
+const { question } = Astro.props;
+const { Content } = await render(question);
+const q = question.data;
+const decisions = await Promise.all(q.relatedDecisions.map((ref) => getEntry(ref)));
+const concepts = await Promise.all(q.relatedConcepts.map((ref) => getEntry(ref)));
+const related = [
+  ...decisions.filter(Boolean).map((d) => ({ kind: 'Decision', href: `/decisions/${d!.id}`, title: d!.data.question })),
+  ...concepts.filter(Boolean).map((c) => ({ kind: 'Conversation', href: `/conversations/${c!.id}`, title: c!.data.title })),
+];
+---
+
+<Base title={q.question} description={q.description}>
+  <article>
+    <header class="border-b border-line bg-surface-2">
+      <div class="article-col pb-[54px] pt-10">
+        <a
+          href="/questions"
+          class="font-label text-[13px] font-bold tracking-[0.04em] text-ink-soft transition hover:text-navy"
+        >
+          &larr; All questions
+        </a>
+        <p class="mb-4 mt-[30px] font-label text-xs font-bold uppercase tracking-[0.22em] text-primary-text">
+          {q.asker} asked
+        </p>
+        <h1 class="text-balance font-display text-[clamp(32px,4vw,48px)] font-extrabold leading-[1.08] tracking-[-0.015em] text-navy">
+          {q.question}
+        </h1>
+      </div>
+    </header>
+
+    <div class="article-col pt-4">
+      <div class="prose">
+        <Content />
+      </div>
+
+      {related.length > 0 && (
+        <section class="mt-[72px]">
+          <h2 class="sun-heading mb-[22px] font-display text-[29px] font-extrabold text-navy">
+            Where this is covered in depth
+          </h2>
+          <ul class="flex flex-col gap-6">
+            {related.map((r) => (
+              <li class="grid grid-cols-[6px_minmax(0,1fr)] gap-[22px]">
+                <span class="rounded-[3px] bg-accent" aria-hidden="true"></span>
+                <div>
+                  <p class="mb-2 font-label text-[11.5px] font-bold uppercase tracking-[0.2em] text-ink-soft">
+                    {r.kind}
+                  </p>
+                  <a
+                    href={r.href}
+                    class="text-balance text-[21px] font-semibold leading-[1.34] text-primary-text underline decoration-panel-blue-line-strong decoration-[1.5px] underline-offset-4 transition hover:decoration-primary"
+                  >
+                    {r.title}
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <section class="mb-2 mt-[72px] rounded-[28px] border-2 border-accent bg-panel-accent px-9 pb-7 pt-[26px]">
+        <h2 class="font-display text-[22px] font-extrabold text-navy">Navigating something yourself?</h2>
+        <p class="mt-2.5 text-[1.03rem] leading-[1.66] text-ink">
+          Send it to the column. We read everything, and anything we publish is anonymized first.{' '}
+          <a href="/questions" class="font-semibold text-primary-text underline underline-offset-4 hover:text-navy">Ask us</a>.
+        </p>
+      </section>
+    </div>
+
+    {q.sources.length > 0 && (
+      <div class="article-col pt-[34px]">
+        <Sources ids={q.sources} />
+      </div>
+    )}
+  </article>
+</Base>
