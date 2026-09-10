@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import Container from '../components/Container.astro';
+---
+
+<Base
+  title="Search"
+  description="Search every decision, conversation, and page on Offline Childhood."
+  noSearchIndex={true}
+>
+  <header class="border-b border-line bg-surface-2 py-12">
+    <Container>
+      <h1 class="font-display text-[clamp(34px,4vw,48px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">
+        Search the site
+      </h1>
+      <p class="mt-4 max-w-[40em] text-lg leading-relaxed text-ink-soft">
+        Every decision, conversation, and page. Try a device, a worry, or a kid's question:
+        phone, sleep, Roblox, is it real.
+      </p>
+    </Container>
+  </header>
+
+  <div class="mx-auto w-full max-w-[820px] px-6 pb-24 pt-10 sm:px-10">
+    <div id="search"></div>
+    <noscript>
+      <p class="text-ink-soft">
+        Search needs JavaScript. The <a href="/decisions" class="underline underline-offset-4">decisions</a>{' '}
+        and <a href="/conversations" class="underline underline-offset-4">conversations</a> indexes list everything.
+      </p>
+    </noscript>
+  </div>
+</Base>
+
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', () => {
+    if (typeof PagefindUI === 'undefined') return;
+    new PagefindUI({
+      element: '#search',
+      showSubResults: true,
+      showImages: false,
+      autofocus: true,
+      translations: { placeholder: 'Search the site' },
+    });
+    // Arriving with ?q= runs the search straight away.
+    const q = new URLSearchParams(location.search).get('q');
+    if (q) {
+      const input = document.querySelector('#search input');
+      if (input) {
+        input.value = q;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+  });
+</script>
+
+<style is:global>
+  /* Pagefind's UI, dressed in the house tokens. */
+  #search {
+    --pagefind-ui-primary: var(--navy);
+    --pagefind-ui-text: var(--ink);
+    --pagefind-ui-background: var(--surface);
+    --pagefind-ui-border: var(--line-strong);
+    --pagefind-ui-tag: var(--panel-blue);
+    --pagefind-ui-border-width: 1.5px;
+    --pagefind-ui-border-radius: 14px;
+    --pagefind-ui-font: inherit;
+  }
+  #search .pagefind-ui__search-input {
+    font-weight: 500;
+  }
+  #search .pagefind-ui__result-title {
+    font-family: var(--font-display);
+  }
+  #search .pagefind-ui__result-link {
+    color: var(--primary-text);
+  }
+</style>

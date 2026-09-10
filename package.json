@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/fix-cache-headers.mjs",
+    "build": "astro build && pagefind --site .vercel/output/static && node scripts/fix-cache-headers.mjs",
     "preview": "astro preview",
     "check": "astro check"
   },
@@ -29,6 +29,7 @@
   "devDependencies": {
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
+    "pagefind": "^1.5.2",
     "typescript": "^5.9.3"
   }
 }

@@ -9,10 +9,11 @@ interface Props {
   /** Omit the site-name suffix when the page title already carries it. */
   bareTitle?: boolean;
   ogTitle?: string;
+  noSearchIndex?: boolean;
   ogDescription?: string;
 }
 
-const { title, description, bareTitle = false, ogTitle, ogDescription } = Astro.props;
+const { title, description, bareTitle = false, ogTitle, ogDescription, noSearchIndex = false } = Astro.props;
 const fullTitle = bareTitle ? title : `${title} · Offline Childhood`;
 // LinkedIn cards render only image, title, and domain, so a page can put its
 // one-sentence description in the social title without touching the tab title.
@@ -57,7 +58,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <body class="min-h-screen flex flex-col">
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
-    <main id="main" class="flex-1">
+    <main id="main" class="flex-1" {...(noSearchIndex ? {} : { "data-pagefind-body": true })}>
       <slot />
     </main>
     <Footer />
