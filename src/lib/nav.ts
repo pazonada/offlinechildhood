@@ -13,7 +13,6 @@ export const primaryNav: NavItem[] = [
 ];
 
 export const secondaryNav: NavItem[] = [
-  { href: '/questions', label: 'Questions' },
   { href: '/teachers', label: 'For teachers' },
   { href: '/picks', label: 'What to buy' },
   { href: '/about', label: 'About' },
@@ -23,5 +22,6 @@ export const footerNav: NavItem[] = [
   ...primaryNav,
   ...secondaryNav,
   { href: '/trusted', label: 'People we read' },
+  { href: '/suggest', label: 'Suggest a topic' },
   { href: 'https://www.reddit.com/r/OfflineChildhood/', label: 'Community' },
 ];

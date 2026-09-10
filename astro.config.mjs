@@ -42,6 +42,7 @@ export default defineConfig({
    * handled by prerendered forwarding pages instead. See src/lib/moved.ts.
    */
   redirects: {
+    '/questions': '/suggest',
     // Phone and device entries point at the decision, which is what the
     // visitor was actually weighing.
     '/products-services/gabb-wireless-phones-amp-smartwatch': '/decisions/first-phone',

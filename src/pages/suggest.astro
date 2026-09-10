@@ -1,31 +1,26 @@
 ---
-import { getCollection } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import Container from '../../components/Container.astro';
-
-const questions = (await getCollection('questions')).sort(
-  (a, b) => b.data.updated.getTime() - a.data.updated.getTime(),
-);
+import Base from '../layouts/Base.astro';
+import Container from '../components/Container.astro';
 ---
 
 <Base
-  title="Questions"
-  description="Send us a situation you're navigating with your kids and screens, and read our answers to questions other readers have asked. Free, and nothing is published without editing out anything identifying."
+  title="Suggest a topic"
+  description="Tell us what the site should cover next: a decision you're facing, a scenario we haven't written about, or a subject your family needs explained. Free, and nothing you send is published."
 >
   <header class="border-b border-line bg-surface-2 py-14">
     <Container>
       <div class="max-w-[46em]">
         <p class="mb-3.5 font-label text-xs font-bold uppercase tracking-[0.22em] text-primary-text">
-          The advice column
+          Help us build this
         </p>
         <h1 class="font-display text-[clamp(38px,4vw,52px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">
-          Ask us
+          What should we cover?
         </h1>
         <p class="mt-5 text-lg leading-relaxed text-ink-soft">
-          Navigating a situation the site doesn't cover? A school policy, a grandparent with an
-          iPad, a kid who found a loophole? Send it to us. We read everything, answer the
-          questions other families are likely facing too, and publish those answers here with
-          anything identifying edited out.
+          The site grows by covering what families are actually navigating. If you came here for
+          something and did not find it, or you are in the middle of a situation the site should
+          have a page about, describe it below. We read everything, and the best submissions
+          become new decisions, conversations, and answers on the site.
         </p>
       </div>
     </Container>
@@ -33,22 +28,23 @@ const questions = (await getCollection('questions')).sort(
 
   <div class="mx-auto w-full max-w-[900px] px-6 pb-24 pt-12 sm:px-10">
     <section class="rounded-[28px] border-2 border-accent bg-panel-accent px-9 pb-8 pt-[30px]">
-      <h2 class="font-display text-[24px] font-extrabold text-navy">Send a question</h2>
+      <h2 class="font-display text-[24px] font-extrabold text-navy">Suggest a topic or scenario</h2>
       <p class="mt-2 text-[1.01rem] leading-[1.62] text-ink">
-        Leave out names, schools, and anything that would identify your kid. If you include your
-        email, we use it only to reply, and it is never published.
+        Leave out names, schools, and anything that would identify your kid. Nothing you send is
+        published; it goes to our inbox and shapes what we write next. If you include your email,
+        we use it only to follow up.
       </p>
 
       <form id="ask-form" class="mt-6 flex flex-col gap-4">
         <div class="flex flex-col gap-1.5">
-          <label for="ask-situation" class="text-sm font-semibold text-ink">The situation</label>
+          <label for="ask-topic" class="text-sm font-semibold text-ink">The topic or scenario</label>
           <textarea
-            id="ask-situation"
-            name="situation"
+            id="ask-topic"
+            name="topic"
             rows="5"
             maxlength="3000"
             required
-            placeholder="What is happening, what you have tried, and what you are weighing."
+            placeholder="What you're navigating, or what you wish this site had a page about."
             class="w-full rounded-xl border-[1.5px] border-accent/60 bg-surface px-3.5 py-3 text-[1rem] leading-[1.6] text-ink placeholder:text-ink-soft/70"
           ></textarea>
         </div>
@@ -66,7 +62,7 @@ const questions = (await getCollection('questions')).sort(
             />
           </div>
           <div class="flex flex-col gap-1.5">
-            <label for="ask-email" class="text-sm font-semibold text-ink">Your email <span class="font-normal text-ink-soft">(optional, for a reply)</span></label>
+            <label for="ask-email" class="text-sm font-semibold text-ink">Your email <span class="font-normal text-ink-soft">(optional, for a follow-up)</span></label>
             <input
               id="ask-email"
               name="email"
@@ -88,8 +84,7 @@ const questions = (await getCollection('questions')).sort(
 
       <p id="ask-ok" hidden class="mt-4 flex items-start gap-2 leading-relaxed text-green-deep">
         <svg viewBox="0 0 20 20" class="mt-1 h-[17px] w-[17px] shrink-0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10.5 4 4 8-9" /></svg>
-        Thank you. We read every question, and if yours gets published, it will be anonymized
-        first.
+        Thank you. We read every suggestion, and the best ones become pages.
       </p>
       <p id="ask-err" hidden class="mt-4 leading-relaxed text-coral" role="alert">
         That did not send. Please try again, or email{' '}
@@ -97,47 +92,19 @@ const questions = (await getCollection('questions')).sort(
       </p>
     </section>
 
-    <section class="mt-16">
-      <h2 class="sun-heading mb-2 font-display text-[33px] font-extrabold leading-[1.14] text-navy">
-        Answered so far
-      </h2>
-
-      {questions.length === 0 ? (
-        <p class="mt-4 max-w-[40em] text-[1.06rem] leading-[1.7] text-ink-soft">
-          This column is brand new, so the first answers are still being written. Send a question
-          above and help us start it.
-        </p>
-      ) : (
-        <ul class="mt-6 flex flex-col gap-0.5">
-          {questions.map((q) => (
-            <li class="border-b border-line py-6">
-              <p class="mb-2 font-label text-[11.5px] font-bold uppercase tracking-[0.2em] text-ink-soft">
-                {q.data.asker}
-              </p>
-              <a
-                href={`/questions/${q.id}`}
-                class="text-balance text-[22px] font-semibold leading-[1.32] text-primary-text underline decoration-panel-blue-line-strong decoration-[1.5px] underline-offset-4 transition hover:decoration-primary"
-              >
-                {q.data.question}
-              </a>
-              <p class="mt-2.5 max-w-[44em] text-[1rem] leading-relaxed text-ink-soft">{q.data.description}</p>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
-    <section class="mt-16 rounded-[28px] border-[1.5px] border-panel-blue-line bg-panel-blue px-9 pb-8 pt-[30px]">
-      <h2 class="font-display text-[24px] font-extrabold text-navy">Or talk it over with other parents</h2>
+    <section class="mt-14 rounded-[28px] border-[1.5px] border-panel-blue-line bg-panel-blue px-9 pb-8 pt-[30px]">
+      <h2 class="font-display text-[24px] font-extrabold text-navy">Need advice right now?</h2>
       <p class="mt-2.5 max-w-[44em] text-[1.03rem] leading-[1.7] text-ink">
-        Some situations want a conversation more than a column. We just opened{' '}
+        This form feeds the site; it is not a conversation. For advice from other parents,
+        caregivers, and teachers, bring your situation to{' '}
         <a
           href="https://www.reddit.com/r/OfflineChildhood/"
           target="_blank"
           rel="noopener"
           class="font-semibold text-primary-text underline underline-offset-4 hover:text-navy"
-        >r/OfflineChildhood</a>{' '}
-        for exactly that. It is brand new, which means the first families there get to set its
-        tone. Same rules as here: no names, no photos of kids, nothing identifying.
+        >r/OfflineChildhood</a>.
+        It is brand new, which means the first families there get to set its tone. Same rules as
+        here: no names, no photos of kids, nothing identifying.
       </p>
     </section>
   </div>
@@ -152,11 +119,11 @@ const questions = (await getCollection('questions')).sort(
     e.preventDefault();
     const data = new FormData(form);
     const payload = {
-      situation: String(data.get('situation') ?? ''),
+      topic: String(data.get('topic') ?? ''),
       ages: String(data.get('ages') ?? ''),
       email: String(data.get('email') ?? ''),
     };
-    if (!payload.situation.trim()) return;
+    if (!payload.topic.trim()) return;
 
     if (ok) ok.hidden = true;
     if (err) err.hidden = true;

@@ -178,25 +178,4 @@ const experts = defineCollection({
   }),
 });
 
-/**
- * The advice column. Each entry is one reader question, anonymized, with the
- * answer as the body. Publishing one is deliberate: drop an .mdx file here,
- * and the Questions page picks it up. Nothing on the site stores or displays
- * a submission automatically.
- */
-const questions = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/content/questions' }),
-  schema: z.object({
-    /** The question as asked, edited for length and to remove anything identifying. */
-    question: z.string(),
-    /** Who asked, anonymized: "A parent of a 7-year-old", "A middle school teacher". */
-    asker: z.string(),
-    description: z.string(),
-    updated: z.coerce.date(),
-    sources: z.array(z.enum(SOURCE_IDS)).default([]),
-    relatedDecisions: z.array(reference('decisions')).default([]),
-    relatedConcepts: z.array(reference('concepts')).default([]),
-  }),
-});
-
-export const collections = { decisions, concepts, picks, experts, questions };
+export const collections = { decisions, concepts, picks, experts };
