@@ -30,7 +30,7 @@ export interface Sheet {
 
 const PHONE_ASKS: Record<Exclude<PhoneChoice, 'fine'>, string> = {
   class:
-    'Phones away during instructional time, collected or pocketed, with one policy for the whole school so no single teacher has to enforce it alone.',
+    'Phones away during instructional time, collected, with one policy for the whole school so no single teacher has to enforce it alone.',
   bell: 'Phones put away bell to bell, from first period to last, so the policy covers the hallways and the lunchroom where most of the pressure lives.',
   none: 'Personal phones left at home or checked in for the day, with a phone in the front office for anything urgent.',
 };
