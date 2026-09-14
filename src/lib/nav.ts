@@ -27,7 +27,7 @@ export const navGroups: NavGroup[] = [
     ],
   },
   {
-    label: 'Teachers',
+    label: 'For teachers',
     items: [
       { href: '/teachers', label: 'Lesson plans', blurb: 'Thirteen classroom activities, one lesson each' },
       { href: '/conversations', label: 'Conversations', blurb: 'Every idea, written for four age bands' },
