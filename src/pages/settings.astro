@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Container from '../components/Container.astro';
 import { DEVICES } from '../lib/devices';
+import couchTablet from '../assets/photos/annie-spratt-eD5aTzX2KTI-unsplash.jpg';
 
 const LEVERS = [
   {
@@ -35,19 +37,31 @@ const LEVERS = [
 >
   <header class="border-b border-line bg-surface-2 py-14">
     <Container>
-      <div class="max-w-[46em]">
-        <p class="mb-3.5 font-label text-xs font-bold uppercase tracking-[0.22em] text-primary-text">
-          The control panel
-        </p>
-        <h1 class="font-display text-[clamp(38px,4vw,52px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">
-          What you can actually control
-        </h1>
-        <p class="mt-5 text-lg leading-relaxed text-ink-soft">
-          Every device in your house has parental controls, but they go overlooked because
-          they're scattered across menus that get renamed every year. Underneath the menus,
-          every platform offers the same five levers, which you can apply to any settings
-          screen, on any device, including ones that don't exist yet.
-        </p>
+      <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <div>
+          <p class="mb-3.5 font-label text-xs font-bold uppercase tracking-[0.22em] text-primary-text">
+            The control panel
+          </p>
+          <h1 class="font-display text-[clamp(38px,4vw,52px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">
+            What you can actually control
+          </h1>
+          <p class="mt-5 text-lg leading-relaxed text-ink-soft">
+            Every device in your house has parental controls, but they go overlooked because
+            they're scattered across menus that get renamed every year. Underneath the menus,
+            every platform offers the same five levers, which you can apply to any settings
+            screen, on any device, including ones that don't exist yet.
+          </p>
+        </div>
+
+        <div class="overflow-hidden rounded-[240px_240px_24px_24px] bg-surface-3">
+          <Image
+            src={couchTablet}
+            alt="A child curled on a teal couch watches a tablet propped against their knees, snack in hand, boxes of candy in the foreground."
+            widths={[520, 1040]}
+            sizes="(min-width: 768px) 480px, 92vw"
+            class="h-[400px] w-full object-cover object-[38%_30%]"
+          />
+        </div>
       </div>
     </Container>
   </header>
