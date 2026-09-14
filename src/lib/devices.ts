@@ -46,7 +46,7 @@ export const DEVICES: Device[] = [
       { lever: 'Other people', detail: 'No single switch; contact controls live inside each app, so this lever is app-by-app work.' },
     ],
     linkLabel: "Google's own Family Link guide",
-    url: 'https://support.google.com/familylink/',
+    url: 'https://families.google/familylink/',
   },
   {
     id: 'fire-tablet',
@@ -74,7 +74,7 @@ export const DEVICES: Device[] = [
       { lever: 'Other people', detail: 'Not applicable.' },
     ],
     linkLabel: "Roku's own parental controls page",
-    url: 'https://support.roku.com/article/208756478',
+    url: 'https://support.roku.com/article/set-parental-controls',
   },
   {
     id: 'apple-tv',
@@ -144,6 +144,6 @@ export const DEVICES: Device[] = [
       { lever: 'Other people', detail: 'App-by-app, same as Android.' },
     ],
     linkLabel: "Google's own Family Link guide",
-    url: 'https://support.google.com/familylink/',
+    url: 'https://families.google/familylink/',
   },
 ];
