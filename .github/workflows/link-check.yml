@@ -1,0 +1,57 @@
+name: Weekly link check
+
+on:
+  schedule:
+    # Mondays, 13:00 UTC (morning US Eastern).
+    - cron: '0 13 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check every link on the live site
+        id: check
+        run: |
+          set +e
+          node scripts/check-links.mjs > report.md
+          echo "failed=$?" >> "$GITHUB_OUTPUT"
+          cat report.md
+      - name: File an issue when something is broken
+        if: steps.check.outputs.failed != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('report.md', 'utf8');
+            const title = `Broken links on offlinechildhood.com (${new Date().toISOString().slice(0, 10)})`;
+            const { data: open } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'link-check',
+            });
+            if (open.length > 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: open[0].number,
+                body: `Still broken as of the latest run:\n\n${body}`,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['link-check'],
+              });
+            }

@@ -10,7 +10,8 @@
     "dev": "astro dev",
     "build": "astro build && pagefind --site .vercel/output/static && node scripts/fix-cache-headers.mjs",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "check-links": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.6",
