@@ -32,7 +32,7 @@ const CLASS_DEVICE_OPTIONS: { id: ClassDeviceChoice; label: string; blurb: strin
 
 const AI_OPTIONS: { id: AiChoice; label: string; blurb: string }[] = [
   { id: 'fine', label: 'Fine as it is', blurb: 'AI on school accounts is not your concern.' },
-  { id: 'optin', label: 'Off by default', blurb: 'Switched on per student, only with parent consent.' },
+  { id: 'optin', label: 'Off by default', blurb: 'Turned on per student, only with parent consent.' },
   { id: 'off', label: 'Off entirely', blurb: 'Disabled on student accounts, policy in writing.' },
   { id: 'teach', label: 'On, but taught', blurb: 'Keep the tools and teach how they actually work.' },
 ];
@@ -154,7 +154,7 @@ export default function AdvocacyBuilder() {
         />
         <OptionGrid
           legend="AI on school accounts"
-          hint="AI agents and chatbots switched on inside school tools."
+          hint="AI agents and chatbots turned on inside school tools."
           options={AI_OPTIONS}
           value={ai}
           onChange={setAi}

@@ -176,7 +176,7 @@ export const SOURCES = {
     year: 2026,
     url: 'https://www.alabamaag.gov/attorney-general-marshall-announces-12-2-million-settlement-with-roblox-to-ensure-child-safety/',
     claim:
-      'A settlement announced on 21 April 2026 requiring Roblox to verify the age of all users, to stop adults and under sixteens chatting unless they are identified as trusted friends, to let parents restrict transfers of in-game currency from adults, and to leave communications involving minors unencrypted for law enforcement. A settlement is not a finding of wrongdoing. What it establishes for a parent is that these controls now exist and can be switched on.',
+      'A settlement announced on 21 April 2026 requiring Roblox to verify the age of all users, to stop adults and under sixteens chatting unless they are identified as trusted friends, to let parents restrict transfers of in-game currency from adults, and to leave communications involving minors unencrypted for law enforcement. A settlement is not a finding of wrongdoing. What it establishes for a parent is that these controls now exist and can be turned on.',
   },
   technoference: {
     id: 'technoference',

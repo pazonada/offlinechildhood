@@ -81,10 +81,11 @@ export function stanceFor(decision: PlanDecision, wanted: StanceId): PlanStance 
 export function householdRules(opts: {
   hasBedroomDevices: boolean;
   hasSchoolDevice: boolean;
+  hasKidDevice: boolean;
   wanted: StanceId;
   anyUnder13: boolean;
-}): { rule: string; why: string }[] {
-  const rules: { rule: string; why: string }[] = [
+}): { rule: string; why: string; href?: string; hrefLabel?: string }[] {
+  const rules: { rule: string; why: string; href?: string; hrefLabel?: string }[] = [
     {
       rule: 'Every device charges overnight in a shared room, adults included.',
       why: 'The clearest finding in this whole field is that the screens which cost children sleep are the portable ones that follow them to bed. A rule that applies to only one person in the house gets argued about every night.',
@@ -99,6 +100,14 @@ export function householdRules(opts: {
     rules.push({
       rule: 'Move the device that is currently in a bedroom this week.',
       why: 'This is the single highest-value change available to you right now.',
+    });
+  }
+  if (opts.hasKidDevice) {
+    rules.push({
+      rule: 'Do the child-account setup on every device your kid uses.',
+      why: 'A child account is the lever behind every other control: time, content, purchases, and contacts. Without one, the settings do not exist.',
+      href: '/settings',
+      hrefLabel: 'The five levers, device by device',
     });
   }
   if (opts.hasSchoolDevice) {

@@ -71,6 +71,7 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
       householdRules({
         hasBedroomDevices: devices.includes('bedroom'),
         hasSchoolDevice: devices.includes('school-laptop'),
+        hasKidDevice: ['tablet', 'phone', 'console'].some((d) => devices.includes(d)),
         wanted,
         anyUnder13: validChildren.some((c) => (c.age ?? 0) < 13),
       }),
@@ -303,7 +304,17 @@ export default function PlanBuilder({ decisions, concepts }: Props) {
                   </span>
                   <div>
                     <p className="mb-2 font-display text-[19px] font-extrabold leading-[1.34] text-navy">{r.rule}</p>
-                    <p className="text-[1.03rem] leading-[1.64] text-ink-soft">{r.why}</p>
+                    <p className="text-[1.03rem] leading-[1.64] text-ink-soft">
+                      {r.why}
+                      {r.href && (
+                        <>
+                          {' '}
+                          <a href={r.href} className="font-semibold text-primary-text underline underline-offset-4">
+                            {r.hrefLabel}
+                          </a>
+                        </>
+                      )}
+                    </p>
                   </div>
                 </li>
               ))}

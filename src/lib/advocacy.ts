@@ -104,7 +104,7 @@ export function buildSheet(sel: Selections): Sheet {
   }
   if (sel.ai === 'optin' || sel.ai === 'off') {
     evidence.push({
-      text: "When Google expanded its Gemini AI to school accounts for students of all ages, it arrived switched on by default, controlled only by the district's administrator, with no teacher-level switch and no parental notification.",
+      text: "When Google expanded its Gemini AI to school accounts for students of all ages, it arrived turned on by default, controlled only by the district's administrator, with no teacher-level switch and no parental notification.",
       source: SOURCES.geminiClassroom,
     });
   }
