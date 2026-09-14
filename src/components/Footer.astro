@@ -3,9 +3,9 @@ import Container from './Container.astro';
 import { footerNav } from '../lib/nav';
 const year = new Date().getFullYear();
 
-// Mockup groups the links four and three; footerNav is already in that order.
-const colA = footerNav.slice(0, 4);
-const colB = footerNav.slice(4);
+// Two right-pinned columns, five and six.
+const colA = footerNav.slice(0, 5);
+const colB = footerNav.slice(5);
 ---
 
 <footer class="mt-[84px] bg-navy text-on-navy">

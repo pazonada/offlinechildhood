@@ -1,9 +1,10 @@
 ---
 import Container from './Container.astro';
-import { primaryNav, secondaryNav } from '../lib/nav';
+import { navGroups } from '../lib/nav';
 
 const path = Astro.url.pathname;
 const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`);
+const groupActive = (items: { href: string }[]) => items.some((i) => isCurrent(i.href));
 ---
 
 <header class="sticky top-0 z-50 border-b border-line bg-page/85 backdrop-blur-md">
@@ -22,31 +23,42 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
         Offline Childhood
       </a>
 
-      <nav aria-label="Main" class="hidden items-center gap-1 lg:flex">
-        {primaryNav.map((item) => (
-          <a
-            href={item.href}
-            aria-current={isCurrent(item.href) ? 'page' : undefined}
-            class:list={[
-              'rounded-full px-3.5 py-2 font-label text-[13px] font-semibold tracking-[0.04em] transition',
-              isCurrent(item.href) ? 'bg-surface-3 text-navy' : 'text-ink-soft hover:bg-surface-3 hover:text-navy',
-            ]}
-          >
-            {item.label}
-          </a>
-        ))}
-        <span class="mx-1 h-5 w-px bg-line" aria-hidden="true"></span>
-        {secondaryNav.map((item) => (
-          <a
-            href={item.href}
-            aria-current={isCurrent(item.href) ? 'page' : undefined}
-            class:list={[
-              'rounded-full px-4 py-2 text-[0.95rem] font-medium transition',
-              isCurrent(item.href) ? 'bg-surface-3 text-ink' : 'text-ink-soft hover:bg-surface-2 hover:text-ink',
-            ]}
-          >
-            {item.label}
-          </a>
+      <nav aria-label="Main" class="hidden items-center gap-1.5 lg:flex">
+        {navGroups.map((group) => (
+          <div class="relative" data-menu>
+            <button
+              type="button"
+              aria-expanded="false"
+              aria-haspopup="true"
+              class:list={[
+                'flex items-center gap-1.5 rounded-full px-4 py-2 font-label text-[14px] font-semibold tracking-[0.03em] transition',
+                groupActive(group.items) ? 'bg-surface-3 text-navy' : 'text-ink-soft hover:bg-surface-3 hover:text-navy',
+              ]}
+            >
+              {group.label}
+              <svg aria-hidden="true" viewBox="0 0 12 12" class="h-3 w-3 transition" data-chevron fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m2.5 4.5 3.5 3.5 3.5-3.5" />
+              </svg>
+            </button>
+            <div
+              hidden
+              data-panel
+              class="absolute left-0 top-full mt-2 w-64 rounded-[18px] border-2 border-line bg-surface p-2"
+            >
+              {group.items.map((item) => (
+                <a
+                  href={item.href}
+                  aria-current={isCurrent(item.href) ? 'page' : undefined}
+                  class:list={[
+                    'block rounded-xl px-3.5 py-2.5 text-[0.98rem] font-medium transition',
+                    isCurrent(item.href) ? 'bg-surface-3 text-navy' : 'text-ink hover:bg-surface-2 hover:text-navy',
+                  ]}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
         ))}
         <a
           href="/search"
@@ -65,28 +77,28 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
       </nav>
 
       <div class="flex items-center gap-2 lg:hidden">
-      <a
-        href="/search"
-        class="grid h-10 w-10 place-items-center rounded-full border border-line text-ink"
-      >
-        <span class="sr-only">Search</span>
-        <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <circle cx="11" cy="11" r="6.5" />
-          <path d="m20 20-4.4-4.4" />
-        </svg>
-      </a>
-      <button
-        id="menu-toggle"
-        type="button"
-        class="grid h-10 w-10 place-items-center rounded-full border border-line text-ink"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        aria-label="Open menu"
-      >
-        <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
-      </button>
+        <a
+          href="/search"
+          class="grid h-10 w-10 place-items-center rounded-full border border-line text-ink"
+        >
+          <span class="sr-only">Search</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="11" cy="11" r="6.5" />
+            <path d="m20 20-4.4-4.4" />
+          </svg>
+        </a>
+        <button
+          id="menu-toggle"
+          type="button"
+          class="grid h-10 w-10 place-items-center rounded-full border border-line text-ink"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Open menu"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
       </div>
     </div>
   </Container>
@@ -94,17 +106,19 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
   <div id="mobile-menu" hidden class="border-t border-line bg-page lg:hidden">
     <Container>
       <nav aria-label="Main (mobile)" class="flex flex-col gap-1 py-4">
-        {primaryNav.map((item) => (
-          <a href={item.href} class="rounded-xl px-3 py-3 hover:bg-surface-2">
-            <span class="block font-display font-bold text-navy">{item.label}</span>
-            {item.blurb && <span class="block text-sm text-ink-soft">{item.blurb}</span>}
-          </a>
-        ))}
-        <span class="my-2 h-px bg-line" aria-hidden="true"></span>
-        {secondaryNav.map((item) => (
-          <a href={item.href} class="rounded-xl px-3 py-2.5 font-medium text-ink-soft hover:bg-surface-2 hover:text-ink">
-            {item.label}
-          </a>
+        {navGroups.map((group, gi) => (
+          <>
+            {gi > 0 && <span class="my-2 h-px bg-line" aria-hidden="true"></span>}
+            <p class="px-3 pt-1 font-label text-[11px] font-bold uppercase tracking-[0.18em] text-ink-soft">
+              {group.label}
+            </p>
+            {group.items.map((item) => (
+              <a href={item.href} class="rounded-xl px-3 py-2.5 hover:bg-surface-2">
+                <span class="block font-display font-bold text-navy">{item.label}</span>
+                {item.blurb && <span class="block text-sm text-ink-soft">{item.blurb}</span>}
+              </a>
+            ))}
+          </>
         ))}
       </nav>
     </Container>
@@ -112,6 +126,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
 </header>
 
 <script>
+  // Mobile hamburger.
   const btn = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
   btn?.addEventListener('click', () => {
@@ -119,5 +134,31 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
     btn.setAttribute('aria-expanded', String(!open));
     btn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
     if (menu) menu.hidden = open;
+  });
+
+  // Desktop dropdowns: click to open, click elsewhere or Escape to close.
+  const menus = Array.from(document.querySelectorAll<HTMLElement>('[data-menu]'));
+
+  const setOpen = (m: HTMLElement, open: boolean) => {
+    const b = m.querySelector('button');
+    const p = m.querySelector<HTMLElement>('[data-panel]');
+    const c = m.querySelector<HTMLElement>('[data-chevron]');
+    b?.setAttribute('aria-expanded', String(open));
+    if (p) p.hidden = !open;
+    if (c) c.style.transform = open ? 'rotate(180deg)' : '';
+  };
+
+  menus.forEach((m) => {
+    m.querySelector('button')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const opening = m.querySelector('button')?.getAttribute('aria-expanded') !== 'true';
+      menus.forEach((other) => setOpen(other, false));
+      if (opening) setOpen(m, true);
+    });
+  });
+
+  document.addEventListener('click', () => menus.forEach((m) => setOpen(m, false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') menus.forEach((m) => setOpen(m, false));
   });
 </script>
