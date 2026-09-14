@@ -1,0 +1,174 @@
+---
+import Base from '../layouts/Base.astro';
+import Container from '../components/Container.astro';
+import { DEVICES } from '../lib/devices';
+
+const LEVERS = [
+  {
+    name: 'The account.',
+    detail:
+      "You get to decide whether your kid uses a child account or roams free on a shared adult login. If you don't set up a child account, you have no controls.",
+  },
+  {
+    name: 'Time.',
+    detail: "Daily limits, downtime schedules, a bedtime that's enforced because the device stops being useful.",
+  },
+  {
+    name: 'Content.',
+    detail:
+      "Age ratings, filters, etc. On most platforms, there's also an allow-only mode, where instead of blocking bad sites forever, you can approve good ones once.",
+  },
+  {
+    name: 'Apps and money.',
+    detail: 'What can be installed, and whether buying anything requires your approval.',
+  },
+  {
+    name: 'Other people.',
+    detail: 'Who can contact your kid through the device, and whether chat is on at all.',
+  },
+];
+---
+
+<Base
+  title="Device settings"
+  description="The five parental-control levers every device offers, and which ones exist on iPhone, Android, Fire tablet, Roku, Apple TV, Switch, PlayStation, Xbox, and Chromebook."
+>
+  <header class="border-b border-line bg-surface-2 py-14">
+    <Container>
+      <div class="max-w-[46em]">
+        <p class="mb-3.5 font-label text-xs font-bold uppercase tracking-[0.22em] text-primary-text">
+          The control panel
+        </p>
+        <h1 class="font-display text-[clamp(38px,4vw,52px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">
+          What you can actually control
+        </h1>
+        <p class="mt-5 text-lg leading-relaxed text-ink-soft">
+          Every device in your house has parental controls, but they go overlooked because
+          they're scattered across menus that get renamed every year. Underneath the menus,
+          every platform offers the same five levers, which you can apply to any settings
+          screen, on any device, including ones that don't exist yet.
+        </p>
+      </div>
+    </Container>
+  </header>
+
+  <div class="mx-auto w-full max-w-[900px] px-6 pb-24 pt-12 sm:px-10">
+    {/* The five levers, the durable half of the page. */}
+    <section aria-label="The five levers">
+      <ol class="flex flex-col gap-0.5">
+        {LEVERS.map((l, i) => (
+          <li class="grid grid-cols-[34px_minmax(0,1fr)] gap-4 border-b border-line py-4">
+            <span
+              class="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-panel-accent font-label text-[14px] font-bold text-navy"
+              aria-hidden="true"
+            >
+              {i + 1}
+            </span>
+            <p class="text-[1.05rem] leading-[1.64] text-ink">
+              <span class="font-display font-extrabold text-navy">{l.name}</span>{' '}
+              {l.detail}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    {/* The picker: two literal class sets, per the house filter pattern. */}
+    <section class="mt-14">
+      <h2 class="font-display text-[24px] font-extrabold text-navy">Which device are you setting up?</h2>
+      <p class="mt-2.5 max-w-[46em] text-[1.01rem] leading-[1.66] text-ink-soft">
+        We tell you which levers exist on each device, which ones don't, and where you can
+        reference the latest documentation about your device. Menus move too often for anyone
+        to mirror them faithfully, so the company's own guide is always your final step.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-2.5" role="group" aria-label="Which device are you setting up?">
+        <button type="button" data-device="all" aria-pressed="true" class="device-chip border-primary bg-primary font-semibold text-on-navy-bright">
+          All devices
+        </button>
+        {DEVICES.map((d) => (
+          <button type="button" data-device={d.id} aria-pressed="false" class="device-chip border-line bg-transparent font-medium text-ink">
+            {d.name.split(' (')[0]}
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <div class="mt-10 flex flex-col gap-7">
+      {DEVICES.map((d) => (
+        <article data-device-panel={d.id} class="rounded-[28px] border-2 border-line bg-surface px-[34px] pb-8 pt-7">
+          <h3 class="text-balance font-display text-[24px] font-extrabold leading-[1.2] text-navy">{d.name}</h3>
+          <p class="mt-2 border-l-4 border-accent pl-4 text-[1.02rem] leading-[1.6] text-ink-soft">{d.note}</p>
+          <ul class="mt-5 flex flex-col gap-3">
+            {d.levers.map((l) => (
+              <li class="grid grid-cols-[128px_minmax(0,1fr)] gap-4 max-sm:grid-cols-1 max-sm:gap-1">
+                <span class="font-label text-[12px] font-bold uppercase tracking-[0.1em] text-primary-text">{l.lever}</span>
+                <p class="text-[1.01rem] leading-[1.6] text-ink">{l.detail}</p>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={d.url}
+            target="_blank"
+            rel="noopener"
+            class="mt-6 inline-block font-semibold text-primary-text underline underline-offset-4 transition hover:text-navy"
+          >
+            &rarr; {d.linkLabel}
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <section class="mt-16 rounded-[28px] border-[1.5px] border-panel-blue-line bg-panel-blue px-9 pb-8 pt-[30px]">
+      <p class="max-w-[46em] text-[1.03rem] leading-[1.7] text-ink">
+        Most home routers can pause the internet per device or per hour, which catches
+        everything the per-device menus miss. And no lever substitutes for the conversation you
+        need to have about limits. The{' '}
+        <a href="/conversations" class="font-semibold text-primary-text underline underline-offset-4 hover:text-navy">conversations</a>{' '}
+        are the other half of every setting on this page.
+      </p>
+      <p class="mt-4 text-[1.01rem] leading-[1.66] text-ink-soft">
+        Menus moved? A device we're missing?{' '}
+        <a href="/suggest" class="font-semibold text-primary-text underline underline-offset-4 hover:text-navy">Tell us</a>{' '}
+        and we'll update this page.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<script>
+  const ACTIVE = ['bg-primary', 'text-on-navy-bright', 'border-primary', 'font-semibold'];
+  const IDLE = ['bg-transparent', 'text-ink', 'border-line', 'font-medium'];
+
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.device-chip'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-device-panel]'));
+
+  const paint = (btn: HTMLButtonElement, on: boolean) => {
+    btn.setAttribute('aria-pressed', String(on));
+    btn.classList.remove(...(on ? IDLE : ACTIVE));
+    btn.classList.add(...(on ? ACTIVE : IDLE));
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const want = btn.dataset.device;
+      buttons.forEach((b) => paint(b, b === btn));
+      panels.forEach((p) => {
+        p.hidden = want !== 'all' && p.dataset.devicePanel !== want;
+      });
+    });
+  });
+</script>
+
+<style>
+  .device-chip {
+    font-size: 15.5px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    border-width: 2px;
+    cursor: pointer;
+    transition:
+      background-color 0.15s,
+      color 0.15s,
+      border-color 0.15s;
+  }
+</style>

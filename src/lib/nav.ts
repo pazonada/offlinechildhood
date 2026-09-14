@@ -22,6 +22,7 @@ export const footerNav: NavItem[] = [
   ...primaryNav,
   ...secondaryNav,
   { href: '/trusted', label: 'People we read' },
+  { href: '/settings', label: 'Device settings' },
   { href: '/suggest', label: 'Suggest a topic' },
   { href: 'https://www.reddit.com/r/OfflineChildhood/', label: 'Community' },
   { href: '/#updates', label: 'Email updates' },
