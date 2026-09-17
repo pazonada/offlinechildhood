@@ -45,6 +45,10 @@ const RULES = [
   // Windup constructions that stall before the point ("That's the thing about
   // X:", "Here's the catch:"). Owner's orders 2026-09-17: get to the point.
   { id: 'windup', re: /\b(?:that'?s|here'?s) the (?:thing|part|point|trick|catch|kicker)\b/gi, note: '"that\'s/here\'s the thing" windup (banned outright)' },
+  // "Work out" meaning figure out is UK; the site says "figure out". Written
+  // to skip "work out of" ("keep student work out of the software") and the
+  // gym sense would need APPROVED if it ever appears.
+  { id: 'work-out', re: /\bwork(?:s|ed|ing)? out\b(?! of\b)/gi, note: '"work out" (say "figure out")' },
   // "varies more than most parents realize" and its family. AI reaches for
   // this to manufacture stakes. Owner's orders 2026-09-17.
   { id: 'more-than-realize', re: /\bmore than (?:\w+ ){1,2}(?:realize|think|know|imagine|expect|suspect)s?\b/gi, note: '"more than X realize" (banned outright)' },
@@ -85,6 +89,8 @@ const APPROVED = [
   'you want a curious kid rather than a kid who hides the device from you',
   'On by default – not offered, not opted into, not announced to you.',
   'Raising kids who love the real world, while empowering them to understand how machines have become a part of it.',
+  // "Working out" here means "going well", the US idiom, in approved lever copy.
+  'The laptops and tablets are working out.',
   // Second colon-setups on owner-edited pages, kept pending her ruling (2026-09-17).
   'Name the irony directly: people go to these apps to feel less alone,',
   'Researchers call it cognitive surrender: falling back on the machine at the very first sign of difficulty,',
