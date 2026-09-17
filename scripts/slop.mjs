@@ -42,6 +42,13 @@ const RULES = [
     note: '"not X, it is Y" comma snap (banned outright)',
   },
   { id: 'genuinely', re: /\bgenuinely\b/gi, note: '"genuinely" (banned outright)' },
+  // Windup constructions that stall before the point ("That's the thing about
+  // X:", "Here's the catch:"). Owner's orders 2026-09-17: get to the point.
+  { id: 'windup', re: /\b(?:that'?s|here'?s) the (?:thing|part|point|trick|catch|kicker)\b/gi, note: '"that\'s/here\'s the thing" windup (banned outright)' },
+  // The recap chain, where a clause ends on a noun and the next clause picks
+  // the same noun back up ("the wiring is the problem, and the problem is...").
+  // Convoluted by design; say it once instead.
+  { id: 'recap-chain', re: /\b(?:is|are|was|were) (?:the |a |an )?(\w{3,}), and (?:the |that |this |its? )?\1\b/gi, note: 'clause recap chain ("...is the X, and the X...")' },
   { id: 'quietly', re: /\bquietly\b/gi, note: '"quietly" (banned outright)' },
   // The site writes US English. Catches the spellings that kept creeping in
   // and the UK school vocabulary (head teacher, governors) US readers trip on.
@@ -70,6 +77,7 @@ const APPROVED = [
   'you want a curious kid rather than a kid who hides the device from you',
   'On by default – not offered, not opted into, not announced to you.',
   'Raising kids who love the real world, while empowering them to understand how machines have become a part of it.',
+  'The first two are logistics, and logistics have cheap answers.',
 ];
 
 let total = 0;
