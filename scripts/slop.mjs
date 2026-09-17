@@ -48,6 +48,11 @@ const RULES = [
   // "varies more than most parents realize" and its family. AI reaches for
   // this to manufacture stakes. Owner's orders 2026-09-17.
   { id: 'more-than-realize', re: /\bmore than (?:\w+ ){1,2}(?:realize|think|know|imagine|expect|suspect)s?\b/gi, note: '"more than X realize" (banned outright)' },
+  // The drumroll: a short setup phrase, a colon, then the payload ("The
+  // question that outlived the chatbot: where did the data go?"). One per
+  // file at most; past that the device is a crutch. Owner's orders 2026-09-17.
+  // Anchored to a preceding sentence end so code and YAML keys stay out of it.
+  { id: 'colon-setup', re: /[.!?] [A-Z][a-z][^.:;!?\n]{2,38}: [a-z]/g, maxPerFile: 1, note: 'second "[setup]: [payload]" colon sentence' },
   // The recap chain, where a clause ends on a noun and the next clause picks
   // the same noun back up ("the wiring is the problem, and the problem is...").
   // Convoluted by design; say it once instead.
@@ -79,7 +84,14 @@ const APPROVED = [
   'stops being confusing once a child understands that AI predicts things rather than knows things',
   'you want a curious kid rather than a kid who hides the device from you',
   'On by default – not offered, not opted into, not announced to you.',
-  'Raising kids who love the real world, while empowering them to understand how machines have become a part of it.',];
+  'Raising kids who love the real world, while empowering them to understand how machines have become a part of it.',
+  // Second colon-setups on owner-edited pages, kept pending her ruling (2026-09-17).
+  'Name the irony directly: people go to these apps to feel less alone,',
+  'Researchers call it cognitive surrender: falling back on the machine at the very first sign of difficulty,',
+  'Both things can be true: the device is adequate for schoolwork, and the arrangement around it deserves more scrutiny',
+  'Its findings: disturbing videos dressed as content for young children are common on the platform,',
+  'What it establishes for a parent: asking a school to restrain technology is now the mainstream position across most of the country.',
+];
 
 let total = 0;
 for (const f of files) {
