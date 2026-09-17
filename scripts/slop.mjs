@@ -76,9 +76,7 @@ const APPROVED = [
   'stops being confusing once a child understands that AI predicts things rather than knows things',
   'you want a curious kid rather than a kid who hides the device from you',
   'On by default – not offered, not opted into, not announced to you.',
-  'Raising kids who love the real world, while empowering them to understand how machines have become a part of it.',
-  'The first two are logistics, and logistics have cheap answers.',
-];
+  'Raising kids who love the real world, while empowering them to understand how machines have become a part of it.',];
 
 let total = 0;
 for (const f of files) {
