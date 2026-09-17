@@ -45,6 +45,8 @@ const RULES = [
   // Windup constructions that stall before the point ("That's the thing about
   // X:", "Here's the catch:"). Owner's orders 2026-09-17: get to the point.
   { id: 'windup', re: /\b(?:that'?s|here'?s) the (?:thing|part|point|trick|catch|kicker)\b/gi, note: '"that\'s/here\'s the thing" windup (banned outright)' },
+  // The enforcement-as-dentistry idiom. Banned outright, owner's orders 2026-09-17.
+  { id: 'teeth', re: /\b(?:gives?|give|gave|giving|has|have|had|with|lacks?|grow[sn]?|no) (?:it |them |real |some |any )?teeth\b/gi, note: '"gives it teeth" and kin (banned outright)' },
   // "Work out" meaning figure out is UK; the site says "figure out". Written
   // to skip "work out of" ("keep student work out of the software") and the
   // gym sense would need APPROVED if it ever appears.
