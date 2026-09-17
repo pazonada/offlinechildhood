@@ -72,7 +72,7 @@ async function probe(url) {
   }
 }
 
-const BOT_WALL = new Set([401, 403, 405, 429, 999]);
+const BOT_WALL = new Set([401, 403, 405, 406, 429, 999]);
 
 async function main() {
   const pages = await getPages();

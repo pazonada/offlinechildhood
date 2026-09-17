@@ -1,0 +1,364 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Container from '../components/Container.astro';
+import hallway from '../assets/photos/kim-ukill-g8s1NJqptEk-unsplash.jpg';
+
+interface CaseSource {
+  label: string;
+  href?: string;
+}
+
+interface CaseStudy {
+  name: string;
+  meta?: string;
+  body: string;
+  sources: CaseSource[];
+}
+
+interface Tier {
+  title: string;
+  intro: string;
+  cases: CaseStudy[];
+  note?: { lead: string; body: string; sources: CaseSource[] };
+}
+
+// Every word of body copy below is the owner's edit of 2026-09-17, applied
+// verbatim. Her en dashes stay en dashes. Three typo fixes are flagged in
+// the session log for her override.
+const TIERS: Tier[] = [
+  {
+    title: 'None, by design',
+    intro: 'These schools and systems keep generative AI away from students on purpose, and they explain why.',
+    cases: [
+      {
+        name: 'Norway',
+        meta: 'National · Elementary and middle school',
+        body: `In June 2026, Norway's prime minister announced a national recommendation: schools should shield students in grades 1 through 7 from generative AI in schoolwork, starting that fall. Teenagers may experiment cautiously under teacher supervision. The government reasoned that uncritical AI use raises the risk of skipping steps a child needs in order to learn. Note that this is merely guidance, and each school decides what they want to do. Calling it a ban overstates it.`,
+        sources: [
+          { label: 'NRK (June 19, 2026)', href: 'https://www.nrk.no/nyheter/store-vil-ha-ki-ut-av-barneskolen-1.17928236' },
+          { label: 'Office of the Prime Minister of Norway', href: 'https://www.regjeringen.no/no/aktuelt/kunstig-intelligens-skal-i-all-hovedsak-ikke-brukes-i-barneskolen/id3166807/' },
+        ],
+      },
+      {
+        name: 'New York City Public Schools',
+        meta: 'Public · All grades',
+        body: `The country's largest district has changed its mind twice. It banned ChatGPT in January 2023, reversed that decision by May, and spent two years exploring adoption. Then, in September 2026, it announced the broadest retreat in the country: a one-year moratorium on student-facing generative AI from 2-K through 8th grade, a ban on AI companion bots at every grade, daily screen-time caps, and twice-yearly AI-literacy modules for high schoolers. A parent petition and a letter from more than half the City Council came first. Miami-Dade, the third-largest district, took the other road: it vetted about a dozen tools for months, trained all 18,000 of its teachers, and then gave 100,000 high schoolers access to Google's Gemini.`,
+        sources: [
+          { label: "NYC Mayor's Office (Sept 2, 2026)", href: 'https://www.nyc.gov/mayors-office/news/2026/09/mayor-mamdani-and-chancellor-samuels-put-students-first-with-nat' },
+          { label: 'Chalkbeat New York', href: 'https://www.chalkbeat.org/newyork/2026/09/02/nyc-schools-to-set-ai-policy-ban-screen-time-limits/' },
+          { label: 'The New York Times (May 2025)' },
+        ],
+      },
+      {
+        name: 'Waldorf School of the Peninsula',
+        meta: 'Private · K-12 · Silicon Valley',
+        body: `The most famous low-tech school in America has updated its argument for the AI era. Its FAQ describes delaying tech in the early years to build focus, creativity, and social skills first, and calls the result a human-centered education designed for the AI era. High schoolers study technology as creators, coding and media production included. The Waldorf movement's North American association takes the same line – engage with AI where it serves the mission, on the school's terms. The New York Times profiled this school in 2011 under the headline "A Silicon Valley School That Doesn't Compute"; fifteen years later, the school treats that identity as its best answer to AI.`,
+        sources: [
+          { label: 'Waldorf School of the Peninsula FAQ', href: 'https://www.waldorfpeninsula.org/faqs' },
+          { label: 'AWSNA Strategic Priorities 2024-2029', href: 'https://www.waldorfeducation.org/wp-content/uploads/2024/12/AWSNA_SP_24_v5_Web.pdf' },
+        ],
+      },
+      {
+        name: 'Phillips Exeter Academy',
+        meta: 'Private · High school · New Hampshire',
+        body: `Exeter's history department prohibits AI in student work outright. But the school's larger answer predates the technology – at the opening assembly in September 2026, the principal told students the school will keep using its Harkness discussion tables to figure out where AI can enhance learning and where it can't replace it. The school is built on students talking to each other, and wants to maintain that.`,
+        sources: [
+          { label: 'exeter.edu, "Chatbots in class?" (Oct 2023)', href: 'https://exeter.edu/chatbots-in-class/' },
+          { label: 'Opening Assembly address (Sept 4, 2026)', href: 'https://exeter.edu/opening-assembly-2026/' },
+        ],
+      },
+    ],
+    note: {
+      lead: 'Two European notes for this tier.',
+      body: `Italy's data-protection authority blocked ChatGPT nationwide for a month in 2023, the first Western country to do it, citing among other things the absence of any age check for children (Italian schools now ban phones in class even for teaching purposes). And Sweden, often described as anti-tech since it funded printed textbooks again in 2023, belongs here only in part: their pivot back to real books was about screens and reading. Sweden's schools agency publishes AI guidance, and so far it's banned nothing.`,
+      sources: [
+        { label: 'Garante per la protezione dei dati personali (Mar 31, 2023)', href: 'https://www.garanteprivacy.it/home/docweb/-/docweb-display/docweb/9870847' },
+        { label: 'Il Sole 24 Ore (June 2025)', href: 'https://en.ilsole24ore.com/art/valditara-circular-september-stop-mobile-phones-class-also-superiors-AHVDw2HB' },
+        { label: 'AP (Sept 2023)', href: 'https://www.voanews.com/a/sweden-brings-more-books-handwriting-practice-back-to-its-tech-heavy-schools/7262263.html' },
+        { label: 'Skolverket (Dec 2024)', href: 'https://www.skolverket.se/om-skolverket/nyheter-och-pressmeddelanden/nyheter/nyheter/2024-12-12-begransad-anvandning-av-ai-tjanster-i-grundskolan-fritidshem-och-forskoleklass' },
+      ],
+    },
+  },
+  {
+    title: 'Consent and guardrails first',
+    intro: `These systems allow AI and put the control in families' and students' hands, including consent forms, disclosure rules, and real limits. Japan's education ministry wrote this tier's motto into its national guidelines: "rigid implementation such as uniformly prohibiting or mandating teaching is not desirable."`,
+    cases: [
+      {
+        name: 'Florida',
+        meta: 'Statewide rule · K-12',
+        body: `In September 2026, Florida's Board of Education approved the first statewide parental consent rule for classroom AI. Parents opt their child in or out of directly interacting with an AI tool, and schools must provide a non-AI alternative for any student whose parents decline. Schools must also tell families which platform they approved, for which grades and subjects, and how students will interact with it. Tools designed to simulate friendship or an emotional relationship are banned outright. Districts have until July 2027 to comply.`,
+        sources: [
+          { label: 'Florida State Board of Education (Sept 16, 2026), via Central Florida Public Media', href: 'https://www.cfpublic.org/education/2026-09-16/florida-approves-statewide-ai-rules-for-k-12-schools-and-colleges' },
+          { label: 'CBS Miami', href: 'https://www.cbsnews.com/miami/news/florida-state-board-education-ai-school-rule-vote/' },
+        ],
+      },
+      {
+        name: 'France',
+        meta: 'National · K-12',
+        body: `France published a national usage framework for AI in schools in June 2025. Students get no AI accounts before age 13, an adult must supervise and explain every use, and using AI without explicit permission can count as cheating. Middle schoolers take a required AI-awareness module. The same government extended the "digital pause" to every middle school in 2025: phones go into containers or lockers for the day. Sciences Po, the elite university, made undisclosed ChatGPT use punishable up to expulsion back in January 2023.`,
+        sources: [
+          { label: "Ministère de l'Éducation nationale, cadre d'usage de l'IA (June 2025)", href: 'https://dane.site.ac-lille.fr/2025/06/25/intelligence-artificielle-a-lecole-un-cadre-pour-des-usages-maitrises/' },
+          { label: 'Public Sénat (Apr 2025)', href: 'https://www.publicsenat.fr/actualites/politique/college-elisabeth-borne-annonce-la-generalisation-de-linterdiction-des-telephones-portables-a-la-rentree-2025' },
+          { label: 'AFP (Jan 2023)', href: 'https://www.france24.com/en/live-news/20230127-top-french-university-bans-students-from-using-chatgpt' },
+        ],
+      },
+      {
+        name: 'Columbia University',
+        body: `Columbia has one of the few university-wide AI policies in the country, and it's centered on disclosure – anyone who uses generative AI to produce work must say so. A detector report alone cannot convict a student, and the policy tells instructors to keep student work out of detection software on their own initiative. Columbia's undergraduate schools go further, prohibiting AI on assignments unless the instructor grants written permission. Enforcement is the hard part, evidenced by a situation that happened on its campus not long ago – a sophomore built an AI tool for cheating job interviews, was suspended in 2025, dropped out, then raised millions in venture funding for the same product. Meanwhile, professors are retreating to handwritten blue-book exams.`,
+        sources: [
+          { label: 'Columbia Office of the Provost', href: 'https://provost.columbia.edu/content/office-senior-vice-provost/ai-policy' },
+          { label: 'Columbia School of General Studies bulletin', href: 'https://bulletin.columbia.edu/general-studies/academic-policies/academic-integrity-community-standards/' },
+          { label: 'TechCrunch (Apr 2025)', href: 'https://techcrunch.com/2025/04/21/columbia-student-suspended-over-interview-cheating-tool-raises-5-3m-to-cheat-on-everything/' },
+        ],
+      },
+      {
+        name: 'Vanderbilt University',
+        body: `Vanderbilt turned off Turnitin's AI detector in August 2023 and published the math. The vendor claims a 1 percent false-positive rate, at which the software could falsely accuse roughly 750 of the 75,000 papers Vanderbilt runs through it in a year. Add documented bias against students writing in a second language, plus no way to examine how the tool reaches its verdicts, and the university decided accusing innocent students was the greater risk.`,
+        sources: [
+          { label: 'Vanderbilt University (Aug 16, 2023)', href: 'https://www.vanderbilt.edu/brightspace/2023/08/16/guidance-on-ai-detection-and-why-were-disabling-turnitins-ai-detector/' },
+        ],
+      },
+    ],
+    note: {
+      lead: 'Worth knowing, even without a full case study:',
+      body: `Ohio now requires every district to adopt a written AI policy, which means an Ohio parent can ask to read one. Denmark added oral defenses to written take-home exams, so a student has to stand behind the work in person.`,
+      sources: [
+        { label: 'Ohio Department of Education and Workforce', href: 'https://education.ohio.gov/Topics/AI-in-Ohio-s-Education/Model-Policy' },
+        { label: 'Euronews (Aug 2026)', href: 'https://www.euronews.com/next/2026/08/07/denmark-tightens-rules-on-secondary-school-students-to-prevent-ai-cheating' },
+      ],
+    },
+  },
+  {
+    title: 'Adoption on stated terms',
+    intro: 'These institutions let AI in deliberately, with the rules written down before the tools arrived.',
+    cases: [
+      {
+        name: 'MIT',
+        body: `MIT decided, on purpose, to have no institute-wide classroom rule. Its faculty governance office restates the position every fall, most recently in August 2026, next to the requirement that every class must post a clear AI policy, chosen from a four-option menu that runs from prohibited to required. The Institute draws two hard lines of its own – sensitive data never goes into an AI tool, and its 2026 faculty committee recommends against AI detectors, predicting an arms race with "AI humanizers." One clarification for anyone who has seen the headlines: the widely shared "Your Brain on ChatGPT" study came from the MIT Media Lab, and it's good research, but sets no MIT policy as of yet.`,
+        sources: [
+          { label: 'MIT Faculty Governance (Aug 25, 2026)', href: 'https://facultygovernance.mit.edu/ai-use-policy-and-resources-instructors-august-25-2026' },
+          { label: 'MIT Teaching + Learning Lab', href: 'https://tll.mit.edu/teaching-resources/course-design/ai-in-teaching-learning/acceptable-ai-use-policies/' },
+          { label: 'MIT Ad Hoc Committee report (Aug 13, 2026)', href: 'https://aiandeducation.mit.edu/report/' },
+        ],
+      },
+      {
+        name: 'Harvard University',
+        body: `Harvard built the walls first. Its AI Sandbox gives every undergraduate a controlled interface to the major AI models, with a guarantee that nothing they enter will train a vendor's model, and its 2023 guidelines sort data by sensitivity before any of it touches a tool. Classroom rules stay with each instructor, supported by sample policies at three strictness levels. Three years in, Harvard also supplies the best data anywhere on how the arrangement feels from the front of the room. In the Crimson's 2026 faculty survey, nearly two thirds said AI had made their courses worse, up from 42 percent a year earlier, and about 90 percent believed they had received AI-generated work.`,
+        sources: [
+          { label: 'Harvard Office of the Provost (July 2023)', href: 'https://provost.harvard.edu/guidelines-using-chatgpt-and-other-generative-ai-tools-harvard' },
+          { label: 'Harvard University IT', href: 'https://www.huit.harvard.edu/ai-sandbox' },
+          { label: 'The Harvard Crimson (Sept 14, 2026)', href: 'https://www.thecrimson.com/article/2026/9/14/fas-2026-survey-AI/' },
+        ],
+      },
+      {
+        name: 'Singapore',
+        meta: 'National · Elementary through high school',
+        body: `Singapore's ministry builds its own AI into the national learning platform and gates it by age. Children in Primary 1 through 3 learn about AI and do no assigned work with it. Primary 4 through 6 use approved tools under direct teacher supervision. The ministry anonymizes student data, keeps it out of outside models, and built the platform's assistant to redirect a student who fishes for the answer instead of handing it over.`,
+        sources: [
+          { label: 'Ministry of Education, Singapore, parliamentary reply (May 6, 2026)', href: 'https://www.moe.gov.sg/news/parliamentary-replies/20260506-ai-usage-in-schools' },
+          { label: 'GovTech Singapore (Jan 2025)', href: 'https://www.tech.gov.sg/technews/ai-in-education-transforming-singapore-education-system-with-student-learning-space/' },
+        ],
+      },
+      {
+        name: 'China',
+        meta: 'National · Elementary through high school',
+        body: `China mandates AI literacy, and restricts AI use in the same set of rules. National guidelines from May 2025 prohibit primary students from independently using open-ended generative tools, ban submitting AI output as original work at every level, and bar teachers from using AI to evaluate students. Beijing schools must teach at least eight class hours of AI per year, starting in first grade. Keep in mind that these details come through Chinese state media, though an independent translation from Georgetown's CSET confirms the substance.`,
+        sources: [
+          { label: 'Ministry of Education guidelines (May 12, 2025), via China Daily', href: 'https://www.chinadaily.com.cn/a/202505/16/WS6826951fa310a04af22bfc2e.html' },
+          { label: 'CSET, Georgetown University', href: 'https://cset.georgetown.edu/publication/china-school-gen-ai-use-guide-2025/' },
+        ],
+      },
+      {
+        name: 'United Kingdom',
+        meta: 'National · Middle and high school',
+        body: `The UK gives the clearest answer anywhere to what a teacher may actually do. Government guidance approves teacher use of generative AI for planning, resources, and feedback, so long as school filtering and monitoring cover the tools and an adult stays responsible for the output. For students, the exam boards' joint rules make uncited AI use formal malpractice: a student who uses AI in assessed coursework must name the tool and the date, keep screenshots of the prompts, and explain what the AI contributed. Teachers may not grade by AI alone.`,
+        sources: [
+          { label: 'Department for Education (updated Aug 2025)', href: 'https://www.gov.uk/government/publications/generative-artificial-intelligence-in-education/generative-artificial-intelligence-ai-in-education' },
+          { label: 'JCQ, AI Use in Assessments (Apr 2025)', href: 'https://www.jcq.org.uk/exams-office/malpractice/artificial-intelligence/' },
+        ],
+      },
+      {
+        name: 'Choate Rosemary Hall',
+        meta: 'Private · High school · Connecticut',
+        body: `Choate runs a standing policy group on generative AI, chaired from the top of the school. It says the school endorses discerning, informed, and ethical use, and that the human connections at its center "should only ever be amplified by the use of Generative AI, never replaced by it." Among traditional prep schools, this stands alone as pioneering institutional policy.`,
+        sources: [
+          { label: 'choate.edu/ai (updated Aug 2026)', href: 'https://www.choate.edu/ai/gen' },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'All in (and the consequences of going all in)',
+    intro: 'The systems in this tier made AI central to instruction. But the interesting part, and the part we can learn from, is what happened next.',
+    cases: [
+      {
+        name: 'South Korea',
+        meta: 'National · K-12',
+        body: `South Korea ran the full experiment at national scale. The government announced AI-powered digital textbooks in 2023 and mandated them for 2025, committing roughly 1.2 trillion won while publishers spent 800 billion more. Parents pushed back with a 56,505-signature petition to the National Assembly. Lawmakers downgraded the textbooks to optional materials, adoption reached about a third of schools and then fell to 19 percent, and in August 2025 the Assembly stripped the program's status and funding. The same month, Korea passed a law banning phone use during class in every school. A country went all in, listened to parents, and turned around inside two years.`,
+        sources: [
+          { label: 'Korean Ministry of Education (June 2023)', href: 'https://english.moe.go.kr/boardCnts/viewRenewal.do?boardID=254&boardSeq=95291&lev=0&m=0202&opType=N&page=2&s=english' },
+          { label: 'The Korea Herald (2024-2025)', href: 'https://www.koreaherald.com/article/10546695' },
+          { label: 'Rest of World (Oct 2025)', href: 'https://restofworld.org/2025/south-korea-ai-textbook/' },
+        ],
+      },
+      {
+        name: 'Estonia',
+        meta: 'National · High school',
+        body: `Estonia announced a national AI program with OpenAI in February 2025, for every student in grades 10 and 11, and framed it as the successor to the computerization drive that built e-Estonia. But in reality, teachers received ChatGPT and Gemini. Students received a purpose-built Estonian tutor app that asks guiding questions and declines to do the homework, with student data kept out of model training. By March 2026, about 7,700 of 20,000 eligible students had turned their accounts on. Even the most AI-forward country in Europe put a guardrailed tutor between the model and the student.`,
+        sources: [
+          { label: 'Estonian Ministry of Education and Research (Feb 25, 2025)', href: 'https://www.hm.ee/en/news/estonia-announces-groundbreaking-national-initiative-ai-leap-programme-bring-ai-tools-all' },
+          { label: 'AI Leap program', href: 'https://tihupe.ee/en/estonia-launches-nationwide-ai-leap-education-program-and-introduces-learning-supportive-ai-in-upper-secondary-schools/' },
+          { label: 'ERR', href: 'https://news.err.ee/1609614773/president-karis-spearheads-ai-driven-transformation-in-estonia-s-high-schools' },
+        ],
+      },
+      {
+        name: 'California State University, with a contrast',
+        meta: 'College',
+        body: `This one is the largest AI deployment in education anywhere. In February 2025, the 23-campus Cal State system bought ChatGPT Edu for more than 460,000 students and 63,000 employees – a $17 million contract that critics noted was signed without competitive bidding. A year later, NPR documented the backlash from faculty and students asking what problem the purchase solved. Ohio State chose the other version of 'all in': no mass tool purchase, and a promise instead that every graduate from the class of 2029 forward will leave AI-fluent, with the training built into every undergraduate program.`,
+        sources: [
+          { label: 'California State University (Feb 4, 2025)', href: 'https://news.csun.edu/higher-education/csu-announces-landmark-initiative-to-become-nations-first-and-largest-ai-empowered-university-system/' },
+          { label: 'NPR (May 2026)', href: 'https://www.npr.org/2026/05/25/nx-s1-5772820/artificial-intelligence-education-technology-california-state-university' },
+          { label: 'Ohio State University (June 4, 2025)', href: 'https://news.osu.edu/ohio-state-launches-bold-ai-fluency-initiative-to-redefine-learning-and-innovation/' },
+        ],
+      },
+      {
+        name: 'Alpha School and Unbound Academy',
+        meta: 'Private and charter · Elementary through high school',
+        body: `Alpha School sells a private education built on AI, including two hours of adaptive software a day, adults as motivational guides instead of teachers, and a claim that students learn twice as fast (tuition ranges from $40,000 to $75,000). The claim has no public evidence behind it. Alpha's founder promised WIRED the data and never provided it. A researcher who helped build the very test Alpha cites says its reports cannot support the claim. WIRED's investigation documented students working late into the night to hit reward metrics, cash payments for test scores, and webcam monitoring that recorded a child at home in her pajamas. One of Alpha's own software vendors terminated the school's account and said its product should never replace trained teachers. Alpha disputes the reporting. Its charter arm, Unbound Academy, applied in five states, but Pennsylvania, Utah, North Carolina, and Arkansas declined, and Arizona approved a tuition-free virtual version for grades 4 through 8 that opened in fall 2025.`,
+        sources: [
+          { label: 'WIRED (Oct 27, 2025)', href: 'https://www.wired.com/story/ai-teacher-inside-alpha-school/' },
+          { label: 'Scientific American (Aug 2026)', href: 'https://www.scientificamerican.com/article/alpha-schools-ai-teaching-model-is-expanding-does-it-work/' },
+          { label: 'Utah State Charter School Board minutes (Aug 2024)', href: 'https://www.utah.gov/pmn/files/1167891.docx' },
+          { label: 'Chalkbeat Philadelphia (Jan 2025)', href: 'https://www.chalkbeat.org/philadelphia/2025/01/24/ai-cyber-charter-school-pennsylvania-promises-2-hour-learning/' },
+          { label: 'WBUR (Mar 2026)', href: 'https://www.wbur.org/hereandnow/2026/03/23/alpha-school-ai' },
+        ],
+      },
+      {
+        name: 'Los Angeles Unified',
+        meta: 'Public · K-12',
+        body: `LA Unified paid $6.2 million for "Ed," an AI advisor for students, and launched it in March 2024 with national fanfare. Within three months the vendor furloughed most of its staff, the district unplugged the tool, the company went bankrupt, and federal prosecutors later charged the founder with defrauding investors. Reporters could barely find a student who had used it. No one seems to know where the student data went.`,
+        sources: [
+          { label: 'The 74 (2024)', href: 'https://www.the74million.org/article/allhere-set-meeting-with-lausd-leaders-months-before-landing-6-2m-chatbot-deal/' },
+          { label: 'EdWeek (July 2024)', href: 'https://www.edweek.org/technology/los-angeles-unifieds-ai-meltdown-5-ways-districts-can-avoid-the-same-mistakes/2024/07' },
+          { label: 'EdSurge (July 2024)', href: 'https://www.edsurge.com/news/2024-07-15-an-education-chatbot-company-collapsed-where-did-the-student-data-go' },
+        ],
+      },
+    ],
+  },
+];
+---
+
+<Base
+  title="What schools are deciding about AI"
+  description="How schools from Oslo to Seoul are answering the AI question"
+>
+  <header class="border-b border-line bg-surface-2 py-14">
+    <Container>
+      <div class="grid items-center gap-x-12 gap-y-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+        <div>
+          <p class="mb-3.5 font-label text-xs font-bold uppercase tracking-[0.22em] text-primary-text">
+            Case studies
+          </p>
+          <h1 class="font-display text-[clamp(38px,4vw,52px)] font-extrabold leading-[1.04] tracking-[-0.015em] text-navy">
+            What schools are deciding about AI
+          </h1>
+          <p class="mt-5 text-lg leading-relaxed text-ink-soft">
+            Schools everywhere are deciding what to do about AI right now. This page collects
+            the ones that have written policies, board votes, budgets, and reversals, and each
+            is tied to a primary source. We organized them by how much AI each school or system
+            allows, from none to all in.
+          </p>
+        </div>
+
+        <div class="overflow-hidden rounded-[240px_240px_24px_24px] bg-surface-3">
+          <Image
+            src={hallway}
+            alt="An empty school hallway with pale blue walls, green-framed windows down one side, and bulletin boards of class photos and notices down the other."
+            widths={[520, 1040]}
+            sizes="(min-width: 768px) 480px, 92vw"
+            class="h-[400px] w-full object-cover object-[52%_60%]"
+          />
+        </div>
+      </div>
+    </Container>
+  </header>
+
+  <div class="mx-auto w-full max-w-[900px] px-6 pb-24 pt-4 sm:px-10">
+    {TIERS.map((tier, ti) => (
+      <section class="mt-12">
+        <p class="font-label text-xs font-bold uppercase tracking-[0.22em] text-primary-text">
+          Tier {ti + 1}
+        </p>
+        <h2 class="mt-1.5 font-display text-[clamp(26px,3vw,34px)] font-extrabold leading-tight text-navy">
+          {tier.title}
+        </h2>
+        <p class="mt-3 max-w-[46em] text-[1.05rem] leading-[1.7] text-ink">{tier.intro}</p>
+
+        <div class="mt-7 flex flex-col gap-5">
+          {tier.cases.map((c) => (
+            <article class="rounded-[24px] border-2 border-line bg-surface px-7 pb-6 pt-[22px]">
+              <h3 class="font-display text-[21px] font-extrabold text-navy">{c.name}</h3>
+              {c.meta && (
+                <p class="mt-0.5 font-label text-[11px] font-bold uppercase tracking-[0.16em] text-ink-soft">
+                  {c.meta}
+                </p>
+              )}
+              <p class="mt-3 text-[1.01rem] leading-[1.68] text-ink">{c.body}</p>
+              <p class="mt-3.5 text-sm leading-relaxed text-ink-soft">
+                {c.sources.length > 1 ? 'Sources: ' : 'Source: '}
+                {c.sources.map((s, si) => (
+                  <>
+                    {s.href ? (
+                      <a href={s.href} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-ink">{s.label}</a>
+                    ) : (
+                      s.label
+                    )}
+                    {si < c.sources.length - 1 ? '; ' : '.'}
+                  </>
+                ))}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        {tier.note && (
+          <div class="mt-5 rounded-2xl bg-surface-2 px-7 pb-5 pt-[18px]">
+            <p class="text-[1.01rem] leading-[1.68] text-ink">
+              <strong>{tier.note.lead}</strong> {tier.note.body}
+            </p>
+            <p class="mt-3 text-sm leading-relaxed text-ink-soft">
+              Sources:{' '}
+              {tier.note.sources.map((s, si) => (
+                <>
+                  {s.href ? (
+                    <a href={s.href} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-ink">{s.label}</a>
+                  ) : (
+                    s.label
+                  )}
+                  {si < tier.note.sources.length - 1 ? '; ' : '.'}
+                </>
+              ))}
+            </p>
+          </div>
+        )}
+      </section>
+    ))}
+
+    <section class="mt-14 rounded-[28px] border-2 border-accent bg-panel-accent px-9 pb-8 pt-[30px]">
+      <h2 class="font-display text-[24px] font-extrabold text-navy">Using this at your school</h2>
+      <p class="mt-2.5 max-w-[46em] text-[1.03rem] leading-[1.7] text-ink">
+        Every case above answers{' '}
+        <a href="/advocate#audit" class="font-semibold text-primary-text underline underline-offset-4 hover:text-navy">a question a parent or teacher can ask</a>{' '}
+        at home: Who decided on the AI policy? What is written down? Can families opt out? If
+        your school has no written answer,{' '}
+        <a href="https://education.ohio.gov/Topics/AI-in-Ohio-s-Education/Model-Policy" target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-navy">Ohio's rule</a>{' '}
+        is the precedent to cite,{' '}
+        <a href="https://www.cfpublic.org/education/2026-09-16/florida-approves-statewide-ai-rules-for-k-12-schools-and-colleges" target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-navy">Florida's</a>{' '}
+        is the consent model to point at, and our{' '}
+        <a href="/advocate" class="font-semibold text-primary-text underline underline-offset-4 hover:text-navy">sheet builder</a>{' '}
+        will put the request in writing for you.
+      </p>
+    </section>
+  </div>
+</Base>

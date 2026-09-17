@@ -30,6 +30,7 @@ export const navGroups: NavGroup[] = [
     label: 'For teachers',
     items: [
       { href: '/teachers', label: 'Lesson plans', blurb: 'Thirteen classroom activities, one lesson each' },
+      { href: '/ai-case-studies', label: 'AI case studies', blurb: 'What schools worldwide decided, with sources' },
       { href: '/conversations', label: 'Conversations', blurb: 'Every idea, written for four age bands' },
     ],
   },
@@ -42,6 +43,7 @@ export const footerNav: NavItem[] = [
   { href: '/settings', label: 'Device settings' },
   { href: '/picks', label: 'What to buy' },
   { href: '/teachers', label: 'For teachers' },
+  { href: '/ai-case-studies', label: 'AI case studies' },
   { href: '/about', label: 'About' },
   { href: '/trusted', label: 'People we read' },
   { href: '/suggest', label: 'Suggest a topic' },

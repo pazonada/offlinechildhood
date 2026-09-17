@@ -110,6 +110,9 @@ for (const f of files) {
     const re = new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+'), 'g');
     text = text.replace(re, '');
   }
+  // URLs are not prose: a source link that spells "programme" is the
+  // publisher's spelling. Blank them at equal length so line numbers hold.
+  text = text.replace(/https?:\/\/[^\s'"()<>]+/g, (m) => ' '.repeat(m.length));
   const hits = [];
   for (const r of RULES) {
     const matches = [...text.matchAll(r.re)];
