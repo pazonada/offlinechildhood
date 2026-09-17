@@ -45,6 +45,9 @@ const RULES = [
   // Windup constructions that stall before the point ("That's the thing about
   // X:", "Here's the catch:"). Owner's orders 2026-09-17: get to the point.
   { id: 'windup', re: /\b(?:that'?s|here'?s) the (?:thing|part|point|trick|catch|kicker)\b/gi, note: '"that\'s/here\'s the thing" windup (banned outright)' },
+  // "varies more than most parents realize" and its family. AI reaches for
+  // this to manufacture stakes. Owner's orders 2026-09-17.
+  { id: 'more-than-realize', re: /\bmore than (?:\w+ ){1,2}(?:realize|think|know|imagine|expect|suspect)s?\b/gi, note: '"more than X realize" (banned outright)' },
   // The recap chain, where a clause ends on a noun and the next clause picks
   // the same noun back up ("the wiring is the problem, and the problem is...").
   // Convoluted by design; say it once instead.
