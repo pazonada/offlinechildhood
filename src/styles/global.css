@@ -84,6 +84,8 @@
   --cat-cameras: #a81e63;
   --cat-classes: #0f6c8c;
   --cat-controls: #525f70;
+  --cat-books: #8c333d;
+  --cat-parents: #5c6b1f;
 }
 
 @theme inline {
@@ -141,6 +143,8 @@
   --color-cat-cameras: var(--cat-cameras);
   --color-cat-classes: var(--cat-classes);
   --color-cat-controls: var(--cat-controls);
+  --color-cat-books: var(--cat-books);
+  --color-cat-parents: var(--cat-parents);
 
   --font-display: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;

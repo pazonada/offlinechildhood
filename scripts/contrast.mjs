@@ -27,6 +27,7 @@ const modes = {
       catPhones: '#2451D6', catAudio: '#0C7568', catComputers: '#6D28D9',
       catToys: '#BE3A24', catStem: '#8A5200', catOutdoor: '#297046',
       catCameras: '#A81E63', catClasses: '#0F6C8C', catControls: '#525F70',
+      catBooks: '#8C333D', catParents: '#5C6B1F',
     },
     pairs: [
       ['body text', 'ink', 'surface', 4.5],
@@ -61,6 +62,10 @@ const modes = {
       ['cat classes on panel', 'catClasses', 'surface2', 4.5],
       ['cat controls on white', 'catControls', 'surface', 4.5],
       ['cat controls on panel', 'catControls', 'surface2', 4.5],
+      ['cat books on white', 'catBooks', 'surface', 4.5],
+      ['cat books on panel', 'catBooks', 'surface2', 4.5],
+      ['cat parents on white', 'catParents', 'surface', 4.5],
+      ['cat parents on panel', 'catParents', 'surface2', 4.5],
       ['downsides text on panel', 'inkSoft', 'panelBlue', 4.5],
       ['border on surface', 'line', 'surface', 1.2],
       // Storybook redesign pairings. Two are known FAILURES kept out of use:

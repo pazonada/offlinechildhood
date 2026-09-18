@@ -137,6 +137,8 @@ export const PICK_TAGS = [
   'Cameras and making',
   'Classes and activities',
   'Parental controls',
+  'Books and reading',
+  'For parents',
 ] as const;
 
 const picks = defineCollection({

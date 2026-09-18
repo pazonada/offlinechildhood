@@ -37,5 +37,11 @@ export const TAG_STYLE: Record<PickTag, { text: string; tile: string }> = {
   'Parental controls': {
     text: 'text-cat-controls', tile: 'bg-cat-controls/10 text-cat-controls',
   },
+  'Books and reading': {
+    text: 'text-cat-books', tile: 'bg-cat-books/10 text-cat-books',
+  },
+  'For parents': {
+    text: 'text-cat-parents', tile: 'bg-cat-parents/10 text-cat-parents',
+  },
 };
 

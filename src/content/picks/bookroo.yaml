@@ -1,0 +1,9 @@
+name: Bookroo
+maker: Bookroo
+kind: Service
+tags: ['Books and reading']
+summary: A book subscription that mails wrapped, hand-picked children's books every month, with four clubs from board books to middle grade. Unwrapping a book does for reading what an ad does for a toy.
+price: From about $22 a month
+url: https://bookroo.com
+limitations: You will sometimes get a book you already own, and per book it costs more than the library, which does the same thing for nothing if you remember to go.
+updated: 2026-09-18
